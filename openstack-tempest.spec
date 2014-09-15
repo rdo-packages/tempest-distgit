@@ -1,6 +1,6 @@
 Name:           openstack-tempest
 Version:        20140915
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://github.com/redhat-openstack/tempest
@@ -65,6 +65,7 @@ Requires:       python-testrepository
 Requires:       python-testresources
 Requires:       python-testscenarios
 Requires:       python-testtools
+Requires:       which
 
 %description icehouse
 This is a set of integration tests to be run against a live OpenStack cluster.
@@ -84,6 +85,9 @@ other specific tests useful in validating an OpenStack deployment.
 
 
 %changelog
+* Mon Sep 15 2014 Steve Linabery <slinaber@redhat.com> - 20140915-2
+- add runtime dep on package which
+
 * Mon Sep 15 2014 Steve Linabery <slinaber@redhat.com> - 20140915-1
 - rebase to latest upstream tag
 
