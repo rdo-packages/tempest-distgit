@@ -1,5 +1,5 @@
 Name:           openstack-tempest
-Version:        20140805
+Version:        20140915
 Release:        1%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
@@ -84,6 +84,9 @@ other specific tests useful in validating an OpenStack deployment.
 
 
 %changelog
+* Mon Sep 15 2014 Steve Linabery <slinaber@redhat.com> - 20140915-1
+- rebase to latest upstream tag
+
 * Wed Aug 06 2014 Steve Linabery <slinaber@redhat.com> - 20140805-1
 - rebase to latest tag
 - use relative path to LICENSE
