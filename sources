@@ -1,2 +1,3 @@
 52e209f7e2f1602930ad0944ea638128  openstack-tempest-icehouse-20141105.tar.gz
 bbb49290c3089f6f1b6b6d874d2eb288  openstack-tempest-juno-20141105.tar.gz
+fe1b3365db5aecd32909a4d97e320fb8  0001-add-configure-tempest-directory-to-juno-branch-it-wa.patch
