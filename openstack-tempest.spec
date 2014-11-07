@@ -1,6 +1,6 @@
 Name:           openstack-tempest
 Version:        20141105
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://github.com/redhat-openstack/tempest
@@ -146,9 +146,12 @@ other specific tests useful in validating an OpenStack deployment.
 %exclude %{_datarootdir}/%{name}-juno/.gitreview
 %exclude %{_datarootdir}/%{name}-juno/.mailmap
 %exclude %{_datarootdir}/%{name}-juno/.coveragerc
-
+%attr(755, root, root) %{_datarootdir}/%{name}-juno/tools/configure-tempest-directory 
 
 %changelog
+* Thu Nov 06 2014 Steve Linabery <slinaber@redhat.com> - 20141105-3
+- fix perms on  tools/configure-tempest-directory
+
 * Thu Nov 06 2014 Steve Linabery <slinaber@redhat.com> - 20141105-2
 - sync w/juno branch, patch tools/configure-tempest-directory
 
