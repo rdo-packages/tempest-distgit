@@ -1,12 +1,11 @@
 Name:           openstack-tempest
-Version:        20141105
-Release:        3%{?dist}
+Version:        20141201
+Release:        1%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://github.com/redhat-openstack/tempest
 Source0:        https://github.com/redhat-openstack/tempest/archive/openstack-tempest-icehouse-%{version}.tar.gz
 Source1:        https://github.com/redhat-openstack/tempest/archive/openstack-tempest-juno-%{version}.tar.gz
-Patch0:         0001-add-configure-tempest-directory-to-juno-branch-it-wa.patch
 BuildArch:      noarch
 
 BuildRequires:  fdupes
@@ -24,9 +23,6 @@ other specific tests useful in validating an OpenStack deployment.
 %prep
 %setup -q -D -a 0 -c -n tempest-%{name}-%{version}
 %setup -q -D -a 1 -c -n tempest-%{name}-%{version}
-pushd tempest-openstack-tempest-juno-%{version}
-%patch0 -p1
-popd
 
 %install
 mkdir -p %{buildroot}%{_datarootdir}/%{name}-icehouse
@@ -146,9 +142,11 @@ other specific tests useful in validating an OpenStack deployment.
 %exclude %{_datarootdir}/%{name}-juno/.gitreview
 %exclude %{_datarootdir}/%{name}-juno/.mailmap
 %exclude %{_datarootdir}/%{name}-juno/.coveragerc
-%attr(755, root, root) %{_datarootdir}/%{name}-juno/tools/configure-tempest-directory 
 
 %changelog
+* Mon Dec 01 2014 Steve Linabery <slinaber@redhat.com> - 20141201-1
+- rebase to latest tag
+
 * Thu Nov 06 2014 Steve Linabery <slinaber@redhat.com> - 20141105-3
 - fix perms on  tools/configure-tempest-directory
 
