@@ -2,7 +2,7 @@
 
 Name:           openstack-tempest
 Epoch:          1
-Version:        juno
+Version:        kilo
 Release:        %{timestamp}.1%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
