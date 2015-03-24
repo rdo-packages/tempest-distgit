@@ -1,6 +1,7 @@
 %global         timestamp 20150319
 
 Name:           openstack-tempest
+Epoch:          1
 Version:        juno
 Release:        %{timestamp}.1%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
