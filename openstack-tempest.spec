@@ -70,6 +70,9 @@ cp --preserve=mode -r . %{buildroot}%{_datarootdir}/%{name}-%{version}
 %exclude %{_datarootdir}/%{name}-%{version}/.coveragerc
 
 %changelog
+* Tue Mar 24 2015 Steve Linabery <slinaber@redhat.com> - 20150319-1
+- new kilo RPM from latest tag
+
 * Mon Dec 01 2014 Steve Linabery <slinaber@redhat.com> - 20141201-1
 - rebase to latest tag
 
