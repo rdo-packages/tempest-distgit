@@ -69,3 +69,40 @@ cp --preserve=mode -r . %{buildroot}%{_datarootdir}/%{name}-%{version}
 %exclude %{_datarootdir}/%{name}-%{version}/.coveragerc
 
 %changelog
+* Mon Dec 01 2014 Steve Linabery <slinaber@redhat.com> - 20141201-1
+- rebase to latest tag
+
+* Thu Nov 06 2014 Steve Linabery <slinaber@redhat.com> - 20141105-3
+- fix perms on  tools/configure-tempest-directory
+
+* Thu Nov 06 2014 Steve Linabery <slinaber@redhat.com> - 20141105-2
+- sync w/juno branch, patch tools/configure-tempest-directory
+
+* Wed Nov 05 2014 Steve Linabery <slinaber@redhat.com> - 20141105-1
+- rebase to latest tag
+- add juno subpackage
+
+* Mon Sep 15 2014 Steve Linabery <slinaber@redhat.com> - 20140915-2
+- add runtime dep on package which
+
+* Mon Sep 15 2014 Steve Linabery <slinaber@redhat.com> - 20140915-1
+- rebase to latest upstream tag
+
+* Wed Aug 06 2014 Steve Linabery <slinaber@redhat.com> - 20140805-1
+- rebase to latest tag
+- use relative path to LICENSE
+
+* Tue Aug 05 2014 Steve Linabery <slinaber@redhat.com> - 20140703-4
+- keep .testr.conf
+
+* Mon Aug 04 2014 Steve Linabery <slinaber@redhat.com> - 20140703-3
+- Move Requires into subpackage openstack-tempest-icehouse
+
+* Thu Jul 03 2014 Steve Linabery <slinaber@redhat.com> - 20140703-2
+- relax python version requirement for el6
+
+* Thu Jul 03 2014 Steve Linabery <slinaber@redhat.com> - 20140703-1
+- rebase to latest tag
+
+* Wed Jun 25 2014 Steve Linabery <slinaber@redhat.com> - 20140625-1
+- Initial package.
