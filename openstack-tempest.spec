@@ -1,4 +1,4 @@
-%global         timestamp 20150319
+%global         timestamp 20150413
 
 Name:           openstack-tempest
 Epoch:          1
@@ -44,6 +44,7 @@ Requires:       python-testresources
 Requires:       python-testscenarios
 Requires:       python-testtools
 Requires:       which
+Requires:       python-tempest-lib >= 0.4.0
 
 %description
 This is a set of integration tests to be run against a live OpenStack cluster.
@@ -70,6 +71,10 @@ cp --preserve=mode -r . %{buildroot}%{_datarootdir}/%{name}-%{version}
 %exclude %{_datarootdir}/%{name}-%{version}/.coveragerc
 
 %changelog
+* Tue Mar 24 2015 Steve Linabery <slinaber@redhat.com> - 20150413-1
+- rebase to latest tag
+- Add Requires on python-tempest-lib
+
 * Tue Mar 24 2015 Steve Linabery <slinaber@redhat.com> - 20150319-1
 - new kilo RPM from latest tag
 
