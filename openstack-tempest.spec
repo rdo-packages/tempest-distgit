@@ -10,6 +10,9 @@ Url:            https://github.com/redhat-openstack/tempest
 Source0:        https://github.com/redhat-openstack/tempest/archive/openstack-tempest-%{version}-%{timestamp}.tar.gz
 BuildArch:      noarch
 
+Provides:       openstack-tempest-juno
+Obsoletes:      openstack-tempest-juno < 20150319
+
 BuildRequires:  fdupes
 BuildRequires:  python-sphinx
 BuildRequires:  python-d2to1
