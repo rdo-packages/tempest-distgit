@@ -3,7 +3,7 @@
 Name:           openstack-tempest
 Epoch:          1
 Version:        kilo
-Release:        %{timestamp}.1%{?dist}
+Release:        %{timestamp}.2%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://github.com/redhat-openstack/tempest
@@ -45,6 +45,7 @@ Requires:       python-testscenarios
 Requires:       python-testtools
 Requires:       which
 Requires:       python-tempest-lib >= 0.4.0
+Requires:       subunit-filters
 
 %description
 This is a set of integration tests to be run against a live OpenStack cluster.
@@ -71,6 +72,9 @@ cp --preserve=mode -r . %{buildroot}%{_datarootdir}/%{name}-%{version}
 %exclude %{_datarootdir}/%{name}-%{version}/.coveragerc
 
 %changelog
+* Thu Apr 16 2015 Steve Linabery <slinaber@redhat.com> - kilo-20150413.2
+- Add Requires for subunit-filters
+
 * Mon Apr 13 2015 Steve Linabery <slinaber@redhat.com> - kilo-20150413.1
 - rebase to latest tag
 - Add Requires on python-tempest-lib
