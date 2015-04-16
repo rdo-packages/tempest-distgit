@@ -71,7 +71,7 @@ cp --preserve=mode -r . %{buildroot}%{_datarootdir}/%{name}-%{version}
 %exclude %{_datarootdir}/%{name}-%{version}/.coveragerc
 
 %changelog
-* Tue Mar 24 2015 Steve Linabery <slinaber@redhat.com> - 20150413-1
+* Mon Apr 13 2015 Steve Linabery <slinaber@redhat.com> - kilo-20150413.1
 - rebase to latest tag
 - Add Requires on python-tempest-lib
 
