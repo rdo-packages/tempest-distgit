@@ -47,6 +47,7 @@ Requires:       python-testresources
 Requires:       python-testscenarios
 Requires:       python-testtools
 Requires:       which
+Requires:       python-tempest-lib
 
 %description
 This is a set of integration tests to be run against a live OpenStack cluster.
