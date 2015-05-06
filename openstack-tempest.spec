@@ -1,9 +1,9 @@
-%global         timestamp 20150413
+%global         timestamp 20150506
 
 Name:           openstack-tempest
 Epoch:          1
 Version:        kilo
-Release:        %{timestamp}.3%{?dist}
+Release:        %{timestamp}.1%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://github.com/redhat-openstack/tempest
@@ -45,7 +45,6 @@ Requires:       python-testscenarios
 Requires:       python-testtools
 Requires:       which
 Requires:       python-tempest-lib >= 0.4.0
-Requires:       subunit-filters
 
 Provides:       openstack-tempest-kilo
 Obsoletes:      openstack-tempest-juno < 20150319
@@ -59,6 +58,10 @@ other specific tests useful in validating an OpenStack deployment.
 
 %prep
 %setup -q -n tempest-%{name}-%{version}-%{timestamp}
+# remove shebangs and fix permissions
+find -type f -a \( -name '*.py' -o -name 'py.*' \) \
+   -exec sed -i '1{/^#!/d}' {} \; \
+   -exec chmod u=rw,go=r {} \;
 
 %install
 mkdir -p %{buildroot}%{_datarootdir}/%{name}-%{version}
@@ -76,6 +79,10 @@ cp --preserve=mode -r . %{buildroot}%{_datarootdir}/%{name}-%{version}
 %exclude %{_datarootdir}/%{name}-%{version}/.coveragerc
 
 %changelog
+* Wed May 06 2015 Steve Linabery <slinaber@redhat.com> - kilo-20150506.1
+- Rebase to new midstream tag on kilo branch
+- remove Requires on subunit-filters
+
 * Mon May 04 2015 Steve Linabery <slinaber@redhat.com> - kilo-20150413.3
 - Add provides/obsoletes
 
