@@ -1,17 +1,12 @@
-%global         timestamp 20150319
-
 Name:           openstack-tempest
 Epoch:          1
-Version:        juno
-Release:        %{timestamp}.1%{?dist}
+Version:        XXX
+Release:        XXX
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://github.com/redhat-openstack/tempest
-Source0:        https://github.com/redhat-openstack/tempest/archive/openstack-tempest-%{version}-%{timestamp}.tar.gz
+Source0:        https://github.com/redhat-openstack/tempest/archive/master.tar.gz
 BuildArch:      noarch
-
-Provides:       openstack-tempest-juno
-Obsoletes:      openstack-tempest-juno < 20150319
 
 BuildRequires:  fdupes
 BuildRequires:  python-sphinx
@@ -47,7 +42,12 @@ Requires:       python-testresources
 Requires:       python-testscenarios
 Requires:       python-testtools
 Requires:       which
-Requires:       python-tempest-lib
+Requires:       python-tempest-lib >= 0.4.0
+Requires:       subunit-filters
+
+Provides:       openstack-tempest-kilo
+Obsoletes:      openstack-tempest-juno < 20150319
+Obsoletes:      openstack-tempest-icehouse < 20150319
 
 %description
 This is a set of integration tests to be run against a live OpenStack cluster.
@@ -56,7 +56,7 @@ other specific tests useful in validating an OpenStack deployment.
 
 
 %prep
-%setup -q -n tempest-%{name}-%{version}-%{timestamp}
+%setup -q -n tempest-%{upstream_version}
 
 %install
 mkdir -p %{buildroot}%{_datarootdir}/%{name}-%{version}
