@@ -1,0 +1,44 @@
+From 46d633a27387abcef10b6bdc42f4c9a64975c6d9 Mon Sep 17 00:00:00 2001
+From: Steve Linabery <slinaber@redhat.com>
+Date: Thu, 7 May 2015 16:24:23 -0500
+Subject: [PATCH] Remove some shebangs
+
+---
+ tempest/cmd/cleanup_service.py  | 2 --
+ tempest/common/api_discovery.py | 2 --
+ tempest/stress/cleanup.py       | 2 --
+ 3 files changed, 6 deletions(-)
+
+diff --git a/tempest/cmd/cleanup_service.py b/tempest/cmd/cleanup_service.py
+index 1ad12eb..94541e2 100644
+--- a/tempest/cmd/cleanup_service.py
++++ b/tempest/cmd/cleanup_service.py
+@@ -1,5 +1,3 @@
+-#!/usr/bin/env python
+-
+ # Copyright 2014 Dell Inc.
+ #
+ #    Licensed under the Apache License, Version 2.0 (the "License"); you may
+diff --git a/tempest/common/api_discovery.py b/tempest/common/api_discovery.py
+index 59fc87b..6433d39 100644
+--- a/tempest/common/api_discovery.py
++++ b/tempest/common/api_discovery.py
+@@ -1,5 +1,3 @@
+-#!/usr/bin/env python
+-
+ # Copyright 2013 Red Hat, Inc.
+ #
+ #    Licensed under the Apache License, Version 2.0 (the "License"); you may
+diff --git a/tempest/stress/cleanup.py b/tempest/stress/cleanup.py
+index 29c4401..e4791c9 100644
+--- a/tempest/stress/cleanup.py
++++ b/tempest/stress/cleanup.py
+@@ -1,5 +1,3 @@
+-#!/usr/bin/env python
+-
+ # Copyright 2013 Quanta Research Cambridge, Inc.
+ #
+ #    Licensed under the Apache License, Version 2.0 (the "License");
+-- 
+1.9.3
+
