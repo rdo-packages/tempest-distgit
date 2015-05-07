@@ -1,4 +1,4 @@
-%global         timestamp 20150506
+%global         timestamp 20150507
 
 Name:           openstack-tempest
 Epoch:          1
@@ -45,6 +45,7 @@ Requires:       python-testscenarios
 Requires:       python-testtools
 Requires:       which
 Requires:       python-tempest-lib >= 0.4.0
+Requires:       subunit-filters
 
 Provides:       openstack-tempest-kilo
 Obsoletes:      openstack-tempest-juno < 20150319
@@ -79,6 +80,9 @@ cp --preserve=mode -r . %{buildroot}%{_datarootdir}/%{name}-%{version}
 %exclude %{_datarootdir}/%{name}-%{version}/.coveragerc
 
 %changelog
+* Thu May 07 2015 Steve Linabery <slinaber@redhat.com> - kilo-20150507.1
+- Rebase to new midstream tag on kilo branch
+
 * Wed May 06 2015 Steve Linabery <slinaber@redhat.com> - kilo-20150506.1
 - Rebase to new midstream tag on kilo branch
 - remove Requires on subunit-filters
