@@ -58,9 +58,9 @@ other specific tests useful in validating an OpenStack deployment.
 %prep
 %setup -q -n tempest-%{upstream_version}
 # remove shebangs and fix permissions
-find -type f -a \( -name '*.py' -o -name 'py.*' \) \
-   -exec sed -i '1{/^#!/d}' {} \; \
-   -exec chmod u=rw,go=r {} \;
+RPMLINT_OFFENDERS="tempest/cmd/cleanup_service.py tempest/common/api_discovery.py tempest/stress/cleanup.py"
+sed -i '1{/^#!/d}' $RPMLINT_OFFENDERS
+chmod u=rw,go=r $RPMLINT_OFFENDERS
 
 %install
 mkdir -p %{buildroot}%{_datarootdir}/%{name}-%{version}
