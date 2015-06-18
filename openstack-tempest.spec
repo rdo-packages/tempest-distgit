@@ -3,7 +3,7 @@
 Name:           openstack-tempest
 Epoch:          1
 Version:        kilo
-Release:        %{timestamp}.2%{?dist}
+Release:        %{timestamp}.2%{?dist}.1
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://github.com/redhat-openstack/tempest
@@ -79,6 +79,9 @@ cp --preserve=mode -r . %{buildroot}%{_datarootdir}/%{name}-%{version}
 %exclude %{_datarootdir}/%{name}-%{version}/.coveragerc
 
 %changelog
+* Thu Jun 18 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1:kilo-20150507.2.1
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
+
 * Thu May 07 2015 Steve Linabery <slinaber@redhat.com> - kilo-20150507.2
 - Remove shebangs from specific .py files with patch file
 
