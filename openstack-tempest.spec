@@ -3,7 +3,7 @@
 Name:           openstack-tempest
 Epoch:          1
 Version:        kilo
-Release:        %{timestamp}.2%{?dist}.1
+Release:        %{timestamp}.3%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://github.com/redhat-openstack/tempest
@@ -46,7 +46,7 @@ Requires:       python-testresources
 Requires:       python-testscenarios
 Requires:       python-testtools
 Requires:       which
-Requires:       python-tempest-lib >= 0.4.0
+Requires:       python-tempest-lib >= 0.5.0
 Requires:       subunit-filters
 
 Provides:       openstack-tempest-kilo
@@ -79,6 +79,9 @@ cp --preserve=mode -r . %{buildroot}%{_datarootdir}/%{name}-%{version}
 %exclude %{_datarootdir}/%{name}-%{version}/.coveragerc
 
 %changelog
+* Wed Jul 01 2015 Steve Linabery <slinaber@redhat.com> - kilo-20150507.3
+- Update Requires on python-tempest-lib to 0.5.0
+
 * Thu Jun 18 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1:kilo-20150507.2.1
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
 
