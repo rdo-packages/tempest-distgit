@@ -1,16 +1,14 @@
-%global         timestamp 20150507
+%global         timestamp 20150708
 
 Name:           openstack-tempest
 Epoch:          1
 Version:        kilo
-Release:        %{timestamp}.3%{?dist}
+Release:        %{timestamp}.1%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://github.com/redhat-openstack/tempest
 Source0:        https://github.com/redhat-openstack/tempest/archive/openstack-tempest-%{version}-%{timestamp}.tar.gz
 BuildArch:      noarch
-
-Patch0001: 0001-Remove-some-shebangs.patch
 
 BuildRequires:  fdupes
 BuildRequires:  python-sphinx
@@ -61,7 +59,10 @@ other specific tests useful in validating an OpenStack deployment.
 
 %prep
 %setup -q -n tempest-%{name}-%{version}-%{timestamp}
-%patch0001 -p1
+# remove shebangs and fix permissions
+RPMLINT_OFFENDERS="tempest/cmd/cleanup_service.py tempest/tests/cmd/test_javelin.py tempest/common/api_discovery.py tempest/stress/cleanup.py"
+sed -i '1{/^#!/d}' $RPMLINT_OFFENDERS
+chmod u=rw,go=r $RPMLINT_OFFENDERS
 
 %install
 mkdir -p %{buildroot}%{_datarootdir}/%{name}-%{version}
@@ -79,6 +80,9 @@ cp --preserve=mode -r . %{buildroot}%{_datarootdir}/%{name}-%{version}
 %exclude %{_datarootdir}/%{name}-%{version}/.coveragerc
 
 %changelog
+* Wed Jul 08 2015 Steve Linabery <slinaber@redhat.com> - kilo-20150708.1
+- Rebase to new midstream tag on kilo branch
+
 * Wed Jul 01 2015 Steve Linabery <slinaber@redhat.com> - kilo-20150507.3
 - Update Requires on python-tempest-lib to 0.5.0
 
