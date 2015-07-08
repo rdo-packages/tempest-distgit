@@ -3,7 +3,7 @@
 Name:           openstack-tempest
 Epoch:          1
 Version:        kilo
-Release:        %{timestamp}.1%{?dist}
+Release:        %{timestamp}.2%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://github.com/redhat-openstack/tempest
@@ -20,10 +20,7 @@ BuildRequires:  python2-devel
 Requires:       python
 Requires:       python-anyjson
 Requires:       python-boto
-Requires:       python-cinderclient
 Requires:       python-fixtures
-Requires:       python-glanceclient
-Requires:       python-heatclient
 Requires:       python-ironicclient
 Requires:       python-iso8601
 Requires:       python-junitxml
@@ -46,6 +43,8 @@ Requires:       python-testtools
 Requires:       which
 Requires:       python-tempest-lib >= 0.5.0
 Requires:       subunit-filters
+Requires:       pyOpenSSL
+Requires:       PyYAML
 
 Provides:       openstack-tempest-kilo
 Obsoletes:      openstack-tempest-juno < 20150319
@@ -80,6 +79,9 @@ cp --preserve=mode -r . %{buildroot}%{_datarootdir}/%{name}-%{version}
 %exclude %{_datarootdir}/%{name}-%{version}/.coveragerc
 
 %changelog
+* Wed Jul 08 2015 Steve Linabery <slinaber@redhat.com> - kilo-20150708.2
+- Update Requires based on requirements.txt
+
 * Wed Jul 08 2015 Steve Linabery <slinaber@redhat.com> - kilo-20150708.1
 - Rebase to new midstream tag on kilo branch
 
