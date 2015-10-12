@@ -1,5 +1,5 @@
 %global project tempest
-%global upstream_release liberty
+%global release_name liberty
 
 Name:           openstack-%{project}
 Epoch:          1
@@ -75,8 +75,8 @@ sed -i '1{/^#!/d}' $RPMLINT_OFFENDERS
 chmod u=rw,go=r $RPMLINT_OFFENDERS
 
 %install
-mkdir -p %{buildroot}%{_datarootdir}/%{name}-%{upstream_release}
-cp --preserve=mode -r . %{buildroot}%{_datarootdir}/%{name}-%{upstream_release}
+mkdir -p %{buildroot}%{_datarootdir}/%{name}-%{release_name}
+cp --preserve=mode -r . %{buildroot}%{_datarootdir}/%{name}-%{release_name}
 %{__python} setup.py install --skip-build --root %{buildroot}
 mkdir -p %{buildroot}/etc/tempest
 mv %{buildroot}/usr/etc/tempest/* %{buildroot}/etc/tempest
@@ -87,9 +87,9 @@ mv %{buildroot}/usr/etc/tempest/* %{buildroot}/etc/tempest
 %files
 %license LICENSE
 %defattr(-,root,root)
-%{_datarootdir}/%{name}-%{upstream_release}
-%exclude %{_datarootdir}/%{name}-%{upstream_release}/.mailmap
-%exclude %{_datarootdir}/%{name}-%{upstream_release}/.coveragerc
+%{_datarootdir}/%{name}-%{release_name}
+%exclude %{_datarootdir}/%{name}-%{release_name}/.mailmap
+%exclude %{_datarootdir}/%{name}-%{release_name}/.coveragerc
 %{_bindir}/tempest
 %{_bindir}/javelin2
 %{_bindir}/run-tempest-stress
