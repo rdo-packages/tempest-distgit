@@ -5,7 +5,7 @@
 Name:           openstack-%{project}
 Epoch:          1
 Version:        %{release_name}
-Release:        %{timestamp}.1%{?dist}
+Release:        %{timestamp}.2%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://github.com/redhat-openstack/tempest
@@ -39,7 +39,7 @@ Requires:       python-neutronclient
 Requires:       python-nose
 Requires:       python-novaclient
 Requires:       python-oslo-concurrency >= 2.3.0
-Requires:       python-oslo-config >= 2.3.0
+Requires:       python-oslo-config >= 2:2.3.0
 Requires:       python-oslo-i18n >= 1.5.0
 Requires:       python-oslo-log >= 1.8.0
 Requires:       python-oslo-serialization >= 1.4.0
@@ -119,7 +119,11 @@ mv %{buildroot}/usr/etc/tempest/* %{buildroot}/etc/tempest
 %{_sysconfdir}/%{project}/*.conf
 
 %changelog
-* Wed Jul 08 2015 Steve Linabery <slinaber@redhat.com> - 1:liberty-20151020.1
+* Wed Oct 28 2015 Steve Linabery <slinaber@redhat.com> - 1:liberty-20151020.2
+- fix version Requires for python-oslo-config to add Epoch
+- fix date on previous changelog entry
+
+* Fri Oct 23 2015 Steve Linabery <slinaber@redhat.com> - 1:liberty-20151020.1
 - Rebase to new midstream tag on liberty branch
 
 * Wed Jul 08 2015 Steve Linabery <slinaber@redhat.com> - kilo-20150708.2
