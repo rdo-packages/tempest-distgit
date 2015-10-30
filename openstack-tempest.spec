@@ -12,6 +12,7 @@ Source0:        https://github.com/redhat-openstack/tempest/archive/master.tar.g
 BuildArch:      noarch
 
 BuildRequires:  fdupes
+BuildRequires:  git
 BuildRequires:  python-sphinx
 BuildRequires:  python-d2to1
 BuildRequires:  python-distribute
@@ -37,7 +38,7 @@ Requires:       python-neutronclient
 Requires:       python-nose
 Requires:       python-novaclient
 Requires:       python-oslo-concurrency >= 2.3.0
-Requires:       python-oslo-config >= 2.3.0
+Requires:       python-oslo-config >= 2:2.3.0
 Requires:       python-oslo-i18n >= 1.5.0
 Requires:       python-oslo-log >= 1.8.0
 Requires:       python-oslo-serialization >= 1.4.0
@@ -68,15 +69,26 @@ other specific tests useful in validating an OpenStack deployment.
 
 
 %prep
-%setup -q -n tempest-%{upstream_version}
+%autosetup -n tempest-%{upstream_version} -S git
 # remove shebangs and fix permissions
-RPMLINT_OFFENDERS="tempest/cmd/cleanup_service.py tempest/stress/cleanup.py"
+RPMLINT_OFFENDERS="tempest/cmd/account_generator.py \
+tempest/cmd/cleanup.py \
+tempest/cmd/cleanup_service.py \
+tempest/cmd/javelin.py \
+tempest/cmd/run_stress.py \
+tempest/cmd/verify_tempest_config.py \
+tempest/common/api_discovery.py \
+tempest/stress/cleanup.py \
+tempest/tests/cmd/test_javelin.py"
 sed -i '1{/^#!/d}' $RPMLINT_OFFENDERS
 chmod u=rw,go=r $RPMLINT_OFFENDERS
 
 %install
 mkdir -p %{buildroot}%{_datarootdir}/%{name}-%{release_name}
 cp --preserve=mode -r . %{buildroot}%{_datarootdir}/%{name}-%{release_name}
+rm -rf %{buildroot}%{_datarootdir}/%{name}-%{release_name}/.git*
+rm -rf %{buildroot}%{_datarootdir}/%{name}-%{release_name}/build
+rm -f  %{buildroot}%{_datarootdir}/%{name}-%{release_name}/doc/source/_static/.keep
 %{__python} setup.py install --skip-build --root %{buildroot}
 mkdir -p %{buildroot}/etc/tempest
 mv %{buildroot}/usr/etc/tempest/* %{buildroot}/etc/tempest
