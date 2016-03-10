@@ -1,5 +1,6 @@
 %global project tempest
-%global release_name liberty
+
+%{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 
 Name:           openstack-%{project}
 Epoch:          1
@@ -29,6 +30,7 @@ Requires:       python-glanceclient
 Requires:       python-heatclient
 Requires:       python-ironicclient
 Requires:       python-iso8601
+Requires:       python-jsonschema
 Requires:       python-junitxml
 Requires:       python-keyring
 Requires:       python-keystoneclient
@@ -43,7 +45,9 @@ Requires:       python-oslo-i18n >= 1.5.0
 Requires:       python-oslo-log >= 1.8.0
 Requires:       python-oslo-serialization >= 1.4.0
 Requires:       python-oslo-utils >= 2.0.0
+Requires:       python-paramiko
 Requires:       python-pbr
+Requires:       python-prettytable
 Requires:       python-saharaclient
 Requires:       python-six >= 1.9.0
 Requires:       python-swiftclient
@@ -52,12 +56,12 @@ Requires:       python-testrepository
 Requires:       python-testresources
 Requires:       python-testscenarios
 Requires:       python-testtools
+Requires:       python2-os-testr >= 0.4.1
 Requires:       PyYAML
 Requires:       which
-Requires:       python-tempest-lib >= 0.6.1
 Requires:       subunit-filters
 
-Provides:       openstack-tempest-liberty
+Obsoletes:      openstack-tempest-liberty
 Obsoletes:      openstack-tempest-kilo
 Obsoletes:      openstack-tempest-juno < 20150319
 Obsoletes:      openstack-tempest-icehouse < 20150319
@@ -84,11 +88,11 @@ sed -i '1{/^#!/d}' $RPMLINT_OFFENDERS
 chmod u=rw,go=r $RPMLINT_OFFENDERS
 
 %install
-mkdir -p %{buildroot}%{_datarootdir}/%{name}-%{release_name}
-cp --preserve=mode -r . %{buildroot}%{_datarootdir}/%{name}-%{release_name}
-rm -rf %{buildroot}%{_datarootdir}/%{name}-%{release_name}/.git*
-rm -rf %{buildroot}%{_datarootdir}/%{name}-%{release_name}/build
-rm -f  %{buildroot}%{_datarootdir}/%{name}-%{release_name}/doc/source/_static/.keep
+mkdir -p %{buildroot}%{_datarootdir}/%{name}-%{upstream_version}
+cp --preserve=mode -r . %{buildroot}%{_datarootdir}/%{name}-%{upstream_version}
+rm -rf %{buildroot}%{_datarootdir}/%{name}-%{upstream_version}/.git*
+rm -rf %{buildroot}%{_datarootdir}/%{name}-%{upstream_version}/build
+rm -f  %{buildroot}%{_datarootdir}/%{name}-%{upstream_version}/doc/source/_static/.keep
 %{__python} setup.py install --skip-build --root %{buildroot}
 mkdir -p %{buildroot}/etc/tempest
 mv %{buildroot}/usr/etc/tempest/* %{buildroot}/etc/tempest
@@ -99,12 +103,14 @@ mv %{buildroot}/usr/etc/tempest/* %{buildroot}/etc/tempest
 %files
 %license LICENSE
 %defattr(-,root,root)
-%{_datarootdir}/%{name}-%{release_name}
-%exclude %{_datarootdir}/%{name}-%{release_name}/.mailmap
-%exclude %{_datarootdir}/%{name}-%{release_name}/.coveragerc
+%{_datarootdir}/%{name}-%{upstream_version}
+%exclude %{_datarootdir}/%{name}-%{upstream_version}/.mailmap
+%exclude %{_datarootdir}/%{name}-%{upstream_version}/.coveragerc
 %{_bindir}/tempest
+%{_bindir}/check-uuid
 %{_bindir}/javelin2
 %{_bindir}/run-tempest-stress
+%{_bindir}/skip-tracker
 %{_bindir}/tempest-account-generator
 %{_bindir}/tempest-cleanup
 %{_bindir}/verify-tempest-config
