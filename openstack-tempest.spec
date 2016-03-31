@@ -9,7 +9,7 @@ Release:        XXX
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://github.com/redhat-openstack/tempest
-Source0:        https://github.com/redhat-openstack/tempest/archive/master.tar.gz
+Source0:        https://github.com/redhat-openstack/tempest/archive/%{version}.tar.gz#/%{project}-%{version}.tar.gz
 BuildArch:      noarch
 
 BuildRequires:  fdupes
