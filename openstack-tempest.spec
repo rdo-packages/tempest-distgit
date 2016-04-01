@@ -1,3 +1,6 @@
+%global commit b4a056da5c65f893389694e1f219ffe7473ab191
+%global shortcommit %(c=%{commit}; echo ${c:0:7})
+%global alphatag .%{shortcommit}git
 %global project tempest
 
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
@@ -5,11 +8,11 @@
 Name:           openstack-%{project}
 Epoch:          1
 Version:        10.0.0
-Release:        1
+Release:        1%{alphatag}%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://github.com/redhat-openstack/tempest
-Source0:        https://github.com/redhat-openstack/tempest/archive/%{version}.tar.gz#/%{project}-%{version}.tar.gz
+Source0:        https://github.com/redhat-openstack/tempest/archive/%{commit}.tar.gz#/%{project}-%{commit}.tar.gz
 BuildArch:      noarch
 
 BuildRequires:  fdupes
@@ -73,7 +76,7 @@ other specific tests useful in validating an OpenStack deployment.
 
 
 %prep
-%autosetup -n tempest-%{upstream_version} -S git
+%autosetup -n tempest-%{commit} -S git
 # remove shebangs and fix permissions
 RPMLINT_OFFENDERS="tempest/cmd/account_generator.py \
 tempest/cmd/cleanup.py \
