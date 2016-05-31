@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dabed58f_28419e0b",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 85
+      },
+      "writtenOn": "2016-05-31T15:27:56Z",
+      "side": 1,
+      "message": "python-murano-tests is not subpackaged yet\nhttps://review.rdoproject.org/r/gitweb?p\u003dopenstack/murano-distgit.git;a\u003dblob;f\u003dopenstack-murano.spec;hb\u003dHEAD",
+      "revId": "eedecd0edadae542d7039b866e08850fd065d7a3",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
