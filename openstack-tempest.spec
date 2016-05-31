@@ -60,6 +60,24 @@ Requires:       python2-os-testr >= 0.4.1
 Requires:       PyYAML
 Requires:       which
 Requires:       subunit-filters
+Requires:       python-aodh-tests
+Requires:       python-ceilometer-tests
+Requires:       python-cinder-tests
+Requires:       python-glance-tests
+Requires:       python-gnocchi-tests
+Requires:       python-heat-tests
+Requires:       python-ironic-tests
+Requires:       python-keystone-tests
+Requires:       python-mistral-tests
+Requires:       python-neutron-tests
+Requires:       python-neutron-fwaas-tests
+Requires:       python-neutron-lbaas-tests
+Requires:       python-neutron-vpnaas-tests
+Requires:       python-nova-tests
+Requires:       python-sahara-tests
+Requires:       python-swift-tests
+Requires:       python-trove-tests
+Requires:       python-zaqar-tests
 
 Obsoletes:      openstack-tempest-liberty
 Obsoletes:      openstack-tempest-kilo
