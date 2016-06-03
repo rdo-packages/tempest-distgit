@@ -77,7 +77,6 @@ Requires:       python-nova-tests
 Requires:       python-sahara-tests
 Requires:       python-swift-tests
 Requires:       python-trove-tests
-Requires:       python-zaqar-tests
 
 Obsoletes:      openstack-tempest-liberty
 Obsoletes:      openstack-tempest-kilo
