@@ -95,6 +95,8 @@ other specific tests useful in validating an OpenStack deployment.
 
 %prep
 %autosetup -n tempest-%{commit} -S git
+# have dependencies being handled by rpms, rather than requirement files
+rm -f *requirements.txt
 # remove shebangs and fix permissions
 RPMLINT_OFFENDERS="tempest/cmd/account_generator.py \
 tempest/cmd/cleanup.py \
