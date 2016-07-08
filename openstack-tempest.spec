@@ -8,7 +8,7 @@
 Name:           openstack-%{project}
 Epoch:          1
 Version:        10.0.0
-Release:        1%{alphatag}%{?dist}
+Release:        2%{alphatag}%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://github.com/redhat-openstack/tempest
@@ -144,6 +144,10 @@ mv %{buildroot}/usr/etc/tempest/* %{buildroot}/etc/tempest
 %{_sysconfdir}/%{project}/*.conf
 
 %changelog
+* Fri Jul 08 2016 Steve Linabery <slinaber@redhat.com> 1:10.0.0-2.b4a056dgit
+- Add Requires for *-tests packages
+- Remove *requirements.txt from source
+
 * Thu Mar 31 2016 Haikel Guemar <hguemar@fedoraproject.org> 1:10.0.0-
 - Update to 10.0.0
 
