@@ -78,6 +78,8 @@ Requires:       python-sahara-tests
 Requires:       python-swift-tests
 Requires:       python-trove-tests
 Requires:       python-zaqar-tests
+Requires:       python-murano-tests
+Requires:       python-designate-tests-tempest
 
 Obsoletes:      openstack-tempest-liberty
 Obsoletes:      openstack-tempest-kilo
