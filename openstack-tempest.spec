@@ -139,3 +139,4 @@ mv %{buildroot}/usr/etc/tempest/* %{buildroot}/etc/tempest
 %{_sysconfdir}/%{project}/*.conf
 
 %changelog
+# REMOVEME: error caused by commit 
