@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "facab960_1ca7ed50",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 85
+      },
+      "writtenOn": "2016-09-08T18:11:35Z",
+      "side": 1,
+      "message": "this part is actually not a justification, please drop it, rest of this line is the complete justification",
+      "range": {
+        "startLine": 9,
+        "startChar": 2,
+        "endLine": 9,
+        "endChar": 31
+      },
+      "revId": "cca336f243537a9317385f057e958e6442cc1ef9",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "facab960_bc88c1c7",
         "filename": "openstack-tempest.spec",
         "patchSetId": 5
