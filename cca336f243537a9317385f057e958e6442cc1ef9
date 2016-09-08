@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "facab960_bc88c1c7",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2016-09-08T16:42:45Z",
+      "side": 1,
+      "message": "Please alphabetically sort",
+      "revId": "cca336f243537a9317385f057e958e6442cc1ef9",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "facab960_9ca4dd58",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2016-09-08T16:42:45Z",
+      "side": 1,
+      "message": "Please alphabetically sort",
+      "revId": "cca336f243537a9317385f057e958e6442cc1ef9",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
