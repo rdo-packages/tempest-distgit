@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "facab960_bc3e0128",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2016-09-08T13:57:38Z",
+      "side": 1,
+      "message": "Nit: missing space(s) and does it really need to be separated from the other BRs ?",
+      "revId": "8dc926f2d94b4617c4a9c403ff67fa1526226b51",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "facab960_1c460dc0",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2016-09-08T13:57:38Z",
+      "side": 1,
+      "message": "If we want to have all the plugins here, I think it\u0027s missing:\n- python-designate-tests-tempest\n- python-horizon-tests-tempest\n- python-watcher-tests-tempest",
+      "revId": "8dc926f2d94b4617c4a9c403ff67fa1526226b51",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
