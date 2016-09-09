@@ -46,6 +46,30 @@
       "revId": "036a61f854846ecd5a19bb2e8d236f512c02ea2f",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "facab960_374a0a84",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 77
+      },
+      "writtenOn": "2016-09-09T15:14:45Z",
+      "side": 1,
+      "message": "But, if aodh is not installed, it wouldn\u0027t really make sense. If aodh is not there, there\u0027s no entry point for the tests, so how could it be needed. Am I missing something?",
+      "parentUuid": "facab960_d7739ee5",
+      "range": {
+        "startLine": 10,
+        "startChar": 12,
+        "endLine": 11,
+        "endChar": 16
+      },
+      "revId": "036a61f854846ecd5a19bb2e8d236f512c02ea2f",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
     }
   ]
 }
