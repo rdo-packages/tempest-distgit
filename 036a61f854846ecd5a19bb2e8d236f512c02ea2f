@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "facab960_3763ea1b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 113
+      },
+      "writtenOn": "2016-09-09T15:08:59Z",
+      "side": 1,
+      "message": "Do we know why aodh is special in this case? Does it happen when we run it on a machine with no Aodh installed at all?",
+      "range": {
+        "startLine": 10,
+        "startChar": 12,
+        "endLine": 11,
+        "endChar": 16
+      },
+      "revId": "036a61f854846ecd5a19bb2e8d236f512c02ea2f",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
