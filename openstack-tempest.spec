@@ -25,7 +25,9 @@ Requires:       python-tempest = %{epoch}:%{version}-%{release}
 
 Requires:       python
 Requires:       python-anyjson
+Requires:       python-aodh-tests
 Requires:       python-boto
+Requires:       python-gabbi
 Requires:       python-iso8601
 Requires:       python-junitxml
 Requires:       python-keyring
@@ -104,7 +106,6 @@ Summary:       All OpenStack Tempest Plugins
 
 Requires:      %{name} = %{epoch}:%{version}-%{release}
 
-Requires:       python-aodh-tests
 Requires:       python-ceilometer-tests
 Requires:       python-cinder-tests
 Requires:       python-designate-tests-tempest
