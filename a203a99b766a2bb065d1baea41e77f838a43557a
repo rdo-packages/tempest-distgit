@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "facab960_69791693",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 113
+      },
+      "writtenOn": "2016-09-09T16:25:37Z",
+      "side": 1,
+      "message": "I would suggest something like \"Do not build -all subpackage during bootstrap\", then some more detail in the message.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 93
+      },
+      "revId": "a203a99b766a2bb065d1baea41e77f838a43557a",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
