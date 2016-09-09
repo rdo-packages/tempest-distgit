@@ -99,6 +99,7 @@ other specific tests useful in validating an OpenStack deployment.
 
 This package contains tests for the tempest python library.
 
+%if 0%{?repo_bootstrap} == 0
 %package -n    %{name}-all
 Summary:       All OpenStack Tempest Plugins
 
@@ -132,6 +133,7 @@ Tempest has batteries of tests for OpenStack API validation, Scenarios, and
 other specific tests useful in validating an OpenStack deployment.
 
 This package contains all the tempest plugins.
+%endif
 
 %prep
 %autosetup -n tempest-%{upstream_version} -S git
@@ -200,7 +202,9 @@ mv %{buildroot}/usr/etc/tempest/* %{buildroot}/etc/tempest
 %license LICENSE
 %{python2_sitelib}/tempest/tests
 
+%if 0%{?repo_bootstrap} == 0
 %files -n %{name}-all
 %license LICENSE
+%endif
 
 %changelog
