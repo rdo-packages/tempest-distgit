@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "facab960_d7fe3e38",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 7
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 113
+      },
+      "writtenOn": "2016-09-09T14:21:02Z",
+      "side": 1,
+      "message": "I\u0027ve just realized that we have created a circular dependency here during build time. openstack-tempest-all requires python-designate-tests-tempest, which in turn requires python-tempest (built by this same spec).\n\nWe should fix it using https://github.com/openstack-packages/DLRN/blob/master/README.rst#bootstrapping",
+      "range": {
+        "startLine": 110,
+        "startChar": 13,
+        "endLine": 110,
+        "endChar": 46
+      },
+      "revId": "4fe997a57ec8885349c46a463a89120e05881b7a",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
