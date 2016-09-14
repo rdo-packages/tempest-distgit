@@ -121,7 +121,7 @@ Requires:       python-neutron-fwaas-tests
 Requires:       python-neutron-lbaas-tests
 Requires:       python-neutron-vpnaas-tests
 Requires:       python-nova-tests
-Requires:       python-sahara-tests
+Requires:       python-sahara-tests-tempest
 Requires:       python-swift-tests
 Requires:       python-trove-tests
 Requires:       python-zaqar-tests
