@@ -34,6 +34,24 @@
       "revId": "4416165c3d0c8f213b96a12b0805e31a05ae3008",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "facab960_82fe2f6a",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2016-09-14T07:36:03Z",
+      "side": 1,
+      "message": "All tempest tests, or all tests? Scenario tests are not Tempest tests (ok, they use few Tempest libraries, but not there is a specific runner and a different configuration).",
+      "parentUuid": "facab960_4204277e",
+      "revId": "4416165c3d0c8f213b96a12b0805e31a05ae3008",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
     }
   ]
 }
