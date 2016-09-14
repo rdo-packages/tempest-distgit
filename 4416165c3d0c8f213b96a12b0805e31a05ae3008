@@ -52,6 +52,24 @@
       "revId": "4416165c3d0c8f213b96a12b0805e31a05ae3008",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "facab960_c2f7578b",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 77
+      },
+      "writtenOn": "2016-09-14T07:39:21Z",
+      "side": 1,
+      "message": "Luigi, could you please elaborate on the distinction between python-sahara-test-tempest and the scenario ones? AFAIU they should be added, as the -all package would take everything it.",
+      "parentUuid": "facab960_82fe2f6a",
+      "revId": "4416165c3d0c8f213b96a12b0805e31a05ae3008",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
     }
   ]
 }
