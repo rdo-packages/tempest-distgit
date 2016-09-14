@@ -70,6 +70,24 @@
       "revId": "4416165c3d0c8f213b96a12b0805e31a05ae3008",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "facab960_422b47eb",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2016-09-14T07:46:32Z",
+      "side": 1,
+      "message": "http://docs.openstack.org/developer/sahara-tests/scenario.html\n\nEven if you install them, they won\u0027t be run together with the other tempest tests (no plugin for them). Also they need a different set of configuration files, which is probably not clear from the examples in the documentation unless you want to override the default configuration files.",
+      "parentUuid": "facab960_c2f7578b",
+      "revId": "4416165c3d0c8f213b96a12b0805e31a05ae3008",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
     }
   ]
 }
