@@ -16,6 +16,24 @@
       "revId": "4416165c3d0c8f213b96a12b0805e31a05ae3008",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "facab960_4204277e",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 111
+      },
+      "writtenOn": "2016-09-14T07:29:47Z",
+      "side": 1,
+      "message": "-all package should install all the tempest plugins and all the component specific tests so that user can easily run tempest tests.\nIf we donot install sceanario tests during -all package, the user needs to install it manually, which i think does not looks good.",
+      "parentUuid": "facab960_02dbff1b",
+      "revId": "4416165c3d0c8f213b96a12b0805e31a05ae3008",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
     }
   ]
 }
