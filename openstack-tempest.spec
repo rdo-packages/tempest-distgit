@@ -1,16 +1,21 @@
+%global commit 0f8baae7d1553017a4349b6d500e91f1b9847551
+%global shortcommit %(c=%{commit}; echo ${c:0:7})
+%global alphatag .%{shortcommit}git
 %global project tempest
+
+%global repo_bootstrap 1
 
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 
 Name:           openstack-%{project}
 Epoch:          1
-Version:        XXX
-Release:        XXX
+Version:        12.2.0
+Release:        1%{alphatag}%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 # FIXME move to Upstream tempest
 Url:            https://github.com/redhat-openstack/tempest
-Source0:        https://github.com/redhat-openstack/tempest/archive/master.tar.gz
+Source0:        https://github.com/redhat-openstack/tempest/archive/%{commit}.tar.gz#/%{project}-%{commit}.tar.gz
 BuildArch:      noarch
 
 BuildRequires:  fdupes
@@ -136,7 +141,7 @@ This package contains all the tempest plugins.
 %endif
 
 %prep
-%autosetup -n tempest-%{upstream_version} -S git
+%autosetup -n tempest-%{commit} -S git
 # have dependencies being handled by rpms, rather than requirement files
 rm -rf {test-,}requirements.txt
 
@@ -208,3 +213,5 @@ mv %{buildroot}/usr/etc/tempest/* %{buildroot}/etc/tempest
 %endif
 
 %changelog
+* Fri Sep 16 2016 Alan Pevec <apevec AT redhat.com> 1:12.2.0-1.0f8baaegit
+- Update to 12.2.0 redhat-openstack/tempest snapshot 0f8baae
