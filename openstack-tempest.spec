@@ -3,14 +3,12 @@
 %global alphatag .%{shortcommit}git
 %global project tempest
 
-%global repo_bootstrap 1
-
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 
 Name:           openstack-%{project}
 Epoch:          1
 Version:        12.2.0
-Release:        1%{alphatag}%{?dist}
+Release:        2%{alphatag}%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 # FIXME move to Upstream tempest
@@ -213,5 +211,5 @@ mv %{buildroot}/usr/etc/tempest/* %{buildroot}/etc/tempest
 %endif
 
 %changelog
-* Fri Sep 16 2016 Alan Pevec <apevec AT redhat.com> 1:12.2.0-1.0f8baaegit
+* Fri Sep 23 2016 Alan Pevec <apevec AT redhat.com> 1:12.2.0-2.0f8baaegit
 - Update to 12.2.0 redhat-openstack/tempest snapshot 0f8baae
