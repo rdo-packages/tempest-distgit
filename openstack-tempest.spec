@@ -4,6 +4,8 @@
 %global project tempest
 
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
+%{?dlrn: %global tarsources %{project}-%{upstream_version}}
+%{!?dlrn: %global tarsources %{project}-%{commit}}
 
 Name:           openstack-%{project}
 Epoch:          1
@@ -139,7 +141,7 @@ This package contains all the tempest plugins.
 %endif
 
 %prep
-%autosetup -n tempest-%{commit} -S git
+%autosetup -n %{tarsources} -S git
 # have dependencies being handled by rpms, rather than requirement files
 rm -rf {test-,}requirements.txt
 
