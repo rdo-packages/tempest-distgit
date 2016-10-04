@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dacfb570_d6e3a203",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 85
+      },
+      "writtenOn": "2016-10-04T11:06:53Z",
+      "side": 1,
+      "message": "To be precise: DLRN generates sdist tarball but openstack-tempest we build in \u003c\u003d Newton is redhat-openstack/tempest fork for which don\u0027t have (and should not!) releases, so CBS stable builds take github snapshot tarball, which is raw git checkout.\n\nOcata goal is to switch RPM to openstack/tempest upstream, so this will need to be revisited for Ocata RC.",
+      "revId": "1d2fcc0959d1b16e8eb05adfad2893ef2b97611d",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
