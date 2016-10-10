@@ -186,7 +186,6 @@ mv %{buildroot}/usr/etc/tempest/* %{buildroot}/etc/tempest
 %{_bindir}/skip-tracker
 %{_bindir}/subunit-describe-calls
 %{_bindir}/tempest-account-generator
-%{_bindir}/tempest-cleanup
 %{_bindir}/verify-tempest-config
 %{_sysconfdir}/%{project}/*sample
 %{_sysconfdir}/%{project}/*yaml
