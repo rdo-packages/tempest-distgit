@@ -1,4 +1,4 @@
-%global commit 0f8baae7d1553017a4349b6d500e91f1b9847551
+%global commit 0363596717152b3315b5984d844434c63c448a36
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 %global alphatag .%{shortcommit}git
 %global project tempest
@@ -9,8 +9,8 @@
 
 Name:           openstack-%{project}
 Epoch:          1
-Version:        12.2.0
-Release:        2%{alphatag}%{?dist}
+Version:        13.0.0
+Release:        1%{alphatag}%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 # FIXME move to Upstream tempest
@@ -191,7 +191,6 @@ mv %{buildroot}/usr/etc/tempest/* %{buildroot}/etc/tempest
 %{_bindir}/skip-tracker
 %{_bindir}/subunit-describe-calls
 %{_bindir}/tempest-account-generator
-%{_bindir}/tempest-cleanup
 %{_bindir}/verify-tempest-config
 %{_sysconfdir}/%{project}/*sample
 %{_sysconfdir}/%{project}/*yaml
@@ -213,5 +212,8 @@ mv %{buildroot}/usr/etc/tempest/* %{buildroot}/etc/tempest
 %endif
 
 %changelog
+* Tue Oct 11 2016 Chandan Kumar <chkumar AT redhat.com> 1:13.0.0-1.3c448a36git
+- Update to 13.0.0
+
 * Fri Sep 23 2016 Alan Pevec <apevec AT redhat.com> 1:12.2.0-2.0f8baaegit
 - Update to 12.2.0 redhat-openstack/tempest snapshot 0f8baae
