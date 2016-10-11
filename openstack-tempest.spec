@@ -207,3 +207,4 @@ mv %{buildroot}/usr/etc/tempest/* %{buildroot}/etc/tempest
 %endif
 
 %changelog
+# REMOVEME: error caused by commit https://github.com/redhat-openstack/tempest.git/commit/1abece760d3192ec6a6a368a0566939656623d8a
