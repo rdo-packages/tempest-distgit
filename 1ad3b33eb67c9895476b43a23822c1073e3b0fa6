@@ -16,6 +16,24 @@
       "revId": "1ad3b33eb67c9895476b43a23822c1073e3b0fa6",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7adec928_7e40f156",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 111
+      },
+      "writtenOn": "2016-10-18T15:22:09Z",
+      "side": 1,
+      "message": "Yes, Here is the commit https://github.com/redhat-openstack/tempest/commit/5bea3b23c4d872b0052b1a88a8bda900ec3ed53e",
+      "parentUuid": "7adec928_3e366904",
+      "revId": "1ad3b33eb67c9895476b43a23822c1073e3b0fa6",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
     }
   ]
 }
