@@ -66,7 +66,6 @@ Requires:      python-prettytable
 Requires:      python-six
 Requires:      python-stevedore
 Requires:      python-testrepository
-Requires:      python-testscenarios
 Requires:      python-testtools
 Requires:      python-urllib3
 Requires:      PyYAML
