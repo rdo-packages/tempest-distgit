@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7adec928_3e366904",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 85
+      },
+      "writtenOn": "2016-10-18T15:20:15Z",
+      "side": 1,
+      "message": "Has redhat-openstack/tempest been rebase to include that change?",
+      "revId": "1ad3b33eb67c9895476b43a23822c1073e3b0fa6",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
