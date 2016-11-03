@@ -143,12 +143,10 @@ rm -rf {test-,}requirements.txt
 RPMLINT_OFFENDERS="tempest/cmd/list_plugins.py \
 tempest/cmd/cleanup.py \
 tempest/cmd/cleanup_service.py \
-tempest/cmd/run_stress.py \
 tempest/cmd/verify_tempest_config.py \
 tempest/cmd/account_generator.py \
 tempest/lib/cmd/skip_tracker.py \
-tempest/lib/cmd/check_uuid.py \
-tempest/stress/cleanup.py"
+tempest/lib/cmd/check_uuid.py"
 sed -i '1{/^#!/d}' $RPMLINT_OFFENDERS
 chmod u=rw,go=r $RPMLINT_OFFENDERS
 
@@ -181,7 +179,6 @@ mv %{buildroot}/usr/etc/tempest/* %{buildroot}/etc/tempest
 %{_datarootdir}/%{name}-%{upstream_version}
 %{_bindir}/tempest
 %{_bindir}/check-uuid
-%{_bindir}/run-tempest-stress
 %{_bindir}/skip-tracker
 %{_bindir}/subunit-describe-calls
 %{_bindir}/tempest-account-generator
