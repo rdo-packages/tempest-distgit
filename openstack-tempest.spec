@@ -1,4 +1,4 @@
-%global commit 296cca79678463dd90ca2694245bb7b89f8405d8
+%global commit 6425a9bac6082278a26dcd4a067e270bba80b58d
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 %global alphatag .%{shortcommit}git
 %global project tempest
@@ -10,7 +10,7 @@
 Name:           openstack-%{project}
 Epoch:          1
 Version:        13.0.0
-Release:        3%{alphatag}%{?dist}
+Release:        4%{alphatag}%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 # FIXME move to Upstream tempest
@@ -212,6 +212,9 @@ mv %{buildroot}/usr/etc/tempest/* %{buildroot}/etc/tempest
 %endif
 
 %changelog
+* Fri Nov 11 2016 Chandan Kumar <chkumar AT redhat.com> 1:13.0.0-4.6425a9bagit
+- Update to post 13.0.0 (6425a9bac6082278a26dcd4a067e270bba80b58d)
+
 * Fri Nov 04 2016 Chandan Kumar <chkumar AT redhat.com> 1:13.0.0-3.296cca79git
 - Update to post 13.0.0 (296cca79678463dd90ca2694245bb7b89f8405d8)
 
