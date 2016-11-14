@@ -128,6 +128,7 @@ Requires:       python-watcher-tests-tempest
 Requires:       python-magnum-tests
 Requires:       python-murano-tests
 Requires:       python-manila-tests
+Requires:       python-ironic-inspector-tests
 
 %description -n %{name}-all
 This is a set of integration tests to be run against a live OpenStack cluster.
