@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dab895d6_bff43f88",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 127
+      },
+      "writtenOn": "2017-01-09T13:51:00Z",
+      "side": 0,
+      "message": "personal preference would be to leave the -libery Obsoletes for one more cycle and drop it once liberty is EOL officially.  But removing the rest of them makes sense.",
+      "revId": "7e764b3d52403c66909d35ff06104fa67c1a8191",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
