@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dab895d6_62ca0ca3",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 111
+      },
+      "writtenOn": "2017-01-09T16:56:04Z",
+      "side": 1,
+      "message": "Here is the %check logic",
+      "revId": "06d978b138da7370165057507f848a3a7a119c75",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
