@@ -35,10 +35,8 @@ Requires:       python-testresources
 Requires:       subunit-filters
 Requires:       which
 
-Obsoletes:      openstack-tempest-icehouse < 20150319
-Obsoletes:      openstack-tempest-juno < 20150319
+# FIXME remove openstack-tempest-liberty obsoletes by Pike release.
 Obsoletes:      openstack-tempest-liberty
-Obsoletes:      openstack-tempest-kilo
 
 %description
 This is a set of integration tests to be run against a live OpenStack cluster.
