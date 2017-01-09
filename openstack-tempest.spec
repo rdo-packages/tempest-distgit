@@ -56,7 +56,6 @@ Requires:      python-netaddr
 Requires:      python-oslo-concurrency
 Requires:      python-oslo-config
 Requires:      python-oslo-log
-Requires:      python-oslo-i18n
 Requires:      python-oslo-serialization
 Requires:      python-oslo-utils
 Requires:      python-os-testr
@@ -69,6 +68,7 @@ Requires:      python-testrepository
 Requires:      python-testtools
 Requires:      python-urllib3
 Requires:      PyYAML
+Requires:      python-subunit
 
 %description -n python-tempest
 This is a set of integration tests to be run against a live OpenStack cluster.
@@ -85,11 +85,19 @@ BuildRequires:  python-coverage
 BuildRequires:  python-mock
 BuildRequires:  python-oslotest
 BuildRequires:  python-subunit
+BuildRequires:  python-oslo-log
+BuildRequires:  python-jsonschema
+BuildRequires:  python-urllib3
+BuildRequires:  PyYAML
+BuildRequires:  python-oslo-concurrency
+BuildRequires:  python-paramiko
+BuildRequires:  python-cliff
+BuildRequires:  python-pep8
+BuildRequires:  python-os-testr
 
 Requires:       python-coverage
 Requires:       python-mock
 Requires:       python-oslotest
-Requires:       python-subunit
 
 %description -n python-tempest-tests
 This is a set of integration tests to be run against a live OpenStack cluster.
@@ -176,6 +184,12 @@ oslo-config-generator --config-file tempest/cmd/config-generator.tempest.conf \
 
 mkdir -p %{buildroot}/etc/tempest
 mv %{buildroot}/usr/etc/tempest/* %{buildroot}/etc/tempest
+
+%check
+export OS_TEST_PATH='./tempest/tests'
+export PATH=$PATH:$RPM_BUILD_ROOT/usr/bin
+export PYTHONPATH=$PWD
+%{__python2} setup.py testr
 
 %files
 %license LICENSE
