@@ -16,6 +16,24 @@
       "revId": "7e764b3d52403c66909d35ff06104fa67c1a8191",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dab895d6_5f35e344",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 111
+      },
+      "writtenOn": "2017-01-09T14:05:46Z",
+      "side": 0,
+      "message": "Fixing it in a new patchset",
+      "parentUuid": "dab895d6_bff43f88",
+      "revId": "7e764b3d52403c66909d35ff06104fa67c1a8191",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
     }
   ]
 }
