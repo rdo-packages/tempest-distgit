@@ -16,6 +16,29 @@
       "revId": "06d978b138da7370165057507f848a3a7a119c75",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dab895d6_08aa4f70",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-01-11T12:27:09Z",
+      "side": 1,
+      "message": "Tests are failing because they try to run \"tempest\" command wich is not installed in system PATH. It should work declaring following variables before running the tests:\n\nexport OS_TEST_PATH\u003d\u0027./tempest/tests\u0027\nexport PATH\u003d$PATH:$RPM_BUILD_ROOT/usr/bin\nexport PYTHONPATH\u003d$PWD",
+      "range": {
+        "startLine": 191,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 40
+      },
+      "revId": "06d978b138da7370165057507f848a3a7a119c75",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
     }
   ]
 }
