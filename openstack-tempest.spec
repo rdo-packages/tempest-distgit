@@ -8,14 +8,11 @@ Version:        XXX
 Release:        XXX
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
-# FIXME move to Upstream tempest
-Url:            https://github.com/redhat-openstack/tempest
-Source0:        https://github.com/redhat-openstack/tempest/archive/master.tar.gz
+Url:            https://launchpad.net/tempest
+Source0:        http://tarballs.openstack.org/tempest/tempest-%{upstream_version}.tar.gz
 BuildArch:      noarch
 
-BuildRequires:  fdupes
 BuildRequires:  git
-BuildRequires:  python-d2to1
 BuildRequires:  python-oslo-config
 BuildRequires:  python-pbr
 BuildRequires:  python-setuptools
@@ -23,17 +20,9 @@ BuildRequires:  python2-devel
 
 Requires:       python-tempest = %{epoch}:%{version}-%{release}
 
-Requires:       python
-Requires:       python-anyjson
-Requires:       python-boto
-Requires:       python-iso8601
-Requires:       python-junitxml
-Requires:       python-keyring
-Requires:       python-lxml
-Requires:       python-nose
-Requires:       python-testresources
-Requires:       subunit-filters
-Requires:       which
+Requires:     python-tempestconf
+
+
 
 # FIXME remove openstack-tempest-liberty obsoletes by Pike release.
 Obsoletes:      openstack-tempest-liberty
@@ -164,15 +153,6 @@ chmod u=rw,go=r $RPMLINT_OFFENDERS
 %{__python2} setup.py build
 
 %install
-mkdir -p %{buildroot}%{_datarootdir}/%{name}-%{upstream_version}
-cp -pr . %{buildroot}%{_datarootdir}/%{name}-%{upstream_version}
-# Remove unnecessary files
-rm -rf %{buildroot}%{_datarootdir}/%{name}-%{upstream_version}/.git*
-rm -rf %{buildroot}%{_datarootdir}/%{name}-%{upstream_version}/build
-rm -f  %{buildroot}%{_datarootdir}/%{name}-%{upstream_version}/doc/source/_static/.keep
-rm -f  %{buildroot}%{_datarootdir}/%{name}-%{upstream_version}/.mailmap
-rm -f  %{buildroot}%{_datarootdir}/%{name}-%{upstream_version}/.coveragerc
-
 %{__python2} setup.py install --skip-build --root %{buildroot}
 
 # Generate tempest config
@@ -192,7 +172,6 @@ export PYTHONPATH=$PWD
 %files
 %license LICENSE
 %doc README.rst
-%{_datarootdir}/%{name}-%{upstream_version}
 %{_bindir}/tempest
 %{_bindir}/check-uuid
 %{_bindir}/skip-tracker
