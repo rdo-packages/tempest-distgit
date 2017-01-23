@@ -16,6 +16,24 @@
       "revId": "1d276825216007bd4c8a1baae5703b6e4c95ff8b",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dab895d6_6c303657",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 111
+      },
+      "writtenOn": "2017-01-23T14:57:59Z",
+      "side": 1,
+      "message": "As per the earlier tempest workflow They uses it https://github.com/redhat-openstack/tempest/blob/master/tools/configure-tempest-directory to create symlink by copying files from /usr/share/openstack-tempest, currently we donot need it, as config-tool got installed and can be called from anywhere. They can simply use the new workflow, tempest init \u003ccloud\u003e; cd \u003ccloud\u003e and run config too and then we can use tempest run command to run the tests.",
+      "parentUuid": "dab895d6_cc7b0228",
+      "revId": "1d276825216007bd4c8a1baae5703b6e4c95ff8b",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
     }
   ]
 }
