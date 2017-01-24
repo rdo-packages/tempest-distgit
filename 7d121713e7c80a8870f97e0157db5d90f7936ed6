@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "baada198_18ff0503",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 3
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 85
+      },
+      "writtenOn": "2017-01-24T17:30:07Z",
+      "side": 1,
+      "message": "For the followup cleanup: -all subpkg could be either remove or if kept made without files: license is not needed b/c it is included via dependency on the main package.",
+      "revId": "7d121713e7c80a8870f97e0157db5d90f7936ed6",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
