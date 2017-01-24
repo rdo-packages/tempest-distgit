@@ -34,6 +34,24 @@
       "revId": "1d276825216007bd4c8a1baae5703b6e4c95ff8b",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dab895d6_87448575",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 85
+      },
+      "writtenOn": "2017-01-24T11:30:32Z",
+      "side": 1,
+      "message": "ok, sounds good, we just need updated docs/blog once this hits the repo",
+      "parentUuid": "dab895d6_6c303657",
+      "revId": "1d276825216007bd4c8a1baae5703b6e4c95ff8b",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
     }
   ]
 }
