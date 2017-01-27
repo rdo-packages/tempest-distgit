@@ -1,4 +1,4 @@
-%global commit a8d012a1807916d065657cec2a3e20d636741b7f
+%global commit fa4dc09118621a9a0f95988c88d998c961e455fc
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 %global alphatag .%{shortcommit}git
 %global project tempest
@@ -10,7 +10,7 @@
 Name:           openstack-%{project}
 Epoch:          1
 Version:        13.0.0
-Release:        6%{alphatag}%{?dist}
+Release:        7%{alphatag}%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 # FIXME move to Upstream tempest
@@ -216,6 +216,10 @@ mv %{buildroot}/usr/etc/tempest/* %{buildroot}/etc/tempest
 %endif
 
 %changelog
+* Fri Jan 27 2017 Chandan Kumar <chkumar AT redhat.com> 1:13.0.0-7.1e455fcgit
+- Update to post 13.0.0 (fa4dc09118621a9a0f95988c88d998c961e455fc)
+- Added manila service in tools/config_tempest.py
+
 * Thu Nov 24 2016 Chandan Kumar <chkumar AT redhat.com> 1:13.0.0-6.a8d012a1git
 - Update to post 13.0.0 (a8d012a1807916d065657cec2a3e20d636741b7f)
 - Remove unused arguments from _error_checker() from negative_rest_client
