@@ -40,12 +40,12 @@ Requires:      python-debtcollector
 Requires:      python-fixtures
 Requires:      python-jsonschema
 Requires:      python-netaddr
-Requires:      python-oslo-concurrency
-Requires:      python-oslo-config
-Requires:      python-oslo-log
-Requires:      python-oslo-serialization
-Requires:      python-oslo-utils
-Requires:      python-os-testr
+Requires:      python-oslo-concurrency >= 3.8.0
+Requires:      python-oslo-config >= 2:3.14.0
+Requires:      python-oslo-log >= 3.11.0
+Requires:      python-oslo-serialization >= 1.10.0
+Requires:      python-oslo-utils >= 3.18.0
+Requires:      python-os-testr >= 0.8.0
 Requires:      python-paramiko
 Requires:      python-pbr
 Requires:      python-prettytable
