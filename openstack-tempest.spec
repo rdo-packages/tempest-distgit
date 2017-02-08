@@ -124,6 +124,10 @@ Requires:       python-magnum-tests
 Requires:       python-murano-tests
 Requires:       python-manila-tests
 Requires:       python-ironic-inspector-tests
+Requires:       python-panko-tests
+Requires:       python-congress-tests
+Requires:       python-vitrage-tests
+Requires:       python-octavia-tests
 
 %description -n %{name}-all
 This is a set of integration tests to be run against a live OpenStack cluster.
