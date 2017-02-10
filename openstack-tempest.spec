@@ -2,10 +2,12 @@
 
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 
+%global repo_bootstrap 1
+
 Name:           openstack-%{project}
 Epoch:          1
-Version:        XXX
-Release:        XXX
+Version:        14.0.0
+Release:        1%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://launchpad.net/tempest
@@ -203,3 +205,6 @@ export PYTHONPATH=$PWD
 %endif
 
 %changelog
+* Fri Feb 10 2017 Alfredo Moralejo <amoralej@redhat.com> 1:14.0.0-1
+- Update to 14.0.0
+
