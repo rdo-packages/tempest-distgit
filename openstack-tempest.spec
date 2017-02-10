@@ -20,8 +20,9 @@ BuildRequires:  python2-devel
 
 Requires:       python-tempest = %{epoch}:%{version}-%{release}
 
+%if 0%{?repo_bootstrap} == 0
 Requires:     python-tempestconf
-
+%endif
 
 
 # FIXME remove openstack-tempest-liberty obsoletes by Pike release.
