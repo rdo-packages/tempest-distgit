@@ -128,6 +128,7 @@ Requires:       python-panko-tests
 Requires:       python-congress-tests
 Requires:       python-vitrage-tests
 Requires:       python-octavia-tests
+Requires:       python-ec2-api-tests
 
 %description -n %{name}-all
 This is a set of integration tests to be run against a live OpenStack cluster.
