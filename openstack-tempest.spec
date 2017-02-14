@@ -24,7 +24,6 @@ Requires:       python-tempest = %{epoch}:%{version}-%{release}
 Requires:     python-tempestconf
 %endif
 
-
 # FIXME remove openstack-tempest-liberty obsoletes by Pike release.
 Obsoletes:      openstack-tempest-liberty
 
@@ -57,6 +56,13 @@ Requires:      python-testtools
 Requires:      python-urllib3
 Requires:      PyYAML
 Requires:      python-subunit
+
+# Additional binary required for running tempest
+# Taken from bindep.txt
+Requires:      libffi-devel
+Requires:      openssl-devel
+Requires:      gcc
+Requires:      python-devel
 
 %description -n python-tempest
 This is a set of integration tests to be run against a live OpenStack cluster.
