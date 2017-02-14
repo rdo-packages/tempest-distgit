@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7ac7a964_39cccb35",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2017-02-14T08:22:54Z",
+      "side": 1,
+      "message": "For running or building?\nThe description of bindep says that \" some dependencies have to be installed before pip can be used - such as virtualenv and pip itself.\". This is for a pip-based workflow, and they remember the need to install those packages if I install tempest from source in order to build some module, but are those needed by the RPM package at *runtime*?",
+      "revId": "30039bcc86c304f8d102f50e0be09407cf0ccd92",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
