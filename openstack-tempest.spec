@@ -2,7 +2,7 @@
 
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 
-%global repo_bootstrap 1
+%global repo_bootstrap 0
 
 Name:           openstack-%{project}
 Epoch:          1
