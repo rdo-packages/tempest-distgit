@@ -1,4 +1,4 @@
-%global commit fa4dc09118621a9a0f95988c88d998c961e455fc
+%global commit 35fce1741bab97398a586c47df22ea493074c49e
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 %global alphatag .%{shortcommit}git
 %global project tempest
@@ -10,7 +10,7 @@
 Name:           openstack-%{project}
 Epoch:          1
 Version:        13.0.0
-Release:        7%{alphatag}%{?dist}
+Release:        8%{alphatag}%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 # FIXME move to Upstream tempest
@@ -153,12 +153,10 @@ rm -rf {test-,}requirements.txt
 RPMLINT_OFFENDERS="tempest/cmd/list_plugins.py \
 tempest/cmd/cleanup.py \
 tempest/cmd/cleanup_service.py \
-tempest/cmd/run_stress.py \
 tempest/cmd/verify_tempest_config.py \
 tempest/cmd/account_generator.py \
 tempest/lib/cmd/skip_tracker.py \
-tempest/lib/cmd/check_uuid.py \
-tempest/stress/cleanup.py"
+tempest/lib/cmd/check_uuid.py"
 sed -i '1{/^#!/d}' $RPMLINT_OFFENDERS
 chmod u=rw,go=r $RPMLINT_OFFENDERS
 
@@ -191,7 +189,6 @@ mv %{buildroot}/usr/etc/tempest/* %{buildroot}/etc/tempest
 %{_datarootdir}/%{name}-%{upstream_version}
 %{_bindir}/tempest
 %{_bindir}/check-uuid
-%{_bindir}/run-tempest-stress
 %{_bindir}/skip-tracker
 %{_bindir}/subunit-describe-calls
 %{_bindir}/tempest-account-generator
@@ -216,6 +213,10 @@ mv %{buildroot}/usr/etc/tempest/* %{buildroot}/etc/tempest
 %endif
 
 %changelog
+* Mon Feb 20 2017 Chandan Kumar <chkumar AT redhat.com> 1:13.0.0-8.35fce174git
+- Remove the Stress Framework
+- Update to post 13.0.0 (35fce1741bab97398a586c47df22ea493074c49e)
+
 * Fri Jan 27 2017 Chandan Kumar <chkumar AT redhat.com> 1:13.0.0-7.1e455fcgit
 - Update to post 13.0.0 (fa4dc09118621a9a0f95988c88d998c961e455fc)
 - Added manila service in tools/config_tempest.py
