@@ -242,3 +242,4 @@ mv %{buildroot}/usr/etc/tempest/* %{buildroot}/etc/tempest
 
 * Fri Sep 23 2016 Alan Pevec <apevec AT redhat.com> 1:12.2.0-2.0f8baaegit
 - Update to 12.2.0 redhat-openstack/tempest snapshot 0f8baae
+# REMOVEME: error caused by commit https://github.com/redhat-openstack/tempest.git/commit/35fce1741bab97398a586c47df22ea493074c49e
