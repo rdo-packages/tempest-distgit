@@ -1,4 +1,4 @@
-%global commit b4a056da5c65f893389694e1f219ffe7473ab191
+%global commit b5c755882dbe25d294810f09a663646cd5d59cfa
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 %global alphatag .%{shortcommit}git
 %global project tempest
@@ -8,7 +8,7 @@
 Name:           openstack-%{project}
 Epoch:          1
 Version:        10.0.0
-Release:        2%{alphatag}%{?dist}
+Release:        3%{alphatag}%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://github.com/redhat-openstack/tempest
@@ -144,6 +144,11 @@ mv %{buildroot}/usr/etc/tempest/* %{buildroot}/etc/tempest
 %{_sysconfdir}/%{project}/*.conf
 
 %changelog
+* Tue Feb 21 2017 Chandan Kumar <chkumar@redhat.com> 1:10.0.0-3-b5c75588git
+- Update to post 10.0.0 (b5c755882dbe25d294810f09a663646cd5d59cfa)
+- CDH 5.5 is also supported in Mitaka
+- Enable configuration of manila service
+
 * Fri Jul 08 2016 Steve Linabery <slinaber@redhat.com> 1:10.0.0-2.b4a056dgit
 - Add Requires for *-tests packages
 - Remove *requirements.txt from source
