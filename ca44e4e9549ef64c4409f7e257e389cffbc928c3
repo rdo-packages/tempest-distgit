@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ac4a560_35a050f4",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 87
+      },
+      "writtenOn": "2017-02-21T16:55:39Z",
+      "side": 1,
+      "message": "Should be %{project}-%{commit}\n\nFTBFS in CBS.\nhttp://cbs.centos.org/kojifiles/work/tasks/2247/162247/build.log",
+      "revId": "ca44e4e9549ef64c4409f7e257e389cffbc928c3",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
