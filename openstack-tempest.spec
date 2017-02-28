@@ -17,6 +17,7 @@ BuildRequires:  python-oslo-config
 BuildRequires:  python-pbr
 BuildRequires:  python-setuptools
 BuildRequires:  python2-devel
+BuildRequires:  python-debtcollector
 
 Requires:       python-tempest = %{epoch}:%{version}-%{release}
 
