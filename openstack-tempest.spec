@@ -7,11 +7,14 @@
 Name:           openstack-%{project}
 Epoch:          1
 Version:        15.0.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://launchpad.net/tempest
 Source0:        http://tarballs.openstack.org/tempest/tempest-%{upstream_version}.tar.gz
+Patch0:         0001-Add-plugin-group-names-to-CONF.patch
+Patch1:         0001-Move-plugin-client-registration-to-proxy.patch
+
 BuildArch:      noarch
 
 BuildRequires:  git
@@ -142,7 +145,7 @@ This package contains all the tempest plugins.
 %endif
 
 %prep
-%autosetup -n tempest-%{upstream_version} -S git
+%autosetup -n tempest-%{upstream_version} -S git -p1
 # have dependencies being handled by rpms, rather than requirement files
 rm -rf {test-,}requirements.txt
 
@@ -206,6 +209,10 @@ export PYTHONPATH=$PWD
 %endif
 
 %changelog
+* Tue Mar 21 2017 Chandan Kumar <chkumar@redhat.com> 1:15.0.0-2
+- Added patch for move plugin client registration to proxy
+- Added patch for add plugin group names to CONF
+
 * Mon Feb 20 2017 Alfredo Moralejo <amoralej@redhat.com> 1:15.0.0-1
 - Update to 15.0.0
 

@@ -1,0 +1,111 @@
+From 382a6f12a38baab47918fb902ccfd9e451c04800 Mon Sep 17 00:00:00 2001
+From: Andrea Frittoli <andrea.frittoli@gmail.com>
+Date: Thu, 9 Mar 2017 11:52:17 +0000
+Subject: [PATCH] Add plugin group names to CONF
+
+Plugins have no way of setting the name of their groups to CONF
+so that they are available at discovery time, so setting them
+up for them, using the get_opt_list hook.
+
+Since plugins may pass an OptGroup object or a string, handle
+both cases. Normalise strings with a '-' to '_'.
+
+Added comments and docstring to document this.
+
+Change-Id: I1afae0d1f9c4a6aec2742aaba4928cdde54b224f
+---
+ tempest/config.py                | 23 +++++++++++++++++++++++
+ tempest/test_discover/plugins.py | 33 ++++++++++++++++++++++++++++++++-
+ 2 files changed, 55 insertions(+), 1 deletion(-)
+
+diff --git a/tempest/config.py b/tempest/config.py
+index 3ad7684..fb3b8f4 100644
+--- a/tempest/config.py
++++ b/tempest/config.py
+@@ -1087,6 +1087,12 @@ class TempestConfigPrivate(object):
+         return getattr(_CONF, attr)
+ 
+     def _set_attrs(self):
++        # This methods ensures that config options in Tempest as well as
++        # in Tempest plugins can be accessed via:
++        #     CONF.<normalised_group_name>.<key_name>
++        # where:
++        #     normalised_group_name = group_name.replace('-', '_')
++        # Attributes are set at __init__ time *only* for known option groups
+         self.auth = _CONF.auth
+         self.compute = _CONF.compute
+         self.compute_feature_enabled = _CONF['compute-feature-enabled']
+@@ -1108,6 +1114,23 @@ class TempestConfigPrivate(object):
+         self.service_available = _CONF.service_available
+         self.debug = _CONF.debug
+         logging.tempest_set_log_file('tempest.log')
++        # Setting attributes for plugins
++        # NOTE(andreaf) Plugins have no access to the TempestConfigPrivate
++        # instance at discovery time, so they have no way of setting these
++        # aliases themselves.
++        ext_plugins = plugins.TempestTestPluginManager()
++        for group, _ in ext_plugins.get_plugin_options_list():
++            if isinstance(group, cfg.OptGroup):
++                # If we have an OptGroup
++                group_name = group.name
++                group_dest = group.dest
++            else:
++                # If we have a group name as a string
++                group_name = group
++                group_dest = group.replace('-', '_')
++            # NOTE(andreaf) We can set the attribute safely here since in
++            # case of name conflict we would not have reached this point.
++            setattr(self, group_dest, _CONF[group_name])
+ 
+     def __init__(self, parse_conf=True, config_path=None):
+         """Initialize a configuration from a conf directory and conf file."""
+diff --git a/tempest/test_discover/plugins.py b/tempest/test_discover/plugins.py
+index 9ddcd9b..276cf3c 100644
+--- a/tempest/test_discover/plugins.py
++++ b/tempest/test_discover/plugins.py
+@@ -46,10 +46,41 @@ class TempestPlugin(object):
+         """Add additional configuration options to tempest.
+ 
+         This method will be run for the plugin during the register_opts()
+-        function in tempest.config
++        function in tempest.config.
+ 
+         :param ConfigOpts conf: The conf object that can be used to register
+             additional options on.
++
++        Example:
++            >>> # Config options are defined in a config.py module
++            >>> service_option = cfg.BoolOpt(
++            >>>     "my_service",
++            >>>     default=True,
++            >>>     help="Whether or not my service is available")
++            >>>
++            >>> # Note: as long as the group is listed in get_opt_lists,
++            >>> # it will be possible to access its optins in the plugin code
++            >>> # via ("-" in the group name are replaces with "_"):
++            >>> #     CONF.my_service.<option_name>
++            >>> my_service_group = cfg.OptGroup(name="my-service",
++            >>>                                 title="My service options")
++            >>>
++            >>> MyServiceGroup = [<list of options>]
++            >>> # (...) More groups and options...
++            >>>
++            >>> # Plugin is implemented in a plugin.py module
++            >>> from my_plugin import config as my_config
++            >>>
++            >>> def register_opts(self, conf):
++            >>>    conf.register_opt(my_config.service_option,
++            >>>                      group='service_available')
++            >>>    conf.register_group(my_config.my_service_group)
++            >>>    conf.register_opts(my_config.MyService +
++            >>>                       my_config.my_service_group)
++            >>>
++            >>>    conf.register_group(my_config.my_service_feature_group)
++            >>>    conf.register_opts(my_config.MyServiceFeaturesGroup,
++            >>>                       my_config.my_service_feature_group)
+         """
+         return
+ 
+-- 
+2.9.3
+
