@@ -1,0 +1,46 @@
+From 05bce8767b887fa123af0cde0a1b1be226ad3688 Mon Sep 17 00:00:00 2001
+From: Andrea Frittoli <andrea.frittoli@gmail.com>
+Date: Thu, 9 Mar 2017 13:17:01 +0000
+Subject: [PATCH] Move plugin client registration to proxy
+
+The plugin client registration is triggered to early, which leads
+to the CONF object being initialised twice. Moving the plugin
+client registration to live together with the tempest own client
+registration.
+
+Change-Id: I7c15e8c5ee9c7421ac410cfaa84b3ce21380f5e7
+(cherry picked from commit 8b23c79325ed68c6741683690c69ba3f64acfc2e)
+---
+ tempest/config.py                | 6 ++++++
+ tempest/test_discover/plugins.py | 1 -
+ 2 files changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/tempest/config.py b/tempest/config.py
+index bd19967..f982e78 100644
+--- a/tempest/config.py
++++ b/tempest/config.py
+@@ -1182,6 +1182,12 @@ class TempestConfigProxy(object):
+             # loaded, options registered, and _config is set.
+             _register_tempest_service_clients()
+ 
++            # Registering service clients and pushing their configuration to
++            # the service clients register. Doing this in the config module
++            # ensures that the configuration is available by the time we
++            # discover tests from plugins.
++            plugins.TempestTestPluginManager()._register_service_clients()
++
+         return getattr(self._config, attr)
+ 
+     def set_config_path(self, path):
+diff --git a/tempest/test_discover/plugins.py b/tempest/test_discover/plugins.py
+index abe2b73..9ddcd9b 100644
+--- a/tempest/test_discover/plugins.py
++++ b/tempest/test_discover/plugins.py
+@@ -124,7 +124,6 @@ class TempestTestPluginManager(object):
+             'tempest.test_plugins', invoke_on_load=True,
+             propagate_map_exceptions=True,
+             on_load_failure_callback=self.failure_hook)
+-        self._register_service_clients()
+ 
+     @staticmethod
+     def failure_hook(_, ep, err):
