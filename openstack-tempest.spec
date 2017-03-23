@@ -204,3 +204,4 @@ export PYTHONPATH=$PWD
 %endif
 
 %changelog
+# REMOVEME: error caused by commit http://git.openstack.org/cgit/openstack/tempest/commit/?id=a281277a7bbf02cf39d2f62fbeb850feeb0050f7
