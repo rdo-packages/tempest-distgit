@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa98f980_030311b9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2017-03-30T12:52:40Z",
+      "side": 1,
+      "message": "Ups, initialization here too\n\nThe subject is a bit long, what about\"\nFix the initialization of configuration for some plugins\n\nand (if you think it\u0027s needed) more details in the rest of the commit message?",
+      "revId": "721d0ef473eb03cedea4e708447d01dcaa9fee79",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
