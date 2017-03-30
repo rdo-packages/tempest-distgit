@@ -1,4 +1,4 @@
-%global commit 35fce1741bab97398a586c47df22ea493074c49e
+%global commit 72c0cf156358858984186fee53b2bd2ae6587796
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 %global alphatag .%{shortcommit}git
 %global project tempest
@@ -10,7 +10,7 @@
 Name:           openstack-%{project}
 Epoch:          1
 Version:        13.0.0
-Release:        8%{alphatag}%{?dist}
+Release:        9%{alphatag}%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 # FIXME move to Upstream tempest
@@ -213,6 +213,12 @@ mv %{buildroot}/usr/etc/tempest/* %{buildroot}/etc/tempest
 %endif
 
 %changelog
+* Thu Mar 30 2017 Chandan Kumar <chkumar AT redhat.com> 1:13.0.0-9-e6587796git
+- Add plugin group names to CONF
+- Move plugin client registration to proxy
+- Resolves rhbz#1434849
+- Update to post 13.0.0 (72c0cf156358858984186fee53b2bd2ae6587796)
+
 * Mon Feb 20 2017 Chandan Kumar <chkumar AT redhat.com> 1:13.0.0-8.35fce174git
 - Remove the Stress Framework
 - Update to post 13.0.0 (35fce1741bab97398a586c47df22ea493074c49e)
