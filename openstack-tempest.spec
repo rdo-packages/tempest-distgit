@@ -13,7 +13,7 @@ Source0:        http://tarballs.openstack.org/tempest/tempest-%{upstream_version
 BuildArch:      noarch
 
 BuildRequires:  git
-BuildRequires:  python-oslo-config
+BuildRequires:  python-oslo-config >= 2:3.14.0, python-oslo-config < 3.22.0
 BuildRequires:  python-pbr
 BuildRequires:  python-setuptools
 BuildRequires:  python2-devel
@@ -42,7 +42,7 @@ Requires:      python-fixtures
 Requires:      python-jsonschema
 Requires:      python-netaddr
 Requires:      python-oslo-concurrency >= 3.8.0
-Requires:      python-oslo-config >= 2:3.14.0
+Requires:      python-oslo-config >= 2:3.14.0, python-oslo-config < 3.22.0
 Requires:      python-oslo-log >= 3.11.0
 Requires:      python-oslo-serialization >= 1.10.0
 Requires:      python-oslo-utils >= 3.18.0
@@ -204,3 +204,4 @@ export PYTHONPATH=$PWD
 %endif
 
 %changelog
+# REMOVEME: error caused by commit http://git.openstack.org/cgit/openstack/tempest/commit/?id=c85642f6e2c355669c42572c2b08706ee9f98bbf
