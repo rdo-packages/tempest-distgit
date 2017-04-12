@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa98f980_1a49afd0",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 85
+      },
+      "writtenOn": "2017-04-12T12:19:43Z",
+      "side": 1,
+      "message": "\u003c is never used, it needs to be solved distro-wide i.e. as pin in rdoinfo\n\nAlso we do not use more than one requirement condition per line.",
+      "revId": "225dfe50f3f2643dc4862825dbd3b19168963e1c",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
