@@ -7,7 +7,7 @@
 Name:           openstack-%{project}
 Epoch:          1
 Version:        15.0.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://launchpad.net/tempest
@@ -150,6 +150,9 @@ This package contains all the tempest plugins.
 # have dependencies being handled by rpms, rather than requirement files
 rm -rf {test-,}requirements.txt
 
+# Remove pbr>=2.0.0 version as it is required for pike
+sed -i 's/pbr>=2.0.0/pbr/g' setup.py
+
 # remove shebangs and fix permissions
 RPMLINT_OFFENDERS="tempest/cmd/list_plugins.py \
 tempest/cmd/cleanup.py \
@@ -210,6 +213,9 @@ export PYTHONPATH=$PWD
 %endif
 
 %changelog
+* Tue Apr 25 2017 Chandan Kumar <chkumar@redhat.com> 1:15.0.0-3
+- Remove pbr >= 2.0.0 version from setup.py as required by pike
+
 * Wed Mar 22 2017 Chandan Kumar <chkumar@redhat.com> 1:15.0.0-2
 - Add plugin group names to CONF
 - Move plugin client registration to proxy
