@@ -1,4 +1,4 @@
-%global commit 72c0cf156358858984186fee53b2bd2ae6587796
+%global commit 79cf31a3034f227c2ddfa3426a45615cd8ed6f63
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 %global alphatag .%{shortcommit}git
 %global project tempest
@@ -10,7 +10,7 @@
 Name:           openstack-%{project}
 Epoch:          1
 Version:        13.0.0
-Release:        9%{alphatag}%{?dist}
+Release:        10%{alphatag}%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 # FIXME move to Upstream tempest
@@ -213,6 +213,11 @@ mv %{buildroot}/usr/etc/tempest/* %{buildroot}/etc/tempest
 %endif
 
 %changelog
+* Thu Apr 27 2017 Chandan Kumar <chkumar AT redhat.com> 1:13.0.0-10-79cf31a3git
+- Added remove option in config_tempest.py
+- Resolves rhbz#1443397
+- Update to post 13.0.0 (79cf31a3034f227c2ddfa3426a45615cd8ed6f63)
+
 * Thu Mar 30 2017 Chandan Kumar <chkumar AT redhat.com> 1:13.0.0-9-e6587796git
 - Fixed proper initialization of configuration values from tempest.conf for some plugins
 - Resolves rhbz#1434849
