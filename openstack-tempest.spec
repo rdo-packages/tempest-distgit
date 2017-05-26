@@ -1,4 +1,4 @@
-%global commit 79cf31a3034f227c2ddfa3426a45615cd8ed6f63
+%global commit b13ba4cfd277c67097db4cc431ecd04d6ed49411
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 %global alphatag .%{shortcommit}git
 %global project tempest
@@ -10,7 +10,7 @@
 Name:           openstack-%{project}
 Epoch:          1
 Version:        13.0.0
-Release:        10%{alphatag}%{?dist}
+Release:        11%{alphatag}%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 # FIXME move to Upstream tempest
@@ -213,6 +213,11 @@ mv %{buildroot}/usr/etc/tempest/* %{buildroot}/etc/tempest
 %endif
 
 %changelog
+* Fri May 26 2017 Chandan Kumar <chkumar AT redhat.com> 1:13.0.0-11-b13ba4cfgit
+- Fixed waiters.py: raise BackupException defined in tempest/lib
+- Resolves rhbz#1455928
+- Update to post 13.0.0 (b13ba4cfd277c67097db4cc431ecd04d6ed49411)
+
 * Thu Apr 27 2017 Chandan Kumar <chkumar AT redhat.com> 1:13.0.0-10-79cf31a3git
 - Added remove option in config_tempest.py
 - Resolves rhbz#1443397
