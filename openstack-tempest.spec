@@ -1,4 +1,4 @@
-%global commit b13ba4cfd277c67097db4cc431ecd04d6ed49411
+%global commit ab030aba43cdd2412411f184763e2d7c905db31a
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 %global alphatag .%{shortcommit}git
 %global project tempest
@@ -10,7 +10,7 @@
 Name:           openstack-%{project}
 Epoch:          1
 Version:        13.0.0
-Release:        11%{alphatag}%{?dist}
+Release:        12%{alphatag}%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 # FIXME move to Upstream tempest
@@ -213,6 +213,11 @@ mv %{buildroot}/usr/etc/tempest/* %{buildroot}/etc/tempest
 %endif
 
 %changelog
+* Thu Jun 15 2017 Martin Kopec <mkopec AT redhat.com> 1:13.0.0-12-ab030abagit
+- Fix config_tempest failing due to v3
+- Resolves rhbz#1460925
+- Update to post 13.0.0 (ab030aba43cdd2412411f184763e2d7c905db31a)
+
 * Fri May 26 2017 Chandan Kumar <chkumar AT redhat.com> 1:13.0.0-11-b13ba4cfgit
 - Fixed waiters.py: raise BackupException defined in tempest/lib
 - Resolves rhbz#1455928
