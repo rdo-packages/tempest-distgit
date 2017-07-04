@@ -1,6 +1,10 @@
 %global project tempest
-
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
+%global with_doc 1
+%global common_desc \
+This is a set of integration tests to be run against a live OpenStack cluster.\
+Tempest has batteries of tests for OpenStack API validation, Scenarios, and \
+other specific tests useful in validating an OpenStack deployment.
 
 Name:           openstack-%{project}
 Epoch:          1
@@ -17,6 +21,7 @@ BuildRequires:  python-oslo-config
 BuildRequires:  python-pbr
 BuildRequires:  python-setuptools
 BuildRequires:  python2-devel
+BuildRequires:  openstack-macros
 
 Requires:       python-tempest = %{epoch}:%{version}-%{release}
 
@@ -29,9 +34,7 @@ Requires:     python-tempestconf
 Obsoletes:      openstack-tempest-liberty
 
 %description
-This is a set of integration tests to be run against a live OpenStack cluster.
-Tempest has batteries of tests for OpenStack API validation, Scenarios, and
-other specific tests useful in validating an OpenStack deployment.
+%{common_desc}
 
 %package -n    python-tempest
 Summary:       Tempest Python library
@@ -59,9 +62,7 @@ Requires:      PyYAML
 Requires:      python-subunit
 
 %description -n python-tempest
-This is a set of integration tests to be run against a live OpenStack cluster.
-Tempest has batteries of tests for OpenStack API validation, Scenarios, and
-other specific tests useful in validating an OpenStack deployment.
+%{common_desc}
 
 This package contains the tempest python library.
 
@@ -88,9 +89,7 @@ Requires:       python-mock
 Requires:       python-oslotest
 
 %description -n python-tempest-tests
-This is a set of integration tests to be run against a live OpenStack cluster.
-Tempest has batteries of tests for OpenStack API validation, Scenarios, and
-other specific tests useful in validating an OpenStack deployment.
+%{common_desc}
 
 This package contains tests for the tempest python library.
 
@@ -132,17 +131,29 @@ Requires:       python-octavia-tests
 Requires:       python-ec2-api-tests
 
 %description -n %{name}-all
-This is a set of integration tests to be run against a live OpenStack cluster.
-Tempest has batteries of tests for OpenStack API validation, Scenarios, and
-other specific tests useful in validating an OpenStack deployment.
+%{common_desc}
 
 This package contains all the tempest plugins.
+%endif
+
+%if 0%{?with_doc}
+%package -n %{name}-doc
+Summary:        %{sname} documentation
+
+BuildRequires:  python-sphinx
+BuildRequires:  python-oslo-sphinx
+BuildRequires:  python-openstackdocstheme
+
+%description -n %{name}-doc
+%{common_desc}
+
+It contains the documentation for Tempest.
 %endif
 
 %prep
 %autosetup -n tempest-%{upstream_version} -S git
 # have dependencies being handled by rpms, rather than requirement files
-rm -rf {test-,}requirements.txt
+%py_req_cleanup
 
 # remove shebangs and fix permissions
 RPMLINT_OFFENDERS="tempest/cmd/list_plugins.py \
@@ -155,8 +166,19 @@ tempest/lib/cmd/check_uuid.py"
 sed -i '1{/^#!/d}' $RPMLINT_OFFENDERS
 chmod u=rw,go=r $RPMLINT_OFFENDERS
 
+# Disable Build the plugin registry step as it uses git to clone
+# projects and then generate tempest plugin projects list.
+# It is also time taking.
+sed -i '/def setup(app):/d' doc/source/conf.py
+sed -i "/\s*app.connect('builder-inited', build_plugin_registry)/d" doc/source/conf.py
+
 %build
 %{__python2} setup.py build
+
+%if 0%{?with_doc}
+%{__python2} setup.py build_sphinx
+rm -fr doc/build/html/.doctrees doc/build/html/.buildinfo
+%endif
 
 %install
 %{__python2} setup.py install --skip-build --root %{buildroot}
@@ -200,6 +222,12 @@ export PYTHONPATH=$PWD
 
 %if 0%{?repo_bootstrap} == 0
 %files -n %{name}-all
+%license LICENSE
+%endif
+
+%if 0%{?with_doc}
+%files -n %{name}-doc
+%doc doc/build/html
 %license LICENSE
 %endif
 
