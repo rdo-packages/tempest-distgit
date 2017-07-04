@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9aa7fdbe_d9b56cce",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2017-07-04T12:28:29Z",
+      "side": 1,
+      "message": "I wonder if this can be done in a more clear way in the tempest code (like enabling or disabling that code based on a condition variable in doc/source/conf.py). But that\u0027s for another review.",
+      "revId": "212d0f642d9a3d35bce6c338e40ec9412e3ff51b",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
