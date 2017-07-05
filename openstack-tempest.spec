@@ -141,7 +141,6 @@ This package contains all the tempest plugins.
 Summary:        %{name} documentation
 
 BuildRequires:  python-sphinx
-BuildRequires:  python-oslo-sphinx
 BuildRequires:  python-openstackdocstheme
 
 %description -n %{name}-doc
