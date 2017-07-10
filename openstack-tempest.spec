@@ -108,7 +108,7 @@ Requires:       python-gnocchi-tests
 Requires:       python-heat-tests
 Requires:       python-horizon-tests-tempest
 Requires:       python-ironic-tests
-Requires:       python-keystone-tests
+Requires:       python-keystone-tests-tempest
 Requires:       python-mistral-tests
 Requires:       python-neutron-tests
 Requires:       python-neutron-fwaas-tests
