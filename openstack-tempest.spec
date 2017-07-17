@@ -169,6 +169,7 @@ chmod u=rw,go=r $RPMLINT_OFFENDERS
 # projects and then generate tempest plugin projects list.
 # It is also time taking.
 sed -i '/def setup(app):/d' doc/source/conf.py
+sed -i "/\s*if os.getenv('GENERATE_TEMPEST_PLUGIN_LIST', 'true').lower() == 'true':/d" doc/source/conf.py
 sed -i "/\s*app.connect('builder-inited', build_plugin_registry)/d" doc/source/conf.py
 
 %build
