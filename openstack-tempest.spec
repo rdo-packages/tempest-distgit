@@ -165,16 +165,14 @@ tempest/lib/cmd/check_uuid.py"
 sed -i '1{/^#!/d}' $RPMLINT_OFFENDERS
 chmod u=rw,go=r $RPMLINT_OFFENDERS
 
-# Disable Build the plugin registry step as it uses git to clone
-# projects and then generate tempest plugin projects list.
-# It is also time taking.
-sed -i '/def setup(app):/d' doc/source/conf.py
-sed -i "/\s*app.connect('builder-inited', build_plugin_registry)/d" doc/source/conf.py
-
 %build
 %{__python2} setup.py build
 
 %if 0%{?with_doc}
+# Disable Build the plugin registry step as it uses git to clone
+# projects and then generate tempest plugin projects list.
+# It is also time taking.
+export GENERATE_TEMPEST_PLUGIN_LIST='False'
 %{__python2} setup.py build_sphinx -b html
 %endif
 
