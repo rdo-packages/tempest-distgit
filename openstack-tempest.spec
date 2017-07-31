@@ -70,7 +70,6 @@ This package contains the tempest python library.
 Summary:        Python Tempest tests
 Requires:       python-tempest = %{epoch}:%{version}-%{release}
 
-BuildRequires:  python-coverage
 BuildRequires:  python-mock
 BuildRequires:  python-oslotest
 BuildRequires:  python-subunit
@@ -84,7 +83,6 @@ BuildRequires:  python-cliff
 BuildRequires:  python-pep8
 BuildRequires:  python-os-testr
 
-Requires:       python-coverage
 Requires:       python-mock
 Requires:       python-oslotest
 
