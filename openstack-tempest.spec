@@ -80,7 +80,6 @@ BuildRequires:  PyYAML
 BuildRequires:  python-oslo-concurrency
 BuildRequires:  python-paramiko
 BuildRequires:  python-cliff
-BuildRequires:  python-pep8
 BuildRequires:  python-os-testr
 
 Requires:       python-mock
