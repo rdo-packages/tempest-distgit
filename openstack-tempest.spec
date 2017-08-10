@@ -1,6 +1,8 @@
 %global project tempest
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 %global with_doc 1
+# guard for Red Hat OpenStack Platform supported tempest
+%global rhosp 0
 %global common_desc \
 This is a set of integration tests to be run against a live OpenStack cluster.\
 Tempest has batteries of tests for OpenStack API validation, Scenarios, and \
@@ -111,22 +113,25 @@ Requires:       python-mistral-tests
 Requires:       python-neutron-tests
 Requires:       python-neutron-fwaas-tests
 Requires:       python-neutron-lbaas-tests
-Requires:       python-neutron-vpnaas-tests
 Requires:       python-nova-tests
 Requires:       python-sahara-tests-tempest
 Requires:       python-swift-tests
-Requires:       python-trove-tests
 Requires:       python-zaqar-tests
-Requires:       python-watcher-tests-tempest
-Requires:       python-magnum-tests
-Requires:       python-murano-tests
 Requires:       python-manila-tests
 Requires:       python-ironic-inspector-tests
 Requires:       python-panko-tests
-Requires:       python-congress-tests
-Requires:       python-vitrage-tests
 Requires:       python-octavia-tests
 Requires:       python-ec2-api-tests
+
+%if 0%{?rhosp} == 0
+Requires:       python-congress-tests
+Requires:       python-magnum-tests
+Requires:       python-murano-tests
+Requires:       python-neutron-vpnaas-tests
+Requires:       python-trove-tests
+Requires:       python-vitrage-tests
+Requires:       python-watcher-tests-tempest
+%endif
 
 %description -n %{name}-all
 %{common_desc}
