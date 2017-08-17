@@ -47,10 +47,10 @@ Requires:      python-fixtures
 Requires:      python-jsonschema
 Requires:      python-netaddr
 Requires:      python-oslo-concurrency >= 3.8.0
-Requires:      python-oslo-config >= 2:3.14.0
-Requires:      python-oslo-log >= 3.11.0
+Requires:      python-oslo-config >= 2:4.0.0
+Requires:      python-oslo-log >= 3.22.0
 Requires:      python-oslo-serialization >= 1.10.0
-Requires:      python-oslo-utils >= 3.18.0
+Requires:      python-oslo-utils >= 3.20.0
 Requires:      python-os-testr >= 0.8.0
 Requires:      python-paramiko
 Requires:      python-pbr
@@ -62,6 +62,7 @@ Requires:      python-testtools
 Requires:      python-urllib3
 Requires:      PyYAML
 Requires:      python-subunit
+Requires:      python-unittest2
 
 %description -n python-tempest
 %{common_desc}
