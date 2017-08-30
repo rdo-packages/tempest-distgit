@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a890539_c9791095",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2017-08-30T09:18:59Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be \u003cdate\u003egit\u003cshortcommit\u003e?\nhttps://fedoraproject.org/wiki/Packaging:Versioning#Snapshots\n\n(question for the more expert packagers)",
+      "revId": "36c5216e5254d64bb6d4ded22268ab8e6d75f79a",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
