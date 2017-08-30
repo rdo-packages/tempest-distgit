@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a890539_e9096c2d",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 87
+      },
+      "writtenOn": "2017-08-30T09:11:18Z",
+      "side": 1,
+      "message": "s/%{version}%{?milestone}/%{?commit}/",
+      "revId": "fc9c5eee9f3918cd2a1c34d3aedab7ba7e62ad8a",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a890539_691d7c66",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 87
+      },
+      "writtenOn": "2017-08-30T09:11:18Z",
+      "side": 1,
+      "message": "Source0:        https://github.com/openstack/%{project}/archive/%{commit}.tar.gz#/%{project}-%{shortcommit}.tar.gz",
+      "revId": "fc9c5eee9f3918cd2a1c34d3aedab7ba7e62ad8a",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
