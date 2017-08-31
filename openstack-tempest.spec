@@ -1,10 +1,5 @@
-%global commit e70e0feb6361d7f97f0b360b25a711a2426775a7
-%global shortcommit %(c=%{commit}; echo ${c:0:7})
-%global alphatag .%{shortcommit}git
-
-%global repo_bootstrap 1
 %global project tempest
-%{!?upstream_version: %global upstream_version %{commit}}
+%{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 %global with_doc 1
 # guard for Red Hat OpenStack Platform supported tempest
 %global rhosp 0
@@ -15,12 +10,12 @@ other specific tests useful in validating an OpenStack deployment.
 
 Name:           openstack-%{project}
 Epoch:          1
-Version:        16.1.0
-Release:        2%{alphatag}%{?dist}
+Version:        17.0.0
+Release:        1%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://launchpad.net/tempest
-Source0:        https://github.com/openstack/%{project}/archive/%{commit}.tar.gz#/%{project}-%{shortcommit}.tar.gz
+Source0:        http://tarballs.openstack.org/tempest/tempest-%{upstream_version}.tar.gz
 BuildArch:      noarch
 
 BuildRequires:  git
@@ -35,10 +30,6 @@ Requires:       python-tempest = %{epoch}:%{version}-%{release}
 %if 0%{?repo_bootstrap} == 0
 Requires:     python-tempestconf
 %endif
-
-
-# FIXME remove openstack-tempest-liberty obsoletes by Pike release.
-Obsoletes:      openstack-tempest-liberty
 
 %description
 %{common_desc}
@@ -237,6 +228,9 @@ export PYTHONPATH=$PWD
 %endif
 
 %changelog
+* Thu Aug 31 2017 Chandan Kumar <chkumar@redhat.com> 1:17.0.0-1
+- Update to 17.0.0
+
 * Wed Aug 30 2017 Chandan Kumar <chkumar@redhat.com> 1:16.1.0-2-e70e0febgit
 - Pin tempest to 16.1.0 (e70e0feb6361d7f97f0b360b25a711a2426775a7) for Pike
 - Moves the dynamic and preprovisioned credentials to tempest/lib
