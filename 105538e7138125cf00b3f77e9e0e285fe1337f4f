@@ -1,0 +1,11 @@
+Code-Review+2: Luigi Toscano <ltoscano@redhat.com>
+Code-Review+1: Tom Barron <tpb@dyncloud.net>
+Code-Review+1: Thierry Vignaud <soig@review.rdoproject.org>
+Code-Review+2: hguemar <hguemar@fedoraproject.org>
+Workflow+1: hguemar <hguemar@fedoraproject.org>
+Verified+2: Jenkins CI <admin@rpmfactory.beta.rdoproject.org>
+Submitted-by: Jenkins CI <admin@rpmfactory.beta.rdoproject.org>
+Submitted-at: Fri, 01 Sep 2017 20:13:27 +0000
+Reviewed-on: https://review.rdoproject.org/r/9180
+Project: openstack/tempest-distgit
+Branch: refs/heads/pike-rdo
