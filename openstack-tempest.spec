@@ -15,8 +15,8 @@ other specific tests useful in validating an OpenStack deployment.
 
 Name:           openstack-%{project}
 Epoch:          1
-Version:        16.1.0
-Release:        2%{alphatag}%{?dist}
+Version:        17.0.0
+Release:        1%{alphatag}%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://launchpad.net/tempest
@@ -237,6 +237,9 @@ export PYTHONPATH=$PWD
 %endif
 
 %changelog
+* Fri Sep 01 2017 rdo-trunk <javier.pena@redhat.com> 1:17.0.0-1.e70e0fegit
+- Update to 17.0.0
+
 * Wed Aug 30 2017 Chandan Kumar <chkumar@redhat.com> 1:16.1.0-2-e70e0febgit
 - Pin tempest to 16.1.0 (e70e0feb6361d7f97f0b360b25a711a2426775a7) for Pike
 - Moves the dynamic and preprovisioned credentials to tempest/lib
