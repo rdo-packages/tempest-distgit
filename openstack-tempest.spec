@@ -195,7 +195,7 @@ mv %{buildroot}/usr/etc/tempest/* %{buildroot}/etc/tempest
 export OS_TEST_PATH='./tempest/tests'
 export PATH=$PATH:$RPM_BUILD_ROOT/usr/bin
 export PYTHONPATH=$PWD
-%{__python2} setup.py testr
+stestr --test-path $OS_TEST_PATH run
 
 %files
 %license LICENSE
