@@ -8,6 +8,10 @@ This is a set of integration tests to be run against a live OpenStack cluster.\
 Tempest has batteries of tests for OpenStack API validation, Scenarios, and \
 other specific tests useful in validating an OpenStack deployment.
 
+%if 0%{?fedora} >= 24
+%global with_python3 1
+%endif
+
 Name:           openstack-%{project}
 Epoch:          1
 Version:        XXX
@@ -34,8 +38,10 @@ Requires:     python-tempestconf
 %description
 %{common_desc}
 
-%package -n    python-tempest
+%package -n    python2-%{project}
 Summary:       Tempest Python library
+
+%{?python_provide:%python_provide python2-%{project}}
 
 Requires:      python-cliff
 Requires:      python-debtcollector
@@ -60,14 +66,14 @@ Requires:      PyYAML
 Requires:      python-subunit
 Requires:      python-unittest2
 
-%description -n python-tempest
+%description -n python2-%{project}
 %{common_desc}
 
 This package contains the tempest python library.
 
-%package -n     python-tempest-tests
+%package -n     python2-%{project}-tests
 Summary:        Python Tempest tests
-Requires:       python-tempest = %{epoch}:%{version}-%{release}
+Requires:       python2-tempest = %{epoch}:%{version}-%{release}
 
 BuildRequires:  python-mock
 BuildRequires:  python-oslotest
@@ -85,10 +91,73 @@ BuildRequires:  python-os-testr
 Requires:       python-mock
 Requires:       python-oslotest
 
-%description -n python-tempest-tests
+%description -n python2-%{project}-tests
 %{common_desc}
 
 This package contains tests for the tempest python library.
+
+# Python3 package
+%if 0%{?with_python3}
+%package -n    python3-%{project}
+Summary:       Tempest Python library
+
+%{?python_provide:%python_provide python3-%{project}}
+BuildRequires:  python3-oslo-config
+BuildRequires:  python3-pbr
+BuildRequires:  python3-setuptools
+BuildRequires:  python3-devel
+
+Requires:      python3-cliff
+Requires:      python3-debtcollector
+Requires:      python3-fixtures
+Requires:      python3-jsonschema
+Requires:      python3-netaddr
+Requires:      python3-oslo-concurrency >= 3.8.0
+Requires:      python3-oslo-config >= 2:4.0.0
+Requires:      python3-oslo-log >= 3.22.0
+Requires:      python3-oslo-serialization >= 1.10.0
+Requires:      python3-oslo-utils >= 3.20.0
+Requires:      python3-os-testr >= 0.8.0
+Requires:      python3-paramiko
+Requires:      python3-pbr
+Requires:      python3-prettytable
+Requires:      python3-six
+Requires:      python3-stevedore
+Requires:      python3-testrepository
+Requires:      python3-testtools
+Requires:      python3-urllib3
+Requires:      python3-PyYAML
+Requires:      python3-subunit
+Requires:      python3-unittest2
+
+%description -n python3-%{project}
+%{common_desc}
+
+This package contains the tempest python library.
+
+%package -n     python3-%{project}-tests
+Summary:        Python Tempest tests
+Requires:       python3-tempest = %{epoch}:%{version}-%{release}
+
+BuildRequires:  python3-oslotest
+BuildRequires:  python3-subunit
+BuildRequires:  python3-oslo-log
+BuildRequires:  python3-jsonschema
+BuildRequires:  python3-urllib3
+BuildRequires:  python3-PyYAML
+BuildRequires:  python3-oslo-concurrency
+BuildRequires:  python3-paramiko
+BuildRequires:  python3-cliff
+BuildRequires:  python3-pep8
+BuildRequires:  python3-os-testr
+
+Requires:       python3-oslotest
+
+%description -n python3-%{project}-tests
+%{common_desc}
+
+This package contains tests for the tempest python library.
+%endif
 
 %if 0%{?repo_bootstrap} == 0
 %package -n    %{name}-all
@@ -166,7 +235,10 @@ sed -i '1{/^#!/d}' $RPMLINT_OFFENDERS
 chmod u=rw,go=r $RPMLINT_OFFENDERS
 
 %build
-%{__python2} setup.py build
+%py2_build
+%if 0%{?with_python3}
+%py3_build
+%endif
 
 %if 0%{?with_doc}
 # Disable Build the plugin registry step as it uses git to clone
@@ -177,7 +249,10 @@ export GENERATE_TEMPEST_PLUGIN_LIST='False'
 %endif
 
 %install
-%{__python2} setup.py install --skip-build --root %{buildroot}
+%py2_install
+%if 0%{?with_python3}
+%py3_install
+%endif
 
 # Generate tempest config
 mkdir -p %{buildroot}%{_sysconfdir}/%{project}/
@@ -192,6 +267,10 @@ export OS_TEST_PATH='./tempest/tests'
 export PATH=$PATH:$RPM_BUILD_ROOT/usr/bin
 export PYTHONPATH=$PWD
 stestr --test-path $OS_TEST_PATH run
+%if 0%{?with_python3}
+rm -rf .stestr
+stestr-3 --test-path $OS_TEST_PATH run
+%endif
 
 %files
 %license LICENSE
@@ -206,15 +285,27 @@ stestr --test-path $OS_TEST_PATH run
 %{_sysconfdir}/%{project}/*yaml
 %config(noreplace) %{_sysconfdir}/%{project}/*.conf
 
-%files -n python-tempest
+%files -n python2-%{project}
 %license LICENSE
 %{python2_sitelib}/%{project}
 %{python2_sitelib}/%{project}*.egg-info
 %exclude %{python2_sitelib}/tempest/tests
 
-%files -n python-tempest-tests
+%files -n python2-%{project}-tests
 %license LICENSE
 %{python2_sitelib}/tempest/tests
+
+%if 0%{?with_python3}
+%files -n python3-%{project}
+%license LICENSE
+%{python3_sitelib}/%{project}
+%{python3_sitelib}/%{project}*.egg-info
+%exclude %{python3_sitelib}/tempest/tests
+
+%files -n python3-%{project}-tests
+%license LICENSE
+%{python3_sitelib}/tempest/tests
+%endif
 
 %if 0%{?repo_bootstrap} == 0
 %files -n %{name}-all
