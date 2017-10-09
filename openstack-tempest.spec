@@ -31,10 +31,6 @@ Requires:       python-tempest = %{epoch}:%{version}-%{release}
 Requires:     python-tempestconf
 %endif
 
-
-# FIXME remove openstack-tempest-liberty obsoletes by Pike release.
-Obsoletes:      openstack-tempest-liberty
-
 %description
 %{common_desc}
 
