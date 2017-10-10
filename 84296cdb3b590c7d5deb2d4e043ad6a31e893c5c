@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa81d914_fb0230b3",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 87
+      },
+      "writtenOn": "2017-10-10T08:06:16Z",
+      "side": 1,
+      "message": "This is already provided by the macro %python_provide above",
+      "revId": "84296cdb3b590c7d5deb2d4e043ad6a31e893c5c",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa81d914_dbf56ccc",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 87
+      },
+      "writtenOn": "2017-10-10T08:06:16Z",
+      "side": 1,
+      "message": "We should use the %python_provide macro instead \n\nAnd same goes for the py3 version (if we do the migration one day, the macro will handle transparently upgrade path)",
+      "revId": "84296cdb3b590c7d5deb2d4e043ad6a31e893c5c",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
