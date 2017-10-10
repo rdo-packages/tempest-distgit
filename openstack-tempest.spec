@@ -74,6 +74,7 @@ This package contains the tempest python library.
 %package -n     python2-%{project}-tests
 Summary:        Python Tempest tests
 Requires:       python2-tempest = %{epoch}:%{version}-%{release}
+%{?python_provide:%python_provide python2-%{project}-tests}
 
 BuildRequires:  python-mock
 BuildRequires:  python-oslotest
@@ -137,6 +138,8 @@ This package contains the tempest python library.
 
 %package -n     python3-%{project}-tests
 Summary:        Python Tempest tests
+%{?python_provide:%python_provide python3-%{project}-tests}
+
 Requires:       python3-tempest = %{epoch}:%{version}-%{release}
 
 BuildRequires:  python3-oslotest
