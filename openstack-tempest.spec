@@ -43,6 +43,8 @@ Summary:       Tempest Python library
 
 %{?python_provide:%python_provide python2-%{project}}
 
+Provides:      python-%{project}
+
 Requires:      python-cliff
 Requires:      python-debtcollector
 Requires:      python-fixtures
@@ -74,6 +76,8 @@ This package contains the tempest python library.
 %package -n     python2-%{project}-tests
 Summary:        Python Tempest tests
 Requires:       python2-tempest = %{epoch}:%{version}-%{release}
+
+Provides:       python-{project}-tests
 
 BuildRequires:  python-mock
 BuildRequires:  python-oslotest
