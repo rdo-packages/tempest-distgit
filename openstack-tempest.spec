@@ -11,7 +11,7 @@ other specific tests useful in validating an OpenStack deployment.
 Name:           openstack-%{project}
 Epoch:          1
 Version:        17.0.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://launchpad.net/tempest
@@ -81,6 +81,7 @@ BuildRequires:  python-paramiko
 BuildRequires:  python-cliff
 BuildRequires:  python-pep8
 BuildRequires:  python-os-testr
+BuildRequires:  python-stestr
 
 Requires:       python-mock
 Requires:       python-oslotest
@@ -228,6 +229,10 @@ export PYTHONPATH=$PWD
 %endif
 
 %changelog
+* Wed Oct 25 2017 Chandan Kumar <chkumar@redhat.com> 1:17.0.0-2
+- Added python-stestr as BR for running tempest unit tests
+- Tempest-17.1.0 uses stestr to run the same.
+
 * Thu Aug 31 2017 Chandan Kumar <chkumar@redhat.com> 1:17.0.0-1
 - Update to 17.0.0
 
