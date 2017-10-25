@@ -81,6 +81,7 @@ BuildRequires:  python-paramiko
 BuildRequires:  python-cliff
 BuildRequires:  python-pep8
 BuildRequires:  python-os-testr
+BuildRequires:  python-stestr
 
 Requires:       python-mock
 Requires:       python-oslotest
