@@ -10,7 +10,7 @@ other specific tests useful in validating an OpenStack deployment.
 
 Name:           openstack-%{project}
 Epoch:          1
-Version:        17.0.0
+Version:        17.1.0
 Release:        1%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
@@ -229,6 +229,9 @@ stestr --test-path $OS_TEST_PATH run
 %endif
 
 %changelog
+* Fri Oct 27 2017 rdo-trunk <javier.pena@redhat.com> 1:17.1.0-1
+- Update to 17.1.0
+
 * Thu Aug 31 2017 Chandan Kumar <chkumar@redhat.com> 1:17.0.0-1
 - Update to 17.0.0
 
