@@ -16,6 +16,24 @@
       "revId": "3f4c592b33fa86755acdb4fc3e12f41d9bbff13d",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da86d52c_dd02cbb3",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 85
+      },
+      "writtenOn": "2017-11-13T13:25:11Z",
+      "side": 1,
+      "message": "Release: 3\nthere was openstack-tempest-16.1.0-2.e70e0fegit.el7",
+      "parentUuid": "da86d52c_9df853c6",
+      "revId": "3f4c592b33fa86755acdb4fc3e12f41d9bbff13d",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
     }
   ]
 }
