@@ -6,8 +6,8 @@
 
 Name:           openstack-%{project}
 Epoch:          1
-Version:        16.0.0
-Release:        1%{?dist}
+Version:        16.1.0
+Release:        3%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://launchpad.net/tempest
@@ -210,6 +210,9 @@ export PYTHONPATH=$PWD
 %endif
 
 %changelog
+* Mon Nov 13 2017 RDO <dev@lists.rdoproject.org> 1:16.1.0-3
+- Update to 16.1.0 for Ocata
+
 * Wed Apr 26 2017 Chandan Kumar <chkumar@redhat.com> 1:16.0.0-1
 - Update to 16.0.0
 
