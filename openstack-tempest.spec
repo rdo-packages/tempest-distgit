@@ -250,6 +250,7 @@ chmod u=rw,go=r $RPMLINT_OFFENDERS
 # projects and then generate tempest plugin projects list.
 # It is also time taking.
 export GENERATE_TEMPEST_PLUGIN_LIST='False'
+sed -i 's/warning-is-error = 1/warning-is-error = 0/'setup.cfg
 %{__python2} setup.py build_sphinx -b html
 %endif
 
