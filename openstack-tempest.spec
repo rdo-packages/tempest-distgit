@@ -327,3 +327,4 @@ stestr-3 --test-path $OS_TEST_PATH run
 %endif
 
 %changelog
+# REMOVEME: error caused by commit http://git.openstack.org/cgit/openstack/tempest/commit/?id=54cf3e446f16f1f914f9f8ccbc8400b8e57eb5b7
