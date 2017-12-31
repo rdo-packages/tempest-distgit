@@ -20,6 +20,7 @@ Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://launchpad.net/tempest
 Source0:        http://tarballs.openstack.org/tempest/tempest-%{upstream_version}.tar.gz
+Patch0:         /0001-Set-OS_TEST_LOCK_PATH-default-value-in-fake_config.patch
 BuildArch:      noarch
 
 BuildRequires:  git
@@ -227,6 +228,7 @@ It contains the documentation for Tempest.
 %autosetup -n tempest-%{upstream_version} -S git
 # have dependencies being handled by rpms, rather than requirement files
 %py_req_cleanup
+%patch0 -p1 -t
 
 # remove shebangs and fix permissions
 RPMLINT_OFFENDERS="tempest/cmd/list_plugins.py \
