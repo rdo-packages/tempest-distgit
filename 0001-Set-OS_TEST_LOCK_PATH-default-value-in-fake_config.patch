@@ -1,0 +1,38 @@
+From e62f1e4831c62387a172a5e8c4ed0060919d9cb6 Mon Sep 17 00:00:00 2001
+From: Masayuki Igawa <masayuki@igawa.io>
+Date: Fri, 8 Dec 2017 19:18:59 +0900
+Subject: [PATCH] Set OS_TEST_LOCK_PATH default value in fake_config
+
+This commit sets OS_TEST_LOCK_PATH default value in fake_config.
+Originally, a 'None' directory was created after a unit test running.
+Because we don't specified the environment variable when we run unit
+tests. Let's stop making a weird 'None' directory.
+
+Change-Id: I850f0835af821e90d85a9366d0ef87618761216a
+---
+ tempest/tests/fake_config.py | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/tempest/tests/fake_config.py b/tempest/tests/fake_config.py
+index ee6368441..f1d3bbaf8 100644
+--- a/tempest/tests/fake_config.py
++++ b/tempest/tests/fake_config.py
+@@ -40,10 +40,12 @@ class ConfigFixture(conf_fixture.Config):
+                               group='identity')
+         self.conf.set_default('neutron', True, group='service_available')
+         self.conf.set_default('heat', True, group='service_available')
+-        if not os.path.exists(str(os.environ.get('OS_TEST_LOCK_PATH'))):
+-            os.mkdir(str(os.environ.get('OS_TEST_LOCK_PATH')))
++        lock_path = str(os.environ.get('OS_TEST_LOCK_PATH',
++                                       os.environ.get('TMPDIR', '/tmp')))
++        if not os.path.exists(lock_path):
++            os.mkdir(lock_path)
+         lockutils.set_defaults(
+-            lock_path=str(os.environ.get('OS_TEST_LOCK_PATH')),
++            lock_path=lock_path,
+         )
+         self.conf.set_default('auth_version', 'v2', group='identity')
+         for config_option in ['username', 'password', 'project_name']:
+-- 
+2.14.3
+
