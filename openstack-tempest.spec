@@ -170,37 +170,29 @@ Summary:       All OpenStack Tempest Plugins
 
 Requires:      %{name} = %{epoch}:%{version}-%{release}
 
-Requires:       python-aodh-tests
-Requires:       python-ceilometer-tests
-Requires:       python-cinder-tests
+Requires:       python-cinder-tests-tempest
 Requires:       python-designate-tests-tempest
-Requires:       python-glance-tests
-Requires:       python-gnocchi-tests
-Requires:       python-heat-tests
+Requires:       python-heat-tests-tempest
 Requires:       python-horizon-tests-tempest
-Requires:       python-ironic-tests
+Requires:       python-ironic-tests-tempest
 Requires:       python-keystone-tests-tempest
-Requires:       python-mistral-tests
-Requires:       python-neutron-tests
-Requires:       python-neutron-fwaas-tests
-Requires:       python-neutron-lbaas-tests
-Requires:       python-nova-tests
+Requires:       python-mistral-tests-tempest
+Requires:       python-neutron-tests-tempest
 Requires:       python-sahara-tests-tempest
-Requires:       python-swift-tests
-Requires:       python-zaqar-tests
-Requires:       python-manila-tests
-Requires:       python-ironic-inspector-tests
-Requires:       python-panko-tests
-Requires:       python-octavia-tests
-Requires:       python-ec2-api-tests
+Requires:       python-zaqar-tests-tempest
+Requires:       python-manila-tests-tempest
+Requires:       python-telemetry-tests-tempest
+Requires:       python-octavia-tests-tempest
+Requires:       python-ec2api-tests-tempest
+Requires:       python-networking-l2gw-tests-tempest
+Requires:       python-patrole-tests-tempest
 
 %if 0%{?rhosp} == 0
-Requires:       python-congress-tests
-Requires:       python-magnum-tests
-Requires:       python-murano-tests
-Requires:       python-neutron-vpnaas-tests
-Requires:       python-trove-tests
-Requires:       python-vitrage-tests
+Requires:       python-congress-tests-tempest
+Requires:       python-magnum-tests-tempest
+Requires:       python-murano-tests-tempest
+Requires:       python-trove-tests-tempest
+Requires:       python-vitrage-tests-tempest
 Requires:       python-watcher-tests-tempest
 %endif
 
