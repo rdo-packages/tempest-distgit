@@ -189,6 +189,7 @@ Requires:       python-patrole-tests-tempest
 Requires:       python-tripleo-common-tests-tempest
 Requires:       python-novajoin-tests-tempest
 Requires:       python-kuryr-tests-tempest
+Requires:       python-barbican-tests-tempest
 
 %if 0%{?rhosp} == 0
 Requires:       python-congress-tests-tempest
