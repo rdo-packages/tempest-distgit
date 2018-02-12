@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7aaa499b_65e75541",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-02-12T14:03:27Z",
+      "side": 1,
+      "message": "typo, it should be lower case \"p\" in python",
+      "range": {
+        "startLine": 68,
+        "startChar": 15,
+        "endLine": 68,
+        "endChar": 29
+      },
+      "revId": "8ad595c1ec4b17e0e28630feefbb434262fa3a40",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aaa499b_45e4593a",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 4
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-02-12T14:03:27Z",
+      "side": 1,
+      "message": "to conditional too",
+      "range": {
+        "startLine": 89,
+        "startChar": 16,
+        "endLine": 89,
+        "endChar": 22
+      },
+      "revId": "8ad595c1ec4b17e0e28630feefbb434262fa3a40",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
