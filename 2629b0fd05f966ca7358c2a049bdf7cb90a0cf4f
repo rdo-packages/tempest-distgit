@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7aaa499b_935e2e44",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-02-12T13:36:37Z",
+      "side": 1,
+      "message": "PyYAML should go to fedora conditional, it\u0027s python2-pyyaml in fedora.",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 21
+      },
+      "revId": "2629b0fd05f966ca7358c2a049bdf7cb90a0cf4f",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
