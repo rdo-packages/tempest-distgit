@@ -23,16 +23,16 @@ Source0:        http://tarballs.openstack.org/tempest/tempest-%{upstream_version
 BuildArch:      noarch
 
 BuildRequires:  git
-BuildRequires:  python-oslo-config
-BuildRequires:  python-pbr
-BuildRequires:  python-setuptools
+BuildRequires:  python2-oslo-config
+BuildRequires:  python2-pbr
+BuildRequires:  python2-setuptools
 BuildRequires:  python2-devel
 BuildRequires:  openstack-macros
 
 Requires:       python-tempest = %{epoch}:%{version}-%{release}
 
 %if 0%{?repo_bootstrap} == 0
-Requires:     python-tempestconf
+Requires:     python2-tempestconf
 %endif
 
 %description
@@ -43,28 +43,28 @@ Summary:       Tempest Python library
 
 %{?python_provide:%python_provide python2-%{project}}
 
-Requires:      python-cliff
-Requires:      python-debtcollector
-Requires:      python-fixtures
-Requires:      python-jsonschema
-Requires:      python-netaddr
-Requires:      python-oslo-concurrency >= 3.8.0
-Requires:      python-oslo-config >= 2:4.0.0
-Requires:      python-oslo-log >= 3.22.0
-Requires:      python-oslo-serialization >= 1.10.0
-Requires:      python-oslo-utils >= 3.20.0
-Requires:      python-os-testr >= 0.8.0
-Requires:      python-paramiko
-Requires:      python-pbr
-Requires:      python-prettytable
-Requires:      python-six
-Requires:      python-stevedore
-Requires:      python-testrepository
-Requires:      python-testtools
-Requires:      python-urllib3
+Requires:      python2-cliff
+Requires:      python2-debtcollector
+Requires:      python2-fixtures
+Requires:      python2-jsonschema
+Requires:      python2-netaddr
+Requires:      python2-oslo-concurrency >= 3.8.0
+Requires:      python2-oslo-config >= 2:4.0.0
+Requires:      python2-oslo-log >= 3.22.0
+Requires:      python2-oslo-serialization >= 1.10.0
+Requires:      python2-oslo-utils >= 3.20.0
+Requires:      python2-os-testr >= 0.8.0
+Requires:      python2-paramiko
+Requires:      python2-pbr
+Requires:      python2-prettytable
+Requires:      python2-six
+Requires:      python2-stevedore
+Requires:      python2-testrepository
+Requires:      python2-testtools
+Requires:      python2-urllib3
 Requires:      PyYAML
-Requires:      python-subunit
-Requires:      python-unittest2
+Requires:      python2-subunit
+Requires:      python2-unittest2
 
 %description -n python2-%{project}
 %{common_desc}
@@ -76,22 +76,22 @@ Summary:        Python Tempest tests
 Requires:       python2-tempest = %{epoch}:%{version}-%{release}
 %{?python_provide:%python_provide python2-%{project}-tests}
 
-BuildRequires:  python-mock
-BuildRequires:  python-oslotest
-BuildRequires:  python-subunit
-BuildRequires:  python-oslo-log
-BuildRequires:  python-jsonschema
-BuildRequires:  python-urllib3
+BuildRequires:  python2-mock
+BuildRequires:  python2-oslotest
+BuildRequires:  python2-subunit
+BuildRequires:  python2-oslo-log
+BuildRequires:  python2-jsonschema
+BuildRequires:  python2-urllib3
 BuildRequires:  PyYAML
-BuildRequires:  python-oslo-concurrency
-BuildRequires:  python-paramiko
-BuildRequires:  python-cliff
-BuildRequires:  python-pep8
-BuildRequires:  python-os-testr
-BuildRequires:  python-stestr
+BuildRequires:  python2-oslo-concurrency
+BuildRequires:  python2-paramiko
+BuildRequires:  python2-cliff
+BuildRequires:  python2-pep8
+BuildRequires:  python2-os-testr
+BuildRequires:  python2-stestr
 
-Requires:       python-mock
-Requires:       python-oslotest
+Requires:       python2-mock
+Requires:       python2-oslotest
 
 %description -n python2-%{project}-tests
 %{common_desc}
@@ -210,8 +210,8 @@ This package contains all the tempest plugins.
 %package -n %{name}-doc
 Summary:        %{name} documentation
 
-BuildRequires:  python-sphinx
-BuildRequires:  python-openstackdocstheme
+BuildRequires:  python2-sphinx
+BuildRequires:  python2-openstackdocstheme
 
 %description -n %{name}-doc
 %{common_desc}
