@@ -43,6 +43,11 @@ Summary:       Tempest Python library
 
 %{?python_provide:%python_provide python2-%{project}}
 
+# Obseletes python-tempest-lib to avoid breakage
+# during upgrade from Newton onwards to till this
+# release
+Obseletes:     python-tempest-lib
+
 Requires:      python2-cliff
 Requires:      python2-debtcollector
 Requires:      python2-fixtures
