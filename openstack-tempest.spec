@@ -11,7 +11,7 @@ other specific tests useful in validating an OpenStack deployment.
 Name:           openstack-%{project}
 Epoch:          1
 Version:        17.2.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://launchpad.net/tempest
@@ -36,6 +36,11 @@ Requires:     python-tempestconf
 
 %package -n    python-tempest
 Summary:       Tempest Python library
+
+# Obsoletes python-tempest-lib to avoid breakage
+# during upgrade from Newton onwards to till this
+# release
+Obsoletes: python-tempest-lib
 
 Requires:      python-cliff
 Requires:      python-debtcollector
@@ -232,6 +237,9 @@ stestr --test-path $OS_TEST_PATH run
 %endif
 
 %changelog
+* Tue Feb 13 2018 Chandan Kumar <chkumar@redhat.com> 1:17.2.0-2
+- Added obsoletes for python-tempest-lib removal
+
 * Sat Dec 02 2017 RDO <dev@lists.rdoproject.org> 1:17.2.0-1
 - Update to 17.2.0
 
