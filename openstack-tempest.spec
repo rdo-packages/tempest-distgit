@@ -39,6 +39,11 @@ other specific tests useful in validating an OpenStack deployment.
 %package -n    python-tempest
 Summary:       Tempest Python library
 
+# Obsoletes python-tempest-lib to avoid breakage
+# during upgrade from Newton onwards to till this
+# release
+Obsoletes:     python-tempest-lib
+
 Requires:      python-cliff
 Requires:      python-debtcollector
 Requires:      python-fixtures
