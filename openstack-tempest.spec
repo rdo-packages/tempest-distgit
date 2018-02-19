@@ -11,7 +11,7 @@ other specific tests useful in validating an OpenStack deployment.
 Name:           openstack-%{project}
 Epoch:          1
 Version:        17.2.0
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://launchpad.net/tempest
@@ -74,6 +74,7 @@ This package contains the tempest python library.
 %package -n     python-tempest-tests
 Summary:        Python Tempest tests
 Requires:       python-tempest = %{epoch}:%{version}-%{release}
+Provides:       python2-tempest-tests = %{epoch}:%{version}-%{release}
 
 BuildRequires:  python-mock
 BuildRequires:  python-oslotest
@@ -238,6 +239,9 @@ stestr --test-path $OS_TEST_PATH run
 %endif
 
 %changelog
+* Mon Feb 19 2018 Chandan Kumar <chkumar@redhat.com> 1:17.2.0-4
+- Added provides python2-tempest-tests for compatibility with packages which requires it.
+
 * Thu Feb 15 2018 Alfredo Moralejo <amoralej@redhat.com> 1:17.2.0-3
 - Added provides python2-tempest for compatibility with packages which requires it.
 
