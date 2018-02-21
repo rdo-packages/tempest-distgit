@@ -3,6 +3,7 @@
 %global with_doc 1
 # guard for Red Hat OpenStack Platform supported tempest
 %global rhosp 0
+%global repo_bootstrap 1
 %global common_desc \
 This is a set of integration tests to be run against a live OpenStack cluster.\
 Tempest has batteries of tests for OpenStack API validation, Scenarios, and \
@@ -14,8 +15,8 @@ other specific tests useful in validating an OpenStack deployment.
 
 Name:           openstack-%{project}
 Epoch:          1
-Version:        XXX
-Release:        XXX
+Version:        17.2.0
+Release:        5%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://launchpad.net/tempest
@@ -336,3 +337,35 @@ stestr-3 --test-path $OS_TEST_PATH run
 %endif
 
 %changelog
+* Wed Feb 21 2018 Alfredo Moralejo <amoralej@redhat.com> 1:17.2.0-5
+- Enabled repo_bootstrap until we get all builds ready in queens
+- Updated requirements for queens.
+
+* Mon Feb 19 2018 Chandan Kumar <chkumar@redhat.com> 1:17.2.0-4
+- Added provides python2-tempest-tests for compatibility with packages which requires it.
+
+* Thu Feb 15 2018 Alfredo Moralejo <amoralej@redhat.com> 1:17.2.0-3
+- Added provides python2-tempest for compatibility with packages which requires it.
+
+* Tue Feb 13 2018 Chandan Kumar <chkumar@redhat.com> 1:17.2.0-2
+- Added obsoletes for python-tempest-lib removal
+
+* Sat Dec 02 2017 RDO <dev@lists.rdoproject.org> 1:17.2.0-1
+- Update to 17.2.0
+
+* Wed Oct 25 2017 Chandan Kumar <chkumar@redhat.com> 1:17.1.0-1
+- Update to 17.1.0
+- test.py and clients.py as a stable interface
+
+* Thu Aug 31 2017 Chandan Kumar <chkumar@redhat.com> 1:17.0.0-1
+- Update to 17.0.0
+
+* Wed Aug 30 2017 Chandan Kumar <chkumar@redhat.com> 1:16.1.0-2-e70e0febgit
+- Pin tempest to 16.1.0 (e70e0feb6361d7f97f0b360b25a711a2426775a7) for Pike
+- Moves the dynamic and preprovisioned credentials to tempest/lib
+- Required for Manila project
+
+* Mon Aug 21 2017 Alfredo Moralejo <amoralej@redhat.com> 1:16.1.0-1
+- Update to 16.1.0
+
+
