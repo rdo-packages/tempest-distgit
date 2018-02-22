@@ -65,7 +65,7 @@ Requires:      python2-pbr
 Requires:      python2-prettytable
 Requires:      python2-six
 Requires:      python2-stevedore
-Requires:      python2-testrepository
+Requires:      python2-stestr
 Requires:      python2-testtools
 Requires:      python2-urllib3
 Requires:      python2-subunit
@@ -139,7 +139,7 @@ Requires:      python3-pbr
 Requires:      python3-prettytable
 Requires:      python3-six
 Requires:      python3-stevedore
-Requires:      python3-testrepository
+Requires:      python3-stestr
 Requires:      python3-testtools
 Requires:      python3-urllib3
 Requires:      python3-PyYAML
