@@ -15,8 +15,8 @@ other specific tests useful in validating an OpenStack deployment.
 
 Name:           openstack-%{project}
 Epoch:          1
-Version:        17.2.0
-Release:        5%{?dist}
+Version:        18.0.0
+Release:        1%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://launchpad.net/tempest
@@ -337,6 +337,9 @@ stestr-3 --test-path $OS_TEST_PATH run
 %endif
 
 %changelog
+* Thu Mar 01 2018 RDO <dev@lists.rdoproject.org> 1:18.0.0-1
+- Update to 18.0.0
+
 * Wed Feb 21 2018 Alfredo Moralejo <amoralej@redhat.com> 1:17.2.0-5
 - Enabled repo_bootstrap until we get all builds ready in queens
 - Updated requirements for queens.
