@@ -258,11 +258,11 @@ chmod u=rw,go=r $RPMLINT_OFFENDERS
 # Disable Build the plugin registry step as it uses git to clone
 # projects and then generate tempest plugin projects list.
 # It is also time taking.
+export PYTHONPATH=.
 export GENERATE_TEMPEST_PLUGIN_LIST='False'
-# TODO(ihrachys): remove when https://review.openstack.org/#/c/523235/ is
-# released
-sed -i 's/warning-is-error = 1/warning-is-error = 0/' setup.cfg
-%{__python2} setup.py build_sphinx -b html
+sphinx-build -b html doc/source doc/build/html
+# remove the sphinx-build leftovers
+rm -rf doc/build/html/.{doctrees,buildinfo}
 %endif
 
 %install
