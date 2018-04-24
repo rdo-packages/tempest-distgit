@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dac4157f_9fb87be7",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 6
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 113
+      },
+      "writtenOn": "2018-04-24T08:54:02Z",
+      "side": 1,
+      "message": "After this call we should remove doc/build/html/.doctree and .buildinfo, to avoid the rpmlint error",
+      "revId": "3d37b2cf7b976eae69ecde1b22cd5ac01d2dce41",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
