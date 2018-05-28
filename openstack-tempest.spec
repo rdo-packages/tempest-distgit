@@ -10,6 +10,7 @@ other specific tests useful in validating an OpenStack deployment.
 
 %if 0%{?fedora} >= 24
 %global with_python3 1
+%global repo_bootstrap 1
 %endif
 
 Name:           openstack-%{project}
