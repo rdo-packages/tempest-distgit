@@ -33,6 +33,24 @@
       "revId": "3e378100cb76a1d4101ac9068d830cb1f60a92d0",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bab921fb_5a6d3103",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 403
+      },
+      "writtenOn": "2018-06-19T10:40:54Z",
+      "side": 1,
+      "message": "will update the patch to include only one python variant.\nand regarding moving binaries to python subpackages, we need to consider what we are going to support in future as here only 6 binaries are there.\n%{_bindir}/tempest\n%{_bindir}/check-uuid\n%{_bindir}/skip-tracker\n%{_bindir}/subunit-describe-calls\n%{_bindir}/tempest-account-generator\n%{_bindir}/verify-tempest-config",
+      "parentUuid": "bab921fb_7ac115e4",
+      "revId": "3e378100cb76a1d4101ac9068d830cb1f60a92d0",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
     }
   ]
 }
