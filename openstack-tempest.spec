@@ -31,6 +31,9 @@ BuildRequires:  python2-devel
 BuildRequires:  openstack-macros
 
 Requires:       python-tempest = %{epoch}:%{version}-%{release}
+%if 0%{?with_python3}
+Requires:       python3-tempest = %{epoch}:%{version}-%{release}
+%endif
 
 %if 0%{?repo_bootstrap} == 0
 Requires:     python2-tempestconf
