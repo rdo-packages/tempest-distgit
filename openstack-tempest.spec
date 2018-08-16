@@ -58,11 +58,11 @@ Requires:      python2-debtcollector
 Requires:      python2-fixtures
 Requires:      python2-jsonschema
 Requires:      python2-netaddr
-Requires:      python2-oslo-concurrency >= 3.8.0
-Requires:      python2-oslo-config >= 2:4.0.0
-Requires:      python2-oslo-log >= 3.22.0
-Requires:      python2-oslo-serialization >= 1.10.0
-Requires:      python2-oslo-utils >= 3.20.0
+Requires:      python2-oslo-concurrency >= 3.26.0
+Requires:      python2-oslo-config >= 2:5.2.0
+Requires:      python2-oslo-log >= 3.36.0
+Requires:      python2-oslo-serialization >= 2.18.0
+Requires:      python2-oslo-utils >= 3.33.0
 Requires:      python2-os-testr >= 0.8.0
 Requires:      python2-paramiko
 Requires:      python2-pbr
@@ -132,11 +132,11 @@ Requires:      python3-debtcollector
 Requires:      python3-fixtures
 Requires:      python3-jsonschema
 Requires:      python3-netaddr
-Requires:      python3-oslo-concurrency >= 3.8.0
-Requires:      python3-oslo-config >= 2:4.0.0
-Requires:      python3-oslo-log >= 3.22.0
-Requires:      python3-oslo-serialization >= 1.10.0
-Requires:      python3-oslo-utils >= 3.20.0
+Requires:      python3-oslo-concurrency >= 3.26.0
+Requires:      python3-oslo-config >= 2:5.2.0
+Requires:      python3-oslo-log >= 3.36.0
+Requires:      python3-oslo-serialization >= 2.18.0
+Requires:      python3-oslo-utils >= 3.33.0
 Requires:      python3-os-testr >= 0.8.0
 Requires:      python3-paramiko
 Requires:      python3-pbr
