@@ -100,11 +100,15 @@ BuildRequires:  PyYAML
 BuildRequires:  python2-oslo-concurrency
 BuildRequires:  python2-paramiko
 BuildRequires:  python2-cliff
+# FIXME(chkumar246): Since pep8 version is not yet updated
+# in master rdoinfo, we are keeping it so that it will work
+# with Rocky and master and later on we can remove pep8
 %if 0%{?fedora} > 0
 BuildRequires:  python2-pep8
 %else
 BuildRequires:  python-pep8
 %endif
+BuildRequires:  python2-pycodestyle
 BuildRequires:  python2-os-testr
 BuildRequires:  python2-stestr
 
@@ -171,6 +175,7 @@ BuildRequires:  python3-oslo-concurrency
 BuildRequires:  python3-paramiko
 BuildRequires:  python3-cliff
 BuildRequires:  python3-pep8
+BuildRequires:  python3-pycodestyle
 BuildRequires:  python3-os-testr
 BuildRequires:  python3-stestr
 
