@@ -100,11 +100,7 @@ BuildRequires:  PyYAML
 BuildRequires:  python2-oslo-concurrency
 BuildRequires:  python2-paramiko
 BuildRequires:  python2-cliff
-%if 0%{?fedora} > 0
-BuildRequires:  python2-pep8
-%else
-BuildRequires:  python-pep8
-%endif
+BuildRequires:  python2-pycodestyle
 BuildRequires:  python2-os-testr
 BuildRequires:  python2-stestr
 
@@ -170,7 +166,7 @@ BuildRequires:  python3-PyYAML
 BuildRequires:  python3-oslo-concurrency
 BuildRequires:  python3-paramiko
 BuildRequires:  python3-cliff
-BuildRequires:  python3-pep8
+BuildRequires:  python3-pycodestyle
 BuildRequires:  python3-os-testr
 BuildRequires:  python3-stestr
 
@@ -341,3 +337,4 @@ stestr-3 --test-path $OS_TEST_PATH run
 %endif
 
 %changelog
+# REMOVEME: error caused by commit http://git.openstack.org/cgit/openstack/tempest/commit/?id=9c71dcfa7c24a1fea350c07f4008964d857957ad
