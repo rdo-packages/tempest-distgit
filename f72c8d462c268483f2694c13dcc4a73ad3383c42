@@ -16,6 +16,24 @@
       "revId": "f72c8d462c268483f2694c13dcc4a73ad3383c42",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9abe1de1_0403a010",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 2
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 403
+      },
+      "writtenOn": "2018-11-23T04:03:40Z",
+      "side": 1,
+      "message": "yes u are correct, there is no \"stestr\" executable instead has stestr-3 and stestr-3.6 in python3,\n(.quickstart) [ykarel@yatinkarel .quickstart]$ rpm -qpl https://trunk.rdoproject.org/fedora/stable-base/latest/Packages/python3-stestr-1.1.0-1.fc28.noarch.rpm|grep \u0027/usr/bin\u0027\n/usr/bin/stestr-3\n/usr/bin/stestr-3.6\n(.quickstart) [ykarel@yatinkarel .quickstart]$ rpm -qpl https://trunk.rdoproject.org/centos7-master/deps/latest/noarch/python2-stestr-1.1.0-1.el7.noarch.rpm|grep \u0027/usr/bin\u0027\n/usr/bin/stestr\n/usr/bin/stestr-2\n/usr/bin/stestr-2.7",
+      "parentUuid": "9abe1de1_e4bd4c69",
+      "revId": "f72c8d462c268483f2694c13dcc4a73ad3383c42",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
     }
   ]
 }
