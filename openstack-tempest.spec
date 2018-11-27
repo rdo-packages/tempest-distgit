@@ -19,7 +19,7 @@ This is a set of integration tests to be run against a live OpenStack cluster.\
 Tempest has batteries of tests for OpenStack API validation, Scenarios, and \
 other specific tests useful in validating an OpenStack deployment.
 
-%global repo_bootstrap 1
+%global repo_bootstrap 0
 
 Name:           openstack-%{project}
 Epoch:          1
