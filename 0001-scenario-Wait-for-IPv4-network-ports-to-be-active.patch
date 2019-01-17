@@ -1,0 +1,52 @@
+From ec00b27b759ed962e8ae0b3ea88af295a3f2e934 Mon Sep 17 00:00:00 2001
+From: Anthony PERARD <anthony.perard@citrix.com>
+Date: Thu, 19 Jan 2017 18:15:27 +0000
+Subject: [PATCH] scenario: Wait for IPv4 network ports to be active
+
+Often, tempest tests fail when _get_server_port_id_and_ip4 is
+called, because it asserts with "No IPv4 addresses found"
+without waiting for them to be active.
+
+Closes-Bug: #1728600
+
+Change-Id: Idacd514fab0592c6bd985ff8950d5caa757317e0
+---
+ tempest/scenario/manager.py | 18 +++++++++++++++---
+ 1 file changed, 15 insertions(+), 3 deletions(-)
+
+diff --git a/tempest/scenario/manager.py b/tempest/scenario/manager.py
+index dbb9accee..23045a766 100644
+--- a/tempest/scenario/manager.py
++++ b/tempest/scenario/manager.py
+@@ -836,13 +836,25 @@ class NetworkScenarioTest(ScenarioTest):
+         # servers. Neutron does not bind ports for Ironic instances, as a
+         # result the port remains in the DOWN state.
+         # TODO(vsaienko) remove once bug: #1599836 is resolved.
+-        if getattr(CONF.service_available, 'ironic', False):
++        ironic = getattr(CONF.service_available, 'ironic', False)
++        if ironic:
+             p_status.append('DOWN')
++
++        wait_port_id = [
++            p["id"] for p in ports for fxip in p["fixed_ips"]
++            if (netutils.is_valid_ipv4(fxip["ip_address"]) and
++                p['status'] not in p_status)]
++        for port_id in wait_port_id:
++            waiters.wait_for_interface_status(self.manager.interfaces_client,
++                                              server['id'], port_id, 'ACTIVE')
++
++        # Since waiting for anything to become active that needs to be active
++        # will raise on failure, we no longer have to check non-ironic status
+         port_map = [(p["id"], fxip["ip_address"])
+                     for p in ports
+                     for fxip in p["fixed_ips"]
+-                    if (netutils.is_valid_ipv4(fxip["ip_address"]) and
+-                        p['status'] in p_status)]
++                    if (netutils.is_valid_ipv4(fxip["ip_address"]) and (not
++                        ironic or p['status'] in p_status))]
+         inactive = [p for p in ports if p['status'] != 'ACTIVE']
+         if inactive:
+             LOG.warning("Instance has ports that are not ACTIVE: %s", inactive)
+-- 
+2.17.1
+

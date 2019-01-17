@@ -1,3 +1,4 @@
+#DNM
 # Macros for py2/py3 compatibility
 %if 0%{?fedora} || 0%{?rhel} > 7
 %global pyver %{python3_pkgversion}
@@ -29,6 +30,9 @@ Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://launchpad.net/tempest
 Source0:        http://tarballs.openstack.org/tempest/tempest-%{upstream_version}.tar.gz
+
+
+Patch0001:      0001-scenario-Wait-for-IPv4-network-ports-to-be-active.patch
 BuildArch:      noarch
 
 BuildRequires:  git
