@@ -149,7 +149,6 @@ Requires:       python%{pyver}-octavia-tests-tempest
 Requires:       python%{pyver}-ec2api-tests-tempest
 Requires:       python%{pyver}-networking-l2gw-tests-tempest
 Requires:       python%{pyver}-patrole-tests-tempest
-Requires:       python%{pyver}-tripleo-common-tests-tempest
 Requires:       python%{pyver}-novajoin-tests-tempest
 Requires:       python%{pyver}-kuryr-tests-tempest
 Requires:       python%{pyver}-barbican-tests-tempest
