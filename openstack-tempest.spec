@@ -145,7 +145,6 @@ Requires:       python%{pyver}-zaqar-tests-tempest
 Requires:       python%{pyver}-manila-tests-tempest
 Requires:       python%{pyver}-telemetry-tests-tempest
 Requires:       python%{pyver}-octavia-tests-tempest
-Requires:       python%{pyver}-ec2api-tests-tempest
 Requires:       python%{pyver}-networking-l2gw-tests-tempest
 Requires:       python%{pyver}-patrole-tests-tempest
 Requires:       python%{pyver}-novajoin-tests-tempest
