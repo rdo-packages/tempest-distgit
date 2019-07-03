@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e97cbc02_b4d5c103",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 111
+      },
+      "writtenOn": "2019-07-03T09:44:33Z",
+      "side": 1,
+      "message": "It is not needed, autosetup will take care of that.",
+      "range": {
+        "startLine": 188,
+        "startChar": 49,
+        "endLine": 188,
+        "endChar": 51
+      },
+      "revId": "6ad477e1b2666e0e100032cddbb2fc686178f33f",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
