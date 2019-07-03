@@ -22,11 +22,15 @@ other specific tests useful in validating an OpenStack deployment.
 Name:           openstack-%{project}
 Epoch:          1
 Version:        20.0.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://launchpad.net/tempest
 Source0:        http://tarballs.openstack.org/tempest/tempest-%{upstream_version}.tar.gz
+
+Patch0001: 0001-compute-Make-image-certificate-validation-a-configur.patch
+Patch0002: 0002-compute-Correctly-pass-certified_image_ref-as-image_.patch
+
 BuildArch:      noarch
 
 BuildRequires:  git
@@ -181,7 +185,7 @@ It contains the documentation for Tempest.
 %endif
 
 %prep
-%autosetup -n tempest-%{upstream_version} -S git
+%autosetup -n tempest-%{upstream_version} -S git -s
 # have dependencies being handled by rpms, rather than requirement files
 %py_req_cleanup
 
@@ -265,6 +269,10 @@ stestr-%{pyver} --test-path $OS_TEST_PATH run
 %endif
 
 %changelog
+* Wed Jul 03 2019 Lee Yarwood <lyarwood@redhat.com> 1:20.0.0-3
+- compute: Correctly pass certified_image_ref as image_id
+- compute: Make image certificate validation a configurable feature
+
 * Mon Jun 10 2019 Yatin Karel <ykarel@redhat.com> - 1:20.0.0-2
 - Disable repo_bootstrap and include openstack-tempest-all package
 
