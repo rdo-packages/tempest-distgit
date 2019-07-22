@@ -140,7 +140,9 @@ Requires:       python%{pyver}-ironic-tests-tempest
 Requires:       python%{pyver}-keystone-tests-tempest
 Requires:       python%{pyver}-mistral-tests-tempest
 Requires:       python%{pyver}-neutron-tests-tempest
+%if 0%{?rhosp} == 0
 Requires:       python%{pyver}-sahara-tests-tempest
+%endif
 Requires:       python%{pyver}-zaqar-tests-tempest
 Requires:       python%{pyver}-manila-tests-tempest
 Requires:       python%{pyver}-telemetry-tests-tempest
