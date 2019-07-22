@@ -140,7 +140,6 @@ Requires:       python%{pyver}-ironic-tests-tempest
 Requires:       python%{pyver}-keystone-tests-tempest
 Requires:       python%{pyver}-mistral-tests-tempest
 Requires:       python%{pyver}-neutron-tests-tempest
-Requires:       python%{pyver}-sahara-tests-tempest
 Requires:       python%{pyver}-zaqar-tests-tempest
 Requires:       python%{pyver}-manila-tests-tempest
 Requires:       python%{pyver}-telemetry-tests-tempest
@@ -155,6 +154,7 @@ Requires:       python%{pyver}-barbican-tests-tempest
 Requires:       python%{pyver}-congress-tests-tempest
 Requires:       python%{pyver}-magnum-tests-tempest
 Requires:       python%{pyver}-murano-tests-tempest
+Requires:       python%{pyver}-sahara-tests-tempest
 Requires:       python%{pyver}-trove-tests-tempest
 Requires:       python%{pyver}-vitrage-tests-tempest
 Requires:       python%{pyver}-watcher-tests-tempest
