@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8574d015_74a31533",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 403
+      },
+      "writtenOn": "2019-07-22T09:14:07Z",
+      "side": 1,
+      "message": "can move this in block in Line 156-163",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 144,
+        "endChar": 51
+      },
+      "revId": "d6c04c5a251be27356d378d5646e60aef3758210",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
