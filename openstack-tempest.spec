@@ -264,3 +264,4 @@ PYTHON=%{pyver_bin} stestr-%{pyver} --test-path $OS_TEST_PATH run
 %endif
 
 %changelog
+# REMOVEME: error caused by commit http://git.openstack.org/cgit/openstack/tempest/commit/?id=181a26d25872e349ab552724c8d94bd4436868fb
