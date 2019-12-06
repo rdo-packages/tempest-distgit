@@ -111,10 +111,8 @@ BuildRequires:  python%{pyver}-stestr
 # Handle python2 exception
 %if %{pyver} == 2
 BuildRequires:  PyYAML
-BuildRequires:  python-pep8
 %else
 BuildRequires:  python%{pyver}-PyYAML
-BuildRequires:  python%{pyver}-pep8
 %endif
 
 
