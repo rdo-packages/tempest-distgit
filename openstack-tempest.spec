@@ -21,7 +21,7 @@ other specific tests useful in validating an OpenStack deployment.
 
 Name:           openstack-%{project}
 Epoch:          1
-Version:        22.1.0
+Version:        23.0.0
 Release:        1%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
@@ -263,6 +263,9 @@ PYTHON=%{pyver_bin} stestr-%{pyver} --test-path $OS_TEST_PATH run
 %endif
 
 %changelog
+* Wed Feb 05 2020 RDO <dev@lists.rdoproject.org> 1:23.0.0-1
+- Update to 23.0.0
+
 * Wed Oct 16 2019 RDO <dev@lists.rdoproject.org> 1:22.1.0-1
 - Update to 22.1.0
 
