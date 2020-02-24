@@ -5,9 +5,9 @@
 %global pyver 2
 %endif
 %global pyver_bin python%{pyver}
-%global pyver_sitelib %python%{pyver}_sitelib
-%global pyver_install %py%{pyver}_install
-%global pyver_build %py%{pyver}_build
+%global pyver_sitelib %{expand:%{python%{pyver}_sitelib}}
+%global pyver_install %{expand:%{py%{pyver}_install}}
+%global pyver_build %{expand:%{py%{pyver}_build}}
 # End of macros for py2/py3 compatibility
 %global project tempest
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
@@ -38,8 +38,8 @@ BuildRequires:  openstack-macros
 
 Requires:       python%{pyver}-tempest = %{epoch}:%{version}-%{release}
 
-%if 0%{?repo_bootstrap} == 0
-Requires:     python%{pyver}-tempestconf
+%if 0%{?fedora} || 0%{?rhel} > 7
+Recommends:     python%{pyver}-tempestconf
 %endif
 
 %description
