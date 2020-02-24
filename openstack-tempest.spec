@@ -38,8 +38,8 @@ BuildRequires:  openstack-macros
 
 Requires:       python%{pyver}-tempest = %{epoch}:%{version}-%{release}
 
-%if 0%{?repo_bootstrap} == 0
-Requires:     python%{pyver}-tempestconf
+%if 0%{?fedora} || 0%{?rhel} > 7
+Recommends:     python%{pyver}-tempestconf
 %endif
 
 %description
