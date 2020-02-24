@@ -38,8 +38,8 @@ BuildRequires:  openstack-macros
 
 Requires:       python%{pyver}-tempest = %{epoch}:%{version}-%{release}
 
-%if 0%{?repo_bootstrap} == 0
-Requires:     python%{pyver}-tempestconf
+%if 0%{?fedora} || 0%{?rhel} > 7
+Recommends:     python%{pyver}-tempestconf
 %endif
 
 %description
@@ -124,38 +124,38 @@ Requires:       python%{pyver}-oslotest
 
 This package contains tests for the tempest python library.
 
-%if 0%{?repo_bootstrap} == 0
+%if 0%{?fedora} || 0%{?rhel} > 7
 %package -n    %{name}-all
 Summary:       All OpenStack Tempest Plugins
 
 Requires:      %{name} = %{epoch}:%{version}-%{release}
 
-Requires:       python%{pyver}-cinder-tests-tempest
-Requires:       python%{pyver}-designate-tests-tempest
-Requires:       python%{pyver}-heat-tests-tempest
-Requires:       python%{pyver}-horizon-tests-tempest
-Requires:       python%{pyver}-ironic-tests-tempest
-Requires:       python%{pyver}-keystone-tests-tempest
-Requires:       python%{pyver}-mistral-tests-tempest
-Requires:       python%{pyver}-neutron-tests-tempest
-Requires:       python%{pyver}-zaqar-tests-tempest
-Requires:       python%{pyver}-manila-tests-tempest
-Requires:       python%{pyver}-telemetry-tests-tempest
-Requires:       python%{pyver}-octavia-tests-tempest
-Requires:       python%{pyver}-networking-l2gw-tests-tempest
-Requires:       python%{pyver}-patrole-tests-tempest
-Requires:       python%{pyver}-novajoin-tests-tempest
-Requires:       python%{pyver}-kuryr-tests-tempest
-Requires:       python%{pyver}-barbican-tests-tempest
+Recommends:       python%{pyver}-cinder-tests-tempest
+Recommends:       python%{pyver}-designate-tests-tempest
+Recommends:       python%{pyver}-heat-tests-tempest
+Recommends:       python%{pyver}-horizon-tests-tempest
+Recommends:       python%{pyver}-ironic-tests-tempest
+Recommends:       python%{pyver}-keystone-tests-tempest
+Recommends:       python%{pyver}-mistral-tests-tempest
+Recommends:       python%{pyver}-neutron-tests-tempest
+Recommends:       python%{pyver}-zaqar-tests-tempest
+Recommends:       python%{pyver}-manila-tests-tempest
+Recommends:       python%{pyver}-telemetry-tests-tempest
+Recommends:       python%{pyver}-octavia-tests-tempest
+Recommends:       python%{pyver}-networking-l2gw-tests-tempest
+Recommends:       python%{pyver}-patrole-tests-tempest
+Recommends:       python%{pyver}-novajoin-tests-tempest
+Recommends:       python%{pyver}-kuryr-tests-tempest
+Recommends:       python%{pyver}-barbican-tests-tempest
 
 %if 0%{?rhosp} == 0
-Requires:       python%{pyver}-congress-tests-tempest
-Requires:       python%{pyver}-magnum-tests-tempest
-Requires:       python%{pyver}-murano-tests-tempest
-Requires:       python%{pyver}-sahara-tests-tempest
-Requires:       python%{pyver}-trove-tests-tempest
-Requires:       python%{pyver}-vitrage-tests-tempest
-Requires:       python%{pyver}-watcher-tests-tempest
+Recommends:       python%{pyver}-congress-tests-tempest
+Recommends:       python%{pyver}-magnum-tests-tempest
+Recommends:       python%{pyver}-murano-tests-tempest
+Recommends:       python%{pyver}-sahara-tests-tempest
+Recommends:       python%{pyver}-trove-tests-tempest
+Recommends:       python%{pyver}-vitrage-tests-tempest
+Recommends:       python%{pyver}-watcher-tests-tempest
 %endif
 
 %description -n %{name}-all
@@ -250,7 +250,7 @@ PYTHON=%{pyver_bin} stestr-%{pyver} --test-path $OS_TEST_PATH run
 %license LICENSE
 %{pyver_sitelib}/tempest/tests
 
-%if 0%{?repo_bootstrap} == 0
+%if 0%{?fedora} || 0%{?rhel} > 7
 %files -n %{name}-all
 %license LICENSE
 %endif
