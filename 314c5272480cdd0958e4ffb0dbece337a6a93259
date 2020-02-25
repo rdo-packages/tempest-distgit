@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "0af2ff39_4e77534d",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2020-02-25T11:02:41Z",
+      "side": 1,
+      "message": "We need to maintain condition for centos7 until we get rid of it.\n\n%else\nRequires:     python%{pyver}-tempestconf",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 6
+      },
+      "revId": "314c5272480cdd0958e4ffb0dbece337a6a93259",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1dd25e1d_0c6a5ee2",
         "filename": "openstack-tempest.spec",
         "patchSetId": 2
