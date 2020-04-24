@@ -11,7 +11,10 @@
 # End of macros for py2/py3 compatibility
 %global project tempest
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
-%global with_doc 1
+# documentation in tempest 23.0.0 requires sphinxcontrib-svg2pdfconverter
+# package which is not available in stein, therefore the documentation
+# generation is disabled
+%global with_doc 0
 # guard for Red Hat OpenStack Platform supported tempest
 %global rhosp 0
 %global common_desc \
