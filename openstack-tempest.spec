@@ -1,14 +1,3 @@
-# Macros for py2/py3 compatibility
-%if 0%{?fedora} || 0%{?rhel} > 7
-%global pyver %{python3_pkgversion}
-%else
-%global pyver 2
-%endif
-%global pyver_bin python%{pyver}
-%global pyver_sitelib %python%{pyver}_sitelib
-%global pyver_install %py%{pyver}_install
-%global pyver_build %py%{pyver}_build
-# End of macros for py2/py3 compatibility
 %global project tempest
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 %global with_doc 1
@@ -30,26 +19,22 @@ Source0:        http://tarballs.openstack.org/tempest/tempest-%{upstream_version
 BuildArch:      noarch
 
 BuildRequires:  git
-BuildRequires:  python%{pyver}-oslo-config
-BuildRequires:  python%{pyver}-pbr
-BuildRequires:  python%{pyver}-setuptools
-BuildRequires:  python%{pyver}-devel
+BuildRequires:  python3-oslo-config
+BuildRequires:  python3-pbr
+BuildRequires:  python3-setuptools
+BuildRequires:  python3-devel
 BuildRequires:  openstack-macros
 
-Requires:       python%{pyver}-tempest = %{epoch}:%{version}-%{release}
+Requires:       python3-tempest = %{epoch}:%{version}-%{release}
 
 %if 0%{?repo_bootstrap} == 0
-%if 0%{?fedora} || 0%{?rhel} > 7
-Recommends:     python%{pyver}-tempestconf
-%else
-Requires:       python%{pyver}-tempestconf
-%endif
+Recommends:     python3-tempestconf
 %endif
 
 %description
 %{common_desc}
 
-%package -n    python%{pyver}-%{project}
+%package -n    python3-%{project}
 Summary:       Tempest Python library
 
 %{?python_provide:%python_provide python2-%{project}}
@@ -59,71 +44,60 @@ Summary:       Tempest Python library
 # release
 Obsoletes:     python-tempest-lib
 
-Requires:      python%{pyver}-cliff
-Requires:      python%{pyver}-debtcollector
-Requires:      python%{pyver}-fixtures
-Requires:      python%{pyver}-jsonschema
-Requires:      python%{pyver}-netaddr
-Requires:      python%{pyver}-oslo-concurrency >= 3.26.0
-Requires:      python%{pyver}-oslo-config >= 2:5.2.0
-Requires:      python%{pyver}-oslo-log >= 3.36.0
-Requires:      python%{pyver}-oslo-serialization >= 2.18.0
-Requires:      python%{pyver}-oslo-utils >= 3.33.0
-Requires:      python%{pyver}-os-testr >= 0.8.0
-Requires:      python%{pyver}-paramiko
-Requires:      python%{pyver}-pbr
-Requires:      python%{pyver}-prettytable
-Requires:      python%{pyver}-six
-Requires:      python%{pyver}-stevedore
-Requires:      python%{pyver}-stestr
-Requires:      python%{pyver}-testtools
-Requires:      python%{pyver}-urllib3
-Requires:      python%{pyver}-subunit
+Requires:      python3-cliff
+Requires:      python3-debtcollector
+Requires:      python3-fixtures
+Requires:      python3-jsonschema
+Requires:      python3-netaddr
+Requires:      python3-oslo-concurrency >= 3.26.0
+Requires:      python3-oslo-config >= 2:5.2.0
+Requires:      python3-oslo-log >= 3.36.0
+Requires:      python3-oslo-serialization >= 2.18.0
+Requires:      python3-oslo-utils >= 3.33.0
+Requires:      python3-os-testr >= 0.8.0
+Requires:      python3-paramiko
+Requires:      python3-pbr
+Requires:      python3-prettytable
+Requires:      python3-six
+Requires:      python3-stevedore
+Requires:      python3-stestr
+Requires:      python3-testtools
+Requires:      python3-urllib3
+Requires:      python3-subunit
 
-# Handle python2 exception
-%if %{pyver} == 2
-Requires:      python-unittest2
-Requires:      PyYAML
-%else
-Requires:      python%{pyver}-unittest2
-Requires:      python%{pyver}-PyYAML
-%endif
+Requires:      python3-unittest2
+Requires:      python3-PyYAML
 
-%description -n python%{pyver}-%{project}
+%description -n python3-%{project}
 %{common_desc}
 
 This package contains the tempest python library.
 
-%package -n     python%{pyver}-%{project}-tests
+%package -n     python3-%{project}-tests
 Summary:        Python Tempest tests
-Requires:       python%{pyver}-tempest = %{epoch}:%{version}-%{release}
+Requires:       python3-tempest = %{epoch}:%{version}-%{release}
 %{?python_provide:%python_provide python2-%{project}-tests}
 
-BuildRequires:  python%{pyver}-mock
-BuildRequires:  python%{pyver}-oslotest
-BuildRequires:  python%{pyver}-subunit
-BuildRequires:  python%{pyver}-oslo-log
-BuildRequires:  python%{pyver}-jsonschema
-BuildRequires:  python%{pyver}-urllib3
-BuildRequires:  python%{pyver}-oslo-concurrency
-BuildRequires:  python%{pyver}-paramiko
-BuildRequires:  python%{pyver}-cliff
-BuildRequires:  python%{pyver}-pycodestyle
-BuildRequires:  python%{pyver}-os-testr
-BuildRequires:  python%{pyver}-stestr
+BuildRequires:  python3-mock
+BuildRequires:  python3-oslotest
+BuildRequires:  python3-subunit
+BuildRequires:  python3-oslo-log
+BuildRequires:  python3-jsonschema
+BuildRequires:  python3-urllib3
+BuildRequires:  python3-oslo-concurrency
+BuildRequires:  python3-paramiko
+BuildRequires:  python3-cliff
+BuildRequires:  python3-pycodestyle
+BuildRequires:  python3-os-testr
+BuildRequires:  python3-stestr
 
-# Handle python2 exception
-%if %{pyver} == 2
-BuildRequires:  PyYAML
-%else
-BuildRequires:  python%{pyver}-PyYAML
-%endif
+BuildRequires:  python3-PyYAML
 
 
-Requires:       python%{pyver}-mock
-Requires:       python%{pyver}-oslotest
+Requires:       python3-mock
+Requires:       python3-oslotest
 
-%description -n python%{pyver}-%{project}-tests
+%description -n python3-%{project}-tests
 %{common_desc}
 
 This package contains tests for the tempest python library.
@@ -134,64 +108,32 @@ Summary:       All OpenStack Tempest Plugins
 
 Requires:      %{name} = %{epoch}:%{version}-%{release}
 
-%if 0%{?fedora} || 0%{?rhel} > 7
-Recommends:       python%{pyver}-cinder-tests-tempest
-Recommends:       python%{pyver}-designate-tests-tempest
-Recommends:       python%{pyver}-heat-tests-tempest
-Recommends:       python%{pyver}-horizon-tests-tempest
-Recommends:       python%{pyver}-ironic-tests-tempest
-Recommends:       python%{pyver}-keystone-tests-tempest
-Recommends:       python%{pyver}-mistral-tests-tempest
-Recommends:       python%{pyver}-neutron-tests-tempest
-Recommends:       python%{pyver}-zaqar-tests-tempest
-Recommends:       python%{pyver}-manila-tests-tempest
-Recommends:       python%{pyver}-telemetry-tests-tempest
-Recommends:       python%{pyver}-octavia-tests-tempest
-Recommends:       python%{pyver}-networking-l2gw-tests-tempest
-Recommends:       python%{pyver}-patrole-tests-tempest
-Recommends:       python%{pyver}-novajoin-tests-tempest
-Recommends:       python%{pyver}-kuryr-tests-tempest
-Recommends:       python%{pyver}-barbican-tests-tempest
+Recommends:       python3-cinder-tests-tempest
+Recommends:       python3-designate-tests-tempest
+Recommends:       python3-heat-tests-tempest
+Recommends:       python3-horizon-tests-tempest
+Recommends:       python3-ironic-tests-tempest
+Recommends:       python3-keystone-tests-tempest
+Recommends:       python3-mistral-tests-tempest
+Recommends:       python3-neutron-tests-tempest
+Recommends:       python3-zaqar-tests-tempest
+Recommends:       python3-manila-tests-tempest
+Recommends:       python3-telemetry-tests-tempest
+Recommends:       python3-octavia-tests-tempest
+Recommends:       python3-networking-l2gw-tests-tempest
+Recommends:       python3-patrole-tests-tempest
+Recommends:       python3-novajoin-tests-tempest
+Recommends:       python3-kuryr-tests-tempest
+Recommends:       python3-barbican-tests-tempest
 
 %if 0%{?rhosp} == 0
-Recommends:       python%{pyver}-congress-tests-tempest
-Recommends:       python%{pyver}-magnum-tests-tempest
-Recommends:       python%{pyver}-murano-tests-tempest
-Recommends:       python%{pyver}-sahara-tests-tempest
-Recommends:       python%{pyver}-trove-tests-tempest
-Recommends:       python%{pyver}-vitrage-tests-tempest
-Recommends:       python%{pyver}-watcher-tests-tempest
-%endif
-
-%else
-Requires:       python%{pyver}-cinder-tests-tempest
-Requires:       python%{pyver}-designate-tests-tempest
-Requires:       python%{pyver}-heat-tests-tempest
-Requires:       python%{pyver}-horizon-tests-tempest
-Requires:       python%{pyver}-ironic-tests-tempest
-Requires:       python%{pyver}-keystone-tests-tempest
-Requires:       python%{pyver}-mistral-tests-tempest
-Requires:       python%{pyver}-neutron-tests-tempest
-Requires:       python%{pyver}-zaqar-tests-tempest
-Requires:       python%{pyver}-manila-tests-tempest
-Requires:       python%{pyver}-telemetry-tests-tempest
-Requires:       python%{pyver}-octavia-tests-tempest
-Requires:       python%{pyver}-networking-l2gw-tests-tempest
-Requires:       python%{pyver}-patrole-tests-tempest
-Requires:       python%{pyver}-novajoin-tests-tempest
-Requires:       python%{pyver}-kuryr-tests-tempest
-Requires:       python%{pyver}-barbican-tests-tempest
-
-%if 0%{?rhosp} == 0
-Requires:       python%{pyver}-congress-tests-tempest
-Requires:       python%{pyver}-magnum-tests-tempest
-Requires:       python%{pyver}-murano-tests-tempest
-Requires:       python%{pyver}-sahara-tests-tempest
-Requires:       python%{pyver}-trove-tests-tempest
-Requires:       python%{pyver}-vitrage-tests-tempest
-Requires:       python%{pyver}-watcher-tests-tempest
-%endif
-
+Recommends:       python3-congress-tests-tempest
+Recommends:       python3-magnum-tests-tempest
+Recommends:       python3-murano-tests-tempest
+Recommends:       python3-sahara-tests-tempest
+Recommends:       python3-trove-tests-tempest
+Recommends:       python3-vitrage-tests-tempest
+Recommends:       python3-watcher-tests-tempest
 %endif
 
 %description -n %{name}-all
@@ -204,9 +146,9 @@ This package contains all the tempest plugins.
 %package -n %{name}-doc
 Summary:        %{name} documentation
 
-BuildRequires:  python%{pyver}-sphinx
-BuildRequires:  python%{pyver}-openstackdocstheme
-BuildRequires:  python%{pyver}-sphinxcontrib-rsvgconverter
+BuildRequires:  python3-sphinx
+BuildRequires:  python3-openstackdocstheme
+BuildRequires:  python3-sphinxcontrib-rsvgconverter
 
 %description -n %{name}-doc
 %{common_desc}
@@ -218,9 +160,6 @@ It contains the documentation for Tempest.
 %autosetup -n tempest-%{upstream_version} -S git
 # have dependencies being handled by rpms, rather than requirement files
 %py_req_cleanup
-
-# Adjust use of 'stestr' binary in tests
-sed -i "s/'stestr'/'stestr-%{pyver}'/" tempest/tests/cmd/test_run.py tempest/tests/test_list_tests.py
 
 # remove shebangs and fix permissions
 RPMLINT_OFFENDERS="tempest/cmd/list_plugins.py \
@@ -234,7 +173,7 @@ sed -i '1{/^#!/d}' $RPMLINT_OFFENDERS
 chmod u=rw,go=r $RPMLINT_OFFENDERS
 
 %build
-%{pyver_build}
+%{py3_build}
 
 %if 0%{?with_doc}
 # Disable Build the plugin registry step as it uses git to clone
@@ -242,17 +181,17 @@ chmod u=rw,go=r $RPMLINT_OFFENDERS
 # It is also time taking.
 export PYTHONPATH=.
 export GENERATE_TEMPEST_PLUGIN_LIST='False'
-sphinx-build-%{pyver} -b html doc/source doc/build/html
-# remove the sphinx-build-%{pyver} leftovers
+sphinx-build -b html doc/source doc/build/html
+# remove the sphinx-build leftovers
 rm -rf doc/build/html/.{doctrees,buildinfo}
 %endif
 
 %install
-%{pyver_install}
+%{py3_install}
 
 # Generate tempest config
 mkdir -p %{buildroot}%{_sysconfdir}/%{project}/
-oslo-config-generator-%{pyver} --config-file tempest/cmd/config-generator.tempest.conf \
+oslo-config-generator --config-file tempest/cmd/config-generator.tempest.conf \
     --output-file %{buildroot}%{_sysconfdir}/%{project}/tempest.conf
 
 mkdir -p %{buildroot}/etc/tempest
@@ -263,7 +202,7 @@ export OS_TEST_PATH='./tempest/tests'
 export PATH=$PATH:$RPM_BUILD_ROOT/usr/bin
 export PYTHONPATH=$PWD
 rm -f $OS_TEST_PATH/test_hacking.py
-PYTHON=%{pyver_bin} stestr-%{pyver} --test-path $OS_TEST_PATH run
+PYTHON=%{__python3} stestr --test-path $OS_TEST_PATH run
 
 %files
 %license LICENSE
@@ -277,15 +216,15 @@ PYTHON=%{pyver_bin} stestr-%{pyver} --test-path $OS_TEST_PATH run
 %{_sysconfdir}/%{project}/*yaml
 %config(noreplace) %{_sysconfdir}/%{project}/*.conf
 
-%files -n python%{pyver}-%{project}
+%files -n python3-%{project}
 %license LICENSE
-%{pyver_sitelib}/%{project}
-%{pyver_sitelib}/%{project}*.egg-info
-%exclude %{pyver_sitelib}/tempest/tests
+%{python3_sitelib}/%{project}
+%{python3_sitelib}/%{project}*.egg-info
+%exclude %{python3_sitelib}/tempest/tests
 
-%files -n python%{pyver}-%{project}-tests
+%files -n python3-%{project}-tests
 %license LICENSE
-%{pyver_sitelib}/tempest/tests
+%{python3_sitelib}/tempest/tests
 
 %if 0%{?repo_bootstrap} == 0
 %files -n %{name}-all
