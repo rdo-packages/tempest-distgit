@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "96f3888f_98ca304b",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 403
+      },
+      "writtenOn": "2020-04-28T11:46:33Z",
+      "side": 1,
+      "message": "conditions can be cleaned up",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 32
+      },
+      "revId": "976b99ace966a44bc3cfbe25ed27bfe560eaa93d",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39e177de_50dfc0bb",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 403
+      },
+      "writtenOn": "2020-04-28T11:46:33Z",
+      "side": 1,
+      "message": "needs conditions cleanup",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 32
+      },
+      "revId": "976b99ace966a44bc3cfbe25ed27bfe560eaa93d",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
