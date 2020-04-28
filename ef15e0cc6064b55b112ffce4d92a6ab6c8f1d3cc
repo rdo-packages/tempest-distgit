@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "49e58bf0_057de351",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2020-04-28T15:29:41Z",
+      "side": 1,
+      "message": "As this is weak dep now, we can get rid of this condition.",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 28
+      },
+      "revId": "ef15e0cc6064b55b112ffce4d92a6ab6c8f1d3cc",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
