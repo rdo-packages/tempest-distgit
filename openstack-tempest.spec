@@ -209,6 +209,7 @@ PYTHON=%{__python3} stestr --test-path $OS_TEST_PATH run
 %{_bindir}/check-uuid
 %{_bindir}/skip-tracker
 %{_bindir}/subunit-describe-calls
+%{_bindir}/tempest-account-generator
 %{_sysconfdir}/%{project}/*sample
 %{_sysconfdir}/%{project}/*yaml
 %config(noreplace) %{_sysconfdir}/%{project}/*.conf
