@@ -247,6 +247,7 @@ sphinx-build-%{pyver} -b html doc/source doc/build/html
 # remove the sphinx-build-%{pyver} leftovers
 rm -rf doc/build/html/.{doctrees,buildinfo}
 %endif
+rm -rf /usr/bin/verify-tempest-config
 
 %install
 %{pyver_install}
@@ -273,7 +274,6 @@ PYTHON=%{pyver_bin} stestr-%{pyver} --test-path $OS_TEST_PATH run
 %{_bindir}/skip-tracker
 %{_bindir}/subunit-describe-calls
 %{_bindir}/tempest-account-generator
-%{_bindir}/verify-tempest-config
 %{_sysconfdir}/%{project}/*sample
 %{_sysconfdir}/%{project}/*yaml
 %config(noreplace) %{_sysconfdir}/%{project}/*.conf
