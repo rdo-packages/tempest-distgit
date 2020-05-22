@@ -111,6 +111,7 @@ BuildRequires:  python%{pyver}-cliff
 BuildRequires:  python%{pyver}-pycodestyle
 BuildRequires:  python%{pyver}-os-testr
 BuildRequires:  python%{pyver}-stestr
+BuildRequires:  python{2,3}-hacking
 
 # Handle python2 exception
 %if %{pyver} == 2
