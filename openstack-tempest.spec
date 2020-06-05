@@ -27,7 +27,9 @@ BuildRequires:  openstack-macros
 
 Requires:       python3-tempest = %{epoch}:%{version}-%{release}
 
-Recommends:     python3-tempestconf
+%if 0%{?repo_bootstrap} == 0
+Requires:       python3-tempestconf
+%endif
 
 %description
 %{common_desc}
@@ -100,45 +102,45 @@ Requires:       python3-oslotest
 
 This package contains tests for the tempest python library.
 
-
+%if 0%{?repo_bootstrap} == 0
 %package -n    %{name}-all
 Summary:       All OpenStack Tempest Plugins
 
 Requires:      %{name} = %{epoch}:%{version}-%{release}
 
-Recommends:       python3-cinder-tests-tempest
-Recommends:       python3-designate-tests-tempest
-Recommends:       python3-heat-tests-tempest
-Recommends:       python3-horizon-tests-tempest
-Recommends:       python3-ironic-tests-tempest
-Recommends:       python3-keystone-tests-tempest
-Recommends:       python3-mistral-tests-tempest
-Recommends:       python3-neutron-tests-tempest
-Recommends:       python3-zaqar-tests-tempest
-Recommends:       python3-manila-tests-tempest
-Recommends:       python3-telemetry-tests-tempest
-Recommends:       python3-octavia-tests-tempest
-Recommends:       python3-networking-l2gw-tests-tempest
-Recommends:       python3-patrole-tests-tempest
-Recommends:       python3-novajoin-tests-tempest
-Recommends:       python3-kuryr-tests-tempest
-Recommends:       python3-barbican-tests-tempest
+Requires:       python3-cinder-tests-tempest
+Requires:       python3-designate-tests-tempest
+Requires:       python3-heat-tests-tempest
+Requires:       python3-horizon-tests-tempest
+Requires:       python3-ironic-tests-tempest
+Requires:       python3-keystone-tests-tempest
+Requires:       python3-mistral-tests-tempest
+Requires:       python3-neutron-tests-tempest
+Requires:       python3-zaqar-tests-tempest
+Requires:       python3-manila-tests-tempest
+Requires:       python3-telemetry-tests-tempest
+Requires:       python3-octavia-tests-tempest
+Requires:       python3-networking-l2gw-tests-tempest
+Requires:       python3-patrole-tests-tempest
+Requires:       python3-novajoin-tests-tempest
+Requires:       python3-kuryr-tests-tempest
+Requires:       python3-barbican-tests-tempest
 
 %if 0%{?rhosp} == 0
-Recommends:       python3-congress-tests-tempest
-Recommends:       python3-magnum-tests-tempest
-Recommends:       python3-murano-tests-tempest
-Recommends:       python3-sahara-tests-tempest
-Recommends:       python3-trove-tests-tempest
-Recommends:       python3-vitrage-tests-tempest
-Recommends:       python3-watcher-tests-tempest
+Requires:       python3-congress-tests-tempest
+Requires:       python3-magnum-tests-tempest
+Requires:       python3-murano-tests-tempest
+Requires:       python3-sahara-tests-tempest
+Requires:       python3-trove-tests-tempest
+Requires:       python3-vitrage-tests-tempest
+Requires:       python3-watcher-tests-tempest
 %endif
 
 %description -n %{name}-all
 %{common_desc}
 
 This package contains all the tempest plugins.
-
+%endif
 
 %if 0%{?with_doc}
 %package -n %{name}-doc
@@ -224,8 +226,10 @@ PYTHON=%{__python3} stestr --test-path $OS_TEST_PATH run
 %license LICENSE
 %{python3_sitelib}/tempest/tests
 
+%if 0%{?repo_bootstrap} == 0
 %files -n %{name}-all
 %license LICENSE
+%endif
 
 %if 0%{?with_doc}
 %files -n %{name}-doc
