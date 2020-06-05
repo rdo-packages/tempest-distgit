@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f036b9c0_3131ef0c",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 2
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2020-06-05T12:34:00Z",
+      "side": 1,
+      "message": "missing repo_bootstrap guard here",
+      "range": {
+        "startLine": 228,
+        "startChar": 0,
+        "endLine": 229,
+        "endChar": 16
+      },
+      "revId": "34bdeec0918f63ae645562c611f9d34705a33671",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
