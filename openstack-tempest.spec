@@ -127,7 +127,6 @@ Requires:       python3-kuryr-tests-tempest
 Requires:       python3-barbican-tests-tempest
 
 %if 0%{?rhosp} == 0
-Requires:       python3-congress-tests-tempest
 Requires:       python3-magnum-tests-tempest
 Requires:       python3-murano-tests-tempest
 Requires:       python3-sahara-tests-tempest
