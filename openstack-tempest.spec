@@ -273,3 +273,4 @@ PYTHON=%{pyver_bin} stestr-%{pyver} --test-path $OS_TEST_PATH run
 * Mon Oct 07 2019 RDO <dev@lists.rdoproject.org> 1:22.0.0-1
 - Update to 22.0.0
 
+# REMOVEME: error caused by commit http://git.openstack.org/cgit/openstack/tempest/commit/?id=d43223773d75d2e82fb33a1281038e611c41d0f3
