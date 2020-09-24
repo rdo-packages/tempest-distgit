@@ -1,0 +1,590 @@
+From 7bdcadad8e66e4dfaa6a792757dc79a5ff3c20f1 Mon Sep 17 00:00:00 2001
+From: Martin Kopec <mkopec@redhat.com>
+Date: Fri, 9 Oct 2020 08:27:24 +0000
+Subject: [PATCH 4/4] Use mock not from unittest
+
+mock from unittest is available only in python3
+
+Change-Id: Ic5d6867cb641e2036d913101b1776c9b9c853665
+---
+ tempest/cmd/verify_tempest_config.py                                  | 2 +-
+ tempest/tests/api/compute/test_base.py                                | 2 +-
+ tempest/tests/base.py                                                 | 2 +-
+ tempest/tests/cmd/test_account_generator.py                           | 2 +-
+ tempest/tests/cmd/test_cleanup.py                                     | 2 +-
+ tempest/tests/cmd/test_run.py                                         | 2 +-
+ tempest/tests/cmd/test_subunit_describe_calls.py                      | 4 ++--
+ tempest/tests/cmd/test_verify_tempest_config.py                       | 2 +-
+ tempest/tests/cmd/test_workspace.py                                   | 2 +-
+ tempest/tests/common/test_compute.py                                  | 2 +-
+ tempest/tests/common/test_credentials_factory.py                      | 2 +-
+ tempest/tests/common/test_waiters.py                                  | 2 +-
+ tempest/tests/common/utils/test_net_utils.py                          | 2 +-
+ tempest/tests/lib/cli/test_execute.py                                 | 2 +-
+ tempest/tests/lib/cmd/test_check_uuid.py                              | 2 +-
+ tempest/tests/lib/common/test_cred_client.py                          | 2 +-
+ tempest/tests/lib/common/test_dynamic_creds.py                        | 2 +-
+ tempest/tests/lib/common/test_preprov_creds.py                        | 2 +-
+ tempest/tests/lib/common/test_profiler.py                             | 2 +-
+ tempest/tests/lib/common/test_validation_resources.py                 | 2 +-
+ tempest/tests/lib/common/utils/linux/test_remote_client.py            | 2 +-
+ tempest/tests/lib/common/utils/test_test_utils.py                     | 2 +-
+ tempest/tests/lib/services/compute/test_base_compute_client.py        | 2 +-
+ tempest/tests/lib/services/compute/test_servers_client.py             | 2 +-
+ tempest/tests/lib/services/compute/test_services_client.py            | 2 +-
+ tempest/tests/lib/services/identity/v2/test_token_client.py           | 2 +-
+ tempest/tests/lib/services/identity/v3/test_token_client.py           | 2 +-
+ tempest/tests/lib/services/network/test_base_network_client.py        | 2 +-
+ .../tests/lib/services/network/test_security_group_rules_client.py    | 2 +-
+ tempest/tests/lib/services/network/test_security_groups_client.py     | 2 +-
+ tempest/tests/lib/services/object_storage/test_object_client.py       | 2 +-
+ tempest/tests/lib/services/test_clients.py                            | 2 +-
+ tempest/tests/lib/services/volume/v3/test_services_client.py          | 2 +-
+ tempest/tests/lib/services/volume/v3/test_snapshot_manage_client.py   | 2 +-
+ tempest/tests/lib/services/volume/v3/test_transfers_client.py         | 2 +-
+ tempest/tests/lib/services/volume/v3/test_volume_manage_client.py     | 2 +-
+ tempest/tests/lib/test_decorators.py                                  | 2 +-
+ tempest/tests/lib/test_ssh.py                                         | 2 +-
+ tempest/tests/test_base_test.py                                       | 2 +-
+ tempest/tests/test_imports.py                                         | 2 +-
+ tempest/tests/test_test.py                                            | 2 +-
+ 41 files changed, 42 insertions(+), 42 deletions(-)
+
+diff --git a/tempest/cmd/verify_tempest_config.py b/tempest/cmd/verify_tempest_config.py
+index 235d8e3..6a154a3 100644
+--- a/tempest/cmd/verify_tempest_config.py
++++ b/tempest/cmd/verify_tempest_config.py
+@@ -65,7 +65,7 @@ import os
+ import re
+ import sys
+ import traceback
+-from urllib import parse as urlparse
++import urlparse
+ 
+ from cliff import command
+ from oslo_log import log as logging
+diff --git a/tempest/tests/api/compute/test_base.py b/tempest/tests/api/compute/test_base.py
+index 74d2625..1593464 100644
+--- a/tempest/tests/api/compute/test_base.py
++++ b/tempest/tests/api/compute/test_base.py
+@@ -12,7 +12,7 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from unittest import mock
++import mock
+ 
+ from oslo_utils import uuidutils
+ import six
+diff --git a/tempest/tests/base.py b/tempest/tests/base.py
+index e8b2c98..02bd03f 100644
+--- a/tempest/tests/base.py
++++ b/tempest/tests/base.py
+@@ -12,7 +12,7 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from unittest import mock
++import mock
+ 
+ from oslotest import base
+ 
+diff --git a/tempest/tests/cmd/test_account_generator.py b/tempest/tests/cmd/test_account_generator.py
+index 7d764be..df2e773 100644
+--- a/tempest/tests/cmd/test_account_generator.py
++++ b/tempest/tests/cmd/test_account_generator.py
+@@ -12,7 +12,7 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from unittest import mock
++import mock
+ 
+ import fixtures
+ from oslo_config import cfg
+diff --git a/tempest/tests/cmd/test_cleanup.py b/tempest/tests/cmd/test_cleanup.py
+index 69e735b..1618df9 100644
+--- a/tempest/tests/cmd/test_cleanup.py
++++ b/tempest/tests/cmd/test_cleanup.py
+@@ -12,7 +12,7 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-from unittest import mock
++import mock
+ 
+ from tempest.cmd import cleanup
+ from tempest.tests import base
+diff --git a/tempest/tests/cmd/test_run.py b/tempest/tests/cmd/test_run.py
+index 5d9ddfa..1698c9d 100644
+--- a/tempest/tests/cmd/test_run.py
++++ b/tempest/tests/cmd/test_run.py
+@@ -18,7 +18,7 @@ import os
+ import shutil
+ import subprocess
+ import tempfile
+-from unittest import mock
++import mock
+ 
+ import fixtures
+ import six
+diff --git a/tempest/tests/cmd/test_subunit_describe_calls.py b/tempest/tests/cmd/test_subunit_describe_calls.py
+index b72d4ea..4b2dd93 100644
+--- a/tempest/tests/cmd/test_subunit_describe_calls.py
++++ b/tempest/tests/cmd/test_subunit_describe_calls.py
+@@ -21,8 +21,8 @@ import shutil
+ import subprocess
+ import sys
+ import tempfile
+-from unittest import mock
+-from unittest.mock import patch
++import mock
++from mock import patch
+ 
+ 
+ from oslo_serialization import jsonutils as json
+diff --git a/tempest/tests/cmd/test_verify_tempest_config.py b/tempest/tests/cmd/test_verify_tempest_config.py
+index 721fd76..b099753 100644
+--- a/tempest/tests/cmd/test_verify_tempest_config.py
++++ b/tempest/tests/cmd/test_verify_tempest_config.py
+@@ -13,7 +13,7 @@
+ #    under the License.
+ 
+ import os
+-from unittest import mock
++import mock
+ 
+ import fixtures
+ from oslo_serialization import jsonutils as json
+diff --git a/tempest/tests/cmd/test_workspace.py b/tempest/tests/cmd/test_workspace.py
+index eae6202..0029540 100644
+--- a/tempest/tests/cmd/test_workspace.py
++++ b/tempest/tests/cmd/test_workspace.py
+@@ -16,7 +16,7 @@ import os
+ import shutil
+ import subprocess
+ import tempfile
+-from unittest.mock import patch
++from mock import patch
+ try:
+     from StringIO import StringIO
+ except ImportError:
+diff --git a/tempest/tests/common/test_compute.py b/tempest/tests/common/test_compute.py
+index 45a439c..6e487f6 100644
+--- a/tempest/tests/common/test_compute.py
++++ b/tempest/tests/common/test_compute.py
+@@ -13,7 +13,7 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from unittest import mock
++import mock
+ 
+ from six.moves.urllib import parse as urlparse
+ 
+diff --git a/tempest/tests/common/test_credentials_factory.py b/tempest/tests/common/test_credentials_factory.py
+index 0ef3742..a1fec8d 100644
+--- a/tempest/tests/common/test_credentials_factory.py
++++ b/tempest/tests/common/test_credentials_factory.py
+@@ -13,7 +13,7 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from unittest import mock
++import mock
+ 
+ from oslo_config import cfg
+ import testtools
+diff --git a/tempest/tests/common/test_waiters.py b/tempest/tests/common/test_waiters.py
+index 5f8b990..caf64d9 100755
+--- a/tempest/tests/common/test_waiters.py
++++ b/tempest/tests/common/test_waiters.py
+@@ -13,7 +13,7 @@
+ #    under the License.
+ 
+ import time
+-from unittest import mock
++import mock
+ 
+ from oslo_utils.fixture import uuidsentinel as uuids
+ 
+diff --git a/tempest/tests/common/utils/test_net_utils.py b/tempest/tests/common/utils/test_net_utils.py
+index 51d86d1..83c6bcc 100644
+--- a/tempest/tests/common/utils/test_net_utils.py
++++ b/tempest/tests/common/utils/test_net_utils.py
+@@ -10,7 +10,7 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from unittest import mock
++import mock
+ 
+ from tempest.common.utils import net_utils
+ from tempest.lib import exceptions as lib_exc
+diff --git a/tempest/tests/lib/cli/test_execute.py b/tempest/tests/lib/cli/test_execute.py
+index a10e3bb..50a0e4b 100644
+--- a/tempest/tests/lib/cli/test_execute.py
++++ b/tempest/tests/lib/cli/test_execute.py
+@@ -12,7 +12,7 @@
+ #    under the License.
+ 
+ import subprocess
+-from unittest import mock
++import mock
+ 
+ 
+ from tempest.lib.cli import base as cli_base
+diff --git a/tempest/tests/lib/cmd/test_check_uuid.py b/tempest/tests/lib/cmd/test_check_uuid.py
+index 28ebca1..3f5132f 100644
+--- a/tempest/tests/lib/cmd/test_check_uuid.py
++++ b/tempest/tests/lib/cmd/test_check_uuid.py
+@@ -14,7 +14,7 @@ import importlib
+ import os
+ import sys
+ import tempfile
+-from unittest import mock
++import mock
+ 
+ import fixtures
+ 
+diff --git a/tempest/tests/lib/common/test_cred_client.py b/tempest/tests/lib/common/test_cred_client.py
+index 860a465..3dff16f 100644
+--- a/tempest/tests/lib/common/test_cred_client.py
++++ b/tempest/tests/lib/common/test_cred_client.py
+@@ -11,7 +11,7 @@
+ # License for the specific language governing permissions and limitations
+ # under the License.
+ 
+-from unittest import mock
++import mock
+ 
+ from tempest.lib.common import cred_client
+ from tempest.tests import base
+diff --git a/tempest/tests/lib/common/test_dynamic_creds.py b/tempest/tests/lib/common/test_dynamic_creds.py
+index e9073cc..e8b4df8 100644
+--- a/tempest/tests/lib/common/test_dynamic_creds.py
++++ b/tempest/tests/lib/common/test_dynamic_creds.py
+@@ -12,7 +12,7 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from unittest import mock
++import mock
+ 
+ import fixtures
+ from oslo_config import cfg
+diff --git a/tempest/tests/lib/common/test_preprov_creds.py b/tempest/tests/lib/common/test_preprov_creds.py
+index 579363e..1b745de 100644
+--- a/tempest/tests/lib/common/test_preprov_creds.py
++++ b/tempest/tests/lib/common/test_preprov_creds.py
+@@ -15,7 +15,7 @@
+ import hashlib
+ import os
+ import shutil
+-from unittest import mock
++import mock
+ 
+ import six
+ import testtools
+diff --git a/tempest/tests/lib/common/test_profiler.py b/tempest/tests/lib/common/test_profiler.py
+index 166d831..d0b3131 100644
+--- a/tempest/tests/lib/common/test_profiler.py
++++ b/tempest/tests/lib/common/test_profiler.py
+@@ -10,7 +10,7 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from unittest import mock
++import mock
+ 
+ import testtools
+ 
+diff --git a/tempest/tests/lib/common/test_validation_resources.py b/tempest/tests/lib/common/test_validation_resources.py
+index d50fd89..825182a 100644
+--- a/tempest/tests/lib/common/test_validation_resources.py
++++ b/tempest/tests/lib/common/test_validation_resources.py
+@@ -11,7 +11,7 @@
+ #    See the License for the specific language governing permissions and
+ #    limitations under the License.
+ 
+-from unittest import mock
++import mock
+ 
+ import fixtures
+ import testtools
+diff --git a/tempest/tests/lib/common/utils/linux/test_remote_client.py b/tempest/tests/lib/common/utils/linux/test_remote_client.py
+index df23e63..7a21a5f 100644
+--- a/tempest/tests/lib/common/utils/linux/test_remote_client.py
++++ b/tempest/tests/lib/common/utils/linux/test_remote_client.py
+@@ -13,7 +13,7 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from unittest import mock
++import mock
+ 
+ from tempest.lib.common import ssh
+ from tempest.lib.common.utils.linux import remote_client
+diff --git a/tempest/tests/lib/common/utils/test_test_utils.py b/tempest/tests/lib/common/utils/test_test_utils.py
+index bdc0ea4..37664f9 100644
+--- a/tempest/tests/lib/common/utils/test_test_utils.py
++++ b/tempest/tests/lib/common/utils/test_test_utils.py
+@@ -14,7 +14,7 @@
+ #    under the License.
+ 
+ import time
+-from unittest import mock
++import mock
+ 
+ 
+ from tempest.lib.common import thread
+diff --git a/tempest/tests/lib/services/compute/test_base_compute_client.py b/tempest/tests/lib/services/compute/test_base_compute_client.py
+index 5841ae4..69e8542 100644
+--- a/tempest/tests/lib/services/compute/test_base_compute_client.py
++++ b/tempest/tests/lib/services/compute/test_base_compute_client.py
+@@ -12,7 +12,7 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from unittest import mock
++import mock
+ 
+ from tempest.lib.common import rest_client
+ from tempest.lib import exceptions
+diff --git a/tempest/tests/lib/services/compute/test_servers_client.py b/tempest/tests/lib/services/compute/test_servers_client.py
+index a82b255..56346ea 100644
+--- a/tempest/tests/lib/services/compute/test_servers_client.py
++++ b/tempest/tests/lib/services/compute/test_servers_client.py
+@@ -14,7 +14,7 @@
+ #    under the License.
+ 
+ import copy
+-from unittest import mock
++import mock
+ 
+ 
+ from tempest.lib.services.compute import base_compute_client
+diff --git a/tempest/tests/lib/services/compute/test_services_client.py b/tempest/tests/lib/services/compute/test_services_client.py
+index 0c513cc..b10eb0e 100644
+--- a/tempest/tests/lib/services/compute/test_services_client.py
++++ b/tempest/tests/lib/services/compute/test_services_client.py
+@@ -13,7 +13,7 @@
+ #    under the License.
+ 
+ import copy
+-from unittest import mock
++import mock
+ 
+ 
+ from tempest.lib.services.compute import base_compute_client
+diff --git a/tempest/tests/lib/services/identity/v2/test_token_client.py b/tempest/tests/lib/services/identity/v2/test_token_client.py
+index dc14a50..7ead9f3 100644
+--- a/tempest/tests/lib/services/identity/v2/test_token_client.py
++++ b/tempest/tests/lib/services/identity/v2/test_token_client.py
+@@ -12,7 +12,7 @@
+ # License for the specific language governing permissions and limitations
+ # under the License.
+ 
+-from unittest import mock
++import mock
+ 
+ from oslo_serialization import jsonutils as json
+ 
+diff --git a/tempest/tests/lib/services/identity/v3/test_token_client.py b/tempest/tests/lib/services/identity/v3/test_token_client.py
+index 1c2295d..6515fc0 100644
+--- a/tempest/tests/lib/services/identity/v3/test_token_client.py
++++ b/tempest/tests/lib/services/identity/v3/test_token_client.py
+@@ -12,7 +12,7 @@
+ # License for the specific language governing permissions and limitations
+ # under the License.
+ 
+-from unittest import mock
++import mock
+ 
+ from oslo_serialization import jsonutils as json
+ 
+diff --git a/tempest/tests/lib/services/network/test_base_network_client.py b/tempest/tests/lib/services/network/test_base_network_client.py
+index a426397..e121cec 100644
+--- a/tempest/tests/lib/services/network/test_base_network_client.py
++++ b/tempest/tests/lib/services/network/test_base_network_client.py
+@@ -13,7 +13,7 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from unittest import mock
++import mock
+ 
+ from tempest.lib.services.network import base as base_network_client
+ from tempest.tests.lib import fake_auth_provider
+diff --git a/tempest/tests/lib/services/network/test_security_group_rules_client.py b/tempest/tests/lib/services/network/test_security_group_rules_client.py
+index 2ecc996..7965e34 100644
+--- a/tempest/tests/lib/services/network/test_security_group_rules_client.py
++++ b/tempest/tests/lib/services/network/test_security_group_rules_client.py
+@@ -14,7 +14,7 @@
+ #    under the License.
+ 
+ import copy
+-from unittest import mock
++import mock
+ 
+ from oslo_serialization import jsonutils as json
+ 
+diff --git a/tempest/tests/lib/services/network/test_security_groups_client.py b/tempest/tests/lib/services/network/test_security_groups_client.py
+index 501883b..a1a5c75 100644
+--- a/tempest/tests/lib/services/network/test_security_groups_client.py
++++ b/tempest/tests/lib/services/network/test_security_groups_client.py
+@@ -14,7 +14,7 @@
+ #    under the License.
+ 
+ import copy
+-from unittest import mock
++import mock
+ 
+ from oslo_serialization import jsonutils as json
+ 
+diff --git a/tempest/tests/lib/services/object_storage/test_object_client.py b/tempest/tests/lib/services/object_storage/test_object_client.py
+index c646d61..1749b03 100644
+--- a/tempest/tests/lib/services/object_storage/test_object_client.py
++++ b/tempest/tests/lib/services/object_storage/test_object_client.py
+@@ -14,7 +14,7 @@
+ #    under the License.
+ 
+ 
+-from unittest import mock
++import mock
+ 
+ from tempest.lib import exceptions
+ from tempest.lib.services.object_storage import object_client
+diff --git a/tempest/tests/lib/services/test_clients.py b/tempest/tests/lib/services/test_clients.py
+index f83064a..9f37606 100644
+--- a/tempest/tests/lib/services/test_clients.py
++++ b/tempest/tests/lib/services/test_clients.py
+@@ -13,7 +13,7 @@
+ # the License.
+ 
+ import types
+-from unittest import mock
++import mock
+ 
+ import fixtures
+ import six
+diff --git a/tempest/tests/lib/services/volume/v3/test_services_client.py b/tempest/tests/lib/services/volume/v3/test_services_client.py
+index c807bc2..d037e75 100644
+--- a/tempest/tests/lib/services/volume/v3/test_services_client.py
++++ b/tempest/tests/lib/services/volume/v3/test_services_client.py
+@@ -14,7 +14,7 @@
+ #    under the License.
+ 
+ import copy
+-from unittest import mock
++import mock
+ 
+ from oslo_serialization import jsonutils as json
+ 
+diff --git a/tempest/tests/lib/services/volume/v3/test_snapshot_manage_client.py b/tempest/tests/lib/services/volume/v3/test_snapshot_manage_client.py
+index 8309f7a..1b88020 100644
+--- a/tempest/tests/lib/services/volume/v3/test_snapshot_manage_client.py
++++ b/tempest/tests/lib/services/volume/v3/test_snapshot_manage_client.py
+@@ -13,7 +13,7 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from unittest import mock
++import mock
+ 
+ from oslo_serialization import jsonutils as json
+ 
+diff --git a/tempest/tests/lib/services/volume/v3/test_transfers_client.py b/tempest/tests/lib/services/volume/v3/test_transfers_client.py
+index 1dfe2df..8149fdf 100644
+--- a/tempest/tests/lib/services/volume/v3/test_transfers_client.py
++++ b/tempest/tests/lib/services/volume/v3/test_transfers_client.py
+@@ -14,7 +14,7 @@
+ #    under the License.
+ 
+ import copy
+-from unittest import mock
++import mock
+ 
+ from oslo_serialization import jsonutils as json
+ 
+diff --git a/tempest/tests/lib/services/volume/v3/test_volume_manage_client.py b/tempest/tests/lib/services/volume/v3/test_volume_manage_client.py
+index d4313a2..902f027 100644
+--- a/tempest/tests/lib/services/volume/v3/test_volume_manage_client.py
++++ b/tempest/tests/lib/services/volume/v3/test_volume_manage_client.py
+@@ -13,7 +13,7 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from unittest import mock
++import mock
+ 
+ from oslo_serialization import jsonutils as json
+ 
+diff --git a/tempest/tests/lib/test_decorators.py b/tempest/tests/lib/test_decorators.py
+index e3c17e8..cfc882e 100644
+--- a/tempest/tests/lib/test_decorators.py
++++ b/tempest/tests/lib/test_decorators.py
+@@ -14,7 +14,7 @@
+ #    under the License.
+ 
+ import abc
+-from unittest import mock
++import mock
+ 
+ import six
+ import testtools
+diff --git a/tempest/tests/lib/test_ssh.py b/tempest/tests/lib/test_ssh.py
+index 85048fb..2a6e16e 100644
+--- a/tempest/tests/lib/test_ssh.py
++++ b/tempest/tests/lib/test_ssh.py
+@@ -13,7 +13,7 @@
+ #    under the License.
+ 
+ import socket
+-from unittest import mock
++import mock
+ 
+ import six
+ from six import StringIO
+diff --git a/tempest/tests/test_base_test.py b/tempest/tests/test_base_test.py
+index b154cd5..96721d0 100644
+--- a/tempest/tests/test_base_test.py
++++ b/tempest/tests/test_base_test.py
+@@ -12,7 +12,7 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from unittest import mock
++import mock
+ 
+ from oslo_config import cfg
+ 
+diff --git a/tempest/tests/test_imports.py b/tempest/tests/test_imports.py
+index ad7bebb..6f1cfca 100644
+--- a/tempest/tests/test_imports.py
++++ b/tempest/tests/test_imports.py
+@@ -12,7 +12,7 @@
+ # License for the specific language governing permissions and limitations
+ # under the License.
+ 
+-from unittest import mock
++import mock
+ 
+ from tempest.tests import base
+ 
+diff --git a/tempest/tests/test_test.py b/tempest/tests/test_test.py
+index 72e8b6d..5484be6 100644
+--- a/tempest/tests/test_test.py
++++ b/tempest/tests/test_test.py
+@@ -15,7 +15,7 @@
+ 
+ import os
+ import sys
+-from unittest import mock
++import mock
+ 
+ from oslo_config import cfg
+ import testtools
+-- 
+1.8.3.1
+

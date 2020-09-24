@@ -27,6 +27,13 @@ Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://launchpad.net/tempest
 Source0:        http://tarballs.openstack.org/tempest/tempest-%{upstream_version}.tar.gz
+# workaround for handling py2 and py3 mock issue
+%if %{pyver} == 2
+Patch0001: 0001-Fix-unbound-method.patch
+Patch0002: 0002-Replace-StringIO-by-BytesIO.patch
+Patch0003: 0003-Revert-__future__-removal.patch
+Patch0004: 0004-Use-mock-not-from-unittest.patch
+%endif
 BuildArch:      noarch
 
 BuildRequires:  git
@@ -80,6 +87,8 @@ Requires:      python%{pyver}-subunit
 %if %{pyver} == 2
 Requires:      python-unittest2
 Requires:      PyYAML
+Requires:      python2-mock
+Requires:      python-configparser
 %else
 Requires:      python%{pyver}-unittest2
 Requires:      python%{pyver}-PyYAML
@@ -112,6 +121,8 @@ BuildRequires:  python%{pyver}-hacking
 # Handle python2 exception
 %if %{pyver} == 2
 BuildRequires:  PyYAML
+BuildRequires:  python2-mock
+BuildRequires:  python-configparser
 %else
 BuildRequires:  python%{pyver}-PyYAML
 %endif
