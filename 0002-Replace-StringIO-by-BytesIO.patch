@@ -1,0 +1,38 @@
+From c0ee4cd0c8cf5e1279ddb7d28e5b60099e2ec1b3 Mon Sep 17 00:00:00 2001
+From: Martin Kopec <mkopec@redhat.com>
+Date: Fri, 9 Oct 2020 07:57:13 +0000
+Subject: [PATCH 2/4] Replace StringIO by BytesIO
+
+Make str() and StringIO usage introduced by
+https://review.opendev.org/#/c/741810/ compatible with py2.
+
+Change-Id: Ic806d0779bd874b0f4105a2cf59d5c6568b2fa4e
+---
+ tempest/tests/cmd/test_subunit_describe_calls.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/tempest/tests/cmd/test_subunit_describe_calls.py b/tempest/tests/cmd/test_subunit_describe_calls.py
+index 4fed84a..b72d4ea 100644
+--- a/tempest/tests/cmd/test_subunit_describe_calls.py
++++ b/tempest/tests/cmd/test_subunit_describe_calls.py
+@@ -15,7 +15,7 @@
+ # under the License.
+ 
+ import argparse
+-from io import StringIO
++from io import BytesIO as StringIO
+ import os
+ import shutil
+ import subprocess
+@@ -128,7 +128,7 @@ class TestCliBase(base.TestCase):
+ 
+     def _bytes_to_string(self, data):
+         if isinstance(data, (bytes, bytearray)):
+-            data = str(data, 'utf-8')
++            data = str(data)
+         return data
+ 
+     def _assert_cli_message(self, data):
+-- 
+1.8.3.1
+
