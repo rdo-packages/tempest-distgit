@@ -80,6 +80,7 @@ Requires:      python%{pyver}-subunit
 %if %{pyver} == 2
 Requires:      python-unittest2
 Requires:      PyYAML
+Requires:      python2-mock
 %else
 Requires:      python%{pyver}-unittest2
 Requires:      python%{pyver}-PyYAML
@@ -112,6 +113,7 @@ BuildRequires:  python%{pyver}-hacking
 # Handle python2 exception
 %if %{pyver} == 2
 BuildRequires:  PyYAML
+BuildRequires:  python2-mock
 %else
 BuildRequires:  python%{pyver}-PyYAML
 %endif
@@ -210,6 +212,11 @@ export GENERATE_TEMPEST_PLUGIN_LIST='False'
 sphinx-build-%{pyver} -b html doc/source doc/build/html
 # remove the sphinx-build-%{pyver} leftovers
 rm -rf doc/build/html/.{doctrees,buildinfo}
+%endif
+
+# workaround for handling py2 and py3 mock issue
+%if %{pyver} == 2
+find ./tempest/tests -type f -exec sed -i -e 's/from unittest import mock/import mock/g' {} \;
 %endif
 
 %install
