@@ -80,6 +80,8 @@ Requires:      python%{pyver}-subunit
 %if %{pyver} == 2
 Requires:      python-unittest2
 Requires:      PyYAML
+Requires:      python2-mock
+Requires:      python-configparser
 %else
 Requires:      python%{pyver}-unittest2
 Requires:      python%{pyver}-PyYAML
@@ -112,6 +114,8 @@ BuildRequires:  python%{pyver}-hacking
 # Handle python2 exception
 %if %{pyver} == 2
 BuildRequires:  PyYAML
+BuildRequires:  python2-mock
+BuildRequires:  python-configparser
 %else
 BuildRequires:  python%{pyver}-PyYAML
 %endif
@@ -212,10 +216,34 @@ sphinx-build-%{pyver} -b html doc/source doc/build/html
 rm -rf doc/build/html/.{doctrees,buildinfo}
 %endif
 
+# workaround for handling py2 and py3 mock issue
+%if %{pyver} == 2
+find ./tempest/tests -type f -exec sed -i -e 's/from unittest import mock/import mock/g' {} \;
+find ./tempest/tests -type f -exec sed -i -e 's/from unittest.mock import patch/from mock import patch/g' {} \;
+find ./tempest/cmd -type f -exec sed -i -e 's/from urllib import parse as urlparse/import urlparse/g' {} \;
+# revert part of https://review.opendev.org/#/c/732960/
+sed -i -e 's/import six/from __future__ import absolute_import\n\nimport six/g' tempest/lib/common/thread.py
+# make str() and StringIO usage introduced by https://review.opendev.org/#/c/741810/
+# compatible with py2
+sed -i -e "s/, 'utf-8'//g" tempest/tests/cmd/test_subunit_describe_calls.py
+sed -i -e 's/from io import StringIO/from io import BytesIO as StringIO/g' tempest/tests/cmd/test_subunit_describe_calls.py
+# fix unbound method
+sed -i -e 's/def setup_compute_client(cls):/@classmethod\n    def setup_compute_client(cls):/g' tempest/scenario/manager.py
+sed -i -e 's/def setup_network_client(cls):/@classmethod\n    def setup_network_client(cls):/g' tempest/scenario/manager.py
+sed -i -e 's/cls\.setup_compute_client(cls)/cls\.setup_compute_client()/g' tempest/scenario/manager.py
+sed -i -e 's/cls\.setup_network_client(cls)/cls\.setup_network_client()/g' tempest/scenario/manager.py
+%endif
+
 %install
 %{pyver_install}
 rm -rf %{buildroot}/usr/bin/verify-tempest-config
 rm -rf %{buildroot}/usr/bin/tempest-account-generator
+
+# fix unbound method in the build source code
+sed -i -e 's/def setup_compute_client(cls):/@classmethod\n    def setup_compute_client(cls):/g' ./build/lib/tempest/scenario/manager.py
+sed -i -e 's/def setup_network_client(cls):/@classmethod\n    def setup_network_client(cls):/g' ./build/lib/tempest/scenario/manager.py
+sed -i -e 's/cls\.setup_compute_client(cls)/cls\.setup_compute_client()/g' ./build/lib/tempest/scenario/manager.py
+sed -i -e 's/cls\.setup_network_client(cls)/cls\.setup_network_client()/g' ./build/lib/tempest/scenario/manager.py
 
 # Generate tempest config
 mkdir -p %{buildroot}%{_sysconfdir}/%{project}/
