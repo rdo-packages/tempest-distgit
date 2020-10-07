@@ -3,6 +3,8 @@
 %global with_doc 1
 # guard for Red Hat OpenStack Platform supported tempest
 %global rhosp 0
+# enable bootstrap mode
+%global repo_bootstrap 0
 %global common_desc \
 This is a set of integration tests to be run against a live OpenStack cluster.\
 Tempest has batteries of tests for OpenStack API validation, Scenarios, and \
@@ -11,7 +13,7 @@ other specific tests useful in validating an OpenStack deployment.
 Name:           openstack-%{project}
 Epoch:          1
 Version:        25.0.0
-Release:        1%{?dist}
+Release:        1.1%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://launchpad.net/tempest
@@ -119,7 +121,10 @@ Requires:       python3-neutron-tests-tempest
 Requires:       python3-zaqar-tests-tempest
 Requires:       python3-manila-tests-tempest
 Requires:       python3-telemetry-tests-tempest
+# octavia-tests-tempest missing due to https://bugs.centos.org/view.php?id=17139
+%if 0%{?dlrn} != 0
 Requires:       python3-octavia-tests-tempest
+%endif
 Requires:       python3-networking-l2gw-tests-tempest
 Requires:       python3-patrole-tests-tempest
 Requires:       python3-novajoin-tests-tempest
@@ -238,6 +243,10 @@ PYTHON=%{__python3} stestr --test-path $OS_TEST_PATH run
 %endif
 
 %changelog
+* Thu Oct 8 2020 Bhagyashri Shewale <bshewale@redhat.com> - 1:25.0.0-1.1
+- Disable repo_bootstrap and include openstack-tempest-all package
+- Exclude octavia-tests-tempest for non dlrn builds
+
 * Thu Oct 08 2020 RDO <dev@lists.rdoproject.org> 1:25.0.0-1
 - Update to 25.0.0
 
