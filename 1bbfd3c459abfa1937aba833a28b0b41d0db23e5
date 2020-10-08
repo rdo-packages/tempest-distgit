@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "9c2582ae_6e18bec4",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 17
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2020-10-08T09:18:02Z",
+      "side": 1,
+      "message": "Tempest upstream runs in a virtualenv on train on stein. On older releases it has been pinned to the last version which supports python 2. That said, python 2-compatible code has not been removed yet.",
+      "parentUuid": "6e21d752_f8eb1d61",
+      "range": {
+        "startLine": 221,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 102
+      },
+      "revId": "1bbfd3c459abfa1937aba833a28b0b41d0db23e5",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "81eff5b1_e424ddef",
         "filename": "openstack-tempest.spec",
         "patchSetId": 17
