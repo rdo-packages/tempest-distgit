@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dbb160f5_ec0a3fa7",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 17
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 111
+      },
+      "writtenOn": "2020-10-08T04:49:54Z",
+      "side": 1,
+      "message": "I am not sure there is other way to handle these workaround.",
+      "revId": "1bbfd3c459abfa1937aba833a28b0b41d0db23e5",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
