@@ -16,6 +16,52 @@
       "revId": "1bbfd3c459abfa1937aba833a28b0b41d0db23e5",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e21d752_f8eb1d61",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 17
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2020-10-08T09:10:52Z",
+      "side": 1,
+      "message": "instead of all those find and seds, why not create a .patch and apply it in %prep with py2 conditional? imo it\u0027d be much cleaner and would avoid to patch both source code and built files (see my comment below). Other than that, if tempest is suposed to be installable in train upstream it should keep compatibility with python2 upstream, but well, if this is not possible and this has been tested, i think we can apply these fixes in packaging.",
+      "range": {
+        "startLine": 221,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 102
+      },
+      "revId": "1bbfd3c459abfa1937aba833a28b0b41d0db23e5",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "81eff5b1_e424ddef",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 17
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2020-10-08T09:10:52Z",
+      "side": 1,
+      "message": "This is redundant with previous lines and needed only because we are doing it after %pyver_build the package instead of before.",
+      "range": {
+        "startLine": 236,
+        "startChar": 1,
+        "endLine": 240,
+        "endChar": 113
+      },
+      "revId": "1bbfd3c459abfa1937aba833a28b0b41d0db23e5",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
     }
   ]
 }
