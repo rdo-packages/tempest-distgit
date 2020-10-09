@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "86c69fc6_a485570e",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 18
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 113
+      },
+      "writtenOn": "2020-10-09T08:53:49Z",
+      "side": 1,
+      "message": "I\u0027m not sure if this will work in the %prep section. Could you place it below Source0?",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 196,
+        "endChar": 6
+      },
+      "revId": "b01a315da74681bcd2ece50b59432a62b8604a24",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
