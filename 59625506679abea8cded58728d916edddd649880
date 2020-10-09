@@ -1,0 +1,10 @@
+Verified-1: Zuul CI <zuul@review.rdoproject.org>
+Code-Review+2: Javier Peña <jpena@redhat.com>
+Code-Review+2: Alfredo Moralejo <amoralej@redhat.com>
+Verified+2: Alfredo Moralejo <amoralej@redhat.com>
+Workflow+1: Alfredo Moralejo <amoralej@redhat.com>
+Submitted-by: Alfredo Moralejo <amoralej@redhat.com>
+Submitted-at: Fri, 09 Oct 2020 09:49:07 +0000
+Reviewed-on: https://review.rdoproject.org/r/29612
+Project: openstack/tempest-distgit
+Branch: refs/heads/train-rdo
