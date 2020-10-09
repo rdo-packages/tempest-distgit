@@ -22,6 +22,30 @@
       "revId": "b01a315da74681bcd2ece50b59432a62b8604a24",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d080f0a9_eaa413c1",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 18
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 266
+      },
+      "writtenOn": "2020-10-09T08:58:33Z",
+      "side": 1,
+      "message": "yeah, it doesn\u0027t .. sure, thanks, let me try that",
+      "parentUuid": "86c69fc6_a485570e",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 196,
+        "endChar": 6
+      },
+      "revId": "b01a315da74681bcd2ece50b59432a62b8604a24",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
     }
   ]
 }
