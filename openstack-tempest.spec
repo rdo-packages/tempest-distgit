@@ -30,7 +30,7 @@ BuildArch:      noarch
 BuildRequires:  /usr/bin/gpgv2
 %endif
 
-BuildRequires:  git
+BuildRequires:  git-core
 BuildRequires:  python3-oslo-config
 BuildRequires:  python3-pbr
 BuildRequires:  python3-setuptools
