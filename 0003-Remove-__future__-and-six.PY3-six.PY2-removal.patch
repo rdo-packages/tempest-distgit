@@ -1,0 +1,39 @@
+From 908efcab5dce426be8d2db4691c5187d4e235ed4 Mon Sep 17 00:00:00 2001
+From: Martin Kopec <mkopec@redhat.com>
+Date: Sun, 20 Dec 2020 16:04:22 +0000
+Subject: [PATCH] Remove __future__ and six.PY3/six.PY2 removal
+
+In order to package tempest 26.0.0 for py2 parts of the 2 following
+changes must be reverted:
+https://review.opendev.org/c/openstack/tempest/+/732960
+https://review.opendev.org/c/openstack/tempest/+/753215
+
+Change-Id: I15b759b3b45253e4d8bfdd517bc90860d90f9097
+---
+ tempest/lib/common/thread.py | 13 ++++++++++---
+ 1 file changed, 10 insertions(+), 3 deletions(-)
+
+diff --git a/tempest/lib/common/thread.py b/tempest/lib/common/thread.py
+index ef0ec7367..a01bd1058 100644
+--- a/tempest/lib/common/thread.py
++++ b/tempest/lib/common/thread.py
+@@ -13,6 +13,13 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-# On Python3 thread module has been deprecated and get_ident has been moved
+-# to threading module
+-from threading import get_ident  # noqa: F401
++from __future__ import absolute_import
++import six
++
++if six.PY2:
++    # module thread is removed in Python 3
++    from thread import get_ident  # noqa: H237,F401
++else:
++    # On Python3 thread module has been deprecated and get_ident has been moved
++    # to threading module
++    from threading import get_ident  # noqa: F401
+-- 
+2.20.1
+

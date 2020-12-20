@@ -31,7 +31,7 @@ Source0:        http://tarballs.openstack.org/tempest/tempest-%{upstream_version
 %if %{pyver} == 2
 Patch0001: 0001-Fix-unbound-method.patch
 Patch0002: 0002-Replace-StringIO-by-BytesIO.patch
-Patch0003: 0003-Revert-__future__-removal.patch
+Patch0003: 0003-Remove-__future__-and-six.PY3-six.PY2-removal.patch
 Patch0004: 0004-Use-mock-not-from-unittest.patch
 %endif
 BuildArch:      noarch
