@@ -29,10 +29,11 @@ Url:            https://launchpad.net/tempest
 Source0:        http://tarballs.openstack.org/tempest/tempest-%{upstream_version}.tar.gz
 # workaround for handling py2 and py3 mock issue
 %if %{pyver} == 2
-Patch0001: 0001-Fix-unbound-method.patch
-Patch0002: 0002-Replace-StringIO-by-BytesIO.patch
-Patch0003: 0003-Revert-__future__-removal.patch
-Patch0004: 0004-Use-mock-not-from-unittest.patch
+Patch0001: 0001-Revert-Remove-six.PY3-six.PY2.patch
+Patch0002: 0002-Fix-unbound-method.patch
+Patch0003: 0003-Replace-StringIO-by-BytesIO.patch
+Patch0004: 0004-Revert-__future__-removal.patch
+Patch0005: 0005-Use-mock-not-from-unittest.patch
 %endif
 BuildArch:      noarch
 
