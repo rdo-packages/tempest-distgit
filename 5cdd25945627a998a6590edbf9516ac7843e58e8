@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bedaa9bc_2e5bfdcf",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 266
+      },
+      "writtenOn": "2020-12-21T09:36:04Z",
+      "side": 1,
+      "message": "It\u0027s been failing to build the documentation:\n\n# Sphinx version: 1.8.5\n# Python version: 2.7.15 (CPython)\n# Docutils version: 0.16 release\n# Jinja2 version: 2.11.2\n# Last messages:\n\n# Loaded extensions:\nTraceback (most recent call last):\n  File \"/home/fedora/tempest/.venv/lib/python2.7/site-packages/sphinx/cmd/build.py\", line 303, in build_main\n    args.tags, args.verbosity, args.jobs, args.keep_going)\n  File \"/home/fedora/tempest/.venv/lib/python2.7/site-packages/sphinx/application.py\", line 224, in __init__\n    self.setup_extension(extension)\n  File \"/home/fedora/tempest/.venv/lib/python2.7/site-packages/sphinx/application.py\", line 449, in setup_extension\n    self.registry.load_extension(self, extname)\n  File \"/home/fedora/tempest/.venv/lib/python2.7/site-packages/sphinx/registry.py\", line 472, in load_extension\n    mod \u003d __import__(extname, None, None, [\u0027setup\u0027])\n  File \"/home/fedora/tempest/.venv/lib/python2.7/site-packages/sphinx/builders/applehelp.py\", line 20, in \u003cmodule\u003e\n    from sphinx.builders.html import StandaloneHTMLBuilder\n  File \"/home/fedora/tempest/.venv/lib/python2.7/site-packages/sphinx/builders/html.py\", line 40, in \u003cmodule\u003e\n    from sphinx.highlighting import PygmentsBridge\n  File \"/home/fedora/tempest/.venv/lib/python2.7/site-packages/sphinx/highlighting.py\", line 26, in \u003cmodule\u003e\n    from sphinx.ext import doctest\n  File \"/home/fedora/tempest/.venv/lib/python2.7/site-packages/sphinx/ext/doctest.py\", line 15, in \u003cmodule\u003e\n    import doctest\n  File \"/usr/lib64/python2.7/doctest.py\", line 99, in \u003cmodule\u003e\n    import unittest, difflib, pdb, tempfile\n  File \"/usr/lib64/python2.7/pdb.py\", line 59, in \u003cmodule\u003e\n    class Pdb(bdb.Bdb, cmd.Cmd):\n\n\nwhen i reverted the latest significant doc change (https://opendev.org/openstack/tempest/commit/a9055010fc43e5936ccb7c8fa6a7b54c13974b66) it produced a different err:\n# Sphinx version: 1.8.5\n# Python version: 2.7.15 (CPython)\n# Docutils version: 0.16 release\n# Jinja2 version: 2.11.2\n# Last messages:\n\n# Loaded extensions:\nTraceback (most recent call last):\n  File \"/home/fedora/tempest/.venv/lib/python2.7/site-packages/sphinx/cmd/build.py\", line 303, in build_main\n    args.tags, args.verbosity, args.jobs, args.keep_going)\n  File \"/home/fedora/tempest/.venv/lib/python2.7/site-packages/sphinx/application.py\", line 228, in __init__\n    self.setup_extension(extension)\n  File \"/home/fedora/tempest/.venv/lib/python2.7/site-packages/sphinx/application.py\", line 449, in setup_extension\n    self.registry.load_extension(self, extname)\n  File \"/home/fedora/tempest/.venv/lib/python2.7/site-packages/sphinx/registry.py\", line 472, in load_extension\n    mod \u003d __import__(extname, None, None, [\u0027setup\u0027])\n  File \"/home/fedora/tempest/.venv/lib/python2.7/site-packages/openstackdocstheme/__init__.py\", line 15, in \u003cmodule\u003e\n    from . import ext  # noqa\n  File \"/home/fedora/tempest/.venv/lib/python2.7/site-packages/openstackdocstheme/ext.py\", line 22, in \u003cmodule\u003e\n    import dulwich.repo\n  File \"/home/fedora/tempest/.venv/lib/python2.7/site-packages/dulwich/repo.py\", line 51, in \u003cmodule\u003e\n    from dulwich.object_store import (\n  File \"/home/fedora/tempest/.venv/lib/python2.7/site-packages/dulwich/object_store.py\", line 31, in \u003cmodule\u003e\n    from dulwich.diff_tree import (\n  File \"/home/fedora/tempest/.venv/lib/python2.7/site-packages/dulwich/diff_tree.py\", line 32, in \u003cmodule\u003e\n    from dulwich.objects import (\n  File \"/home/fedora/tempest/.venv/lib/python2.7/site-packages/dulwich/objects.py\", line 154\n    def object_header(num_type: int, length: int) -\u003e bytes:\n                              ^\nSyntaxError: invalid syntax\n\n\nI don\u0027t know what else to try, so I turned the doc generation off.",
+      "range": {
+        "startLine": 14,
+        "startChar": 17,
+        "endLine": 14,
+        "endChar": 18
+      },
+      "revId": "5cdd25945627a998a6590edbf9516ac7843e58e8",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
