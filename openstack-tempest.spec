@@ -14,8 +14,8 @@ other specific tests useful in validating an OpenStack deployment.
 
 Name:           openstack-%{project}
 Epoch:          1
-Version:        25.0.0
-Release:        3%{?dist}
+Version:        26.0.0
+Release:        1%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://launchpad.net/tempest
@@ -257,6 +257,9 @@ PYTHON=%{__python3} stestr --test-path $OS_TEST_PATH run
 %endif
 
 %changelog
+* Tue Dec 22 2020 RDO <dev@lists.rdoproject.org> 1:26.0.0-1
+- Update to 26.0.0
+
 * Tue Oct 20 2020 Joel Capitao <jcapitao@redhat.com> 1:25.0.0-3
 - Enable sources tarball validation using GPG signature.
 
