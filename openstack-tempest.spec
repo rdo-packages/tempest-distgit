@@ -12,8 +12,8 @@ other specific tests useful in validating an OpenStack deployment.
 
 Name:           openstack-%{project}
 Epoch:          1
-Version:        25.0.0
-Release:        1.1%{?dist}
+Version:        26.0.0
+Release:        1%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://launchpad.net/tempest
@@ -243,6 +243,9 @@ PYTHON=%{__python3} stestr --test-path $OS_TEST_PATH run
 %endif
 
 %changelog
+* Thu Dec 24 2020 RDO <dev@lists.rdoproject.org> 1:26.0.0-1
+- Update to 26.0.0
+
 * Thu Oct 8 2020 Bhagyashri Shewale <bshewale@redhat.com> - 1:25.0.0-1.1
 - Disable repo_bootstrap and include openstack-tempest-all package
 - Exclude octavia-tests-tempest for non dlrn builds
