@@ -160,7 +160,6 @@ Requires:      %{name} = %{epoch}:%{version}-%{release}
 Requires:       python%{pyver}-cinder-tests-tempest
 Requires:       python%{pyver}-designate-tests-tempest
 Requires:       python%{pyver}-heat-tests-tempest
-Requires:       python%{pyver}-horizon-tests-tempest
 Requires:       python%{pyver}-ironic-tests-tempest
 Requires:       python%{pyver}-keystone-tests-tempest
 Requires:       python%{pyver}-mistral-tests-tempest
