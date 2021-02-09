@@ -1,0 +1,9 @@
+Code-Review+2: Chandan Kumar <chkumar@redhat.com>
+Code-Review+2: Yatin Karel <ykarel@redhat.com>
+Workflow+1: Chandan Kumar <chkumar@redhat.com>
+Verified+2: Zuul CI <zuul@review.rdoproject.org>
+Submitted-by: Zuul CI <zuul@review.rdoproject.org>
+Submitted-at: Tue, 09 Feb 2021 08:48:30 +0000
+Reviewed-on: https://review.rdoproject.org/r/31908
+Project: openstack/tempest-distgit
+Branch: refs/heads/rpm-master
