@@ -123,7 +123,6 @@ Requires:      %{name} = %{epoch}:%{version}-%{release}
 Requires:       python3-cinder-tests-tempest
 Requires:       python3-designate-tests-tempest
 Requires:       python3-heat-tests-tempest
-Requires:       python3-horizon-tests-tempest
 Requires:       python3-ironic-tests-tempest
 Requires:       python3-keystone-tests-tempest
 Requires:       python3-mistral-tests-tempest
