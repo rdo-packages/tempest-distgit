@@ -27,6 +27,13 @@ Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://launchpad.net/tempest
 Source0:        http://tarballs.openstack.org/tempest/tempest-%{upstream_version}.tar.gz
+# This reverts removal of an old tempest/manager.py in order to provide
+# compatibility with neutron-tempest-plugin which has switched to the
+# new manager location at very latest and the change hasn't been included in
+# a tag nor a release. We revert the removal in tempest so that we can package
+# tempest 26.1.0 and ship it in Victoria. Tempest 26.1.0 contains apart from
+# the fixes also a significant argument deprecation.
+Patch 0001: 0001-Revert-Remove-tempest-manager.py-after-4-year-deprec.patch
 # workaround for handling py2 and py3 mock issue
 %if %{pyver} == 2
 Patch0001: 0001-Revert-Remove-six.PY3-six.PY2.patch
