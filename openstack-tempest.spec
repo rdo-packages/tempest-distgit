@@ -25,6 +25,13 @@ Source0:        http://tarballs.openstack.org/tempest/tempest-%{upstream_version
 Source101:        http://tarballs.openstack.org/tempest/tempest-%{upstream_version}.tar.gz.asc
 Source102:        https://releases.openstack.org/_static/%{sources_gpg_sign}.txt
 %endif
+# This reverts removal of an old tempest/manager.py in order to provide
+# compatibility with neutron-tempest-plugin which has switched to the
+# new manager location at very latest and the change hasn't been included in
+# a tag nor a release. We revert the removal in tempest so that we can package
+# tempest 26.1.0 and ship it in Victoria. Tempest 26.1.0 contains apart from
+# the fixes also a significant argument deprecation.
+Patch 0001: 0001-Revert-Remove-tempest-manager.py-after-4-year-deprec.patch
 BuildArch:      noarch
 
 # Required for tarball sources verification
