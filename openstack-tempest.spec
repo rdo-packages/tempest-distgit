@@ -56,29 +56,29 @@ Summary:       Tempest Python library
 # release
 Obsoletes:     python-tempest-lib
 
-Requires:      python3-cliff
-Requires:      python3-debtcollector
-Requires:      python3-fixtures
-Requires:      python3-jsonschema
-Requires:      python3-netaddr
+Requires:      python3-cliff >= 2.8.0
+Requires:      python3-debtcollector >= 1.2.0
+Requires:      python3-fixtures >= 3.0.0
+Requires:      python3-jsonschema >= 3.2.0
+Requires:      python3-netaddr >= 0.7.18
 Requires:      python3-oslo-concurrency >= 3.26.0
 Requires:      python3-oslo-config >= 2:5.2.0
 Requires:      python3-oslo-log >= 3.36.0
 Requires:      python3-oslo-serialization >= 2.18.0
 Requires:      python3-oslo-utils >= 3.33.0
 Requires:      python3-os-testr >= 0.8.0
-Requires:      python3-paramiko
-Requires:      python3-pbr
-Requires:      python3-prettytable
-Requires:      python3-six
-Requires:      python3-stevedore
-Requires:      python3-stestr
-Requires:      python3-testtools
-Requires:      python3-urllib3
-Requires:      python3-subunit
+Requires:      python3-paramiko >= 2.7.0
+Requires:      python3-pbr >= 2.0.0
+Requires:      python3-prettytable >= 0.7.1
+Requires:      python3-six >= 1.10.0
+Requires:      python3-stevedore >= 1.20.0
+Requires:      python3-stestr >= 1.0.0
+Requires:      python3-testtools >= 2.2.0
+Requires:      python3-urllib3 >= 1.21.1
+Requires:      python3-subunit >= 1.0.0
 
-Requires:      python3-unittest2
-Requires:      python3-PyYAML
+Requires:      python3-unittest2 >= 1.1.0
+Requires:      python3-yaml >= 3.12
 
 %description -n python3-%{project}
 %{common_desc}
