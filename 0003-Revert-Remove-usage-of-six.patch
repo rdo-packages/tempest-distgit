@@ -1,0 +1,311 @@
+From f9bac9781f885098e79f4e4fc607981f33efa299 Mon Sep 17 00:00:00 2001
+From: Martin Kopec <xkopec42@gmail.com>
+Date: Thu, 22 Apr 2021 10:08:30 +0000
+Subject: [PATCH 3/5] Revert "Remove usage of six"
+
+This reverts commit 8c3dac1abcdb7be83a94071c06316230a7ec66be.
+---
+ tempest/api/compute/admin/test_volume.py          |  4 ++--
+ .../api/compute/flavors/test_flavors_negative.py  |  5 +++--
+ tempest/api/compute/images/test_image_metadata.py |  4 ++--
+ .../api/compute/images/test_list_image_filters.py |  4 ++--
+ tempest/api/image/base.py                         |  4 ++--
+ tempest/api/image/v1/test_images.py               |  8 ++++----
+ tempest/api/image/v2/admin/test_images.py         |  4 ++--
+ tempest/api/image/v2/test_images.py               | 15 ++++++++-------
+ tempest/api/volume/test_volumes_negative.py       |  4 ++--
+ .../lib/services/image/v2/test_images_client.py   |  4 ++--
+ 10 files changed, 29 insertions(+), 27 deletions(-)
+
+diff --git a/tempest/api/compute/admin/test_volume.py b/tempest/api/compute/admin/test_volume.py
+index cf8c5600e..342380ed6 100644
+--- a/tempest/api/compute/admin/test_volume.py
++++ b/tempest/api/compute/admin/test_volume.py
+@@ -13,7 +13,7 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-import io
++import six
+ 
+ from tempest.api.compute import base
+ from tempest.common import waiters
+@@ -51,7 +51,7 @@ class BaseAttachSCSIVolumeTest(base.BaseV2ComputeAdminTest):
+         image = self.image_client.show_image(CONF.compute.image_ref)
+         image_data = self.image_client.show_image_file(
+             CONF.compute.image_ref).data
+-        image_file = io.BytesIO(image_data)
++        image_file = six.BytesIO(image_data)
+         create_dict = {
+             'container_format': image['container_format'],
+             'disk_format': image['disk_format'],
+diff --git a/tempest/api/compute/flavors/test_flavors_negative.py b/tempest/api/compute/flavors/test_flavors_negative.py
+index 5d6a7d7a8..235049a6f 100644
+--- a/tempest/api/compute/flavors/test_flavors_negative.py
++++ b/tempest/api/compute/flavors/test_flavors_negative.py
+@@ -13,9 +13,10 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-import io
+ import random
+ 
++import six
++
+ from tempest.api.compute import base
+ from tempest.common import image as common_image
+ from tempest.common import utils
+@@ -43,7 +44,7 @@ class FlavorsV2NegativeTest(base.BaseV2ComputeTest):
+             CONF.compute.flavor_ref)['flavor']
+         min_img_ram = flavor['ram'] + 1
+         size = random.randint(1024, 4096)
+-        image_file = io.BytesIO(data_utils.random_bytes(size))
++        image_file = six.BytesIO(data_utils.random_bytes(size))
+         params = {
+             'name': data_utils.rand_name('image'),
+             'container_format': CONF.image.container_formats[0],
+diff --git a/tempest/api/compute/images/test_image_metadata.py b/tempest/api/compute/images/test_image_metadata.py
+index ece983d07..561265f53 100644
+--- a/tempest/api/compute/images/test_image_metadata.py
++++ b/tempest/api/compute/images/test_image_metadata.py
+@@ -13,7 +13,7 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-import io
++import six
+ 
+ from tempest.api.compute import base
+ from tempest.common import image as common_image
+@@ -77,7 +77,7 @@ class ImagesMetadataTestJSON(base.BaseV2ComputeTest):
+         cls.addClassResourceCleanup(test_utils.call_and_ignore_notfound_exc,
+                                     cls.glance_client.delete_image,
+                                     cls.image_id)
+-        image_file = io.BytesIO((b'*' * 1024))
++        image_file = six.BytesIO((b'*' * 1024))
+         if CONF.image_feature_enabled.api_v1:
+             cls.glance_client.update_image(cls.image_id, data=image_file)
+         else:
+diff --git a/tempest/api/compute/images/test_list_image_filters.py b/tempest/api/compute/images/test_list_image_filters.py
+index 15b8a0002..7930c6791 100644
+--- a/tempest/api/compute/images/test_list_image_filters.py
++++ b/tempest/api/compute/images/test_list_image_filters.py
+@@ -15,7 +15,7 @@
+ 
+ import time
+ 
+-import io
++import six
+ import testtools
+ 
+ from tempest.api.compute import base
+@@ -85,7 +85,7 @@ class ListImageFiltersTestJSON(base.BaseV2ComputeTest):
+             # Wait 1 second between creation and upload to ensure a delta
+             # between created_at and updated_at.
+             time.sleep(1)
+-            image_file = io.BytesIO((b'*' * 1024))
++            image_file = six.BytesIO((b'*' * 1024))
+             if CONF.image_feature_enabled.api_v1:
+                 cls.glance_client.update_image(image_id, data=image_file)
+             else:
+diff --git a/tempest/api/image/base.py b/tempest/api/image/base.py
+index d0d64a5b7..d3dc19a86 100644
+--- a/tempest/api/image/base.py
++++ b/tempest/api/image/base.py
+@@ -12,7 +12,7 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-import io
++import six
+ 
+ from tempest.common import image as common_image
+ from tempest import config
+@@ -113,7 +113,7 @@ class BaseV1ImageMembersTest(BaseV1ImageTest):
+         cls.alt_tenant_id = cls.alt_image_member_client.tenant_id
+ 
+     def _create_image(self):
+-        image_file = io.BytesIO(data_utils.random_bytes())
++        image_file = six.BytesIO(data_utils.random_bytes())
+         image = self.create_image(container_format='bare',
+                                   disk_format='raw',
+                                   is_public=False,
+diff --git a/tempest/api/image/v1/test_images.py b/tempest/api/image/v1/test_images.py
+index 6fd6c4e8c..595717e29 100644
+--- a/tempest/api/image/v1/test_images.py
++++ b/tempest/api/image/v1/test_images.py
+@@ -13,7 +13,7 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-import io
++import six
+ 
+ from tempest.api.image import base
+ from tempest.common import image as common_image
+@@ -72,7 +72,7 @@ class CreateRegisterImagesTest(base.BaseV1ImageTest):
+             self.assertEqual(val, image.get('properties')[key])
+ 
+         # Now try uploading an image file
+-        image_file = io.BytesIO(data_utils.random_bytes())
++        image_file = six.BytesIO(data_utils.random_bytes())
+         body = self.client.update_image(image['id'], data=image_file)['image']
+         self.assertIn('size', body)
+         self.assertEqual(1024, body.get('size'))
+@@ -204,7 +204,7 @@ class ListImagesTest(base.BaseV1ImageTest):
+         Note that the size of the new image is a random number between
+         1024 and 4096
+         """
+-        image_file = io.BytesIO(data_utils.random_bytes(size))
++        image_file = six.BytesIO(data_utils.random_bytes(size))
+         name = 'New Standard Image %s' % name
+         image = cls.create_image(name=name,
+                                  container_format=container_format,
+@@ -306,7 +306,7 @@ class UpdateImageMetaTest(base.BaseV1ImageTest):
+                                disk_format, size):
+         """Create a new standard image and return newly-registered image-id"""
+ 
+-        image_file = io.BytesIO(data_utils.random_bytes(size))
++        image_file = six.BytesIO(data_utils.random_bytes(size))
+         name = 'New Standard Image %s' % name
+         image = cls.create_image(name=name,
+                                  container_format=container_format,
+diff --git a/tempest/api/image/v2/admin/test_images.py b/tempest/api/image/v2/admin/test_images.py
+index 733c7784f..ad68d8241 100644
+--- a/tempest/api/image/v2/admin/test_images.py
++++ b/tempest/api/image/v2/admin/test_images.py
+@@ -13,7 +13,7 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-import io
++import six
+ 
+ from tempest.api.image import base
+ from tempest.common import waiters
+@@ -99,7 +99,7 @@ class ImportCopyImagesTest(base.BaseV2ImageAdminTest):
+         self.assertEqual('queued', image['status'])
+ 
+         file_content = data_utils.random_bytes()
+-        image_file = io.BytesIO(file_content)
++        image_file = six.BytesIO(file_content)
+         self.client.store_image_file(image['id'], image_file)
+ 
+         body = self.client.show_image(image['id'])
+diff --git a/tempest/api/image/v2/test_images.py b/tempest/api/image/v2/test_images.py
+index 59067d12a..ca72388b7 100644
+--- a/tempest/api/image/v2/test_images.py
++++ b/tempest/api/image/v2/test_images.py
+@@ -14,9 +14,10 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-import io
+ import random
+ 
++import six
++
+ from oslo_log import log as logging
+ from tempest.api.image import base
+ from tempest.common import waiters
+@@ -81,7 +82,7 @@ class ImportImagesTest(base.BaseV2ImageTest):
+         image = self._create_image()
+         # Stage image data
+         file_content = data_utils.random_bytes()
+-        image_file = io.BytesIO(file_content)
++        image_file = six.BytesIO(file_content)
+         self.client.stage_image_file(image['id'], image_file)
+         # Check image status is 'uploading'
+         body = self.client.show_image(image['id'])
+@@ -157,7 +158,7 @@ class MultiStoresImportImagesTest(base.BaseV2ImageTest):
+ 
+         self.client.stage_image_file(
+             image['id'],
+-            io.BytesIO(data_utils.random_bytes()))
++            six.BytesIO(data_utils.random_bytes()))
+         # Check image status is 'uploading'
+         body = self.client.show_image(image['id'])
+         self.assertEqual(image['id'], body['id'])
+@@ -239,7 +240,7 @@ class BasicOperationsImagesTest(base.BaseV2ImageTest):
+ 
+         # Now try uploading an image file
+         file_content = data_utils.random_bytes()
+-        image_file = io.BytesIO(file_content)
++        image_file = six.BytesIO(file_content)
+         self.client.store_image_file(image['id'], image_file)
+ 
+         # Now try to get image details
+@@ -316,7 +317,7 @@ class BasicOperationsImagesTest(base.BaseV2ImageTest):
+ 
+         # Upload an image file
+         content = data_utils.random_bytes()
+-        image_file = io.BytesIO(content)
++        image_file = six.BytesIO(content)
+         self.client.store_image_file(image['id'], image_file)
+ 
+         # Deactivate image
+@@ -366,7 +367,7 @@ class ListUserImagesTest(base.BaseV2ImageTest):
+         1024 and 4096
+         """
+         size = random.randint(1024, 4096)
+-        image_file = io.BytesIO(data_utils.random_bytes(size))
++        image_file = six.BytesIO(data_utils.random_bytes(size))
+         tags = [data_utils.rand_name('tag'), data_utils.rand_name('tag')]
+         image = cls.create_image(container_format=container_format,
+                                  disk_format=disk_format,
+@@ -549,7 +550,7 @@ class ListSharedImagesTest(base.BaseV2ImageTest):
+     def test_list_images_param_member_status(self):
+         """Test listing images by member_status and visibility"""
+         # Create an image to be shared using default visibility
+-        image_file = io.BytesIO(data_utils.random_bytes(2048))
++        image_file = six.BytesIO(data_utils.random_bytes(2048))
+         container_format = CONF.image.container_formats[0]
+         disk_format = CONF.image.disk_formats[0]
+         image = self.create_image(container_format=container_format,
+diff --git a/tempest/api/volume/test_volumes_negative.py b/tempest/api/volume/test_volumes_negative.py
+index 35dd0caf9..389d3bec6 100644
+--- a/tempest/api/volume/test_volumes_negative.py
++++ b/tempest/api/volume/test_volumes_negative.py
+@@ -13,7 +13,7 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-import io
++import six
+ 
+ from tempest.api.volume import base
+ from tempest.common import utils
+@@ -50,7 +50,7 @@ class VolumesNegativeTest(base.BaseVolumeTest):
+                         self.images_client.delete_image, image['id'])
+ 
+         # Upload image with 1KB data
+-        image_file = io.BytesIO(data_utils.random_bytes())
++        image_file = six.BytesIO(data_utils.random_bytes())
+         self.images_client.store_image_file(image['id'], image_file)
+         waiters.wait_for_image_status(self.images_client,
+                                       image['id'], 'active')
+diff --git a/tempest/tests/lib/services/image/v2/test_images_client.py b/tempest/tests/lib/services/image/v2/test_images_client.py
+index 7ee61d257..fe671bdfa 100644
+--- a/tempest/tests/lib/services/image/v2/test_images_client.py
++++ b/tempest/tests/lib/services/image/v2/test_images_client.py
+@@ -12,7 +12,7 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-import io
++import six
+ 
+ from tempest.lib.common.utils import data_utils
+ from tempest.lib.services.image.v2 import images_client
+@@ -178,7 +178,7 @@ class TestImagesClient(base.BaseServiceTest):
+             {}, image_id="e485aab9-0907-4973-921c-bb6da8a8fcf8", status=204)
+ 
+     def test_store_image_file(self):
+-        data = io.BytesIO(data_utils.random_bytes())
++        data = six.BytesIO(data_utils.random_bytes())
+ 
+         self.check_service_client_function(
+             self.client.store_image_file,
+-- 
+2.27.0
+

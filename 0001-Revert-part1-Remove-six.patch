@@ -1,0 +1,440 @@
+From 3ce31a11b7a5cbe5b57f9ba56b0dd4a921346de4 Mon Sep 17 00:00:00 2001
+From: Martin Kopec <xkopec42@gmail.com>
+Date: Thu, 22 Apr 2021 10:08:13 +0000
+Subject: [PATCH 1/5] Revert "[part1] Remove six"
+
+This reverts commit 19b70a3858237654143c52ace9cf1adc284ba97d.
+---
+ tempest/api/compute/servers/test_attach_interfaces.py |  5 +++--
+ tempest/api/compute/servers/test_novnc.py             |  6 +++---
+ tempest/api/identity/admin/v3/test_tokens.py          |  8 +++++---
+ tempest/api/network/test_ports.py                     |  7 ++++---
+ tempest/api/object_storage/test_account_services.py   |  2 +-
+ tempest/lib/common/dynamic_creds.py                   |  4 ++--
+ tempest/lib/common/jsonschema_validator.py            |  3 ++-
+ tempest/lib/common/preprov_creds.py                   | 11 ++++++-----
+ tempest/lib/common/rest_client.py                     |  2 +-
+ .../lib/services/identity/v3/oauth_token_client.py    |  6 +++---
+ tempest/tests/api/compute/test_base.py                |  5 +++--
+ tempest/tests/cmd/test_run.py                         | 11 ++++++-----
+ tempest/tests/lib/common/test_api_version_utils.py    |  3 ++-
+ tempest/tests/lib/common/test_preprov_creds.py        |  3 ++-
+ tempest/tests/lib/test_ssh.py                         |  2 +-
+ tempest/tests/test_list_tests.py                      |  4 +++-
+ tempest/tests/test_microversions.py                   |  3 ++-
+ 17 files changed, 49 insertions(+), 36 deletions(-)
+
+diff --git a/tempest/api/compute/servers/test_attach_interfaces.py b/tempest/api/compute/servers/test_attach_interfaces.py
+index ac18442eb..102792ef1 100644
+--- a/tempest/api/compute/servers/test_attach_interfaces.py
++++ b/tempest/api/compute/servers/test_attach_interfaces.py
+@@ -16,6 +16,7 @@
+ import time
+ 
+ from oslo_log import log
++import six
+ 
+ from tempest.api.compute import base
+ from tempest.common import compute
+@@ -240,7 +241,7 @@ class AttachInterfacesTestJSON(AttachInterfacesTestBase):
+         except lib_exc.BadRequest as e:
+             msg = ('Multiple possible networks found, use a Network ID to be '
+                    'more specific.')
+-            if not CONF.compute.fixed_network_name and str(e) == msg:
++            if not CONF.compute.fixed_network_name and six.text_type(e) == msg:
+                 raise
+         else:
+             ifs.append(iface)
+@@ -449,7 +450,7 @@ class AttachInterfacesV270Test(AttachInterfacesTestBase):
+         except lib_exc.BadRequest as e:
+             msg = ('Multiple possible networks found, use a Network ID to be '
+                    'more specific.')
+-            if not CONF.compute.fixed_network_name and str(e) == msg:
++            if not CONF.compute.fixed_network_name and six.text_type(e) == msg:
+                 raise
+         else:
+             # just to check the response schema
+diff --git a/tempest/api/compute/servers/test_novnc.py b/tempest/api/compute/servers/test_novnc.py
+index a9c0e5647..34b3146db 100644
+--- a/tempest/api/compute/servers/test_novnc.py
++++ b/tempest/api/compute/servers/test_novnc.py
+@@ -69,7 +69,7 @@ class NoVNCConsoleTestJSON(base.BaseV2ComputeTest):
+         resp = urllib3.PoolManager().request('GET', vnc_url)
+         # Make sure that the GET request was accepted by the novncproxy
+         self.assertEqual(resp.status, 200, 'Got a Bad HTTP Response on the '
+-                         'initial call: ' + str(resp.status))
++                         'initial call: ' + six.text_type(resp.status))
+         # Do some basic validation to make sure it is an expected HTML document
+         resp_data = resp.data.decode()
+         # This is needed in the case of example: <html lang="en">
+@@ -165,11 +165,11 @@ class NoVNCConsoleTestJSON(base.BaseV2ComputeTest):
+             self._websocket.response.startswith(b'HTTP/1.1 101 Switching '
+                                                 b'Protocols'),
+             'Incorrect HTTP return status code: {}'.format(
+-                str(self._websocket.response)
++                six.text_type(self._websocket.response)
+             )
+         )
+         _required_header = 'upgrade: websocket'
+-        _response = str(self._websocket.response).lower()
++        _response = six.text_type(self._websocket.response).lower()
+         self.assertIn(
+             _required_header,
+             _response,
+diff --git a/tempest/api/identity/admin/v3/test_tokens.py b/tempest/api/identity/admin/v3/test_tokens.py
+index 5bbd65c4a..f3a747141 100644
+--- a/tempest/api/identity/admin/v3/test_tokens.py
++++ b/tempest/api/identity/admin/v3/test_tokens.py
+@@ -13,6 +13,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
++import six
++
+ from tempest.api.identity import base
+ from tempest import config
+ from tempest.lib.common.utils import data_utils
+@@ -68,8 +70,8 @@ class TokensV3TestJSON(base.BaseIdentityV3AdminTest):
+         orig_expires_at = token_auth['token']['expires_at']
+         orig_user = token_auth['token']['user']
+ 
+-        self.assertIsInstance(token_auth['token']['expires_at'], str)
+-        self.assertIsInstance(token_auth['token']['issued_at'], str)
++        self.assertIsInstance(token_auth['token']['expires_at'], six.text_type)
++        self.assertIsInstance(token_auth['token']['issued_at'], six.text_type)
+         self.assertEqual(['password'], token_auth['token']['methods'])
+         self.assertEqual(user['id'], token_auth['token']['user']['id'])
+         self.assertEqual(user['name'], token_auth['token']['user']['name'])
+@@ -89,7 +91,7 @@ class TokensV3TestJSON(base.BaseIdentityV3AdminTest):
+ 
+         self.assertEqual(orig_expires_at, token_auth['token']['expires_at'],
+                          'Expiration time should match original token')
+-        self.assertIsInstance(token_auth['token']['issued_at'], str)
++        self.assertIsInstance(token_auth['token']['issued_at'], six.text_type)
+         self.assertEqual(set(['password', 'token']),
+                          set(token_auth['token']['methods']))
+         self.assertEqual(orig_user, token_auth['token']['user'],
+diff --git a/tempest/api/network/test_ports.py b/tempest/api/network/test_ports.py
+index 63078cd88..479578d80 100644
+--- a/tempest/api/network/test_ports.py
++++ b/tempest/api/network/test_ports.py
+@@ -16,6 +16,7 @@
+ import ipaddress
+ 
+ import netaddr
++import six
+ import testtools
+ 
+ from tempest.api.network import base_security_groups as sec_base
+@@ -233,15 +234,15 @@ class PortsTestJSON(sec_base.BaseSecGroupTest):
+         # Get two IP addresses
+         ip_address_1 = None
+         ip_address_2 = None
+-        ip_network = ipaddress.ip_network(str(subnet['cidr']))
++        ip_network = ipaddress.ip_network(six.text_type(subnet['cidr']))
+         for ip in ip_network:
+             if ip == ip_network.network_address:
+                 continue
+             if ip_address_1 is None:
+-                ip_address_1 = str(ip)
++                ip_address_1 = six.text_type(ip)
+             else:
+                 ip_address_2 = ip_address_1
+-                ip_address_1 = str(ip)
++                ip_address_1 = six.text_type(ip)
+                 # Make sure these two IP addresses have different substring
+                 if ip_address_1[:-1] != ip_address_2[:-1]:
+                     break
+diff --git a/tempest/api/object_storage/test_account_services.py b/tempest/api/object_storage/test_account_services.py
+index ffea6f61f..da8ad6632 100644
+--- a/tempest/api/object_storage/test_account_services.py
++++ b/tempest/api/object_storage/test_account_services.py
+@@ -62,7 +62,7 @@ class AccountTest(base.BaseObjectTest):
+         self.assertIsNotNone(container_list)
+ 
+         for container_name in self.containers:
+-            self.assertIn(str(container_name).encode('utf-8'),
++            self.assertIn(six.text_type(container_name).encode('utf-8'),
+                           container_list)
+ 
+     @decorators.idempotent_id('884ec421-fbad-4fcc-916b-0580f2699565')
+diff --git a/tempest/lib/common/dynamic_creds.py b/tempest/lib/common/dynamic_creds.py
+index f334c36bb..dd855ee55 100644
+--- a/tempest/lib/common/dynamic_creds.py
++++ b/tempest/lib/common/dynamic_creds.py
+@@ -342,7 +342,7 @@ class DynamicCredentialProvider(cred_provider.CredentialProvider):
+                             tenant_id=tenant_id,
+                             enable_dhcp=self.network_resources['dhcp'],
+                             ip_version=(ipaddress.ip_network(
+-                                str(subnet_cidr)).version))
++                                six.text_type(subnet_cidr)).version))
+                 else:
+                     resp_body = self.subnets_admin_client.\
+                         create_subnet(network_id=network_id,
+@@ -350,7 +350,7 @@ class DynamicCredentialProvider(cred_provider.CredentialProvider):
+                                       name=subnet_name,
+                                       tenant_id=tenant_id,
+                                       ip_version=(ipaddress.ip_network(
+-                                          str(subnet_cidr)).version))
++                                          six.text_type(subnet_cidr)).version))
+                 break
+             except lib_exc.BadRequest as e:
+                 if 'overlaps with another subnet' not in str(e):
+diff --git a/tempest/lib/common/jsonschema_validator.py b/tempest/lib/common/jsonschema_validator.py
+index 0ac757d31..bbf5e89ba 100644
+--- a/tempest/lib/common/jsonschema_validator.py
++++ b/tempest/lib/common/jsonschema_validator.py
+@@ -15,6 +15,7 @@
+ import jsonschema
+ from oslo_serialization import base64
+ from oslo_utils import timeutils
++import six
+ 
+ # JSON Schema validator and format checker used for JSON Schema validation
+ JSONSCHEMA_VALIDATOR = jsonschema.Draft4Validator
+@@ -42,7 +43,7 @@ def _validate_datetime_format(instance):
+ @jsonschema.FormatChecker.cls_checks('base64')
+ def _validate_base64_format(instance):
+     try:
+-        if isinstance(instance, str):
++        if isinstance(instance, six.text_type):
+             instance = instance.encode('utf-8')
+         base64.decode_as_bytes(instance)
+     except TypeError:
+diff --git a/tempest/lib/common/preprov_creds.py b/tempest/lib/common/preprov_creds.py
+index df0f4d6dd..feca43bcc 100644
+--- a/tempest/lib/common/preprov_creds.py
++++ b/tempest/lib/common/preprov_creds.py
+@@ -17,6 +17,7 @@ import os
+ 
+ from oslo_concurrency import lockutils
+ from oslo_log import log as logging
++import six
+ import yaml
+ 
+ from tempest.lib import auth
+@@ -137,7 +138,7 @@ class PreProvisionedCredentialProvider(cred_provider.CredentialProvider):
+             temp_hash = hashlib.md5()
+             account_for_hash = dict((k, v) for (k, v) in account.items()
+                                     if k in cls.HASH_CRED_FIELDS)
+-            temp_hash.update(str(account_for_hash).encode('utf-8'))
++            temp_hash.update(six.text_type(account_for_hash).encode('utf-8'))
+             temp_hash_key = temp_hash.hexdigest()
+             hash_dict['creds'][temp_hash_key] = account
+             for role in roles:
+@@ -402,7 +403,7 @@ class PreProvisionedCredentialProvider(cred_provider.CredentialProvider):
+ 
+     def get_creds_by_roles(self, roles, force_new=False, scope=None):
+         roles = list(set(roles))
+-        exist_creds = self._creds.get(str(roles).encode(
++        exist_creds = self._creds.get(six.text_type(roles).encode(
+             'utf-8'), None)
+         # The force kwarg is used to allocate an additional set of creds with
+         # the same role list. The index used for the previously allocation
+@@ -412,11 +413,11 @@ class PreProvisionedCredentialProvider(cred_provider.CredentialProvider):
+         elif exist_creds and force_new:
+             # NOTE(andreaf) In py3.x encode returns bytes, and b'' is bytes
+             # In py2.7 encode returns strings, and b'' is still string
+-            new_index = str(roles).encode('utf-8') + b'-' + \
+-                str(len(self._creds)).encode('utf-8')
++            new_index = six.text_type(roles).encode('utf-8') + b'-' + \
++                six.text_type(len(self._creds)).encode('utf-8')
+             self._creds[new_index] = exist_creds
+         net_creds = self._get_creds(roles=roles)
+-        self._creds[str(roles).encode('utf-8')] = net_creds
++        self._creds[six.text_type(roles).encode('utf-8')] = net_creds
+         return net_creds
+ 
+     def clear_creds(self):
+diff --git a/tempest/lib/common/rest_client.py b/tempest/lib/common/rest_client.py
+index 00f2aeb9b..c8ce610aa 100644
+--- a/tempest/lib/common/rest_client.py
++++ b/tempest/lib/common/rest_client.py
+@@ -418,7 +418,7 @@ class RestClient(object):
+     def _safe_body(self, body, maxlen=4096):
+         # convert a structure into a string safely
+         try:
+-            text = str(body)
++            text = six.text_type(body)
+         except UnicodeDecodeError:
+             # if this isn't actually text, return marker that
+             return "<BinaryData: removed>"
+diff --git a/tempest/lib/services/identity/v3/oauth_token_client.py b/tempest/lib/services/identity/v3/oauth_token_client.py
+index 236b22437..33360941a 100644
+--- a/tempest/lib/services/identity/v3/oauth_token_client.py
++++ b/tempest/lib/services/identity/v3/oauth_token_client.py
+@@ -33,7 +33,7 @@ class OAUTHTokenClient(rest_client.RestClient):
+     def _escape(self, s):
+         """Escape a unicode string in an OAuth-compatible fashion."""
+         safe = b'~'
+-        s = s.encode('utf-8') if isinstance(s, str) else s
++        s = s.encode('utf-8') if isinstance(s, six.text_type) else s
+         s = urlparse.quote(s, safe)
+         if isinstance(s, six.binary_type):
+             s = s.decode('utf-8')
+@@ -47,8 +47,8 @@ class OAUTHTokenClient(rest_client.RestClient):
+                                         verifier=None,
+                                         http_method='GET'):
+         """Generate OAUTH params along with signature."""
+-        timestamp = str(int(time.time()))
+-        nonce = str(random.getrandbits(64)) + timestamp
++        timestamp = six.text_type(int(time.time()))
++        nonce = six.text_type(random.getrandbits(64)) + timestamp
+         oauth_params = [
+             ('oauth_nonce', nonce),
+             ('oauth_timestamp', timestamp),
+diff --git a/tempest/tests/api/compute/test_base.py b/tempest/tests/api/compute/test_base.py
+index 8a1873be9..74d2625d5 100644
+--- a/tempest/tests/api/compute/test_base.py
++++ b/tempest/tests/api/compute/test_base.py
+@@ -15,6 +15,7 @@
+ from unittest import mock
+ 
+ from oslo_utils import uuidutils
++import six
+ 
+ from tempest.api.compute import base as compute_base
+ from tempest.common import waiters
+@@ -127,9 +128,9 @@ class TestBaseV2ComputeTest(base.TestCase):
+             mock.sentinel.server_id, wait_until='active')
+         # make our assertions
+         if fault:
+-            self.assertIn(fault, str(ex))
++            self.assertIn(fault, six.text_type(ex))
+         else:
+-            self.assertNotIn(fault, str(ex))
++            self.assertNotIn(fault, six.text_type(ex))
+         if compute_base.BaseV2ComputeTest.is_requested_microversion_compatible(
+             '2.35'):
+             status = 'ACTIVE'
+diff --git a/tempest/tests/cmd/test_run.py b/tempest/tests/cmd/test_run.py
+index 3b5e901a0..ec7b76092 100644
+--- a/tempest/tests/cmd/test_run.py
++++ b/tempest/tests/cmd/test_run.py
+@@ -21,6 +21,7 @@ import tempfile
+ from unittest import mock
+ 
+ import fixtures
++import six
+ 
+ from tempest.cmd import run
+ from tempest.cmd import workspace
+@@ -152,12 +153,12 @@ class TestRunReturnCode(base.TestCase):
+         subprocess.call(['stestr', 'init'])
+         out, err = self.assertRunExit(['tempest', 'run', '-l'], 0)
+         tests = out.split()
+-        tests = sorted([str(x.rstrip()) for x in tests if x])
++        tests = sorted([six.text_type(x.rstrip()) for x in tests if x])
+         result = [
+-            str('tests.test_failing.FakeTestClass.test_pass'),
+-            str('tests.test_failing.FakeTestClass.test_pass_list'),
+-            str('tests.test_passing.FakeTestClass.test_pass'),
+-            str('tests.test_passing.FakeTestClass.test_pass_list'),
++            six.text_type('tests.test_failing.FakeTestClass.test_pass'),
++            six.text_type('tests.test_failing.FakeTestClass.test_pass_list'),
++            six.text_type('tests.test_passing.FakeTestClass.test_pass'),
++            six.text_type('tests.test_passing.FakeTestClass.test_pass_list'),
+         ]
+         # NOTE(mtreinish): on python 3 the subprocess prints b'' around
+         # stdout.
+diff --git a/tempest/tests/lib/common/test_api_version_utils.py b/tempest/tests/lib/common/test_api_version_utils.py
+index 8d5de0962..b99e8d41e 100644
+--- a/tempest/tests/lib/common/test_api_version_utils.py
++++ b/tempest/tests/lib/common/test_api_version_utils.py
+@@ -12,6 +12,7 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
++import six
+ import testtools
+ 
+ from tempest.lib.common import api_version_utils
+@@ -30,7 +31,7 @@ class TestVersionSkipLogic(base.TestCase):
+                                                            cfg_max_version)
+         except testtools.TestCase.skipException as e:
+             if not expected_skip:
+-                raise testtools.TestCase.failureException(str(e))
++                raise testtools.TestCase.failureException(six.text_type(e))
+ 
+     def test_version_min_in_range(self):
+         self._test_version('2.2', '2.10', '2.1', '2.7')
+diff --git a/tempest/tests/lib/common/test_preprov_creds.py b/tempest/tests/lib/common/test_preprov_creds.py
+index 499b6fe11..579363ee7 100644
+--- a/tempest/tests/lib/common/test_preprov_creds.py
++++ b/tempest/tests/lib/common/test_preprov_creds.py
+@@ -17,6 +17,7 @@ import os
+ import shutil
+ from unittest import mock
+ 
++import six
+ import testtools
+ 
+ import fixtures
+@@ -108,7 +109,7 @@ class TestPreProvisionedCredentials(base.TestCase):
+             hash = hashlib.md5()
+             account_for_hash = dict((k, v) for (k, v) in account.items()
+                                     if k in hash_fields)
+-            hash.update(str(account_for_hash).encode('utf-8'))
++            hash.update(six.text_type(account_for_hash).encode('utf-8'))
+             temp_hash = hash.hexdigest()
+             hash_list.append(temp_hash)
+         return hash_list
+diff --git a/tempest/tests/lib/test_ssh.py b/tempest/tests/lib/test_ssh.py
+index 035bdb0f1..0ec926244 100644
+--- a/tempest/tests/lib/test_ssh.py
++++ b/tempest/tests/lib/test_ssh.py
+@@ -274,7 +274,7 @@ class TestSshClient(base.TestCase):
+         client = ssh.Client('localhost', 'root', timeout=2)
+         exc = self.assertRaises(exceptions.SSHExecCommandFailed,
+                                 client.exec_command, "test")
+-        self.assertIn('R' + self._utf8_string, str(exc))
++        self.assertIn('R' + self._utf8_string, six.text_type(exc))
+ 
+     def test_exec_command_no_select(self):
+         gsc_mock = self.patch('tempest.lib.common.ssh.Client.'
+diff --git a/tempest/tests/test_list_tests.py b/tempest/tests/test_list_tests.py
+index fe44ef6a7..1cc9c9a41 100644
+--- a/tempest/tests/test_list_tests.py
++++ b/tempest/tests/test_list_tests.py
+@@ -16,6 +16,8 @@ import os
+ import re
+ import subprocess
+ 
++import six
++
+ from tempest.tests import base
+ 
+ 
+@@ -30,7 +32,7 @@ class TestTestList(base.TestCase):
+         self.assertEqual(0, p.returncode,
+                          "test discovery failed, one or more files cause an "
+                          "error on import %s" % ids)
+-        ids = str(ids).split('\n')
++        ids = six.text_type(ids).split('\n')
+         for test_id in ids:
+             if re.match(r'(\w+\.){3}\w+', test_id):
+                 if not test_id.startswith('tempest.'):
+diff --git a/tempest/tests/test_microversions.py b/tempest/tests/test_microversions.py
+index 835f51c68..ee6db7102 100644
+--- a/tempest/tests/test_microversions.py
++++ b/tempest/tests/test_microversions.py
+@@ -13,6 +13,7 @@
+ #    under the License.
+ 
+ from oslo_config import cfg
++import six
+ import testtools
+ 
+ from tempest.api.compute import base as compute_base
+@@ -74,7 +75,7 @@ class TestMicroversionsTestsClass(base.TestCase):
+                 self.assertRaises(testtools.TestCase.skipException,
+                                   test_class.skip_checks)
+         except testtools.TestCase.skipException as e:
+-            raise testtools.TestCase.failureException(str(e))
++            raise testtools.TestCase.failureException(six.text_type(e))
+ 
+     def test_config_version_none_none(self):
+         expected_pass_tests = [VersionTestNoneTolatest, VersionTestNoneTo2_2]
+-- 
+2.27.0
+

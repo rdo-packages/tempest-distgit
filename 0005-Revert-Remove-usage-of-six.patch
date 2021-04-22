@@ -1,0 +1,1336 @@
+From 7c67e1ffc6891963fa4c992409a9d25119ac2576 Mon Sep 17 00:00:00 2001
+From: Martin Kopec <xkopec42@gmail.com>
+Date: Thu, 22 Apr 2021 10:08:46 +0000
+Subject: [PATCH 5/5] Revert "Remove usage of six"
+
+This reverts commit 99d6e009824254b0be239673b148740129f21daf.
+---
+ tempest/api/compute/admin/test_instance_usage_audit_log.py    | 3 ++-
+ .../compute/admin/test_instance_usage_audit_log_negative.py   | 3 ++-
+ tempest/api/compute/servers/test_novnc.py                     | 2 +-
+ tempest/api/compute/servers/test_server_actions.py            | 3 +--
+ tempest/api/object_storage/test_container_sync.py             | 2 +-
+ tempest/api/object_storage/test_object_formpost.py            | 3 ++-
+ tempest/api/object_storage/test_object_formpost_negative.py   | 3 ++-
+ tempest/api/object_storage/test_object_temp_url.py            | 3 ++-
+ tempest/api/object_storage/test_object_temp_url_negative.py   | 3 ++-
+ tempest/api/volume/test_volumes_list.py                       | 2 +-
+ tempest/cmd/cleanup_service.py                                | 3 +--
+ tempest/cmd/init.py                                           | 4 ++--
+ tempest/common/compute.py                                     | 3 ++-
+ tempest/lib/auth.py                                           | 2 +-
+ tempest/lib/cmd/check_uuid.py                                 | 2 +-
+ tempest/lib/common/rest_client.py                             | 2 +-
+ tempest/lib/services/compute/agents_client.py                 | 3 +--
+ tempest/lib/services/compute/baremetal_nodes_client.py        | 3 +--
+ tempest/lib/services/compute/flavors_client.py                | 3 +--
+ tempest/lib/services/compute/floating_ip_pools_client.py      | 3 +--
+ tempest/lib/services/compute/floating_ips_client.py           | 3 +--
+ tempest/lib/services/compute/hosts_client.py                  | 3 +--
+ tempest/lib/services/compute/images_client.py                 | 3 +--
+ tempest/lib/services/compute/keypairs_client.py               | 3 +--
+ tempest/lib/services/compute/migrations_client.py             | 3 +--
+ tempest/lib/services/compute/quotas_client.py                 | 3 +--
+ tempest/lib/services/compute/security_groups_client.py        | 3 +--
+ tempest/lib/services/compute/servers_client.py                | 2 +-
+ tempest/lib/services/compute/services_client.py               | 3 +--
+ tempest/lib/services/compute/snapshots_client.py              | 3 +--
+ tempest/lib/services/compute/tenant_usages_client.py          | 3 +--
+ tempest/lib/services/compute/volumes_client.py                | 3 +--
+ tempest/lib/services/identity/v2/identity_client.py           | 3 +--
+ tempest/lib/services/identity/v2/roles_client.py              | 3 +--
+ tempest/lib/services/identity/v2/services_client.py           | 3 +--
+ tempest/lib/services/identity/v2/tenants_client.py            | 3 +--
+ tempest/lib/services/identity/v2/users_client.py              | 3 +--
+ tempest/lib/services/identity/v3/access_rules_client.py       | 3 +--
+ .../services/identity/v3/application_credentials_client.py    | 3 +--
+ tempest/lib/services/identity/v3/credentials_client.py        | 3 +--
+ tempest/lib/services/identity/v3/domains_client.py            | 3 +--
+ tempest/lib/services/identity/v3/endpoints_client.py          | 3 +--
+ tempest/lib/services/identity/v3/groups_client.py             | 3 +--
+ tempest/lib/services/identity/v3/oauth_token_client.py        | 2 +-
+ tempest/lib/services/identity/v3/projects_client.py           | 3 +--
+ tempest/lib/services/identity/v3/regions_client.py            | 3 +--
+ tempest/lib/services/identity/v3/role_assignments_client.py   | 3 +--
+ tempest/lib/services/identity/v3/roles_client.py              | 3 +--
+ tempest/lib/services/identity/v3/services_client.py           | 3 +--
+ tempest/lib/services/identity/v3/trusts_client.py             | 3 +--
+ tempest/lib/services/identity/v3/users_client.py              | 3 +--
+ tempest/lib/services/image/v1/images_client.py                | 2 +-
+ tempest/lib/services/image/v2/images_client.py                | 2 +-
+ tempest/lib/services/image/v2/namespace_objects_client.py     | 3 +--
+ tempest/lib/services/image/v2/namespace_tags_client.py        | 3 +--
+ tempest/lib/services/network/base.py                          | 3 +--
+ tempest/lib/services/object_storage/account_client.py         | 2 +-
+ tempest/lib/services/object_storage/container_client.py       | 2 +-
+ tempest/lib/services/object_storage/object_client.py          | 4 ++--
+ tempest/lib/services/placement/placement_client.py            | 3 +--
+ tempest/lib/services/placement/resource_providers_client.py   | 3 +--
+ tempest/lib/services/volume/v1/hosts_client.py                | 3 +--
+ tempest/lib/services/volume/v1/quotas_client.py               | 3 +--
+ tempest/lib/services/volume/v1/services_client.py             | 3 +--
+ tempest/lib/services/volume/v1/snapshots_client.py            | 3 +--
+ tempest/lib/services/volume/v1/types_client.py                | 3 +--
+ tempest/lib/services/volume/v1/volumes_client.py              | 3 +--
+ tempest/lib/services/volume/v3/backups_client.py              | 3 +--
+ tempest/lib/services/volume/v3/group_snapshots_client.py      | 3 +--
+ tempest/lib/services/volume/v3/group_types_client.py          | 3 +--
+ tempest/lib/services/volume/v3/groups_client.py               | 3 +--
+ tempest/lib/services/volume/v3/hosts_client.py                | 3 +--
+ tempest/lib/services/volume/v3/quotas_client.py               | 3 +--
+ tempest/lib/services/volume/v3/services_client.py             | 3 +--
+ tempest/lib/services/volume/v3/snapshots_client.py            | 3 +--
+ tempest/lib/services/volume/v3/transfers_client.py            | 3 +--
+ tempest/lib/services/volume/v3/types_client.py                | 3 +--
+ tempest/lib/services/volume/v3/versions_client.py             | 2 +-
+ tempest/lib/services/volume/v3/volumes_client.py              | 3 +--
+ tempest/services/orchestration/json/orchestration_client.py   | 2 +-
+ tempest/tests/common/test_compute.py                          | 2 +-
+ tools/check_logs.py                                           | 2 +-
+ 82 files changed, 91 insertions(+), 141 deletions(-)
+
+diff --git a/tempest/api/compute/admin/test_instance_usage_audit_log.py b/tempest/api/compute/admin/test_instance_usage_audit_log.py
+index c4c054246..4dcbb3b08 100644
+--- a/tempest/api/compute/admin/test_instance_usage_audit_log.py
++++ b/tempest/api/compute/admin/test_instance_usage_audit_log.py
+@@ -14,7 +14,8 @@
+ #    under the License.
+ 
+ import datetime
+-from urllib import parse as urllib
++
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.api.compute import base
+ from tempest.lib import decorators
+diff --git a/tempest/api/compute/admin/test_instance_usage_audit_log_negative.py b/tempest/api/compute/admin/test_instance_usage_audit_log_negative.py
+index c1154511f..84d18c47b 100644
+--- a/tempest/api/compute/admin/test_instance_usage_audit_log_negative.py
++++ b/tempest/api/compute/admin/test_instance_usage_audit_log_negative.py
+@@ -14,7 +14,8 @@
+ #    under the License.
+ 
+ import datetime
+-from urllib import parse as urllib
++
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.api.compute import base
+ from tempest.lib import decorators
+diff --git a/tempest/api/compute/servers/test_novnc.py b/tempest/api/compute/servers/test_novnc.py
+index 34b3146db..6ebdbdb08 100644
+--- a/tempest/api/compute/servers/test_novnc.py
++++ b/tempest/api/compute/servers/test_novnc.py
+@@ -14,9 +14,9 @@
+ #    under the License.
+ 
+ import struct
+-import urllib.parse as urlparse
+ 
+ import six
++import six.moves.urllib.parse as urlparse
+ import urllib3
+ 
+ from tempest.api.compute import base
+diff --git a/tempest/api/compute/servers/test_server_actions.py b/tempest/api/compute/servers/test_server_actions.py
+index deb21c726..4527aa930 100644
+--- a/tempest/api/compute/servers/test_server_actions.py
++++ b/tempest/api/compute/servers/test_server_actions.py
+@@ -13,9 +13,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urlparse
+-
+ from oslo_log import log as logging
++from six.moves.urllib import parse as urlparse
+ import testtools
+ 
+ from tempest.api.compute import base
+diff --git a/tempest/api/object_storage/test_container_sync.py b/tempest/api/object_storage/test_container_sync.py
+index 276b826b5..eb2ef7ff4 100644
+--- a/tempest/api/object_storage/test_container_sync.py
++++ b/tempest/api/object_storage/test_container_sync.py
+@@ -14,8 +14,8 @@
+ #    under the License.
+ 
+ import time
+-from urllib import parse as urlparse
+ 
++from six.moves.urllib import parse as urlparse
+ import testtools
+ 
+ from tempest.api.object_storage import base
+diff --git a/tempest/api/object_storage/test_object_formpost.py b/tempest/api/object_storage/test_object_formpost.py
+index 39e895ea4..d857d3b12 100644
+--- a/tempest/api/object_storage/test_object_formpost.py
++++ b/tempest/api/object_storage/test_object_formpost.py
+@@ -15,7 +15,8 @@
+ import hashlib
+ import hmac
+ import time
+-from urllib import parse as urlparse
++
++from six.moves.urllib import parse as urlparse
+ 
+ from tempest.api.object_storage import base
+ from tempest.common import utils
+diff --git a/tempest/api/object_storage/test_object_formpost_negative.py b/tempest/api/object_storage/test_object_formpost_negative.py
+index 971a22322..0499eef27 100644
+--- a/tempest/api/object_storage/test_object_formpost_negative.py
++++ b/tempest/api/object_storage/test_object_formpost_negative.py
+@@ -15,7 +15,8 @@
+ import hashlib
+ import hmac
+ import time
+-from urllib import parse as urlparse
++
++from six.moves.urllib import parse as urlparse
+ 
+ from tempest.api.object_storage import base
+ from tempest.common import utils
+diff --git a/tempest/api/object_storage/test_object_temp_url.py b/tempest/api/object_storage/test_object_temp_url.py
+index e75e22a94..29354b62c 100644
+--- a/tempest/api/object_storage/test_object_temp_url.py
++++ b/tempest/api/object_storage/test_object_temp_url.py
+@@ -15,7 +15,8 @@
+ import hashlib
+ import hmac
+ import time
+-from urllib import parse as urlparse
++
++from six.moves.urllib import parse as urlparse
+ 
+ from tempest.api.object_storage import base
+ from tempest.common import utils
+diff --git a/tempest/api/object_storage/test_object_temp_url_negative.py b/tempest/api/object_storage/test_object_temp_url_negative.py
+index 4ad8428ba..bbb48272b 100644
+--- a/tempest/api/object_storage/test_object_temp_url_negative.py
++++ b/tempest/api/object_storage/test_object_temp_url_negative.py
+@@ -15,7 +15,8 @@
+ import hashlib
+ import hmac
+ import time
+-from urllib import parse as urlparse
++
++from six.moves.urllib import parse as urlparse
+ 
+ from tempest.api.object_storage import base
+ from tempest.common import utils
+diff --git a/tempest/api/volume/test_volumes_list.py b/tempest/api/volume/test_volumes_list.py
+index 1d1981caf..60f85a432 100644
+--- a/tempest/api/volume/test_volumes_list.py
++++ b/tempest/api/volume/test_volumes_list.py
+@@ -16,8 +16,8 @@
+ 
+ import operator
+ import random
+-from urllib.parse import urlparse
+ 
++from six.moves.urllib.parse import urlparse
+ from testtools import matchers
+ 
+ from tempest.api.volume import base
+diff --git a/tempest/cmd/cleanup_service.py b/tempest/cmd/cleanup_service.py
+index f2370f30a..84d2492e6 100644
+--- a/tempest/cmd/cleanup_service.py
++++ b/tempest/cmd/cleanup_service.py
+@@ -12,9 +12,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_log import log as logging
++from six.moves.urllib import parse as urllib
+ 
+ from tempest import clients
+ from tempest.common import credentials_factory as credentials
+diff --git a/tempest/cmd/init.py b/tempest/cmd/init.py
+index 3eae5522d..6e93d6960 100644
+--- a/tempest/cmd/init.py
++++ b/tempest/cmd/init.py
+@@ -12,7 +12,6 @@
+ # License for the specific language governing permissions and limitations
+ # under the License.
+ 
+-import configparser
+ import os
+ import shutil
+ import sys
+@@ -20,6 +19,7 @@ import sys
+ from cliff import command
+ from oslo_config import generator
+ from oslo_log import log as logging
++from six import moves
+ from stestr import commands
+ 
+ from tempest.cmd import workspace
+@@ -92,7 +92,7 @@ class TempestInit(command.Command):
+             stestr_conf_file.write(stestr_conf)
+ 
+     def get_configparser(self, conf_path):
+-        config_parse = configparser.ConfigParser()
++        config_parse = moves.configparser.ConfigParser()
+         config_parse.optionxform = str
+         # get any existing values if a config file already exists
+         if os.path.isfile(conf_path):
+diff --git a/tempest/common/compute.py b/tempest/common/compute.py
+index a062f6f0f..42f68f1d8 100644
+--- a/tempest/common/compute.py
++++ b/tempest/common/compute.py
+@@ -18,7 +18,8 @@ import socket
+ import ssl
+ import struct
+ import textwrap
+-from urllib import parse as urlparse
++
++from six.moves.urllib import parse as urlparse
+ 
+ from oslo_log import log as logging
+ from oslo_utils import excutils
+diff --git a/tempest/lib/auth.py b/tempest/lib/auth.py
+index ab9860e44..9f8c7c5ec 100644
+--- a/tempest/lib/auth.py
++++ b/tempest/lib/auth.py
+@@ -18,10 +18,10 @@ import abc
+ import copy
+ import datetime
+ import re
+-from urllib import parse as urlparse
+ 
+ from oslo_log import log as logging
+ import six
++from six.moves.urllib import parse as urlparse
+ 
+ from tempest.lib import exceptions
+ from tempest.lib.services.identity.v2 import token_client as json_v2id
+diff --git a/tempest/lib/cmd/check_uuid.py b/tempest/lib/cmd/check_uuid.py
+index 0ae11ca9f..ff09671dc 100755
+--- a/tempest/lib/cmd/check_uuid.py
++++ b/tempest/lib/cmd/check_uuid.py
+@@ -22,10 +22,10 @@ import inspect
+ import os
+ import sys
+ import unittest
+-import urllib.parse as urlparse
+ import uuid
+ 
+ from oslo_utils import uuidutils
++import six.moves.urllib.parse as urlparse
+ 
+ DECORATOR_MODULE = 'decorators'
+ DECORATOR_NAME = 'idempotent_id'
+diff --git a/tempest/lib/common/rest_client.py b/tempest/lib/common/rest_client.py
+index c8ce610aa..0fa78fa60 100644
+--- a/tempest/lib/common/rest_client.py
++++ b/tempest/lib/common/rest_client.py
+@@ -18,13 +18,13 @@ import collections
+ import email.utils
+ import re
+ import time
+-import urllib
+ 
+ import jsonschema
+ from oslo_log import log as logging
+ from oslo_log import versionutils
+ from oslo_serialization import jsonutils as json
+ import six
++from six.moves import urllib
+ 
+ from tempest.lib.common import http
+ from tempest.lib.common import jsonschema_validator
+diff --git a/tempest/lib/services/compute/agents_client.py b/tempest/lib/services/compute/agents_client.py
+index bd973ddbb..12b3900fb 100644
+--- a/tempest/lib/services/compute/agents_client.py
++++ b/tempest/lib/services/compute/agents_client.py
+@@ -12,9 +12,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.api_schema.response.compute.v2_1 import agents as schema
+ from tempest.lib.common import rest_client
+diff --git a/tempest/lib/services/compute/baremetal_nodes_client.py b/tempest/lib/services/compute/baremetal_nodes_client.py
+index 83af451e2..3efdbcec2 100644
+--- a/tempest/lib/services/compute/baremetal_nodes_client.py
++++ b/tempest/lib/services/compute/baremetal_nodes_client.py
+@@ -12,9 +12,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.api_schema.response.compute.v2_1 import baremetal_nodes \
+     as schema
+diff --git a/tempest/lib/services/compute/flavors_client.py b/tempest/lib/services/compute/flavors_client.py
+index 5282405b6..e22b5b2a3 100644
+--- a/tempest/lib/services/compute/flavors_client.py
++++ b/tempest/lib/services/compute/flavors_client.py
+@@ -13,9 +13,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.api_schema.response.compute.v2_1 import flavors as schema
+ from tempest.lib.api_schema.response.compute.v2_1 import flavors_access \
+diff --git a/tempest/lib/services/compute/floating_ip_pools_client.py b/tempest/lib/services/compute/floating_ip_pools_client.py
+index aa065b829..d3af050be 100644
+--- a/tempest/lib/services/compute/floating_ip_pools_client.py
++++ b/tempest/lib/services/compute/floating_ip_pools_client.py
+@@ -13,9 +13,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.api_schema.response.compute.v2_1 import floating_ips as schema
+ from tempest.lib.common import rest_client
+diff --git a/tempest/lib/services/compute/floating_ips_client.py b/tempest/lib/services/compute/floating_ips_client.py
+index e6b691663..d7a1a9b39 100644
+--- a/tempest/lib/services/compute/floating_ips_client.py
++++ b/tempest/lib/services/compute/floating_ips_client.py
+@@ -13,9 +13,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.api_schema.response.compute.v2_1 import floating_ips as schema
+ from tempest.lib.common import rest_client
+diff --git a/tempest/lib/services/compute/hosts_client.py b/tempest/lib/services/compute/hosts_client.py
+index bbecc3ba4..743b4ec2c 100644
+--- a/tempest/lib/services/compute/hosts_client.py
++++ b/tempest/lib/services/compute/hosts_client.py
+@@ -12,9 +12,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.api_schema.response.compute.v2_1 import hosts as schema
+ from tempest.lib.common import rest_client
+diff --git a/tempest/lib/services/compute/images_client.py b/tempest/lib/services/compute/images_client.py
+index b6d8d3043..b252ee9ef 100644
+--- a/tempest/lib/services/compute/images_client.py
++++ b/tempest/lib/services/compute/images_client.py
+@@ -13,9 +13,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.api_schema.response.compute.v2_1 import images as schema
+ from tempest.lib.api_schema.response.compute.v2_45 import images as schemav245
+diff --git a/tempest/lib/services/compute/keypairs_client.py b/tempest/lib/services/compute/keypairs_client.py
+index 9d7b7fcf0..47cf2d09e 100644
+--- a/tempest/lib/services/compute/keypairs_client.py
++++ b/tempest/lib/services/compute/keypairs_client.py
+@@ -13,9 +13,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.api_schema.response.compute.v2_1 import keypairs as schemav21
+ from tempest.lib.api_schema.response.compute.v2_2 import keypairs as schemav22
+diff --git a/tempest/lib/services/compute/migrations_client.py b/tempest/lib/services/compute/migrations_client.py
+index 8a6e62a13..812dc966e 100644
+--- a/tempest/lib/services/compute/migrations_client.py
++++ b/tempest/lib/services/compute/migrations_client.py
+@@ -12,9 +12,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.api_schema.response.compute.v2_1 import migrations as schema
+ from tempest.lib.api_schema.response.compute.v2_23 import migrations \
+diff --git a/tempest/lib/services/compute/quotas_client.py b/tempest/lib/services/compute/quotas_client.py
+index dd796aa06..12e865e8e 100644
+--- a/tempest/lib/services/compute/quotas_client.py
++++ b/tempest/lib/services/compute/quotas_client.py
+@@ -13,9 +13,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.api_schema.response.compute.v2_1 import quotas as schema
+ from tempest.lib.api_schema.response.compute.v2_36 import quotas as schemav236
+diff --git a/tempest/lib/services/compute/security_groups_client.py b/tempest/lib/services/compute/security_groups_client.py
+index 0bba990c7..9493144ce 100644
+--- a/tempest/lib/services/compute/security_groups_client.py
++++ b/tempest/lib/services/compute/security_groups_client.py
+@@ -13,9 +13,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.api_schema.response.compute.v2_1 import \
+     security_groups as schema
+diff --git a/tempest/lib/services/compute/servers_client.py b/tempest/lib/services/compute/servers_client.py
+index c36f80ab1..e82b58f2f 100644
+--- a/tempest/lib/services/compute/servers_client.py
++++ b/tempest/lib/services/compute/servers_client.py
+@@ -16,9 +16,9 @@
+ #    under the License.
+ 
+ import copy
+-from urllib import parse as urllib
+ 
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.api_schema.response.compute.v2_1 import \
+     security_groups as security_groups_schema
+diff --git a/tempest/lib/services/compute/services_client.py b/tempest/lib/services/compute/services_client.py
+index 7d9f3e26f..4e3383fcd 100644
+--- a/tempest/lib/services/compute/services_client.py
++++ b/tempest/lib/services/compute/services_client.py
+@@ -14,9 +14,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.api_schema.response.compute.v2_1 import services as schema
+ from tempest.lib.api_schema.response.compute.v2_11 import services \
+diff --git a/tempest/lib/services/compute/snapshots_client.py b/tempest/lib/services/compute/snapshots_client.py
+index 2e6f7cff6..225eb8d8d 100644
+--- a/tempest/lib/services/compute/snapshots_client.py
++++ b/tempest/lib/services/compute/snapshots_client.py
+@@ -13,9 +13,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.api_schema.response.compute.v2_1 import snapshots as schema
+ from tempest.lib.common import rest_client
+diff --git a/tempest/lib/services/compute/tenant_usages_client.py b/tempest/lib/services/compute/tenant_usages_client.py
+index b47d91750..a34730c1e 100644
+--- a/tempest/lib/services/compute/tenant_usages_client.py
++++ b/tempest/lib/services/compute/tenant_usages_client.py
+@@ -13,9 +13,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.api_schema.response.compute.v2_1 import tenant_usages
+ from tempest.lib.common import rest_client
+diff --git a/tempest/lib/services/compute/volumes_client.py b/tempest/lib/services/compute/volumes_client.py
+index 52172ed5c..11282ee9e 100644
+--- a/tempest/lib/services/compute/volumes_client.py
++++ b/tempest/lib/services/compute/volumes_client.py
+@@ -13,9 +13,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.api_schema.response.compute.v2_1 import volumes as schema
+ from tempest.lib.common import rest_client
+diff --git a/tempest/lib/services/identity/v2/identity_client.py b/tempest/lib/services/identity/v2/identity_client.py
+index 6239ba64f..d7526f3f6 100644
+--- a/tempest/lib/services/identity/v2/identity_client.py
++++ b/tempest/lib/services/identity/v2/identity_client.py
+@@ -10,9 +10,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.common import rest_client
+ 
+diff --git a/tempest/lib/services/identity/v2/roles_client.py b/tempest/lib/services/identity/v2/roles_client.py
+index 1580c3367..a133fc367 100644
+--- a/tempest/lib/services/identity/v2/roles_client.py
++++ b/tempest/lib/services/identity/v2/roles_client.py
+@@ -10,9 +10,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.common import rest_client
+ 
+diff --git a/tempest/lib/services/identity/v2/services_client.py b/tempest/lib/services/identity/v2/services_client.py
+index 2a0e5ca42..fc51cb46e 100644
+--- a/tempest/lib/services/identity/v2/services_client.py
++++ b/tempest/lib/services/identity/v2/services_client.py
+@@ -12,9 +12,8 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.common import rest_client
+ 
+diff --git a/tempest/lib/services/identity/v2/tenants_client.py b/tempest/lib/services/identity/v2/tenants_client.py
+index 3435835f7..09618adfd 100644
+--- a/tempest/lib/services/identity/v2/tenants_client.py
++++ b/tempest/lib/services/identity/v2/tenants_client.py
+@@ -12,9 +12,8 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.common import rest_client
+ 
+diff --git a/tempest/lib/services/identity/v2/users_client.py b/tempest/lib/services/identity/v2/users_client.py
+index c3217c928..72f29bed5 100644
+--- a/tempest/lib/services/identity/v2/users_client.py
++++ b/tempest/lib/services/identity/v2/users_client.py
+@@ -10,9 +10,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.common import rest_client
+ 
+diff --git a/tempest/lib/services/identity/v3/access_rules_client.py b/tempest/lib/services/identity/v3/access_rules_client.py
+index c3be5df7e..4f13e479c 100644
+--- a/tempest/lib/services/identity/v3/access_rules_client.py
++++ b/tempest/lib/services/identity/v3/access_rules_client.py
+@@ -18,9 +18,8 @@
+ https://docs.openstack.org/api-ref/identity/v3/index.html#application-credentials
+ """
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.common import rest_client
+ 
+diff --git a/tempest/lib/services/identity/v3/application_credentials_client.py b/tempest/lib/services/identity/v3/application_credentials_client.py
+index e7f3ac2b1..be2e17203 100644
+--- a/tempest/lib/services/identity/v3/application_credentials_client.py
++++ b/tempest/lib/services/identity/v3/application_credentials_client.py
+@@ -18,9 +18,8 @@
+ https://docs.openstack.org/api-ref/identity/v3/index.html#application-credentials
+ """
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.common import rest_client
+ 
+diff --git a/tempest/lib/services/identity/v3/credentials_client.py b/tempest/lib/services/identity/v3/credentials_client.py
+index 27f61565c..3f4b40e7f 100644
+--- a/tempest/lib/services/identity/v3/credentials_client.py
++++ b/tempest/lib/services/identity/v3/credentials_client.py
+@@ -17,9 +17,8 @@
+ https://docs.openstack.org/api-ref/identity/v3/index.html#credentials
+ """
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.common import rest_client
+ 
+diff --git a/tempest/lib/services/identity/v3/domains_client.py b/tempest/lib/services/identity/v3/domains_client.py
+index c1d198018..bd32cfc8e 100644
+--- a/tempest/lib/services/identity/v3/domains_client.py
++++ b/tempest/lib/services/identity/v3/domains_client.py
+@@ -12,9 +12,8 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.common import rest_client
+ 
+diff --git a/tempest/lib/services/identity/v3/endpoints_client.py b/tempest/lib/services/identity/v3/endpoints_client.py
+index de8538892..236b34c7f 100644
+--- a/tempest/lib/services/identity/v3/endpoints_client.py
++++ b/tempest/lib/services/identity/v3/endpoints_client.py
+@@ -17,9 +17,8 @@
+ https://docs.openstack.org/api-ref/identity/v3/index.html#service-catalog-and-endpoints
+ """
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.common import rest_client
+ 
+diff --git a/tempest/lib/services/identity/v3/groups_client.py b/tempest/lib/services/identity/v3/groups_client.py
+index 6f8206735..2cfb24a03 100644
+--- a/tempest/lib/services/identity/v3/groups_client.py
++++ b/tempest/lib/services/identity/v3/groups_client.py
+@@ -17,9 +17,8 @@
+ https://docs.openstack.org/api-ref/identity/v3/index.html#groups
+ """
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.common import rest_client
+ 
+diff --git a/tempest/lib/services/identity/v3/oauth_token_client.py b/tempest/lib/services/identity/v3/oauth_token_client.py
+index 33360941a..722decad8 100644
+--- a/tempest/lib/services/identity/v3/oauth_token_client.py
++++ b/tempest/lib/services/identity/v3/oauth_token_client.py
+@@ -18,9 +18,9 @@ import hashlib
+ import hmac
+ import random
+ import time
+-from urllib import parse as urlparse
+ 
+ import six
++from six.moves.urllib import parse as urlparse
+ 
+ from oslo_serialization import jsonutils as json
+ 
+diff --git a/tempest/lib/services/identity/v3/projects_client.py b/tempest/lib/services/identity/v3/projects_client.py
+index fffbe7a3f..b186fba32 100644
+--- a/tempest/lib/services/identity/v3/projects_client.py
++++ b/tempest/lib/services/identity/v3/projects_client.py
+@@ -13,9 +13,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.common import rest_client
+ 
+diff --git a/tempest/lib/services/identity/v3/regions_client.py b/tempest/lib/services/identity/v3/regions_client.py
+index 3aed5b8ca..a598c9c29 100644
+--- a/tempest/lib/services/identity/v3/regions_client.py
++++ b/tempest/lib/services/identity/v3/regions_client.py
+@@ -17,9 +17,8 @@
+ https://docs.openstack.org/api-ref/identity/v3/index.html#regions
+ """
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.common import rest_client
+ 
+diff --git a/tempest/lib/services/identity/v3/role_assignments_client.py b/tempest/lib/services/identity/v3/role_assignments_client.py
+index f6157097a..51ee8f669 100644
+--- a/tempest/lib/services/identity/v3/role_assignments_client.py
++++ b/tempest/lib/services/identity/v3/role_assignments_client.py
+@@ -12,9 +12,8 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.common import rest_client
+ 
+diff --git a/tempest/lib/services/identity/v3/roles_client.py b/tempest/lib/services/identity/v3/roles_client.py
+index 483678414..e41dc28c8 100644
+--- a/tempest/lib/services/identity/v3/roles_client.py
++++ b/tempest/lib/services/identity/v3/roles_client.py
+@@ -12,9 +12,8 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.common import rest_client
+ 
+diff --git a/tempest/lib/services/identity/v3/services_client.py b/tempest/lib/services/identity/v3/services_client.py
+index 994df2f52..eb961a5c6 100644
+--- a/tempest/lib/services/identity/v3/services_client.py
++++ b/tempest/lib/services/identity/v3/services_client.py
+@@ -17,9 +17,8 @@
+ https://docs.openstack.org/api-ref/identity/v3/index.html#service-catalog-and-endpoints
+ """
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.common import rest_client
+ 
+diff --git a/tempest/lib/services/identity/v3/trusts_client.py b/tempest/lib/services/identity/v3/trusts_client.py
+index 48a795686..f1cc806ec 100644
+--- a/tempest/lib/services/identity/v3/trusts_client.py
++++ b/tempest/lib/services/identity/v3/trusts_client.py
+@@ -12,9 +12,8 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.common import rest_client
+ 
+diff --git a/tempest/lib/services/identity/v3/users_client.py b/tempest/lib/services/identity/v3/users_client.py
+index 771ffea6d..bba02a494 100644
+--- a/tempest/lib/services/identity/v3/users_client.py
++++ b/tempest/lib/services/identity/v3/users_client.py
+@@ -12,9 +12,8 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.common import rest_client
+ 
+diff --git a/tempest/lib/services/image/v1/images_client.py b/tempest/lib/services/image/v1/images_client.py
+index c9a4a9403..0e76a63d4 100644
+--- a/tempest/lib/services/image/v1/images_client.py
++++ b/tempest/lib/services/image/v1/images_client.py
+@@ -14,9 +14,9 @@
+ #    under the License.
+ 
+ import functools
+-from urllib import parse as urllib
+ 
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.common import rest_client
+ from tempest.lib import exceptions as lib_exc
+diff --git a/tempest/lib/services/image/v2/images_client.py b/tempest/lib/services/image/v2/images_client.py
+index fa3bb8c5f..4713cce2f 100644
+--- a/tempest/lib/services/image/v2/images_client.py
++++ b/tempest/lib/services/image/v2/images_client.py
+@@ -14,9 +14,9 @@
+ #    under the License.
+ 
+ import functools
+-from urllib import parse as urllib
+ 
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.common import rest_client
+ from tempest.lib import exceptions as lib_exc
+diff --git a/tempest/lib/services/image/v2/namespace_objects_client.py b/tempest/lib/services/image/v2/namespace_objects_client.py
+index 32f5a2cef..0cae8169b 100644
+--- a/tempest/lib/services/image/v2/namespace_objects_client.py
++++ b/tempest/lib/services/image/v2/namespace_objects_client.py
+@@ -13,9 +13,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.common import rest_client
+ 
+diff --git a/tempest/lib/services/image/v2/namespace_tags_client.py b/tempest/lib/services/image/v2/namespace_tags_client.py
+index 5bca229ff..4315f167a 100644
+--- a/tempest/lib/services/image/v2/namespace_tags_client.py
++++ b/tempest/lib/services/image/v2/namespace_tags_client.py
+@@ -13,9 +13,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.common import rest_client
+ 
+diff --git a/tempest/lib/services/network/base.py b/tempest/lib/services/network/base.py
+index ee87dd435..fe8b244ea 100644
+--- a/tempest/lib/services/network/base.py
++++ b/tempest/lib/services/network/base.py
+@@ -10,9 +10,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.common import rest_client
+ 
+diff --git a/tempest/lib/services/object_storage/account_client.py b/tempest/lib/services/object_storage/account_client.py
+index 52b253423..8c15a888c 100644
+--- a/tempest/lib/services/object_storage/account_client.py
++++ b/tempest/lib/services/object_storage/account_client.py
+@@ -13,10 +13,10 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+ from xml.etree import ElementTree as etree
+ 
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.common import rest_client
+ 
+diff --git a/tempest/lib/services/object_storage/container_client.py b/tempest/lib/services/object_storage/container_client.py
+index 6d07ec124..da92adc30 100644
+--- a/tempest/lib/services/object_storage/container_client.py
++++ b/tempest/lib/services/object_storage/container_client.py
+@@ -13,11 +13,11 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+ from xml.etree import ElementTree as etree
+ 
+ import debtcollector.moves
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.common import rest_client
+ from tempest.lib import exceptions
+diff --git a/tempest/lib/services/object_storage/object_client.py b/tempest/lib/services/object_storage/object_client.py
+index bb8297561..dd7d5171e 100644
+--- a/tempest/lib/services/object_storage/object_client.py
++++ b/tempest/lib/services/object_storage/object_client.py
+@@ -14,8 +14,8 @@
+ #    under the License.
+ import ssl
+ 
+-from http import client as httplib
+-from urllib import parse as urlparse
++from six.moves import http_client as httplib
++from six.moves.urllib import parse as urlparse
+ 
+ from tempest.lib.common import rest_client
+ from tempest.lib import exceptions
+diff --git a/tempest/lib/services/placement/placement_client.py b/tempest/lib/services/placement/placement_client.py
+index 216ac08c2..b8e91b8e4 100644
+--- a/tempest/lib/services/placement/placement_client.py
++++ b/tempest/lib/services/placement/placement_client.py
+@@ -12,9 +12,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.common import rest_client
+ from tempest.lib.services.placement import base_placement_client
+diff --git a/tempest/lib/services/placement/resource_providers_client.py b/tempest/lib/services/placement/resource_providers_client.py
+index e6fbcb285..d9f62069c 100644
+--- a/tempest/lib/services/placement/resource_providers_client.py
++++ b/tempest/lib/services/placement/resource_providers_client.py
+@@ -10,9 +10,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.common import rest_client
+ from tempest.lib.services.placement import base_placement_client
+diff --git a/tempest/lib/services/volume/v1/hosts_client.py b/tempest/lib/services/volume/v1/hosts_client.py
+index 2e9427422..f3446780d 100644
+--- a/tempest/lib/services/volume/v1/hosts_client.py
++++ b/tempest/lib/services/volume/v1/hosts_client.py
+@@ -13,9 +13,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.common import rest_client
+ 
+diff --git a/tempest/lib/services/volume/v1/quotas_client.py b/tempest/lib/services/volume/v1/quotas_client.py
+index d7c96987d..7f191ca76 100644
+--- a/tempest/lib/services/volume/v1/quotas_client.py
++++ b/tempest/lib/services/volume/v1/quotas_client.py
+@@ -12,9 +12,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.common import rest_client
+ 
+diff --git a/tempest/lib/services/volume/v1/services_client.py b/tempest/lib/services/volume/v1/services_client.py
+index 957a0e634..d438a34ec 100644
+--- a/tempest/lib/services/volume/v1/services_client.py
++++ b/tempest/lib/services/volume/v1/services_client.py
+@@ -13,9 +13,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.common import rest_client
+ 
+diff --git a/tempest/lib/services/volume/v1/snapshots_client.py b/tempest/lib/services/volume/v1/snapshots_client.py
+index a478686e1..7dfdcf276 100644
+--- a/tempest/lib/services/volume/v1/snapshots_client.py
++++ b/tempest/lib/services/volume/v1/snapshots_client.py
+@@ -10,9 +10,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.common import rest_client
+ from tempest.lib import exceptions as lib_exc
+diff --git a/tempest/lib/services/volume/v1/types_client.py b/tempest/lib/services/volume/v1/types_client.py
+index 6237fb45a..d434e654d 100644
+--- a/tempest/lib/services/volume/v1/types_client.py
++++ b/tempest/lib/services/volume/v1/types_client.py
+@@ -13,9 +13,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.common import rest_client
+ from tempest.lib import exceptions as lib_exc
+diff --git a/tempest/lib/services/volume/v1/volumes_client.py b/tempest/lib/services/volume/v1/volumes_client.py
+index 9fca800a5..2efb0da74 100644
+--- a/tempest/lib/services/volume/v1/volumes_client.py
++++ b/tempest/lib/services/volume/v1/volumes_client.py
+@@ -13,10 +13,9 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
+ import six
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.common import rest_client
+ from tempest.lib import exceptions as lib_exc
+diff --git a/tempest/lib/services/volume/v3/backups_client.py b/tempest/lib/services/volume/v3/backups_client.py
+index 4bf7ffb64..1df45fa20 100644
+--- a/tempest/lib/services/volume/v3/backups_client.py
++++ b/tempest/lib/services/volume/v3/backups_client.py
+@@ -13,9 +13,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.api_schema.response.volume import backups as schema
+ from tempest.lib.common import rest_client
+diff --git a/tempest/lib/services/volume/v3/group_snapshots_client.py b/tempest/lib/services/volume/v3/group_snapshots_client.py
+index 0f36fc970..4051c0657 100644
+--- a/tempest/lib/services/volume/v3/group_snapshots_client.py
++++ b/tempest/lib/services/volume/v3/group_snapshots_client.py
+@@ -13,9 +13,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.api_schema.response.volume import group_snapshots as schema
+ from tempest.lib.common import rest_client
+diff --git a/tempest/lib/services/volume/v3/group_types_client.py b/tempest/lib/services/volume/v3/group_types_client.py
+index 9de36f41b..1dcd508ee 100644
+--- a/tempest/lib/services/volume/v3/group_types_client.py
++++ b/tempest/lib/services/volume/v3/group_types_client.py
+@@ -13,9 +13,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.api_schema.response.volume import group_types as schema
+ from tempest.lib.common import rest_client
+diff --git a/tempest/lib/services/volume/v3/groups_client.py b/tempest/lib/services/volume/v3/groups_client.py
+index d1500cf51..3d8523d46 100644
+--- a/tempest/lib/services/volume/v3/groups_client.py
++++ b/tempest/lib/services/volume/v3/groups_client.py
+@@ -13,9 +13,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.api_schema.response.volume import groups as schema
+ from tempest.lib.common import rest_client
+diff --git a/tempest/lib/services/volume/v3/hosts_client.py b/tempest/lib/services/volume/v3/hosts_client.py
+index 9c6465977..019a85283 100644
+--- a/tempest/lib/services/volume/v3/hosts_client.py
++++ b/tempest/lib/services/volume/v3/hosts_client.py
+@@ -13,9 +13,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.api_schema.response.volume import hosts as schema
+ from tempest.lib.common import rest_client
+diff --git a/tempest/lib/services/volume/v3/quotas_client.py b/tempest/lib/services/volume/v3/quotas_client.py
+index 3f4c4e1c6..5b1a52c23 100644
+--- a/tempest/lib/services/volume/v3/quotas_client.py
++++ b/tempest/lib/services/volume/v3/quotas_client.py
+@@ -13,9 +13,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.api_schema.response.volume import quotas as schema
+ from tempest.lib.common import rest_client
+diff --git a/tempest/lib/services/volume/v3/services_client.py b/tempest/lib/services/volume/v3/services_client.py
+index 4672da8c8..8bc82c9b2 100644
+--- a/tempest/lib/services/volume/v3/services_client.py
++++ b/tempest/lib/services/volume/v3/services_client.py
+@@ -13,9 +13,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.api_schema.response.volume import services as schema
+ from tempest.lib.common import rest_client
+diff --git a/tempest/lib/services/volume/v3/snapshots_client.py b/tempest/lib/services/volume/v3/snapshots_client.py
+index ae31ee9d7..8ca2044d2 100644
+--- a/tempest/lib/services/volume/v3/snapshots_client.py
++++ b/tempest/lib/services/volume/v3/snapshots_client.py
+@@ -13,9 +13,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.api_schema.response.volume import snapshots as schema
+ from tempest.lib.common import rest_client
+diff --git a/tempest/lib/services/volume/v3/transfers_client.py b/tempest/lib/services/volume/v3/transfers_client.py
+index 36198c30e..f572f95c2 100644
+--- a/tempest/lib/services/volume/v3/transfers_client.py
++++ b/tempest/lib/services/volume/v3/transfers_client.py
+@@ -13,9 +13,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.api_schema.response.volume import transfers as schema
+ from tempest.lib.common import rest_client
+diff --git a/tempest/lib/services/volume/v3/types_client.py b/tempest/lib/services/volume/v3/types_client.py
+index 9858d877d..1ebd447e4 100644
+--- a/tempest/lib/services/volume/v3/types_client.py
++++ b/tempest/lib/services/volume/v3/types_client.py
+@@ -13,9 +13,8 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.api_schema.response.volume import volume_types as schema
+ from tempest.lib.common import rest_client
+diff --git a/tempest/lib/services/volume/v3/versions_client.py b/tempest/lib/services/volume/v3/versions_client.py
+index 0bed82735..4ac411241 100644
+--- a/tempest/lib/services/volume/v3/versions_client.py
++++ b/tempest/lib/services/volume/v3/versions_client.py
+@@ -12,7 +12,7 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib.parse import urljoin
++from six.moves.urllib.parse import urljoin
+ 
+ from oslo_serialization import jsonutils as json
+ 
+diff --git a/tempest/lib/services/volume/v3/volumes_client.py b/tempest/lib/services/volume/v3/volumes_client.py
+index 147a79b22..b8535d812 100644
+--- a/tempest/lib/services/volume/v3/volumes_client.py
++++ b/tempest/lib/services/volume/v3/volumes_client.py
+@@ -13,10 +13,9 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
+-from urllib import parse as urllib
+-
+ from oslo_serialization import jsonutils as json
+ import six
++from six.moves.urllib import parse as urllib
+ 
+ from tempest.lib.api_schema.response.volume import volumes as schema
+ from tempest.lib.common import rest_client
+diff --git a/tempest/services/orchestration/json/orchestration_client.py b/tempest/services/orchestration/json/orchestration_client.py
+index 0d7720edb..9fec5482b 100644
+--- a/tempest/services/orchestration/json/orchestration_client.py
++++ b/tempest/services/orchestration/json/orchestration_client.py
+@@ -15,9 +15,9 @@
+ 
+ import re
+ import time
+-from urllib import parse as urllib
+ 
+ from oslo_serialization import jsonutils as json
++from six.moves.urllib import parse as urllib
+ 
+ from tempest import exceptions
+ from tempest.lib.common import rest_client
+diff --git a/tempest/tests/common/test_compute.py b/tempest/tests/common/test_compute.py
+index 142bb081e..45a439ce9 100644
+--- a/tempest/tests/common/test_compute.py
++++ b/tempest/tests/common/test_compute.py
+@@ -15,7 +15,7 @@
+ 
+ from unittest import mock
+ 
+-from urllib import parse as urlparse
++from six.moves.urllib import parse as urlparse
+ 
+ 
+ from tempest.common import compute
+diff --git a/tools/check_logs.py b/tools/check_logs.py
+index 4b059f2f4..7e191a00e 100755
+--- a/tools/check_logs.py
++++ b/tools/check_logs.py
+@@ -20,9 +20,9 @@ import gzip
+ import os
+ import re
+ import sys
+-import urllib.request as urlreq
+ 
+ import six
++import six.moves.urllib.request as urlreq
+ import yaml
+ 
+ # DEVSTACK_GATE_GRENADE is either unset if grenade is not running
+-- 
+2.27.0
+
