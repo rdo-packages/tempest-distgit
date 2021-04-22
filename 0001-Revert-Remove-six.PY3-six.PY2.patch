@@ -1,20 +1,20 @@
-From fb51902e618798446f555be39624cab2938cbd0c Mon Sep 17 00:00:00 2001
-From: Martin Kopec <mkopec@redhat.com>
-Date: Sun, 20 Dec 2020 19:39:20 +0000
+From cccfde6d040573b6578080103c728076f4918ed5 Mon Sep 17 00:00:00 2001
+From: Martin Kopec <xkopec42@gmail.com>
+Date: Thu, 22 Apr 2021 08:18:35 +0000
 Subject: [PATCH] Revert "Remove six.PY3/six.PY2"
 
 This reverts commit 7d91c87345b1f18b19202ba7d447ab49d8f721e7.
 ---
  tempest/api/compute/servers/test_novnc.py | 11 ++++++++---
  tempest/cmd/run.py                        |  7 ++++++-
- tempest/common/compute.py                 | 12 +++++++++---
+ tempest/common/compute.py                 | 15 +++++++++++----
  tempest/lib/cli/base.py                   |  8 +++++++-
  tempest/lib/common/thread.py              | 13 ++++++++++---
  tempest/tests/cmd/test_run.py             |  7 ++++++-
- 6 files changed, 46 insertions(+), 12 deletions(-)
+ 6 files changed, 48 insertions(+), 13 deletions(-)
 
 diff --git a/tempest/api/compute/servers/test_novnc.py b/tempest/api/compute/servers/test_novnc.py
-index 6ebdbdb08..7931ca978 100644
+index a9c0e5647..a08c5eaca 100644
 --- a/tempest/api/compute/servers/test_novnc.py
 +++ b/tempest/api/compute/servers/test_novnc.py
 @@ -26,6 +26,11 @@ from tempest.lib import decorators
@@ -56,18 +56,18 @@ index 6ebdbdb08..7931ca978 100644
  
          # Say to leave the desktop as shared as part of client initialization
 diff --git a/tempest/cmd/run.py b/tempest/cmd/run.py
-index 8bebce2c9..d82b6dff7 100644
+index 2669ff774..ae1bdb3e9 100644
 --- a/tempest/cmd/run.py
 +++ b/tempest/cmd/run.py
-@@ -129,6 +129,7 @@ import sys
- 
+@@ -130,6 +130,7 @@ import sys
  from cliff import command
+ from oslo_log import log
  from oslo_serialization import jsonutils as json
 +import six
  from stestr import commands
  
  from tempest import clients
-@@ -138,6 +139,10 @@ from tempest.cmd import workspace
+@@ -139,6 +140,10 @@ from tempest.cmd import workspace
  from tempest.common import credentials_factory as credentials
  from tempest import config
  
@@ -78,7 +78,7 @@ index 8bebce2c9..d82b6dff7 100644
  CONF = config.CONF
  SAVED_STATE_JSON = "saved_state.json"
  
-@@ -162,7 +167,7 @@ class TempestRun(command.Command):
+@@ -165,7 +170,7 @@ class TempestRun(command.Command):
          # environment variable and fall back to "python", under python3
          # if it does not exist. we should set it to the python3 executable
          # to deal with this situation better for now.
@@ -88,18 +88,21 @@ index 8bebce2c9..d82b6dff7 100644
  
      def _create_stestr_conf(self):
 diff --git a/tempest/common/compute.py b/tempest/common/compute.py
-index 42f68f1d8..da3a4a9dd 100644
+index a062f6f0f..da3a4a9dd 100644
 --- a/tempest/common/compute.py
 +++ b/tempest/common/compute.py
-@@ -19,6 +19,7 @@ import ssl
+@@ -18,7 +18,9 @@ import socket
+ import ssl
  import struct
  import textwrap
- 
+-from urllib import parse as urlparse
++
 +import six
- from six.moves.urllib import parse as urlparse
++from six.moves.urllib import parse as urlparse
  
  from oslo_log import log as logging
-@@ -30,6 +31,11 @@ from tempest.lib.common import fixed_network
+ from oslo_utils import excutils
+@@ -29,6 +31,11 @@ from tempest.lib.common import fixed_network
  from tempest.lib.common import rest_client
  from tempest.lib.common.utils import data_utils
  
@@ -111,7 +114,7 @@ index 42f68f1d8..da3a4a9dd 100644
  CONF = config.CONF
  
  LOG = logging.getLogger(__name__)
-@@ -365,8 +371,8 @@ class _WebSocket(object):
+@@ -364,8 +371,8 @@ class _WebSocket(object):
              # frames less than 125 bytes here (for the negotiation) and
              # that only the 2nd byte contains the length, and since the
              # server doesn't do masking, we can just read the data length
@@ -122,7 +125,7 @@ index 42f68f1d8..da3a4a9dd 100644
  
      def send_frame(self, data):
          """Wrapper for sending data to add in the WebSocket frame format."""
-@@ -383,7 +389,7 @@ class _WebSocket(object):
+@@ -382,7 +389,7 @@ class _WebSocket(object):
              frame_bytes.append(mask[i])
          # Mask each of the actual data bytes that we are going to send
          for i in range(len(data)):
@@ -186,10 +189,10 @@ index ef0ec7367..b47d40dcf 100644
 +    # to threading module
 +    from threading import get_ident  # noqa: F401
 diff --git a/tempest/tests/cmd/test_run.py b/tempest/tests/cmd/test_run.py
-index 3c99bbe57..5d9ddfae1 100644
+index 3b5e901a0..7ac965fee 100644
 --- a/tempest/tests/cmd/test_run.py
 +++ b/tempest/tests/cmd/test_run.py
-@@ -29,6 +29,10 @@ from tempest import config
+@@ -28,6 +28,10 @@ from tempest import config
  from tempest.lib.common.utils import data_utils
  from tempest.tests import base
  
@@ -200,7 +203,7 @@ index 3c99bbe57..5d9ddfae1 100644
  DEVNULL = open(os.devnull, 'wb')
  atexit.register(DEVNULL.close)
  
-@@ -145,7 +149,8 @@ class TestRunReturnCode(base.TestCase):
+@@ -161,7 +165,8 @@ class TestRunReturnCode(base.TestCase):
          ]
          # NOTE(mtreinish): on python 3 the subprocess prints b'' around
          # stdout.
@@ -211,5 +214,5 @@ index 3c99bbe57..5d9ddfae1 100644
  
      def test_tempest_run_with_worker_file(self):
 -- 
-2.20.1
+2.27.0
 
