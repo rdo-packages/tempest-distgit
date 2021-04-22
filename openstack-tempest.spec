@@ -36,11 +36,17 @@ Source0:        http://tarballs.openstack.org/tempest/tempest-%{upstream_version
 Patch 0001: 0001-Revert-Remove-tempest-manager.py-after-4-year-deprec.patch
 # workaround for handling py2 and py3 mock issue
 %if %{pyver} == 2
-Patch0001: 0001-Revert-Remove-six.PY3-six.PY2.patch
-Patch0002: 0002-Fix-unbound-method.patch
-Patch0003: 0003-Replace-StringIO-by-BytesIO.patch
-Patch0004: 0004-Revert-__future__-removal.patch
-Patch0005: 0005-Use-mock-not-from-unittest.patch
+Patch0001: 0001-Revert-part1-Remove-six.patch
+Patch0002: 0002-Revert-Remove-usage-of-six.patch
+Patch0003: 0003-Revert-Remove-usage-of-six.patch
+Patch0004: 0004-Revert-Remove-usage-of-six.patch
+Patch0005: 0005-Revert-Remove-usage-of-six.patch
+Patch0006: 0006-Revert-Remove-six.PY3-six.PY2.patch
+Patch0007: 0007-Fix-unbound-method.patch
+Patch0008: 0008-Replace-StringIO-by-BytesIO.patch
+Patch0009: 0009-Revert-__future__-removal.patch
+Patch0010: 0010-Use-mock-not-from-unittest.patch
+Patch0011: 0011-Reorder-arguments-so-that-params-is-the-last.patch
 %endif
 BuildArch:      noarch
 

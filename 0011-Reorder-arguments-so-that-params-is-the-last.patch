@@ -1,0 +1,38 @@
+From 6fe6a474454a46d92825986ea89f00d23058bdbe Mon Sep 17 00:00:00 2001
+From: Martin Kopec <xkopec42@gmail.com>
+Date: Thu, 22 Apr 2021 09:09:12 +0000
+Subject: [PATCH] Reorder arguments so that **params is the last
+
+python3 doesn't care about the order of the args, however,
+py2 does.
+---
+ tempest/cmd/run.py | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/tempest/cmd/run.py b/tempest/cmd/run.py
+index ae1bdb3e9..08dce120d 100644
+--- a/tempest/cmd/run.py
++++ b/tempest/cmd/run.py
+@@ -265,15 +265,15 @@ class TempestRun(command.Command):
+             }
+             try:
+                 return_code = commands.run_command(
+-                    **params, exclude_list=ex_list,
+-                    include_list=in_list, exclude_regex=ex_regex)
++                    exclude_list=ex_list, include_list=in_list,
++                    exclude_regex=ex_regex, **params)
+             except TypeError:
+                 # exclude_list, include_list and exclude_regex are defined only
+                 # in stestr >= 3.1.0, this except block catches the case when
+                 # tempest is executed with an older stestr
+                 return_code = commands.run_command(
+-                    **params, blacklist_file=ex_list,
+-                    whitelist_file=in_list, black_regex=ex_regex)
++                    blacklist_file=ex_list, whitelist_file=in_list,
++                    black_regex=ex_regex, **params)
+             if return_code > 0:
+                 sys.exit(return_code)
+         return return_code
+-- 
+2.27.0
+

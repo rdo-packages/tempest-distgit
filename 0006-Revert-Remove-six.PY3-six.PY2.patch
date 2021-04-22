@@ -1,6 +1,6 @@
-From fb51902e618798446f555be39624cab2938cbd0c Mon Sep 17 00:00:00 2001
-From: Martin Kopec <mkopec@redhat.com>
-Date: Sun, 20 Dec 2020 19:39:20 +0000
+From a049d5d53f013c5b6c514e9f68266111d383402a Mon Sep 17 00:00:00 2001
+From: Martin Kopec <xkopec42@gmail.com>
+Date: Thu, 22 Apr 2021 10:12:09 +0000
 Subject: [PATCH] Revert "Remove six.PY3/six.PY2"
 
 This reverts commit 7d91c87345b1f18b19202ba7d447ab49d8f721e7.
@@ -56,18 +56,18 @@ index 6ebdbdb08..7931ca978 100644
  
          # Say to leave the desktop as shared as part of client initialization
 diff --git a/tempest/cmd/run.py b/tempest/cmd/run.py
-index 8bebce2c9..d82b6dff7 100644
+index 2669ff774..ae1bdb3e9 100644
 --- a/tempest/cmd/run.py
 +++ b/tempest/cmd/run.py
-@@ -129,6 +129,7 @@ import sys
- 
+@@ -130,6 +130,7 @@ import sys
  from cliff import command
+ from oslo_log import log
  from oslo_serialization import jsonutils as json
 +import six
  from stestr import commands
  
  from tempest import clients
-@@ -138,6 +139,10 @@ from tempest.cmd import workspace
+@@ -139,6 +140,10 @@ from tempest.cmd import workspace
  from tempest.common import credentials_factory as credentials
  from tempest import config
  
@@ -78,7 +78,7 @@ index 8bebce2c9..d82b6dff7 100644
  CONF = config.CONF
  SAVED_STATE_JSON = "saved_state.json"
  
-@@ -162,7 +167,7 @@ class TempestRun(command.Command):
+@@ -165,7 +170,7 @@ class TempestRun(command.Command):
          # environment variable and fall back to "python", under python3
          # if it does not exist. we should set it to the python3 executable
          # to deal with this situation better for now.
@@ -186,7 +186,7 @@ index ef0ec7367..b47d40dcf 100644
 +    # to threading module
 +    from threading import get_ident  # noqa: F401
 diff --git a/tempest/tests/cmd/test_run.py b/tempest/tests/cmd/test_run.py
-index 3c99bbe57..5d9ddfae1 100644
+index ec7b76092..ce418e463 100644
 --- a/tempest/tests/cmd/test_run.py
 +++ b/tempest/tests/cmd/test_run.py
 @@ -29,6 +29,10 @@ from tempest import config
@@ -200,7 +200,7 @@ index 3c99bbe57..5d9ddfae1 100644
  DEVNULL = open(os.devnull, 'wb')
  atexit.register(DEVNULL.close)
  
-@@ -145,7 +149,8 @@ class TestRunReturnCode(base.TestCase):
+@@ -162,7 +166,8 @@ class TestRunReturnCode(base.TestCase):
          ]
          # NOTE(mtreinish): on python 3 the subprocess prints b'' around
          # stdout.
@@ -211,5 +211,5 @@ index 3c99bbe57..5d9ddfae1 100644
  
      def test_tempest_run_with_worker_file(self):
 -- 
-2.20.1
+2.27.0
 
