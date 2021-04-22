@@ -27,14 +27,6 @@ Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://launchpad.net/tempest
 Source0:        http://tarballs.openstack.org/tempest/tempest-%{upstream_version}.tar.gz
-# workaround for handling py2 and py3 mock issue
-%if %{pyver} == 2
-Patch0001: 0001-Revert-Remove-six.PY3-six.PY2.patch
-Patch0002: 0002-Fix-unbound-method.patch
-Patch0003: 0003-Replace-StringIO-by-BytesIO.patch
-Patch0004: 0004-Revert-__future__-removal.patch
-Patch0005: 0005-Use-mock-not-from-unittest.patch
-%endif
 # This reverts removal of an old tempest/manager.py in order to provide
 # compatibility with neutron-tempest-plugin which has switched to the
 # new manager location at very latest and the change hasn't been included in
@@ -42,6 +34,15 @@ Patch0005: 0005-Use-mock-not-from-unittest.patch
 # tempest 26.1.0 and ship it in Victoria. Tempest 26.1.0 contains apart from
 # the fixes also a significant argument deprecation.
 Patch 0001: 0001-Revert-Remove-tempest-manager.py-after-4-year-deprec.patch
+# workaround for handling py2 and py3 mock issue
+%if %{pyver} == 2
+Patch0001: 0001-Revert-Remove-six.PY3-six.PY2.patch
+Patch0002: 0002-Fix-unbound-method.patch
+Patch0003: 0003-Replace-StringIO-by-BytesIO.patch
+Patch0004: 0004-Revert-__future__-removal.patch
+Patch0005: 0005-Use-mock-not-from-unittest.patch
+Patch0006: 0006-Revert-Remove-usage-of-six.patch
+%endif
 BuildArch:      noarch
 
 BuildRequires:  git

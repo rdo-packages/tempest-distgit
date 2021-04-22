@@ -1,0 +1,125 @@
+From 28459b525a2d555352a8be9ecc7272a7f4e878a9 Mon Sep 17 00:00:00 2001
+From: Martin Kopec <xkopec42@gmail.com>
+Date: Thu, 22 Apr 2021 08:51:05 +0000
+Subject: [PATCH] Revert "Remove usage of six"
+
+This reverts commit 4c3bf8f80068ccfd28dd68dfae20c6bca948326b.
+---
+ tempest/lib/auth.py                  | 4 +++-
+ tempest/lib/common/cred_client.py    | 4 +++-
+ tempest/lib/common/cred_provider.py  | 4 +++-
+ tempest/test_discover/plugins.py     | 4 +++-
+ tempest/tests/lib/test_decorators.py | 4 +++-
+ 5 files changed, 15 insertions(+), 5 deletions(-)
+
+diff --git a/tempest/lib/auth.py b/tempest/lib/auth.py
+index 51c4bd6cb..f478719b9 100644
+--- a/tempest/lib/auth.py
++++ b/tempest/lib/auth.py
+@@ -21,6 +21,7 @@ import re
+ import urlparse
+ 
+ from oslo_log import log as logging
++import six
+ 
+ from tempest.lib import exceptions
+ from tempest.lib.services.identity.v2 import token_client as json_v2id
+@@ -64,7 +65,8 @@ def apply_url_filters(url, filters):
+     return url
+ 
+ 
+-class AuthProvider(object, metaclass=abc.ABCMeta):
++@six.add_metaclass(abc.ABCMeta)
++class AuthProvider(object):
+     """Provide authentication"""
+ 
+     SCOPES = set(['project'])
+diff --git a/tempest/lib/common/cred_client.py b/tempest/lib/common/cred_client.py
+index f13d6d033..f6e9b49eb 100644
+--- a/tempest/lib/common/cred_client.py
++++ b/tempest/lib/common/cred_client.py
+@@ -13,6 +13,7 @@
+ import abc
+ 
+ from oslo_log import log as logging
++import six
+ 
+ from tempest.lib import auth
+ from tempest.lib import exceptions as lib_exc
+@@ -21,7 +22,8 @@ from tempest.lib.services.identity.v2 import identity_client as v2_identity
+ LOG = logging.getLogger(__name__)
+ 
+ 
+-class CredsClient(object, metaclass=abc.ABCMeta):
++@six.add_metaclass(abc.ABCMeta)
++class CredsClient(object):
+     """This class is a wrapper around the identity clients
+ 
+      to provide a single interface for managing credentials in both v2 and v3
+diff --git a/tempest/lib/common/cred_provider.py b/tempest/lib/common/cred_provider.py
+index 069172a47..591ef7e19 100644
+--- a/tempest/lib/common/cred_provider.py
++++ b/tempest/lib/common/cred_provider.py
+@@ -14,12 +14,14 @@
+ 
+ import abc
+ 
++import six
+ 
+ from tempest.lib import auth
+ from tempest.lib import exceptions
+ 
+ 
+-class CredentialProvider(object, metaclass=abc.ABCMeta):
++@six.add_metaclass(abc.ABCMeta)
++class CredentialProvider(object):
+     def __init__(self, identity_version, name=None,
+                  network_resources=None, credentials_domain=None,
+                  admin_role=None, identity_uri=None):
+diff --git a/tempest/test_discover/plugins.py b/tempest/test_discover/plugins.py
+index 1d69d9d29..b20b60e41 100644
+--- a/tempest/test_discover/plugins.py
++++ b/tempest/test_discover/plugins.py
+@@ -15,6 +15,7 @@
+ import abc
+ 
+ from oslo_log import log as logging
++import six
+ import stevedore
+ 
+ from tempest.lib.common.utils import misc
+@@ -23,7 +24,8 @@ from tempest.lib.services import clients
+ LOG = logging.getLogger(__name__)
+ 
+ 
+-class TempestPlugin(object, metaclass=abc.ABCMeta):
++@six.add_metaclass(abc.ABCMeta)
++class TempestPlugin(object):
+     """Provide basic hooks for an external plugin
+ 
+     To provide tempest the necessary information to run the plugin.
+diff --git a/tempest/tests/lib/test_decorators.py b/tempest/tests/lib/test_decorators.py
+index 71dffcc01..cfc882e09 100644
+--- a/tempest/tests/lib/test_decorators.py
++++ b/tempest/tests/lib/test_decorators.py
+@@ -16,6 +16,7 @@
+ import abc
+ import mock
+ 
++import six
+ import testtools
+ 
+ from tempest.lib import base as test
+@@ -68,7 +69,8 @@ class TestAttrDecorator(base.TestCase):
+                                condition=True)
+ 
+ 
+-class BaseSkipDecoratorTests(object, metaclass=abc.ABCMeta):
++@six.add_metaclass(abc.ABCMeta)
++class BaseSkipDecoratorTests(object):
+ 
+     @abc.abstractmethod
+     def _test_skip_helper(self, raise_exception=True, expected_to_skip=True,
+-- 
+2.27.0
+
