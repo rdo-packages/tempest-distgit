@@ -41,6 +41,8 @@ Patch0002: 0002-Fix-unbound-method.patch
 Patch0003: 0003-Replace-StringIO-by-BytesIO.patch
 Patch0004: 0004-Revert-__future__-removal.patch
 Patch0005: 0005-Use-mock-not-from-unittest.patch
+Patch0006: 0006-Revert-Remove-usage-of-six.patch
+Patch0007: 0007-Reorder-arguments-so-that-params-is-the-last.patch
 %endif
 BuildArch:      noarch
 
