@@ -1,0 +1,54 @@
+From 3cce546cc30d6e47a4e421ced6b1bddfcd4bd6c9 Mon Sep 17 00:00:00 2001
+From: Martin Kopec <xkopec42@gmail.com>
+Date: Thu, 22 Apr 2021 10:46:31 +0000
+Subject: [PATCH] Reorder arguments and use parse from six
+
+python3 doesn't care about the order of the args, however,
+py2 does so set **params as the last argument in run_command
+call.
+The patch also import parse from six.moves.urllib.
+---
+ tempest/cmd/run.py                           | 8 ++++----
+ tempest/scenario/test_dashboard_basic_ops.py | 2 +-
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/tempest/cmd/run.py b/tempest/cmd/run.py
+index ae1bdb3e9..08dce120d 100644
+--- a/tempest/cmd/run.py
++++ b/tempest/cmd/run.py
+@@ -265,15 +265,15 @@ class TempestRun(command.Command):
+             }
+             try:
+                 return_code = commands.run_command(
+-                    **params, exclude_list=ex_list,
+-                    include_list=in_list, exclude_regex=ex_regex)
++                    exclude_list=ex_list, include_list=in_list,
++                    exclude_regex=ex_regex, **params)
+             except TypeError:
+                 # exclude_list, include_list and exclude_regex are defined only
+                 # in stestr >= 3.1.0, this except block catches the case when
+                 # tempest is executed with an older stestr
+                 return_code = commands.run_command(
+-                    **params, blacklist_file=ex_list,
+-                    whitelist_file=in_list, black_regex=ex_regex)
++                    blacklist_file=ex_list, whitelist_file=in_list,
++                    black_regex=ex_regex, **params)
+             if return_code > 0:
+                 sys.exit(return_code)
+         return return_code
+diff --git a/tempest/scenario/test_dashboard_basic_ops.py b/tempest/scenario/test_dashboard_basic_ops.py
+index b1098fa9c..96b083b23 100644
+--- a/tempest/scenario/test_dashboard_basic_ops.py
++++ b/tempest/scenario/test_dashboard_basic_ops.py
+@@ -12,7 +12,7 @@
+ 
+ import html.parser
+ import ssl
+-from urllib import parse
++from six.moves.urllib import parse
+ from urllib import request
+ 
+ from tempest.common import utils
+-- 
+2.27.0
+
