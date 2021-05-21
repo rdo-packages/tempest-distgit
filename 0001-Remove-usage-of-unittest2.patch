@@ -1,0 +1,55 @@
+From 7f3168b1cc1f748fa641cd844a0a64e2c2d25a66 Mon Sep 17 00:00:00 2001
+From: Alfredo Moralejo <amoralej@redhat.com>
+Date: Fri, 21 May 2021 12:37:30 +0200
+Subject: [PATCH] Remove usage of unittest2
+
+unittest2 is being removed in CentOS9. This patch is removing usage of
+it in tempest until it's properly implemented upstream.
+---
+ requirements.txt    |  1 -
+ tempest/lib/base.py | 12 +-----------
+ 2 files changed, 1 insertion(+), 12 deletions(-)
+
+diff --git a/requirements.txt b/requirements.txt
+index c71cabea9..d389e9141 100644
+--- a/requirements.txt
++++ b/requirements.txt
+@@ -20,4 +20,3 @@ stevedore>=1.20.0 # Apache-2.0
+ PrettyTable>=0.7.1 # BSD
+ urllib3>=1.21.1 # MIT
+ debtcollector>=1.2.0 # Apache-2.0
+-unittest2>=1.1.0 # BSD
+diff --git a/tempest/lib/base.py b/tempest/lib/base.py
+index 74ae77cca..172562d17 100644
+--- a/tempest/lib/base.py
++++ b/tempest/lib/base.py
+@@ -14,25 +14,15 @@
+ #    under the License.
+ 
+ import os
+-import sys
+ 
+ import fixtures
+-import pkg_resources
+ import testtools
+ 
+ 
+ def _handle_skip_exception():
+     try:
+-        stestr_version = pkg_resources.parse_version(
+-            pkg_resources.get_distribution("stestr").version)
+-        stestr_min = pkg_resources.parse_version('2.5.0')
+-        new_stestr = (stestr_version >= stestr_min)
+         import unittest
+-        import unittest2
+-        if sys.version_info >= (3, 5) and new_stestr:
+-            testtools.TestCase.skipException = unittest.case.SkipTest
+-        else:
+-            testtools.TestCase.skipException = unittest2.case.SkipTest
++        testtools.TestCase.skipException = unittest.case.SkipTest
+     except Exception:
+         pass
+ 
+-- 
+2.26.2
+
