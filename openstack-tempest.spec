@@ -22,6 +22,13 @@ Url:            https://launchpad.net/tempest
 Source0:        http://tarballs.openstack.org/tempest/tempest-%{upstream_version}.tar.gz
 BuildArch:      noarch
 
+# This patch is a partial backport of
+# https://review.opendev.org/c/openstack/tempest/+/768583
+# which did inclusive diversity changes.
+# In order to allow tempest users easier transition, this commit
+# backports **only** new arguments (and deprecates the replaced ones).
+Patch0001: 0001-Introduce-inclusive-args.patch
+
 BuildRequires:  git
 BuildRequires:  python2-oslo-config
 BuildRequires:  python2-pbr
