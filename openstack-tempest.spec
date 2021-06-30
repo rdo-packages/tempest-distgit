@@ -15,12 +15,19 @@ other specific tests useful in validating an OpenStack deployment.
 Name:           openstack-%{project}
 Epoch:          1
 Version:        18.0.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://launchpad.net/tempest
 Source0:        http://tarballs.openstack.org/tempest/tempest-%{upstream_version}.tar.gz
 BuildArch:      noarch
+
+# This patch is a partial backport of
+# https://review.opendev.org/c/openstack/tempest/+/768583
+# which did inclusive diversity changes.
+# In order to allow tempest users easier transition, this commit
+# backports **only** new arguments (and deprecates the replaced ones).
+Patch0001: 0001-Introduce-inclusive-args.patch
 
 BuildRequires:  git
 BuildRequires:  python2-oslo-config
@@ -336,6 +343,9 @@ stestr-3 --test-path $OS_TEST_PATH run
 %endif
 
 %changelog
+* Wed June 30 2021 Martin Kopec <mkopec@redhat.com> 1:18:0.0-2
+- Introduce inclusive args
+
 * Wed Mar 07 2018 Chandan Kumar <chkumar@redhat.com> 1:18.0.0-2
 - Disable repo_bootstrap in order to install python-tempestconf
 
