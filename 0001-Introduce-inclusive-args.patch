@@ -1,0 +1,411 @@
+From a9e7f9cb89eef499703d07f475383c5c3141cc6a Mon Sep 17 00:00:00 2001
+From: Martin Kopec <mkopec@redhat.com>
+Date: Wed, 30 Jun 2021 09:02:22 +0000
+Subject: [PATCH 1/1] Introduce inclusive args
+
+This commit is a partial backport of
+https://review.opendev.org/c/openstack/tempest/+/768583
+which did inclusive diversity changes.
+
+In order to allow tempest users easier transition, this commit
+backports **only** new arguments (and deprecates the replaced ones).
+---
+ tempest/cmd/run.py            | 114 ++++++++++++++++++----
+ tempest/tests/cmd/test_run.py | 172 ++++++++++++++++++++--------------
+ 2 files changed, 195 insertions(+), 91 deletions(-)
+
+diff --git a/tempest/cmd/run.py b/tempest/cmd/run.py
+index f9ca2c72e..a40d3fe16 100644
+--- a/tempest/cmd/run.py
++++ b/tempest/cmd/run.py
+@@ -22,10 +22,10 @@ Tempest run has several options:
+ * ``--regex/-r``: This is a selection regex like what stestr uses. It will run
+   any tests that match on re.match() with the regex
+ * ``--smoke/-s``: Run all the tests tagged as smoke
+-* ``--black-regex``: It allows to do simple test exclusion via passing a
+-  rejection/black regexp
++* ``--exclude-regex``: It allows to do simple test exclusion via passing a
++  rejection/exclude regexp
+ 
+-There are also the ``--blacklist-file`` and ``--whitelist-file`` options that
++There are also the ``--exclude-list`` and ``--include-list`` options that
+ let you pass a filepath to tempest run with the file format being a line
+ separated regex, with '#' used to signify the start of a comment on a line.
+ For example::
+@@ -92,6 +92,7 @@ import os
+ import sys
+ 
+ from cliff import command
++from oslo_log import log
+ from oslo_serialization import jsonutils as json
+ import six
+ from stestr import commands
+@@ -110,6 +111,8 @@ if six.PY2:
+ CONF = config.CONF
+ SAVED_STATE_JSON = "saved_state.json"
+ 
++LOG = log.getLogger(__name__)
++
+ 
+ class TempestRun(command.Command):
+ 
+@@ -170,22 +173,70 @@ class TempestRun(command.Command):
+             self._init_state()
+ 
+         regex = self._build_regex(parsed_args)
++
++        # temporary method for parsing deprecated and new stestr options
++        # and showing warning messages in order to make the transition
++        # smoother for all tempest consumers
++        # TODO(kopecmartin) remove this after stestr>=3.1.0 is used
++        # in all supported OpenStack releases
++        def parse_dep(old_o, old_v, new_o, new_v):
++            ret = ''
++            if old_v:
++                LOG.warning("'%s' option is deprecated, use '%s' instead "
++                            "which is functionally equivalent. Right now "
++                            "Tempest still supports this option for "
++                            "backward compatibility, however, it will be "
++                            "removed soon.",
++                            old_o, new_o)
++                ret = old_v
++            if old_v and new_v:
++                # both options are specified
++                LOG.warning("'%s' and '%s' are specified at the same time, "
++                            "'%s' takes precedence over '%s'",
++                            new_o, old_o, new_o, old_o)
++            if new_v:
++                ret = new_v
++            return ret
++        ex_regex = parse_dep('--black-regex', parsed_args.black_regex,
++                             '--exclude-regex', parsed_args.exclude_regex)
++        ex_list = parse_dep('--blacklist-file', parsed_args.blacklist_file,
++                            '--exclude-list', parsed_args.exclude_list)
++        in_list = parse_dep('--whitelist-file', parsed_args.whitelist_file,
++                            '--include-list', parsed_args.include_list)
++
+         return_code = 0
+         if parsed_args.list_tests:
+-            return_code = commands.list_command(
+-                filters=regex, whitelist_file=parsed_args.whitelist_file,
+-                blacklist_file=parsed_args.blacklist_file,
+-                black_regex=parsed_args.black_regex)
++            try:
++                return_code = commands.list_command(
++                    filters=regex, include_list=in_list,
++                    exclude_list=ex_list, exclude_regex=ex_regex)
++            except TypeError:
++                # exclude_list, include_list and exclude_regex are defined only
++                # in stestr >= 3.1.0, this except block catches the case when
++                # tempest is executed with an older stestr
++                return_code = commands.list_command(
++                    filters=regex, whitelist_file=in_list,
++                    blacklist_file=ex_list, black_regex=ex_regex)
+ 
+         else:
+             serial = not parsed_args.parallel
+-            return_code = commands.run_command(
+-                filters=regex, subunit_out=parsed_args.subunit,
+-                serial=serial, concurrency=parsed_args.concurrency,
+-                blacklist_file=parsed_args.blacklist_file,
+-                whitelist_file=parsed_args.whitelist_file,
+-                black_regex=parsed_args.black_regex,
+-                load_list=parsed_args.load_list, combine=parsed_args.combine)
++            params = {
++                'filters': regex, 'subunit_out': parsed_args.subunit,
++                'serial': serial, 'concurrency': parsed_args.concurrency,
++                'load_list': parsed_args.load_list,
++                'combine': parsed_args.combine
++            }
++            try:
++                return_code = commands.run_command(
++                    **params, exclude_list=ex_list,
++                    include_list=in_list, exclude_regex=ex_regex)
++            except TypeError:
++                # exclude_list, include_list and exclude_regex are defined only
++                # in stestr >= 3.1.0, this except block catches the case when
++                # tempest is executed with an older stestr
++                return_code = commands.run_command(
++                    **params, blacklist_file=ex_list,
++                    whitelist_file=in_list, black_regex=ex_regex)
+             if return_code > 0:
+                 sys.exit(return_code)
+         return return_code
+@@ -239,15 +290,38 @@ class TempestRun(command.Command):
+                            help='A normal stestr selection regex used to '
+                                 'specify a subset of tests to run')
+         parser.add_argument('--black-regex', dest='black_regex',
++                            help='DEPRECATED: This option is deprecated and '
++                                 'will be removed soon, use --exclude-regex '
++                                 'which is functionally equivalent. If this '
++                                 'is specified at the same time as '
++                                 '--exclude-regex, this flag will be ignored '
++                                 'and --exclude-regex will be used')
++        parser.add_argument('--exclude-regex', dest='exclude_regex',
+                             help='A regex to exclude tests that match it')
+         parser.add_argument('--whitelist-file', '--whitelist_file',
+-                            help="Path to a whitelist file, this file "
+-                            "contains a separate regex on each "
+-                            "newline.")
++                            help='DEPRECATED: This option is deprecated and '
++                                 'will be removed soon, use --include-list '
++                                 'which is functionally equivalent. If this '
++                                 'is specified at the same time as '
++                                 '--include-list, this flag will be ignored '
++                                 'and --include-list will be used')
++        parser.add_argument('--include-list', '--include_list',
++                            help="Path to an include file which contains the "
++                                 "regex for tests to be included in tempest "
++                                 "run, this file contains a separate regex on "
++                                 "each newline.")
+         parser.add_argument('--blacklist-file', '--blacklist_file',
+-                            help='Path to a blacklist file, this file '
+-                                 'contains a separate regex exclude on '
+-                                 'each newline')
++                            help='DEPRECATED: This option is deprecated and '
++                                 'will be removed soon, use --exclude-list '
++                                 'which is functionally equivalent. If this '
++                                 'is specified at the same time as '
++                                 '--exclude-list, this flag will be ignored '
++                                 'and --exclude-list will be used')
++        parser.add_argument('--exclude-list', '--exclude_list',
++                            help='Path to an exclude file which contains the '
++                                 'regex for tests to be excluded in tempest '
++                                 'run, this file contains a separate regex on '
++                                 'each newline.')
+         parser.add_argument('--load-list', '--load_list',
+                             help='Path to a non-regex whitelist file, '
+                                  'this file contains a separate test '
+diff --git a/tempest/tests/cmd/test_run.py b/tempest/tests/cmd/test_run.py
+index 8997a4cf6..c88198431 100644
+--- a/tempest/tests/cmd/test_run.py
++++ b/tempest/tests/cmd/test_run.py
+@@ -72,6 +72,11 @@ class TestTempestRun(base.TestCase):
+ 
+ 
+ class TestRunReturnCode(base.TestCase):
++
++    exclude_regex = '--exclude-regex'
++    exclude_list = '--exclude-list'
++    include_list = '--include-list'
++
+     def setUp(self):
+         super(TestRunReturnCode, self).setUp()
+         # Setup test dirs
+@@ -96,6 +101,14 @@ class TestRunReturnCode(base.TestCase):
+         self.addCleanup(os.chdir, os.path.abspath(os.curdir))
+         os.chdir(self.directory)
+ 
++    def _get_test_list_file(self, content):
++        fd, path = tempfile.mkstemp()
++        self.addCleanup(os.remove, path)
++        test_file = os.fdopen(fd, 'wb', 0)
++        self.addCleanup(test_file.close)
++        test_file.write(content.encode('utf-8'))
++        return path
++
+     def assertRunExit(self, cmd, expected):
+         p = subprocess.Popen(cmd, stdout=subprocess.PIPE,
+                              stderr=subprocess.PIPE)
+@@ -119,19 +132,23 @@ class TestRunReturnCode(base.TestCase):
+         subprocess.call(['stestr', 'init'])
+         self.assertRunExit(['tempest', 'run', '--regex', 'failing'], 1)
+ 
+-    def test_tempest_run_blackregex_failing(self):
+-        self.assertRunExit(['tempest', 'run', '--black-regex', 'failing'], 0)
++    def test_tempest_run_exclude_failing(self):
++        self.assertRunExit(['tempest', 'run',
++                            self.exclude_regex, 'failing'], 0)
+ 
+-    def test_tempest_run_blackregex_failing_with_stestr_repository(self):
++    def test_tempest_run_exclude_failing_with_stestr_repository(self):
+         subprocess.call(['stestr', 'init'])
+-        self.assertRunExit(['tempest', 'run', '--black-regex', 'failing'], 0)
++        self.assertRunExit(['tempest', 'run',
++                            self.exclude_regex, 'failing'], 0)
+ 
+-    def test_tempest_run_blackregex_passing(self):
+-        self.assertRunExit(['tempest', 'run', '--black-regex', 'passing'], 1)
++    def test_tempest_run_exclude_passing(self):
++        self.assertRunExit(['tempest', 'run',
++                            self.exclude_regex, 'passing'], 1)
+ 
+-    def test_tempest_run_blackregex_passing_with_stestr_repository(self):
++    def test_tempest_run_exclude_passing_with_stestr_repository(self):
+         subprocess.call(['stestr', 'init'])
+-        self.assertRunExit(['tempest', 'run', '--black-regex', 'passing'], 1)
++        self.assertRunExit(['tempest', 'run',
++                            self.exclude_regex, 'passing'], 1)
+ 
+     def test_tempest_run_fails(self):
+         self.assertRunExit(['tempest', 'run'], 1)
+@@ -153,39 +170,27 @@ class TestRunReturnCode(base.TestCase):
+             result = ["b\'" + x + "\'" for x in result]
+         self.assertEqual(result, tests)
+ 
+-    def test_tempest_run_with_whitelist(self):
+-        fd, path = tempfile.mkstemp()
+-        self.addCleanup(os.remove, path)
+-        whitelist_file = os.fdopen(fd, 'wb', 0)
+-        self.addCleanup(whitelist_file.close)
+-        whitelist_file.write('passing'.encode('utf-8'))
+-        self.assertRunExit(['tempest', 'run', '--whitelist-file=%s' % path], 0)
++    def test_tempest_run_with_include_list(self):
++        path = self._get_test_list_file('passing')
++        self.assertRunExit(['tempest', 'run',
++                            '%s=%s' % (self.include_list, path)], 0)
+ 
+-    def test_tempest_run_with_whitelist_regex_include_pass_check_fail(self):
+-        fd, path = tempfile.mkstemp()
+-        self.addCleanup(os.remove, path)
+-        whitelist_file = os.fdopen(fd, 'wb', 0)
+-        self.addCleanup(whitelist_file.close)
+-        whitelist_file.write('passing'.encode('utf-8'))
+-        self.assertRunExit(['tempest', 'run', '--whitelist-file=%s' % path,
++    def test_tempest_run_with_include_list_regex_include_pass_check_fail(self):
++        path = self._get_test_list_file('passing')
++        self.assertRunExit(['tempest', 'run',
++                            '%s=%s' % (self.include_list, path),
+                             '--regex', 'fail'], 1)
+ 
+-    def test_tempest_run_with_whitelist_regex_include_pass_check_pass(self):
+-        fd, path = tempfile.mkstemp()
+-        self.addCleanup(os.remove, path)
+-        whitelist_file = os.fdopen(fd, 'wb', 0)
+-        self.addCleanup(whitelist_file.close)
+-        whitelist_file.write('passing'.encode('utf-8'))
+-        self.assertRunExit(['tempest', 'run', '--whitelist-file=%s' % path,
++    def test_tempest_run_with_include_list_regex_include_pass_check_pass(self):
++        path = self._get_test_list_file('passing')
++        self.assertRunExit(['tempest', 'run',
++                            '%s=%s' % (self.include_list, path),
+                             '--regex', 'passing'], 0)
+ 
+-    def test_tempest_run_with_whitelist_regex_include_fail_check_pass(self):
+-        fd, path = tempfile.mkstemp()
+-        self.addCleanup(os.remove, path)
+-        whitelist_file = os.fdopen(fd, 'wb', 0)
+-        self.addCleanup(whitelist_file.close)
+-        whitelist_file.write('failing'.encode('utf-8'))
+-        self.assertRunExit(['tempest', 'run', '--whitelist-file=%s' % path,
++    def test_tempest_run_with_include_list_regex_include_fail_check_pass(self):
++        path = self._get_test_list_file('failing')
++        self.assertRunExit(['tempest', 'run',
++                            '%s=%s' % (self.include_list, path),
+                             '--regex', 'pass'], 1)
+ 
+     def test_tempest_run_passes_with_config_file(self):
+@@ -193,50 +198,75 @@ class TestRunReturnCode(base.TestCase):
+                             '--config-file', self.stestr_conf_file,
+                             '--regex', 'passing'], 0)
+ 
+-    def test_tempest_run_with_blacklist_failing(self):
+-        fd, path = tempfile.mkstemp()
+-        self.addCleanup(os.remove, path)
+-        blacklist_file = os.fdopen(fd, 'wb', 0)
+-        self.addCleanup(blacklist_file.close)
+-        blacklist_file.write('failing'.encode('utf-8'))
+-        self.assertRunExit(['tempest', 'run', '--blacklist-file=%s' % path], 0)
++    def test_tempest_run_with_exclude_list_failing(self):
++        path = self._get_test_list_file('failing')
++        self.assertRunExit(['tempest', 'run',
++                            '%s=%s' % (self.exclude_list, path)], 0)
+ 
+-    def test_tempest_run_with_blacklist_passing(self):
+-        fd, path = tempfile.mkstemp()
+-        self.addCleanup(os.remove, path)
+-        blacklist_file = os.fdopen(fd, 'wb', 0)
+-        self.addCleanup(blacklist_file.close)
+-        blacklist_file.write('passing'.encode('utf-8'))
+-        self.assertRunExit(['tempest', 'run', '--blacklist-file=%s' % path], 1)
++    def test_tempest_run_with_exclude_list_passing(self):
++        path = self._get_test_list_file('passing')
++        self.assertRunExit(['tempest', 'run',
++                            '%s=%s' % (self.exclude_list, path)], 1)
+ 
+-    def test_tempest_run_with_blacklist_regex_exclude_fail_check_pass(self):
+-        fd, path = tempfile.mkstemp()
+-        self.addCleanup(os.remove, path)
+-        blacklist_file = os.fdopen(fd, 'wb', 0)
+-        self.addCleanup(blacklist_file.close)
+-        blacklist_file.write('failing'.encode('utf-8'))
+-        self.assertRunExit(['tempest', 'run', '--blacklist-file=%s' % path,
++    def test_tempest_run_with_exclude_list_regex_exclude_fail_check_pass(self):
++        path = self._get_test_list_file('failing')
++        self.assertRunExit(['tempest', 'run',
++                            '%s=%s' % (self.exclude_list, path),
+                             '--regex', 'pass'], 0)
+ 
+-    def test_tempest_run_with_blacklist_regex_exclude_pass_check_pass(self):
+-        fd, path = tempfile.mkstemp()
+-        self.addCleanup(os.remove, path)
+-        blacklist_file = os.fdopen(fd, 'wb', 0)
+-        self.addCleanup(blacklist_file.close)
+-        blacklist_file.write('passing'.encode('utf-8'))
+-        self.assertRunExit(['tempest', 'run', '--blacklist-file=%s' % path,
++    def test_tempest_run_with_exclude_list_regex_exclude_pass_check_pass(self):
++        path = self._get_test_list_file('passing')
++        self.assertRunExit(['tempest', 'run',
++                            '%s=%s' % (self.exclude_list, path),
+                             '--regex', 'pass'], 1)
+ 
+-    def test_tempest_run_with_blacklist_regex_exclude_pass_check_fail(self):
+-        fd, path = tempfile.mkstemp()
+-        self.addCleanup(os.remove, path)
+-        blacklist_file = os.fdopen(fd, 'wb', 0)
+-        self.addCleanup(blacklist_file.close)
+-        blacklist_file.write('passing'.encode('utf-8'))
+-        self.assertRunExit(['tempest', 'run', '--blacklist-file=%s' % path,
++    def test_tempest_run_with_exclude_list_regex_exclude_pass_check_fail(self):
++        path = self._get_test_list_file('passing')
++        self.assertRunExit(['tempest', 'run',
++                            '%s=%s' % (self.exclude_list, path),
+                             '--regex', 'fail'], 1)
+ 
+ 
++class TestOldArgRunReturnCode(TestRunReturnCode):
++    """A class for testing deprecated but still supported args.
++
++    This class will be removed once we remove the following arguments:
++      * --black-regex
++      * --blacklist-file
++      * --whitelist-file
++    """
++    exclude_regex = '--black-regex'
++    exclude_list = '--blacklist-file'
++    include_list = '--whitelist-file'
++
++    def _test_args_passing(self, args):
++        self.assertRunExit(['tempest', 'run'] + args, 0)
++
++    def test_tempest_run_new_old_arg_comb(self):
++        path = self._get_test_list_file('failing')
++        self._test_args_passing(['--black-regex', 'failing',
++                                 '--exclude-regex', 'failing'])
++        self._test_args_passing(['--blacklist-file=' + path,
++                                 '--exclude-list=' + path])
++        path = self._get_test_list_file('passing')
++        self._test_args_passing(['--whitelist-file=' + path,
++                                 '--include-list=' + path])
++
++    def _test_args_passing_with_stestr_repository(self, args):
++        subprocess.call(['stestr', 'init'])
++        self.assertRunExit(['tempest', 'run'] + args, 0)
++
++    def test_tempest_run_new_old_arg_comb_with_stestr_repository(self):
++        path = self._get_test_list_file('failing')
++        self._test_args_passing_with_stestr_repository(
++            ['--black-regex', 'failing', '--exclude-regex', 'failing'])
++        self._test_args_passing_with_stestr_repository(
++            ['--blacklist-file=' + path, '--exclude-list=' + path])
++        path = self._get_test_list_file('passing')
++        self._test_args_passing_with_stestr_repository(
++            ['--whitelist-file=' + path, '--include-list=' + path])
++
++
+ class TestConfigPathCheck(base.TestCase):
+     def setUp(self):
+         super(TestConfigPathCheck, self).setUp()
+-- 
+2.27.0
+
