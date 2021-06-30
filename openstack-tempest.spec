@@ -15,7 +15,7 @@ other specific tests useful in validating an OpenStack deployment.
 Name:           openstack-%{project}
 Epoch:          1
 Version:        19.0.0
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://launchpad.net/tempest
@@ -23,6 +23,12 @@ Source0:        http://tarballs.openstack.org/tempest/tempest-%{upstream_version
 
 Patch0001: 0001-compute-Make-image-certificate-validation-a-configur.patch
 Patch0002: 0002-compute-Correctly-pass-certified_image_ref-as-image_.patch
+# This patch is a partial backport of
+# https://review.opendev.org/c/openstack/tempest/+/768583
+# which did inclusive diversity changes.
+# In order to allow tempest users easier transition, this commit
+# backports **only** new arguments (and deprecates the replaced ones).
+Patch0003: 0003-Introduce-inclusive-args.patch
 
 BuildArch:      noarch
 
@@ -344,6 +350,9 @@ stestr-3 --test-path $OS_TEST_PATH run
 %endif
 
 %changelog
+* Wed June 30 2021 Martin Kopec <mkopec@redhat.com> 1:19:0.0-4
+- Introduce inclusive args
+
 * Wed Jul 03 2019 Lee Yarwood <lyarwood@redhat.com> 1:19.0.0-3
 - compute: Correctly pass certified_image_ref as image_id
 - compute: Make image certificate validation a configurable feature
