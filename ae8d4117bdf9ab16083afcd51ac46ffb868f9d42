@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "029b7323_faca33eb",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 3
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 113
+      },
+      "writtenOn": "2021-07-01T13:29:12Z",
+      "side": 1,
+      "message": "Oh, so the CI job is complaining about this. It should be 3-letter, so \"Jun\"",
+      "range": {
+        "startLine": 279,
+        "startChar": 6,
+        "endLine": 279,
+        "endChar": 10
+      },
+      "revId": "ae8d4117bdf9ab16083afcd51ac46ffb868f9d42",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": true
+    }
+  ]
+}
