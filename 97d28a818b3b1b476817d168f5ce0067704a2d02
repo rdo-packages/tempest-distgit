@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d7034f57_57650797",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 111
+      },
+      "writtenOn": "2021-07-01T12:15:34Z",
+      "side": 1,
+      "message": "It needs to be bumped.\n2 -\u003e 3",
+      "range": {
+        "startLine": 18,
+        "startChar": 16,
+        "endLine": 18,
+        "endChar": 18
+      },
+      "revId": "97d28a818b3b1b476817d168f5ce0067704a2d02",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3205ca90_908e702d",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 3
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 111
+      },
+      "writtenOn": "2021-07-01T12:15:34Z",
+      "side": 1,
+      "message": "We need a proper change log here.",
+      "revId": "97d28a818b3b1b476817d168f5ce0067704a2d02",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": true
+    }
+  ]
+}
