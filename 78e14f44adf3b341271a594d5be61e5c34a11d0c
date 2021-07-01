@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "36886aed_41a46c06",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 4
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 111
+      },
+      "writtenOn": "2021-07-01T13:04:01Z",
+      "side": 1,
+      "message": "2 -\u003e 3 \n\nIt should be release that\u0027s why job is failing.",
+      "range": {
+        "startLine": 346,
+        "startChar": 61,
+        "endLine": 346,
+        "endChar": 62
+      },
+      "revId": "78e14f44adf3b341271a594d5be61e5c34a11d0c",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": true
+    }
+  ]
+}
