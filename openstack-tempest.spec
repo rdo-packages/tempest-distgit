@@ -33,7 +33,8 @@ Source0:        http://tarballs.openstack.org/tempest/tempest-%{upstream_version
 # a tag nor a release. We revert the removal in tempest so that we can package
 # tempest 26.1.0 and ship it in Victoria. Tempest 26.1.0 contains apart from
 # the fixes also a significant argument deprecation.
-Patch 0001: 0001-Revert-Remove-tempest-manager.py-after-4-year-deprec.patch
+Patch0000: 0001-Revert-Remove-tempest-manager.py-after-4-year-deprec.patch
+
 # workaround for handling py2 and py3 mock issue
 %if %{pyver} == 2
 Patch0001: 0001-Revert-part1-Remove-six.patch
