@@ -24,7 +24,11 @@ Source0:        http://tarballs.openstack.org/tempest/tempest-%{upstream_version
 # a tag nor a release. We revert the removal in tempest so that we can package
 # tempest 26.1.0 and ship it in Victoria. Tempest 26.1.0 contains apart from
 # the fixes also a significant argument deprecation.
-Patch 0001: 0001-Revert-Remove-tempest-manager.py-after-4-year-deprec.patch
+Patch0001: 0001-Revert-Remove-tempest-manager.py-after-4-year-deprec.patch
+# This reverts https://review.opendev.org/c/openstack/tempest/+/777684
+# as it requires python-oslo-utils package version 4.7.0 and above, current
+# version for Victoria release is lower.
+Patch0002: 0002-Revert-Replace-md5-with-oslo-version.patch
 BuildArch:      noarch
 
 BuildRequires:  git
