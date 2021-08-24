@@ -1,14 +1,14 @@
-From 0a29122ae3626228503fb185e089d12426ceee5a Mon Sep 17 00:00:00 2001
+From 2c043c2b58dd70f51e1ba731bb72e60e6938d937 Mon Sep 17 00:00:00 2001
 From: Martin Kopec <mkopec@redhat.com>
-Date: Mon, 15 Mar 2021 12:29:33 +0000
-Subject: [PATCH] Revert "Remove tempest/manager.py after 4 year deprecation"
+Date: Tue, 7 Sep 2021 06:26:49 +0000
+Subject: [PATCH 1/2] Revert "Remove tempest/manager.py after 4 year
+ deprecation"
 
 This reverts commit 743d4953f096a6f2f2e62c4b95aa747ce4642fcd.
 ---
  .../Remove-manager-2e0b0af48f01294a.yaml      |  5 --
  tempest/manager.py                            | 62 +++++++++++++++++++
- tools/generate-tempest-plugins-list.py        |  3 -
- 3 files changed, 62 insertions(+), 8 deletions(-)
+ 2 files changed, 62 insertions(+), 5 deletions(-)
  delete mode 100644 releasenotes/notes/Remove-manager-2e0b0af48f01294a.yaml
  create mode 100644 tempest/manager.py
 
@@ -91,20 +91,6 @@ index 000000000..b485ef242
 +    LOG.warning(msg)
 +    return tempest_clients.get_auth_provider(credentials=credentials,
 +                                             pre_auth=pre_auth, scope=scope)
-diff --git a/tools/generate-tempest-plugins-list.py b/tools/generate-tempest-plugins-list.py
-index 1b5b369a2..415ad057b 100644
---- a/tools/generate-tempest-plugins-list.py
-+++ b/tools/generate-tempest-plugins-list.py
-@@ -54,9 +54,6 @@ NON_ACTIVE_LIST = [
-     'x/kingbird',  # https://bugs.launchpad.net/kingbird/+bug/1869722
-     # vmware-nsx is excluded since https://review.opendev.org/#/c/736952
-     'x/vmware-nsx-tempest-plugin',
--    # mogan is unmaintained now, remove from the list when this is merged:
--    # https://review.opendev.org/c/x/mogan/+/767718
--    'x/mogan',
- ]
- 
- url = 'https://review.opendev.org/projects/'
 -- 
-2.20.1
+2.27.0
 
