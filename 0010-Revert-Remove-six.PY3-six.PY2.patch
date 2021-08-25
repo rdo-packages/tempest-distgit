@@ -1,7 +1,7 @@
-From a049d5d53f013c5b6c514e9f68266111d383402a Mon Sep 17 00:00:00 2001
-From: Martin Kopec <xkopec42@gmail.com>
-Date: Thu, 22 Apr 2021 10:12:09 +0000
-Subject: [PATCH] Revert "Remove six.PY3/six.PY2"
+From 4c75f4ffc520a460b3d8f71e66c2d99e0ef707a0 Mon Sep 17 00:00:00 2001
+From: Martin Kopec <mkopec@redhat.com>
+Date: Wed, 25 Aug 2021 10:44:25 +0000
+Subject: [PATCH 10/15] Revert "Remove six.PY3/six.PY2"
 
 This reverts commit 7d91c87345b1f18b19202ba7d447ab49d8f721e7.
 ---
@@ -14,7 +14,7 @@ This reverts commit 7d91c87345b1f18b19202ba7d447ab49d8f721e7.
  6 files changed, 46 insertions(+), 12 deletions(-)
 
 diff --git a/tempest/api/compute/servers/test_novnc.py b/tempest/api/compute/servers/test_novnc.py
-index 6ebdbdb08..7931ca978 100644
+index 77176380b..f8e22ee17 100644
 --- a/tempest/api/compute/servers/test_novnc.py
 +++ b/tempest/api/compute/servers/test_novnc.py
 @@ -26,6 +26,11 @@ from tempest.lib import decorators

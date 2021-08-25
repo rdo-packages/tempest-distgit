@@ -1,0 +1,114 @@
+From 10e9f544d8d77d65fcdf94cef2a2978c8d719ad1 Mon Sep 17 00:00:00 2001
+From: lpiwowar <lpiwowar@redhat.com>
+Date: Tue, 10 Aug 2021 15:25:28 +0200
+Subject: [PATCH 03/15] Fix cleanup of default security group when preprov
+ creds are used
+
+Patch [1] fixes cleanup of default security group for
+tempest.api.network.admin.test_negative_quotas.* tests but also
+introduces a bug [2] that makes the tests fail when preprovisioned
+credentials are used.
+
+This patch reverts some changes from patch [1] and tries to
+fix the cleanup of default security group in a way that works
+also for preprovisioned credentials.
+
+[1] https://review.opendev.org/c/openstack/tempest/+/797466/7
+[2] https://bugs.launchpad.net/tempest/+bug/1939049
+
+Closes-Bug: 1939049
+Change-Id: I00a9cc48866e41c3c559628de5af4ba017beba39
+---
+ .../api/network/admin/test_negative_quotas.py    |  3 ++-
+ tempest/lib/common/cred_provider.py              | 16 +++++++++++++++-
+ tempest/lib/common/dynamic_creds.py              | 15 ++-------------
+ 3 files changed, 19 insertions(+), 15 deletions(-)
+
+diff --git a/tempest/api/network/admin/test_negative_quotas.py b/tempest/api/network/admin/test_negative_quotas.py
+index 614dfcfdb..1ce9f47dc 100644
+--- a/tempest/api/network/admin/test_negative_quotas.py
++++ b/tempest/api/network/admin/test_negative_quotas.py
+@@ -53,7 +53,8 @@ class QuotasNegativeTest(base.BaseAdminNetworkTest):
+ 
+     def tearDown(self):
+         super(QuotasNegativeTest, self).tearDown()
+-        self.credentials_provider.cleanup_default_secgroup(self.project['id'])
++        self.credentials_provider.cleanup_default_secgroup(
++            self.os_admin.security_groups_client, self.project['id'])
+ 
+     @decorators.attr(type=['negative'])
+     @decorators.idempotent_id('644f4e1b-1bf9-4af0-9fd8-eb56ac0f51cf')
+diff --git a/tempest/lib/common/cred_provider.py b/tempest/lib/common/cred_provider.py
+index 069172a47..2da206fa3 100644
+--- a/tempest/lib/common/cred_provider.py
++++ b/tempest/lib/common/cred_provider.py
+@@ -13,11 +13,13 @@
+ #    limitations under the License.
+ 
+ import abc
+-
++from oslo_log import log as logging
+ 
+ from tempest.lib import auth
+ from tempest.lib import exceptions
+ 
++LOG = logging.getLogger(__name__)
++
+ 
+ class CredentialProvider(object, metaclass=abc.ABCMeta):
+     def __init__(self, identity_version, name=None,
+@@ -125,6 +127,18 @@ class CredentialProvider(object, metaclass=abc.ABCMeta):
+     def is_role_available(self, role):
+         return
+ 
++    def cleanup_default_secgroup(self, security_group_client, tenant):
++        resp_body = security_group_client.list_security_groups(
++            tenant_id=tenant,
++            name="default")
++        secgroups_to_delete = resp_body['security_groups']
++        for secgroup in secgroups_to_delete:
++            try:
++                security_group_client.delete_security_group(secgroup['id'])
++            except exceptions.NotFound:
++                LOG.warning('Security group %s, id %s not found for clean-up',
++                            secgroup['name'], secgroup['id'])
++
+ 
+ class TestResources(object):
+     """Readonly Credentials, with network resources added."""
+diff --git a/tempest/lib/common/dynamic_creds.py b/tempest/lib/common/dynamic_creds.py
+index 32dea44a8..ba601633e 100644
+--- a/tempest/lib/common/dynamic_creds.py
++++ b/tempest/lib/common/dynamic_creds.py
+@@ -518,18 +518,6 @@ class DynamicCredentialProvider(cred_provider.CredentialProvider):
+             LOG.warning('network with name: %s not found for delete',
+                         network_name)
+ 
+-    def cleanup_default_secgroup(self, tenant):
+-        nsg_client = self.security_groups_admin_client
+-        resp_body = nsg_client.list_security_groups(tenant_id=tenant,
+-                                                    name="default")
+-        secgroups_to_delete = resp_body['security_groups']
+-        for secgroup in secgroups_to_delete:
+-            try:
+-                nsg_client.delete_security_group(secgroup['id'])
+-            except lib_exc.NotFound:
+-                LOG.warning('Security group %s, id %s not found for clean-up',
+-                            secgroup['name'], secgroup['id'])
+-
+     def _clear_isolated_net_resources(self):
+         client = self.routers_admin_client
+         for cred in self._creds:
+@@ -578,7 +566,8 @@ class DynamicCredentialProvider(cred_provider.CredentialProvider):
+             # ensure tenant deletion without big changes.
+             try:
+                 if self.neutron_available:
+-                    self.cleanup_default_secgroup(creds.tenant_id)
++                    self.cleanup_default_secgroup(
++                        self.security_groups_admin_client, creds.tenant_id)
+             except lib_exc.NotFound:
+                 LOG.warning("failed to cleanup tenant %s's secgroup",
+                             creds.tenant_name)
+-- 
+2.27.0
+
