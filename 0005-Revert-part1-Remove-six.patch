@@ -1,7 +1,7 @@
-From 3ce31a11b7a5cbe5b57f9ba56b0dd4a921346de4 Mon Sep 17 00:00:00 2001
-From: Martin Kopec <xkopec42@gmail.com>
-Date: Thu, 22 Apr 2021 10:08:13 +0000
-Subject: [PATCH 1/5] Revert "[part1] Remove six"
+From 8a895d91d4bd0f5a27e5cb638ef90eec2bb5a9a9 Mon Sep 17 00:00:00 2001
+From: Martin Kopec <mkopec@redhat.com>
+Date: Wed, 25 Aug 2021 10:40:12 +0000
+Subject: [PATCH 05/15] Revert "[part1] Remove six"
 
 This reverts commit 19b70a3858237654143c52ace9cf1adc284ba97d.
 ---
@@ -55,10 +55,10 @@ index ac18442eb..102792ef1 100644
          else:
              # just to check the response schema
 diff --git a/tempest/api/compute/servers/test_novnc.py b/tempest/api/compute/servers/test_novnc.py
-index a9c0e5647..34b3146db 100644
+index 1308b19c4..fd1d13515 100644
 --- a/tempest/api/compute/servers/test_novnc.py
 +++ b/tempest/api/compute/servers/test_novnc.py
-@@ -69,7 +69,7 @@ class NoVNCConsoleTestJSON(base.BaseV2ComputeTest):
+@@ -67,7 +67,7 @@ class NoVNCConsoleTestJSON(base.BaseV2ComputeTest):
          resp = urllib3.PoolManager().request('GET', vnc_url)
          # Make sure that the GET request was accepted by the novncproxy
          self.assertEqual(resp.status, 200, 'Got a Bad HTTP Response on the '
@@ -67,7 +67,7 @@ index a9c0e5647..34b3146db 100644
          # Do some basic validation to make sure it is an expected HTML document
          resp_data = resp.data.decode()
          # This is needed in the case of example: <html lang="en">
-@@ -165,11 +165,11 @@ class NoVNCConsoleTestJSON(base.BaseV2ComputeTest):
+@@ -163,11 +163,11 @@ class NoVNCConsoleTestJSON(base.BaseV2ComputeTest):
              self._websocket.response.startswith(b'HTTP/1.1 101 Switching '
                                                  b'Protocols'),
              'Incorrect HTTP return status code: {}'.format(
@@ -146,10 +146,10 @@ index 63078cd88..479578d80 100644
                  if ip_address_1[:-1] != ip_address_2[:-1]:
                      break
 diff --git a/tempest/api/object_storage/test_account_services.py b/tempest/api/object_storage/test_account_services.py
-index ffea6f61f..da8ad6632 100644
+index 4966ec401..2b481eb24 100644
 --- a/tempest/api/object_storage/test_account_services.py
 +++ b/tempest/api/object_storage/test_account_services.py
-@@ -62,7 +62,7 @@ class AccountTest(base.BaseObjectTest):
+@@ -60,7 +60,7 @@ class AccountTest(base.BaseObjectTest):
          self.assertIsNotNone(container_list)
  
          for container_name in self.containers:
@@ -159,10 +159,10 @@ index ffea6f61f..da8ad6632 100644
  
      @decorators.idempotent_id('884ec421-fbad-4fcc-916b-0580f2699565')
 diff --git a/tempest/lib/common/dynamic_creds.py b/tempest/lib/common/dynamic_creds.py
-index f334c36bb..dd855ee55 100644
+index ba601633e..41feb0c3d 100644
 --- a/tempest/lib/common/dynamic_creds.py
 +++ b/tempest/lib/common/dynamic_creds.py
-@@ -342,7 +342,7 @@ class DynamicCredentialProvider(cred_provider.CredentialProvider):
+@@ -341,7 +341,7 @@ class DynamicCredentialProvider(cred_provider.CredentialProvider):
                              tenant_id=tenant_id,
                              enable_dhcp=self.network_resources['dhcp'],
                              ip_version=(ipaddress.ip_network(
@@ -171,7 +171,7 @@ index f334c36bb..dd855ee55 100644
                  else:
                      resp_body = self.subnets_admin_client.\
                          create_subnet(network_id=network_id,
-@@ -350,7 +350,7 @@ class DynamicCredentialProvider(cred_provider.CredentialProvider):
+@@ -349,7 +349,7 @@ class DynamicCredentialProvider(cred_provider.CredentialProvider):
                                        name=subnet_name,
                                        tenant_id=tenant_id,
                                        ip_version=(ipaddress.ip_network(
@@ -247,10 +247,10 @@ index df0f4d6dd..feca43bcc 100644
  
      def clear_creds(self):
 diff --git a/tempest/lib/common/rest_client.py b/tempest/lib/common/rest_client.py
-index 00f2aeb9b..c8ce610aa 100644
+index 573d64e56..d77e2cb19 100644
 --- a/tempest/lib/common/rest_client.py
 +++ b/tempest/lib/common/rest_client.py
-@@ -418,7 +418,7 @@ class RestClient(object):
+@@ -417,7 +417,7 @@ class RestClient(object):
      def _safe_body(self, body, maxlen=4096):
          # convert a structure into a string safely
          try:
@@ -260,19 +260,19 @@ index 00f2aeb9b..c8ce610aa 100644
              # if this isn't actually text, return marker that
              return "<BinaryData: removed>"
 diff --git a/tempest/lib/services/identity/v3/oauth_token_client.py b/tempest/lib/services/identity/v3/oauth_token_client.py
-index 236b22437..33360941a 100644
+index 564d6d60e..141cd11e7 100644
 --- a/tempest/lib/services/identity/v3/oauth_token_client.py
 +++ b/tempest/lib/services/identity/v3/oauth_token_client.py
-@@ -33,7 +33,7 @@ class OAUTHTokenClient(rest_client.RestClient):
+@@ -31,7 +31,7 @@ class OAUTHTokenClient(rest_client.RestClient):
      def _escape(self, s):
          """Escape a unicode string in an OAuth-compatible fashion."""
          safe = b'~'
 -        s = s.encode('utf-8') if isinstance(s, str) else s
 +        s = s.encode('utf-8') if isinstance(s, six.text_type) else s
          s = urlparse.quote(s, safe)
-         if isinstance(s, six.binary_type):
+         if isinstance(s, bytes):
              s = s.decode('utf-8')
-@@ -47,8 +47,8 @@ class OAUTHTokenClient(rest_client.RestClient):
+@@ -45,8 +45,8 @@ class OAUTHTokenClient(rest_client.RestClient):
                                          verifier=None,
                                          http_method='GET'):
          """Generate OAUTH params along with signature."""
@@ -359,7 +359,7 @@ index 8d5de0962..b99e8d41e 100644
      def test_version_min_in_range(self):
          self._test_version('2.2', '2.10', '2.1', '2.7')
 diff --git a/tempest/tests/lib/common/test_preprov_creds.py b/tempest/tests/lib/common/test_preprov_creds.py
-index 499b6fe11..579363ee7 100644
+index e51beb365..52385321a 100644
 --- a/tempest/tests/lib/common/test_preprov_creds.py
 +++ b/tempest/tests/lib/common/test_preprov_creds.py
 @@ -17,6 +17,7 @@ import os
@@ -380,10 +380,10 @@ index 499b6fe11..579363ee7 100644
              hash_list.append(temp_hash)
          return hash_list
 diff --git a/tempest/tests/lib/test_ssh.py b/tempest/tests/lib/test_ssh.py
-index 035bdb0f1..0ec926244 100644
+index 886d99c8b..f04db398c 100644
 --- a/tempest/tests/lib/test_ssh.py
 +++ b/tempest/tests/lib/test_ssh.py
-@@ -274,7 +274,7 @@ class TestSshClient(base.TestCase):
+@@ -273,7 +273,7 @@ class TestSshClient(base.TestCase):
          client = ssh.Client('localhost', 'root', timeout=2)
          exc = self.assertRaises(exceptions.SSHExecCommandFailed,
                                  client.exec_command, "test")

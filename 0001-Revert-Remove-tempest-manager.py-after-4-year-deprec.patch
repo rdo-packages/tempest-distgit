@@ -1,7 +1,8 @@
-From 0a29122ae3626228503fb185e089d12426ceee5a Mon Sep 17 00:00:00 2001
+From 4f454101a2b054638d6f2ea0d1a0837892de4d6a Mon Sep 17 00:00:00 2001
 From: Martin Kopec <mkopec@redhat.com>
-Date: Mon, 15 Mar 2021 12:29:33 +0000
-Subject: [PATCH] Revert "Remove tempest/manager.py after 4 year deprecation"
+Date: Wed, 25 Aug 2021 10:37:42 +0000
+Subject: [PATCH 01/15] Revert "Remove tempest/manager.py after 4 year
+ deprecation"
 
 This reverts commit 743d4953f096a6f2f2e62c4b95aa747ce4642fcd.
 ---
@@ -106,5 +107,5 @@ index 1b5b369a2..415ad057b 100644
  
  url = 'https://review.opendev.org/projects/'
 -- 
-2.20.1
+2.27.0
 

@@ -1,18 +1,18 @@
-From 7e287af9ae3adc464e64f17a7dce904e44aed6b0 Mon Sep 17 00:00:00 2001
-From: Martin Kopec <xkopec42@gmail.com>
-Date: Thu, 22 Apr 2021 10:08:37 +0000
-Subject: [PATCH 4/5] Revert "Remove usage of six"
+From 2a5e2781be5f7bdbe45011d3118d918327f5b5af Mon Sep 17 00:00:00 2001
+From: Martin Kopec <mkopec@redhat.com>
+Date: Wed, 25 Aug 2021 10:42:12 +0000
+Subject: [PATCH 08/15] Revert "Remove usage of six"
 
 This reverts commit 0fa20695101bb037a79e1dc3db34c7b644e9c142.
 ---
  tempest/lib/common/ssh.py           | 3 +--
  tempest/tests/cmd/test_workspace.py | 5 ++++-
- tempest/tests/lib/test_ssh.py       | 4 ++--
+ tempest/tests/lib/test_ssh.py       | 5 +++--
  tools/check_logs.py                 | 3 +--
- 4 files changed, 8 insertions(+), 7 deletions(-)
+ 4 files changed, 9 insertions(+), 7 deletions(-)
 
 diff --git a/tempest/lib/common/ssh.py b/tempest/lib/common/ssh.py
-index 60107d776..3a05f2724 100644
+index ee1537542..b204edd6d 100644
 --- a/tempest/lib/common/ssh.py
 +++ b/tempest/lib/common/ssh.py
 @@ -14,7 +14,6 @@
@@ -23,9 +23,9 @@ index 60107d776..3a05f2724 100644
  import select
  import socket
  import time
-@@ -68,7 +67,7 @@ class Client(object):
+@@ -67,7 +66,7 @@ class Client(object):
          self.password = password
-         if isinstance(pkey, six.string_types):
+         if isinstance(pkey, str):
              pkey = paramiko.RSAKey.from_private_key(
 -                io.StringIO(str(pkey)))
 +                six.StringIO(str(pkey)))
@@ -54,10 +54,10 @@ index f16d53396..eae620224 100644
  from tempest.cmd import workspace
  from tempest.lib.common.utils import data_utils
 diff --git a/tempest/tests/lib/test_ssh.py b/tempest/tests/lib/test_ssh.py
-index 0ec926244..85048fba0 100644
+index f04db398c..f3bc63d2c 100644
 --- a/tempest/tests/lib/test_ssh.py
 +++ b/tempest/tests/lib/test_ssh.py
-@@ -12,11 +12,11 @@
+@@ -12,10 +12,11 @@
  #    License for the specific language governing permissions and limitations
  #    under the License.
  
@@ -65,12 +65,12 @@ index 0ec926244..85048fba0 100644
  import socket
  from unittest import mock
  
- import six
++import six
 +from six import StringIO
  import testtools
  
  from tempest.lib.common import ssh
-@@ -30,7 +30,7 @@ class TestSshClient(base.TestCase):
+@@ -29,7 +30,7 @@ class TestSshClient(base.TestCase):
      SELECT_POLLIN = 1
  
      @mock.patch('paramiko.RSAKey.from_private_key')
@@ -80,7 +80,7 @@ index 0ec926244..85048fba0 100644
          cs_mock.return_value = mock.sentinel.csio
          pkey = 'mykey'
 diff --git a/tools/check_logs.py b/tools/check_logs.py
-index cc74b17ed..4b059f2f4 100755
+index 8ab3af2be..41032acd4 100755
 --- a/tools/check_logs.py
 +++ b/tools/check_logs.py
 @@ -17,7 +17,6 @@
@@ -91,7 +91,7 @@ index cc74b17ed..4b059f2f4 100755
  import os
  import re
  import sys
-@@ -70,7 +69,7 @@ def process_files(file_specs, url_specs, allow_lists):
+@@ -69,7 +68,7 @@ def process_files(file_specs, url_specs, allow_lists):
          req = urlreq.Request(url)
          req.add_header('Accept-Encoding', 'gzip')
          page = urlreq.urlopen(req)

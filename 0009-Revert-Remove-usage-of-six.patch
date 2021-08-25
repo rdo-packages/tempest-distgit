@@ -1,93 +1,99 @@
-From 7c67e1ffc6891963fa4c992409a9d25119ac2576 Mon Sep 17 00:00:00 2001
-From: Martin Kopec <xkopec42@gmail.com>
-Date: Thu, 22 Apr 2021 10:08:46 +0000
-Subject: [PATCH 5/5] Revert "Remove usage of six"
+From 4986c3d3a329f27802a40156b74cd7799cc1dcc0 Mon Sep 17 00:00:00 2001
+From: Martin Kopec <mkopec@redhat.com>
+Date: Wed, 25 Aug 2021 10:44:11 +0000
+Subject: [PATCH 09/15] Revert "Remove usage of six"
 
 This reverts commit 99d6e009824254b0be239673b148740129f21daf.
 ---
- tempest/api/compute/admin/test_instance_usage_audit_log.py    | 3 ++-
- .../compute/admin/test_instance_usage_audit_log_negative.py   | 3 ++-
- tempest/api/compute/servers/test_novnc.py                     | 2 +-
- tempest/api/compute/servers/test_server_actions.py            | 3 +--
- tempest/api/object_storage/test_container_sync.py             | 2 +-
- tempest/api/object_storage/test_object_formpost.py            | 3 ++-
- tempest/api/object_storage/test_object_formpost_negative.py   | 3 ++-
- tempest/api/object_storage/test_object_temp_url.py            | 3 ++-
- tempest/api/object_storage/test_object_temp_url_negative.py   | 3 ++-
- tempest/api/volume/test_volumes_list.py                       | 2 +-
- tempest/cmd/cleanup_service.py                                | 3 +--
- tempest/cmd/init.py                                           | 4 ++--
- tempest/common/compute.py                                     | 3 ++-
- tempest/lib/auth.py                                           | 2 +-
- tempest/lib/cmd/check_uuid.py                                 | 2 +-
- tempest/lib/common/rest_client.py                             | 2 +-
- tempest/lib/services/compute/agents_client.py                 | 3 +--
- tempest/lib/services/compute/baremetal_nodes_client.py        | 3 +--
- tempest/lib/services/compute/flavors_client.py                | 3 +--
- tempest/lib/services/compute/floating_ip_pools_client.py      | 3 +--
- tempest/lib/services/compute/floating_ips_client.py           | 3 +--
- tempest/lib/services/compute/hosts_client.py                  | 3 +--
- tempest/lib/services/compute/images_client.py                 | 3 +--
- tempest/lib/services/compute/keypairs_client.py               | 3 +--
- tempest/lib/services/compute/migrations_client.py             | 3 +--
- tempest/lib/services/compute/quotas_client.py                 | 3 +--
- tempest/lib/services/compute/security_groups_client.py        | 3 +--
- tempest/lib/services/compute/servers_client.py                | 2 +-
- tempest/lib/services/compute/services_client.py               | 3 +--
- tempest/lib/services/compute/snapshots_client.py              | 3 +--
- tempest/lib/services/compute/tenant_usages_client.py          | 3 +--
- tempest/lib/services/compute/volumes_client.py                | 3 +--
- tempest/lib/services/identity/v2/identity_client.py           | 3 +--
- tempest/lib/services/identity/v2/roles_client.py              | 3 +--
- tempest/lib/services/identity/v2/services_client.py           | 3 +--
- tempest/lib/services/identity/v2/tenants_client.py            | 3 +--
- tempest/lib/services/identity/v2/users_client.py              | 3 +--
- tempest/lib/services/identity/v3/access_rules_client.py       | 3 +--
- .../services/identity/v3/application_credentials_client.py    | 3 +--
- tempest/lib/services/identity/v3/credentials_client.py        | 3 +--
- tempest/lib/services/identity/v3/domains_client.py            | 3 +--
- tempest/lib/services/identity/v3/endpoints_client.py          | 3 +--
- tempest/lib/services/identity/v3/groups_client.py             | 3 +--
- tempest/lib/services/identity/v3/oauth_token_client.py        | 2 +-
- tempest/lib/services/identity/v3/projects_client.py           | 3 +--
- tempest/lib/services/identity/v3/regions_client.py            | 3 +--
- tempest/lib/services/identity/v3/role_assignments_client.py   | 3 +--
- tempest/lib/services/identity/v3/roles_client.py              | 3 +--
- tempest/lib/services/identity/v3/services_client.py           | 3 +--
- tempest/lib/services/identity/v3/trusts_client.py             | 3 +--
- tempest/lib/services/identity/v3/users_client.py              | 3 +--
- tempest/lib/services/image/v1/images_client.py                | 2 +-
- tempest/lib/services/image/v2/images_client.py                | 2 +-
- tempest/lib/services/image/v2/namespace_objects_client.py     | 3 +--
- tempest/lib/services/image/v2/namespace_tags_client.py        | 3 +--
- tempest/lib/services/network/base.py                          | 3 +--
- tempest/lib/services/object_storage/account_client.py         | 2 +-
- tempest/lib/services/object_storage/container_client.py       | 2 +-
- tempest/lib/services/object_storage/object_client.py          | 4 ++--
- tempest/lib/services/placement/placement_client.py            | 3 +--
- tempest/lib/services/placement/resource_providers_client.py   | 3 +--
- tempest/lib/services/volume/v1/hosts_client.py                | 3 +--
- tempest/lib/services/volume/v1/quotas_client.py               | 3 +--
- tempest/lib/services/volume/v1/services_client.py             | 3 +--
- tempest/lib/services/volume/v1/snapshots_client.py            | 3 +--
- tempest/lib/services/volume/v1/types_client.py                | 3 +--
- tempest/lib/services/volume/v1/volumes_client.py              | 3 +--
- tempest/lib/services/volume/v3/backups_client.py              | 3 +--
- tempest/lib/services/volume/v3/group_snapshots_client.py      | 3 +--
- tempest/lib/services/volume/v3/group_types_client.py          | 3 +--
- tempest/lib/services/volume/v3/groups_client.py               | 3 +--
- tempest/lib/services/volume/v3/hosts_client.py                | 3 +--
- tempest/lib/services/volume/v3/quotas_client.py               | 3 +--
- tempest/lib/services/volume/v3/services_client.py             | 3 +--
- tempest/lib/services/volume/v3/snapshots_client.py            | 3 +--
- tempest/lib/services/volume/v3/transfers_client.py            | 3 +--
- tempest/lib/services/volume/v3/types_client.py                | 3 +--
- tempest/lib/services/volume/v3/versions_client.py             | 2 +-
- tempest/lib/services/volume/v3/volumes_client.py              | 3 +--
- tempest/services/orchestration/json/orchestration_client.py   | 2 +-
- tempest/tests/common/test_compute.py                          | 2 +-
- tools/check_logs.py                                           | 2 +-
- 82 files changed, 91 insertions(+), 141 deletions(-)
+ .../admin/test_instance_usage_audit_log.py    |   3 +-
+ .../test_instance_usage_audit_log_negative.py |   3 +-
+ tempest/api/compute/servers/test_novnc.py     |   4 +-
+ .../compute/servers/test_server_actions.py    |   3 +-
+ .../api/object_storage/test_container_sync.py |   2 +-
+ .../object_storage/test_object_formpost.py    |   3 +-
+ .../test_object_formpost_negative.py          |   3 +-
+ .../object_storage/test_object_temp_url.py    |   3 +-
+ .../test_object_temp_url_negative.py          |   3 +-
+ tempest/api/volume/test_volumes_list.py       |   2 +-
+ tempest/cmd/cleanup_service.py                |   3 +-
+ tempest/cmd/init.py                           |   4 +-
+ tempest/common/compute.py                     |   3 +-
+ tempest/lib/auth.py                           |   2 +-
+ tempest/lib/cmd/check_uuid.py                 |   2 +-
+ tempest/lib/common/rest_client.py             |   3 +-
+ tempest/lib/services/compute/agents_client.py |   3 +-
+ .../compute/baremetal_nodes_client.py         |   3 +-
+ .../lib/services/compute/flavors_client.py    |   3 +-
+ .../compute/floating_ip_pools_client.py       |   3 +-
+ .../services/compute/floating_ips_client.py   |   3 +-
+ tempest/lib/services/compute/hosts_client.py  |   3 +-
+ tempest/lib/services/compute/images_client.py |   3 +-
+ .../lib/services/compute/keypairs_client.py   |   3 +-
+ .../lib/services/compute/migrations_client.py |   3 +-
+ tempest/lib/services/compute/quotas_client.py |   3 +-
+ .../compute/security_groups_client.py         |   3 +-
+ .../lib/services/compute/servers_client.py    |   2 +-
+ .../lib/services/compute/services_client.py   |   3 +-
+ .../lib/services/compute/snapshots_client.py  |   3 +-
+ .../services/compute/tenant_usages_client.py  |   3 +-
+ .../lib/services/compute/volumes_client.py    |   3 +-
+ .../services/identity/v2/identity_client.py   |   3 +-
+ .../lib/services/identity/v2/roles_client.py  |   3 +-
+ .../services/identity/v2/services_client.py   |   3 +-
+ .../services/identity/v2/tenants_client.py    |   3 +-
+ .../lib/services/identity/v2/users_client.py  |   3 +-
+ .../identity/v3/access_rules_client.py        |   3 +-
+ .../v3/application_credentials_client.py      |   3 +-
+ .../identity/v3/credentials_client.py         |   3 +-
+ .../services/identity/v3/domains_client.py    |   3 +-
+ .../services/identity/v3/endpoints_client.py  |   3 +-
+ .../lib/services/identity/v3/groups_client.py |   3 +-
+ .../identity/v3/oauth_token_client.py         |   4 +-
+ .../services/identity/v3/projects_client.py   |   3 +-
+ .../services/identity/v3/regions_client.py    |   3 +-
+ .../identity/v3/role_assignments_client.py    |   3 +-
+ .../lib/services/identity/v3/roles_client.py  |   3 +-
+ .../services/identity/v3/services_client.py   |   3 +-
+ .../lib/services/identity/v3/trusts_client.py |   3 +-
+ .../lib/services/identity/v3/users_client.py  |   3 +-
+ .../lib/services/image/v1/images_client.py    |   2 +-
+ .../lib/services/image/v2/images_client.py    |   2 +-
+ .../image/v2/namespace_objects_client.py      |   3 +-
+ .../image/v2/namespace_tags_client.py         |   3 +-
+ tempest/lib/services/network/base.py          |   3 +-
+ .../services/object_storage/account_client.py |   2 +-
+ .../object_storage/container_client.py        |   2 +-
+ .../services/object_storage/object_client.py  |   4 +-
+ .../services/placement/placement_client.py    |   3 +-
+ .../placement/resource_providers_client.py    |   3 +-
+ .../lib/services/volume/v1/hosts_client.py    |  39 +++
+ .../lib/services/volume/v1/quotas_client.py   |  62 ++++
+ .../lib/services/volume/v1/services_client.py |  33 ++
+ .../services/volume/v1/snapshots_client.py    | 187 +++++++++++
+ .../lib/services/volume/v1/types_client.py    | 166 ++++++++++
+ .../lib/services/volume/v1/volumes_client.py  | 306 ++++++++++++++++++
+ .../lib/services/volume/v3/backups_client.py  |   3 +-
+ .../volume/v3/group_snapshots_client.py       |   3 +-
+ .../services/volume/v3/group_types_client.py  |   3 +-
+ .../lib/services/volume/v3/groups_client.py   |   3 +-
+ .../lib/services/volume/v3/hosts_client.py    |   3 +-
+ .../lib/services/volume/v3/quotas_client.py   |   3 +-
+ .../lib/services/volume/v3/services_client.py |   3 +-
+ .../services/volume/v3/snapshots_client.py    |   3 +-
+ .../services/volume/v3/transfers_client.py    |   3 +-
+ .../lib/services/volume/v3/types_client.py    |   3 +-
+ .../lib/services/volume/v3/versions_client.py |   2 +-
+ .../lib/services/volume/v3/volumes_client.py  |   4 +-
+ .../json/orchestration_client.py              |   2 +-
+ tempest/tests/common/test_compute.py          |   2 +-
+ tools/check_logs.py                           |   3 +-
+ 82 files changed, 885 insertions(+), 129 deletions(-)
+ create mode 100644 tempest/lib/services/volume/v1/hosts_client.py
+ create mode 100644 tempest/lib/services/volume/v1/quotas_client.py
+ create mode 100644 tempest/lib/services/volume/v1/services_client.py
+ create mode 100644 tempest/lib/services/volume/v1/snapshots_client.py
+ create mode 100644 tempest/lib/services/volume/v1/types_client.py
+ create mode 100644 tempest/lib/services/volume/v1/volumes_client.py
 
 diff --git a/tempest/api/compute/admin/test_instance_usage_audit_log.py b/tempest/api/compute/admin/test_instance_usage_audit_log.py
 index c4c054246..4dcbb3b08 100644
@@ -118,16 +124,16 @@ index c1154511f..84d18c47b 100644
  from tempest.api.compute import base
  from tempest.lib import decorators
 diff --git a/tempest/api/compute/servers/test_novnc.py b/tempest/api/compute/servers/test_novnc.py
-index 34b3146db..6ebdbdb08 100644
+index fd1d13515..77176380b 100644
 --- a/tempest/api/compute/servers/test_novnc.py
 +++ b/tempest/api/compute/servers/test_novnc.py
-@@ -14,9 +14,9 @@
+@@ -14,7 +14,9 @@
  #    under the License.
  
  import struct
 -import urllib.parse as urlparse
- 
- import six
++
++import six
 +import six.moves.urllib.parse as urlparse
  import urllib3
  
@@ -322,10 +328,10 @@ index 0ae11ca9f..ff09671dc 100755
  DECORATOR_MODULE = 'decorators'
  DECORATOR_NAME = 'idempotent_id'
 diff --git a/tempest/lib/common/rest_client.py b/tempest/lib/common/rest_client.py
-index c8ce610aa..0fa78fa60 100644
+index d77e2cb19..14cabe368 100644
 --- a/tempest/lib/common/rest_client.py
 +++ b/tempest/lib/common/rest_client.py
-@@ -18,13 +18,13 @@ import collections
+@@ -18,12 +18,13 @@ import collections
  import email.utils
  import re
  import time
@@ -335,7 +341,7 @@ index c8ce610aa..0fa78fa60 100644
  from oslo_log import log as logging
  from oslo_log import versionutils
  from oslo_serialization import jsonutils as json
- import six
++import six
 +from six.moves import urllib
  
  from tempest.lib.common import http
@@ -506,7 +512,7 @@ index 0bba990c7..9493144ce 100644
  from tempest.lib.api_schema.response.compute.v2_1 import \
      security_groups as schema
 diff --git a/tempest/lib/services/compute/servers_client.py b/tempest/lib/services/compute/servers_client.py
-index c36f80ab1..e82b58f2f 100644
+index e58890c89..83e123e61 100644
 --- a/tempest/lib/services/compute/servers_client.py
 +++ b/tempest/lib/services/compute/servers_client.py
 @@ -16,9 +16,9 @@
@@ -746,16 +752,16 @@ index 6f8206735..2cfb24a03 100644
  from tempest.lib.common import rest_client
  
 diff --git a/tempest/lib/services/identity/v3/oauth_token_client.py b/tempest/lib/services/identity/v3/oauth_token_client.py
-index 33360941a..722decad8 100644
+index 141cd11e7..832033e3a 100644
 --- a/tempest/lib/services/identity/v3/oauth_token_client.py
 +++ b/tempest/lib/services/identity/v3/oauth_token_client.py
-@@ -18,9 +18,9 @@ import hashlib
+@@ -18,7 +18,9 @@ import hashlib
  import hmac
  import random
  import time
 -from urllib import parse as urlparse
- 
- import six
++
++import six
 +from six.moves.urllib import parse as urlparse
  
  from oslo_serialization import jsonutils as json
@@ -881,7 +887,7 @@ index c9a4a9403..0e76a63d4 100644
  from tempest.lib.common import rest_client
  from tempest.lib import exceptions as lib_exc
 diff --git a/tempest/lib/services/image/v2/images_client.py b/tempest/lib/services/image/v2/images_client.py
-index fa3bb8c5f..4713cce2f 100644
+index abf427cd9..ebea624a8 100644
 --- a/tempest/lib/services/image/v2/images_client.py
 +++ b/tempest/lib/services/image/v2/images_client.py
 @@ -14,9 +14,9 @@
@@ -1004,7 +1010,7 @@ index 216ac08c2..b8e91b8e4 100644
  from tempest.lib.common import rest_client
  from tempest.lib.services.placement import base_placement_client
 diff --git a/tempest/lib/services/placement/resource_providers_client.py b/tempest/lib/services/placement/resource_providers_client.py
-index e6fbcb285..d9f62069c 100644
+index 3214053f6..5a7114d97 100644
 --- a/tempest/lib/services/placement/resource_providers_client.py
 +++ b/tempest/lib/services/placement/resource_providers_client.py
 @@ -10,9 +10,8 @@
@@ -1019,96 +1025,834 @@ index e6fbcb285..d9f62069c 100644
  from tempest.lib.common import rest_client
  from tempest.lib.services.placement import base_placement_client
 diff --git a/tempest/lib/services/volume/v1/hosts_client.py b/tempest/lib/services/volume/v1/hosts_client.py
-index 2e9427422..f3446780d 100644
---- a/tempest/lib/services/volume/v1/hosts_client.py
+new file mode 100644
+index 000000000..f3446780d
+--- /dev/null
 +++ b/tempest/lib/services/volume/v1/hosts_client.py
-@@ -13,9 +13,8 @@
- #    License for the specific language governing permissions and limitations
- #    under the License.
- 
--from urllib import parse as urllib
--
- from oslo_serialization import jsonutils as json
+@@ -0,0 +1,39 @@
++# Copyright 2013 OpenStack Foundation
++# All Rights Reserved.
++#
++#    Licensed under the Apache License, Version 2.0 (the "License"); you may
++#    not use this file except in compliance with the License. You may obtain
++#    a copy of the License at
++#
++#         http://www.apache.org/licenses/LICENSE-2.0
++#
++#    Unless required by applicable law or agreed to in writing, software
++#    distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
++#    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
++#    License for the specific language governing permissions and limitations
++#    under the License.
++
++from oslo_serialization import jsonutils as json
 +from six.moves.urllib import parse as urllib
- 
- from tempest.lib.common import rest_client
- 
++
++from tempest.lib.common import rest_client
++
++
++class HostsClient(rest_client.RestClient):
++    """Client class to send CRUD Volume Host API V1 requests"""
++
++    def list_hosts(self, **params):
++        """Lists all hosts.
++
++        For a full list of available parameters, please refer to the official
++        API reference:
++        https://docs.openstack.org/api-ref/block-storage/v2/#list-all-hosts
++        """
++        url = 'os-hosts'
++        if params:
++            url += '?%s' % urllib.urlencode(params)
++
++        resp, body = self.get(url)
++        body = json.loads(body)
++        self.expected_success(200, resp.status)
++        return rest_client.ResponseBody(resp, body)
 diff --git a/tempest/lib/services/volume/v1/quotas_client.py b/tempest/lib/services/volume/v1/quotas_client.py
-index d7c96987d..7f191ca76 100644
---- a/tempest/lib/services/volume/v1/quotas_client.py
+new file mode 100644
+index 000000000..7f191ca76
+--- /dev/null
 +++ b/tempest/lib/services/volume/v1/quotas_client.py
-@@ -12,9 +12,8 @@
- #    License for the specific language governing permissions and limitations
- #    under the License.
- 
--from urllib import parse as urllib
--
- from oslo_serialization import jsonutils
+@@ -0,0 +1,62 @@
++# Copyright (C) 2014 eNovance SAS <licensing@enovance.com>
++#
++#    Licensed under the Apache License, Version 2.0 (the "License"); you may
++#    not use this file except in compliance with the License. You may obtain
++#    a copy of the License at
++#
++#         http://www.apache.org/licenses/LICENSE-2.0
++#
++#    Unless required by applicable law or agreed to in writing, software
++#    distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
++#    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
++#    License for the specific language governing permissions and limitations
++#    under the License.
++
++from oslo_serialization import jsonutils
 +from six.moves.urllib import parse as urllib
- 
- from tempest.lib.common import rest_client
- 
++
++from tempest.lib.common import rest_client
++
++
++class QuotasClient(rest_client.RestClient):
++    """Client class to send CRUD Volume Quotas API V1 requests"""
++
++    def show_default_quota_set(self, tenant_id):
++        """List the default volume quota set for a tenant."""
++
++        url = 'os-quota-sets/%s/defaults' % tenant_id
++        resp, body = self.get(url)
++        self.expected_success(200, resp.status)
++        body = jsonutils.loads(body)
++        return rest_client.ResponseBody(resp, body)
++
++    def show_quota_set(self, tenant_id, params=None):
++        """List the quota set for a tenant."""
++
++        url = 'os-quota-sets/%s' % tenant_id
++        if params:
++            url += '?%s' % urllib.urlencode(params)
++
++        resp, body = self.get(url)
++        self.expected_success(200, resp.status)
++        body = jsonutils.loads(body)
++        return rest_client.ResponseBody(resp, body)
++
++    def update_quota_set(self, tenant_id, **kwargs):
++        """Updates quota set
++
++        For a full list of available parameters, please refer to the official
++        API reference:
++        https://docs.openstack.org/api-ref/block-storage/v2/#update-quotas
++        """
++        put_body = jsonutils.dumps({'quota_set': kwargs})
++        resp, body = self.put('os-quota-sets/%s' % tenant_id, put_body)
++        self.expected_success(200, resp.status)
++        body = jsonutils.loads(body)
++        return rest_client.ResponseBody(resp, body)
++
++    def delete_quota_set(self, tenant_id):
++        """Delete the tenant's quota set."""
++        resp, body = self.delete('os-quota-sets/%s' % tenant_id)
++        self.expected_success(200, resp.status)
++        return rest_client.ResponseBody(resp, body)
 diff --git a/tempest/lib/services/volume/v1/services_client.py b/tempest/lib/services/volume/v1/services_client.py
-index 957a0e634..d438a34ec 100644
---- a/tempest/lib/services/volume/v1/services_client.py
+new file mode 100644
+index 000000000..d438a34ec
+--- /dev/null
 +++ b/tempest/lib/services/volume/v1/services_client.py
-@@ -13,9 +13,8 @@
- #    License for the specific language governing permissions and limitations
- #    under the License.
- 
--from urllib import parse as urllib
--
- from oslo_serialization import jsonutils as json
+@@ -0,0 +1,33 @@
++# Copyright 2014 NEC Corporation
++# All Rights Reserved.
++#
++#    Licensed under the Apache License, Version 2.0 (the "License"); you may
++#    not use this file except in compliance with the License. You may obtain
++#    a copy of the License at
++#
++#         http://www.apache.org/licenses/LICENSE-2.0
++#
++#    Unless required by applicable law or agreed to in writing, software
++#    distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
++#    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
++#    License for the specific language governing permissions and limitations
++#    under the License.
++
++from oslo_serialization import jsonutils as json
 +from six.moves.urllib import parse as urllib
- 
- from tempest.lib.common import rest_client
- 
++
++from tempest.lib.common import rest_client
++
++
++class ServicesClient(rest_client.RestClient):
++    """Volume V1 volume services client"""
++
++    def list_services(self, **params):
++        url = 'os-services'
++        if params:
++            url += '?%s' % urllib.urlencode(params)
++
++        resp, body = self.get(url)
++        body = json.loads(body)
++        self.expected_success(200, resp.status)
++        return rest_client.ResponseBody(resp, body)
 diff --git a/tempest/lib/services/volume/v1/snapshots_client.py b/tempest/lib/services/volume/v1/snapshots_client.py
-index a478686e1..7dfdcf276 100644
---- a/tempest/lib/services/volume/v1/snapshots_client.py
+new file mode 100644
+index 000000000..7dfdcf276
+--- /dev/null
 +++ b/tempest/lib/services/volume/v1/snapshots_client.py
-@@ -10,9 +10,8 @@
- #    License for the specific language governing permissions and limitations
- #    under the License.
- 
--from urllib import parse as urllib
--
- from oslo_serialization import jsonutils as json
+@@ -0,0 +1,187 @@
++#    Licensed under the Apache License, Version 2.0 (the "License"); you may
++#    not use this file except in compliance with the License. You may obtain
++#    a copy of the License at
++#
++#         http://www.apache.org/licenses/LICENSE-2.0
++#
++#    Unless required by applicable law or agreed to in writing, software
++#    distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
++#    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
++#    License for the specific language governing permissions and limitations
++#    under the License.
++
++from oslo_serialization import jsonutils as json
 +from six.moves.urllib import parse as urllib
- 
- from tempest.lib.common import rest_client
- from tempest.lib import exceptions as lib_exc
++
++from tempest.lib.common import rest_client
++from tempest.lib import exceptions as lib_exc
++
++
++class SnapshotsClient(rest_client.RestClient):
++    """Client class to send CRUD Volume V1 API requests."""
++
++    create_resp = 200
++
++    def list_snapshots(self, detail=False, **params):
++        """List all the snapshot.
++
++        For a full list of available parameters, please refer to the official
++        API reference:
++        https://docs.openstack.org/api-ref/block-storage/v2/#list-snapshots
++        https://docs.openstack.org/api-ref/block-storage/v2/#list-snapshots-with-details
++        """
++        url = 'snapshots'
++        if detail:
++            url += '/detail'
++        if params:
++            url += '?%s' % urllib.urlencode(params)
++
++        resp, body = self.get(url)
++        body = json.loads(body)
++        self.expected_success(200, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def show_snapshot(self, snapshot_id):
++        """Returns the details of a single snapshot.
++
++        For a full list of available parameters, please refer to the official
++        API reference:
++        https://docs.openstack.org/api-ref/block-storage/v2/#show-snapshot-details
++        """
++        url = "snapshots/%s" % snapshot_id
++        resp, body = self.get(url)
++        body = json.loads(body)
++        self.expected_success(200, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def create_snapshot(self, **kwargs):
++        """Creates a new snapshot.
++
++        For a full list of available parameters, please refer to the official
++        API reference:
++        https://docs.openstack.org/api-ref/block-storage/v2/#create-snapshot
++        """
++        post_body = json.dumps({'snapshot': kwargs})
++        resp, body = self.post('snapshots', post_body)
++        body = json.loads(body)
++        self.expected_success(self.create_resp, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def delete_snapshot(self, snapshot_id):
++        """Delete Snapshot.
++
++        For a full list of available parameters, please refer to the official
++        API reference:
++        https://docs.openstack.org/api-ref/block-storage/v2/#delete-snapshot
++        """
++        resp, body = self.delete("snapshots/%s" % snapshot_id)
++        self.expected_success(202, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def is_resource_deleted(self, id):
++        try:
++            self.show_snapshot(id)
++        except lib_exc.NotFound:
++            return True
++        return False
++
++    @property
++    def resource_type(self):
++        """Returns the primary type of resource this client works with."""
++        return 'volume-snapshot'
++
++    def reset_snapshot_status(self, snapshot_id, status):
++        """Reset the specified snapshot's status."""
++        post_body = json.dumps({'os-reset_status': {"status": status}})
++        resp, body = self.post('snapshots/%s/action' % snapshot_id, post_body)
++        self.expected_success(202, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def update_snapshot_status(self, snapshot_id, **kwargs):
++        """Update the specified snapshot's status."""
++        # TODO(gmann): api-site doesn't contain doc ref
++        # for this API. After fixing the api-site, we need to
++        # add the link here.
++        # Bug https://bugs.launchpad.net/openstack-api-site/+bug/1532645
++
++        post_body = json.dumps({'os-update_snapshot_status': kwargs})
++        url = 'snapshots/%s/action' % snapshot_id
++        resp, body = self.post(url, post_body)
++        self.expected_success(202, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def create_snapshot_metadata(self, snapshot_id, metadata):
++        """Create metadata for the snapshot."""
++        put_body = json.dumps({'metadata': metadata})
++        url = "snapshots/%s/metadata" % snapshot_id
++        resp, body = self.post(url, put_body)
++        body = json.loads(body)
++        self.expected_success(200, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def update_snapshot(self, snapshot_id, **kwargs):
++        """Updates a snapshot.
++
++        For a full list of available parameters, please refer to the official
++        API reference:
++        https://docs.openstack.org/api-ref/block-storage/v2/#update-snapshot
++        """
++        put_body = json.dumps({'snapshot': kwargs})
++        resp, body = self.put('snapshots/%s' % snapshot_id, put_body)
++        body = json.loads(body)
++        self.expected_success(200, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def show_snapshot_metadata(self, snapshot_id):
++        """Get metadata of the snapshot.
++
++        For a full list of available parameters, please refer to the official
++        API reference:
++        https://docs.openstack.org/api-ref/block-storage/v2/#show-snapshot-metadata
++        """
++        url = "snapshots/%s/metadata" % snapshot_id
++        resp, body = self.get(url)
++        body = json.loads(body)
++        self.expected_success(200, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def update_snapshot_metadata(self, snapshot_id, **kwargs):
++        """Update metadata for the snapshot.
++
++        For a full list of available parameters, please refer to the official
++        API reference:
++        https://docs.openstack.org/api-ref/block-storage/v2/#update-snapshot-metadata
++        """
++        put_body = json.dumps(kwargs)
++        url = "snapshots/%s/metadata" % snapshot_id
++        resp, body = self.put(url, put_body)
++        body = json.loads(body)
++        self.expected_success(200, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def update_snapshot_metadata_item(self, snapshot_id, id, **kwargs):
++        """Update metadata item for the snapshot."""
++        # TODO(piyush): Current api-site doesn't contain this API description.
++        # After fixing the api-site, we need to fix here also for putting the
++        # link to api-site.
++        # LP: https://bugs.launchpad.net/openstack-api-site/+bug/1529064
++        put_body = json.dumps(kwargs)
++        url = "snapshots/%s/metadata/%s" % (snapshot_id, id)
++        resp, body = self.put(url, put_body)
++        body = json.loads(body)
++        self.expected_success(200, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def delete_snapshot_metadata_item(self, snapshot_id, id):
++        """Delete metadata item for the snapshot."""
++        url = "snapshots/%s/metadata/%s" % (snapshot_id, id)
++        resp, body = self.delete(url)
++        self.expected_success(200, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def force_delete_snapshot(self, snapshot_id):
++        """Force Delete Snapshot."""
++        post_body = json.dumps({'os-force_delete': {}})
++        resp, body = self.post('snapshots/%s/action' % snapshot_id, post_body)
++        self.expected_success(202, resp.status)
++        return rest_client.ResponseBody(resp, body)
 diff --git a/tempest/lib/services/volume/v1/types_client.py b/tempest/lib/services/volume/v1/types_client.py
-index 6237fb45a..d434e654d 100644
---- a/tempest/lib/services/volume/v1/types_client.py
+new file mode 100644
+index 000000000..d434e654d
+--- /dev/null
 +++ b/tempest/lib/services/volume/v1/types_client.py
-@@ -13,9 +13,8 @@
- #    License for the specific language governing permissions and limitations
- #    under the License.
- 
--from urllib import parse as urllib
--
- from oslo_serialization import jsonutils as json
+@@ -0,0 +1,166 @@
++# Copyright 2012 OpenStack Foundation
++# All Rights Reserved.
++#
++#    Licensed under the Apache License, Version 2.0 (the "License"); you may
++#    not use this file except in compliance with the License. You may obtain
++#    a copy of the License at
++#
++#         http://www.apache.org/licenses/LICENSE-2.0
++#
++#    Unless required by applicable law or agreed to in writing, software
++#    distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
++#    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
++#    License for the specific language governing permissions and limitations
++#    under the License.
++
++from oslo_serialization import jsonutils as json
 +from six.moves.urllib import parse as urllib
- 
- from tempest.lib.common import rest_client
- from tempest.lib import exceptions as lib_exc
++
++from tempest.lib.common import rest_client
++from tempest.lib import exceptions as lib_exc
++
++
++class TypesClient(rest_client.RestClient):
++    """Client class to send CRUD Volume Types API requests"""
++
++    def is_resource_deleted(self, id):
++        try:
++            self.show_volume_type(id)
++        except lib_exc.NotFound:
++            return True
++        return False
++
++    @property
++    def resource_type(self):
++        """Returns the primary type of resource this client works with."""
++        return 'volume-type'
++
++    def list_volume_types(self, **params):
++        """List all the volume_types created.
++
++        For a full list of available parameters, please refer to the official
++        API reference:
++        https://docs.openstack.org/api-ref/block-storage/v2/#list-all-volume-types-for-v2
++        """
++        url = 'types'
++        if params:
++            url += '?%s' % urllib.urlencode(params)
++
++        resp, body = self.get(url)
++        body = json.loads(body)
++        self.expected_success(200, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def show_volume_type(self, volume_type_id):
++        """Returns the details of a single volume_type.
++
++        For a full list of available parameters, please refer to the official
++        API reference:
++        https://docs.openstack.org/api-ref/block-storage/v2/#show-volume-type-details-for-v2
++        """
++        url = "types/%s" % volume_type_id
++        resp, body = self.get(url)
++        body = json.loads(body)
++        self.expected_success(200, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def create_volume_type(self, **kwargs):
++        """Create volume type.
++
++        For a full list of available parameters, please refer to the official
++        API reference:
++        https://docs.openstack.org/api-ref/block-storage/v2/#create-volume-type-for-v2
++        """
++        post_body = json.dumps({'volume_type': kwargs})
++        resp, body = self.post('types', post_body)
++        body = json.loads(body)
++        self.expected_success(200, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def delete_volume_type(self, volume_type_id):
++        """Deletes the Specified Volume_type.
++
++        For a full list of available parameters, please refer to the official
++        API reference:
++        https://docs.openstack.org/api-ref/block-storage/v2/#delete-volume-type
++        """
++        resp, body = self.delete("types/%s" % volume_type_id)
++        self.expected_success(202, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def list_volume_types_extra_specs(self, volume_type_id, **params):
++        """List all the volume_types extra specs created.
++
++        TODO: Current api-site doesn't contain this API description.
++        After fixing the api-site, we need to fix here also for putting
++        the link to api-site.
++        """
++        url = 'types/%s/extra_specs' % volume_type_id
++        if params:
++            url += '?%s' % urllib.urlencode(params)
++
++        resp, body = self.get(url)
++        body = json.loads(body)
++        self.expected_success(200, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def show_volume_type_extra_specs(self, volume_type_id, extra_specs_name):
++        """Returns the details of a single volume_type extra spec."""
++        url = "types/%s/extra_specs/%s" % (volume_type_id, extra_specs_name)
++        resp, body = self.get(url)
++        body = json.loads(body)
++        self.expected_success(200, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def create_volume_type_extra_specs(self, volume_type_id, extra_specs):
++        """Creates a new Volume_type extra spec.
++
++        volume_type_id: Id of volume_type.
++        extra_specs: A dictionary of values to be used as extra_specs.
++        """
++        url = "types/%s/extra_specs" % volume_type_id
++        post_body = json.dumps({'extra_specs': extra_specs})
++        resp, body = self.post(url, post_body)
++        body = json.loads(body)
++        self.expected_success(200, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def delete_volume_type_extra_specs(self, volume_type_id, extra_spec_name):
++        """Deletes the Specified Volume_type extra spec."""
++        resp, body = self.delete("types/%s/extra_specs/%s" % (
++            volume_type_id, extra_spec_name))
++        self.expected_success(202, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def update_volume_type(self, volume_type_id, **kwargs):
++        """Updates volume type name, description, and/or is_public.
++
++        For a full list of available parameters, please refer to the official
++        API reference:
++        https://docs.openstack.org/api-ref/block-storage/v2/#update-volume-type
++        """
++        put_body = json.dumps({'volume_type': kwargs})
++        resp, body = self.put('types/%s' % volume_type_id, put_body)
++        body = json.loads(body)
++        self.expected_success(200, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def update_volume_type_extra_specs(self, volume_type_id, extra_spec_name,
++                                       extra_specs):
++        """Update a volume_type extra spec.
++
++        :param volume_type_id: Id of volume_type.
++        :param extra_spec_name: Name of the extra spec to be updated.
++        :param extra_specs: A dictionary of with key as extra_spec_name and the
++                            updated value.
++
++        For a full list of available parameters, please refer to the official
++        API reference:
++        https://docs.openstack.org/api-ref/block-storage/v2/#update-extra-specs-for-a-volume-type
++        """
++        url = "types/%s/extra_specs/%s" % (volume_type_id, extra_spec_name)
++        put_body = json.dumps(extra_specs)
++        resp, body = self.put(url, put_body)
++        body = json.loads(body)
++        self.expected_success(200, resp.status)
++        return rest_client.ResponseBody(resp, body)
 diff --git a/tempest/lib/services/volume/v1/volumes_client.py b/tempest/lib/services/volume/v1/volumes_client.py
-index 9fca800a5..2efb0da74 100644
---- a/tempest/lib/services/volume/v1/volumes_client.py
+new file mode 100644
+index 000000000..2efb0da74
+--- /dev/null
 +++ b/tempest/lib/services/volume/v1/volumes_client.py
-@@ -13,10 +13,9 @@
- #    License for the specific language governing permissions and limitations
- #    under the License.
- 
--from urllib import parse as urllib
--
- from oslo_serialization import jsonutils as json
- import six
+@@ -0,0 +1,306 @@
++# Copyright 2012 OpenStack Foundation
++# All Rights Reserved.
++#
++#    Licensed under the Apache License, Version 2.0 (the "License"); you may
++#    not use this file except in compliance with the License. You may obtain
++#    a copy of the License at
++#
++#         http://www.apache.org/licenses/LICENSE-2.0
++#
++#    Unless required by applicable law or agreed to in writing, software
++#    distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
++#    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
++#    License for the specific language governing permissions and limitations
++#    under the License.
++
++from oslo_serialization import jsonutils as json
++import six
 +from six.moves.urllib import parse as urllib
- 
- from tempest.lib.common import rest_client
- from tempest.lib import exceptions as lib_exc
++
++from tempest.lib.common import rest_client
++from tempest.lib import exceptions as lib_exc
++
++
++class VolumesClient(rest_client.RestClient):
++    """Client class to send CRUD Volume V1 API requests"""
++
++    def _prepare_params(self, params):
++        """Prepares params for use in get or _ext_get methods.
++
++        If params is a string it will be left as it is, but if it's not it will
++        be urlencoded.
++        """
++        if isinstance(params, six.string_types):
++            return params
++        return urllib.urlencode(params)
++
++    def list_volumes(self, detail=False, params=None):
++        """List all the volumes created.
++
++        Params can be a string (must be urlencoded) or a dictionary.
++
++        For a full list of available parameters, please refer to the official
++        API reference:
++        https://docs.openstack.org/api-ref/block-storage/v2/#list-volumes
++        https://docs.openstack.org/api-ref/block-storage/v2/#list-volumes-with-details
++        """
++        url = 'volumes'
++        if detail:
++            url += '/detail'
++        if params:
++            url += '?%s' % self._prepare_params(params)
++
++        resp, body = self.get(url)
++        body = json.loads(body)
++        self.expected_success(200, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def show_volume(self, volume_id):
++        """Returns the details of a single volume."""
++        url = "volumes/%s" % volume_id
++        resp, body = self.get(url)
++        body = json.loads(body)
++        self.expected_success(200, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def create_volume(self, **kwargs):
++        """Creates a new Volume.
++
++        For a full list of available parameters, please refer to the official
++        API reference:
++        https://docs.openstack.org/api-ref/block-storage/v2/#create-volume
++        """
++        post_body = json.dumps({'volume': kwargs})
++        resp, body = self.post('volumes', post_body)
++        body = json.loads(body)
++        self.expected_success(200, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def update_volume(self, volume_id, **kwargs):
++        """Updates the Specified Volume.
++
++        For a full list of available parameters, please refer to the official
++        API reference:
++        https://docs.openstack.org/api-ref/block-storage/v2/#update-volume
++        """
++        put_body = json.dumps({'volume': kwargs})
++        resp, body = self.put('volumes/%s' % volume_id, put_body)
++        body = json.loads(body)
++        self.expected_success(200, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def delete_volume(self, volume_id):
++        """Deletes the Specified Volume."""
++        resp, body = self.delete("volumes/%s" % volume_id)
++        self.expected_success(202, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def upload_volume(self, volume_id, **kwargs):
++        """Uploads a volume in Glance."""
++        post_body = json.dumps({'os-volume_upload_image': kwargs})
++        url = 'volumes/%s/action' % (volume_id)
++        resp, body = self.post(url, post_body)
++        body = json.loads(body)
++        self.expected_success(202, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def attach_volume(self, volume_id, **kwargs):
++        """Attaches a volume to a given instance on a given mountpoint.
++
++        For a full list of available parameters, please refer to the official
++        API reference:
++        https://docs.openstack.org/api-ref/block-storage/v2/#attach-volume-to-server
++        """
++        post_body = json.dumps({'os-attach': kwargs})
++        url = 'volumes/%s/action' % (volume_id)
++        resp, body = self.post(url, post_body)
++        self.expected_success(202, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def set_bootable_volume(self, volume_id, **kwargs):
++        """set a bootable flag for a volume - true or false."""
++        post_body = json.dumps({'os-set_bootable': kwargs})
++        url = 'volumes/%s/action' % (volume_id)
++        resp, body = self.post(url, post_body)
++        self.expected_success(200, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def detach_volume(self, volume_id):
++        """Detaches a volume from an instance."""
++        post_body = json.dumps({'os-detach': {}})
++        url = 'volumes/%s/action' % (volume_id)
++        resp, body = self.post(url, post_body)
++        self.expected_success(202, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def reserve_volume(self, volume_id):
++        """Reserves a volume."""
++        post_body = json.dumps({'os-reserve': {}})
++        url = 'volumes/%s/action' % (volume_id)
++        resp, body = self.post(url, post_body)
++        self.expected_success(202, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def unreserve_volume(self, volume_id):
++        """Restore a reserved volume ."""
++        post_body = json.dumps({'os-unreserve': {}})
++        url = 'volumes/%s/action' % (volume_id)
++        resp, body = self.post(url, post_body)
++        self.expected_success(202, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def is_resource_deleted(self, id):
++        try:
++            self.show_volume(id)
++        except lib_exc.NotFound:
++            return True
++        return False
++
++    @property
++    def resource_type(self):
++        """Returns the primary type of resource this client works with."""
++        return 'volume'
++
++    def extend_volume(self, volume_id, **kwargs):
++        """Extend a volume.
++
++        For a full list of available parameters, please refer to the official
++        API reference:
++        https://docs.openstack.org/api-ref/block-storage/v2/#extend-volume-size
++        """
++        post_body = json.dumps({'os-extend': kwargs})
++        url = 'volumes/%s/action' % (volume_id)
++        resp, body = self.post(url, post_body)
++        self.expected_success(202, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def reset_volume_status(self, volume_id, **kwargs):
++        """Reset the Specified Volume's Status.
++
++        For a full list of available parameters, please refer to the official
++        API reference:
++        https://docs.openstack.org/api-ref/block-storage/v2/#reset-volume-statuses
++        """
++        post_body = json.dumps({'os-reset_status': kwargs})
++        resp, body = self.post('volumes/%s/action' % volume_id, post_body)
++        self.expected_success(202, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def create_volume_transfer(self, **kwargs):
++        """Create a volume transfer.
++
++        For a full list of available parameters, please refer to the official
++        API reference:
++        https://docs.openstack.org/api-ref/block-storage/v2/#create-volume-transfer
++        """
++        post_body = json.dumps({'transfer': kwargs})
++        resp, body = self.post('os-volume-transfer', post_body)
++        body = json.loads(body)
++        self.expected_success(202, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def show_volume_transfer(self, transfer_id):
++        """Returns the details of a volume transfer."""
++        url = "os-volume-transfer/%s" % transfer_id
++        resp, body = self.get(url)
++        body = json.loads(body)
++        self.expected_success(200, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def list_volume_transfers(self, **params):
++        """List all the volume transfers created.
++
++        For a full list of available parameters, please refer to the official
++        API reference:
++        https://docs.openstack.org/api-ref/block-storage/v2/#list-volume-transfers
++        """
++        url = 'os-volume-transfer'
++        if params:
++            url += '?%s' % urllib.urlencode(params)
++        resp, body = self.get(url)
++        body = json.loads(body)
++        self.expected_success(200, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def delete_volume_transfer(self, transfer_id):
++        """Delete a volume transfer."""
++        resp, body = self.delete("os-volume-transfer/%s" % transfer_id)
++        self.expected_success(202, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def accept_volume_transfer(self, transfer_id, **kwargs):
++        """Accept a volume transfer.
++
++        For a full list of available parameters, please refer to the official
++        API reference:
++        https://docs.openstack.org/api-ref/block-storage/v2/#accept-volume-transfer
++        """
++        url = 'os-volume-transfer/%s/accept' % transfer_id
++        post_body = json.dumps({'accept': kwargs})
++        resp, body = self.post(url, post_body)
++        body = json.loads(body)
++        self.expected_success(202, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def update_volume_readonly(self, volume_id, **kwargs):
++        """Update the Specified Volume readonly."""
++        post_body = json.dumps({'os-update_readonly_flag': kwargs})
++        url = 'volumes/%s/action' % (volume_id)
++        resp, body = self.post(url, post_body)
++        self.expected_success(202, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def force_delete_volume(self, volume_id):
++        """Force Delete Volume."""
++        post_body = json.dumps({'os-force_delete': {}})
++        resp, body = self.post('volumes/%s/action' % volume_id, post_body)
++        self.expected_success(202, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def create_volume_metadata(self, volume_id, metadata):
++        """Create metadata for the volume."""
++        put_body = json.dumps({'metadata': metadata})
++        url = "volumes/%s/metadata" % volume_id
++        resp, body = self.post(url, put_body)
++        body = json.loads(body)
++        self.expected_success(200, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def show_volume_metadata(self, volume_id):
++        """Get metadata of the volume."""
++        url = "volumes/%s/metadata" % volume_id
++        resp, body = self.get(url)
++        body = json.loads(body)
++        self.expected_success(200, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def update_volume_metadata(self, volume_id, metadata):
++        """Update metadata for the volume."""
++        put_body = json.dumps({'metadata': metadata})
++        url = "volumes/%s/metadata" % volume_id
++        resp, body = self.put(url, put_body)
++        body = json.loads(body)
++        self.expected_success(200, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def update_volume_metadata_item(self, volume_id, id, meta_item):
++        """Update metadata item for the volume."""
++        put_body = json.dumps({'meta': meta_item})
++        url = "volumes/%s/metadata/%s" % (volume_id, id)
++        resp, body = self.put(url, put_body)
++        body = json.loads(body)
++        self.expected_success(200, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def delete_volume_metadata_item(self, volume_id, id):
++        """Delete metadata item for the volume."""
++        url = "volumes/%s/metadata/%s" % (volume_id, id)
++        resp, body = self.delete(url)
++        self.expected_success(200, resp.status)
++        return rest_client.ResponseBody(resp, body)
++
++    def retype_volume(self, volume_id, **kwargs):
++        """Updates volume with new volume type."""
++        post_body = json.dumps({'os-retype': kwargs})
++        resp, _ = self.post('volumes/%s/action' % volume_id, post_body)
++        self.expected_success(202, resp.status)
 diff --git a/tempest/lib/services/volume/v3/backups_client.py b/tempest/lib/services/volume/v3/backups_client.py
 index 4bf7ffb64..1df45fa20 100644
 --- a/tempest/lib/services/volume/v3/backups_client.py
@@ -1200,7 +1944,7 @@ index 3f4c4e1c6..5b1a52c23 100644
  from tempest.lib.api_schema.response.volume import quotas as schema
  from tempest.lib.common import rest_client
 diff --git a/tempest/lib/services/volume/v3/services_client.py b/tempest/lib/services/volume/v3/services_client.py
-index 4672da8c8..8bc82c9b2 100644
+index 1111f8147..4ba01d7ef 100644
 --- a/tempest/lib/services/volume/v3/services_client.py
 +++ b/tempest/lib/services/volume/v3/services_client.py
 @@ -13,9 +13,8 @@
@@ -1213,7 +1957,7 @@ index 4672da8c8..8bc82c9b2 100644
 +from six.moves.urllib import parse as urllib
  
  from tempest.lib.api_schema.response.volume import services as schema
- from tempest.lib.common import rest_client
+ from tempest.lib.api_schema.response.volume.v3_7 import services as schemav37
 diff --git a/tempest/lib/services/volume/v3/snapshots_client.py b/tempest/lib/services/volume/v3/snapshots_client.py
 index ae31ee9d7..8ca2044d2 100644
 --- a/tempest/lib/services/volume/v3/snapshots_client.py
@@ -1230,7 +1974,7 @@ index ae31ee9d7..8ca2044d2 100644
  from tempest.lib.api_schema.response.volume import snapshots as schema
  from tempest.lib.common import rest_client
 diff --git a/tempest/lib/services/volume/v3/transfers_client.py b/tempest/lib/services/volume/v3/transfers_client.py
-index 36198c30e..f572f95c2 100644
+index cc4e1b206..5d39940c3 100644
 --- a/tempest/lib/services/volume/v3/transfers_client.py
 +++ b/tempest/lib/services/volume/v3/transfers_client.py
 @@ -13,9 +13,8 @@
@@ -1273,17 +2017,17 @@ index 0bed82735..4ac411241 100644
  from oslo_serialization import jsonutils as json
  
 diff --git a/tempest/lib/services/volume/v3/volumes_client.py b/tempest/lib/services/volume/v3/volumes_client.py
-index 147a79b22..b8535d812 100644
+index 9c6fe6821..3af576855 100644
 --- a/tempest/lib/services/volume/v3/volumes_client.py
 +++ b/tempest/lib/services/volume/v3/volumes_client.py
-@@ -13,10 +13,9 @@
+@@ -13,9 +13,9 @@
  #    License for the specific language governing permissions and limitations
  #    under the License.
  
 -from urllib import parse as urllib
 -
  from oslo_serialization import jsonutils as json
- import six
++import six
 +from six.moves.urllib import parse as urllib
  
  from tempest.lib.api_schema.response.volume import volumes as schema
@@ -1317,16 +2061,16 @@ index 142bb081e..45a439ce9 100644
  
  from tempest.common import compute
 diff --git a/tools/check_logs.py b/tools/check_logs.py
-index 4b059f2f4..7e191a00e 100755
+index 41032acd4..e08501470 100755
 --- a/tools/check_logs.py
 +++ b/tools/check_logs.py
-@@ -20,9 +20,9 @@ import gzip
+@@ -20,8 +20,9 @@ import gzip
  import os
  import re
  import sys
 -import urllib.request as urlreq
  
- import six
++import six
 +import six.moves.urllib.request as urlreq
  import yaml
  

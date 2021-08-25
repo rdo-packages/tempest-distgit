@@ -1,7 +1,7 @@
-From 3891462cb636ee19f3b0d67e7e8b09e4782bec1d Mon Sep 17 00:00:00 2001
+From cda2f25279eb9ee9b165b14676c8dec4f577fe50 Mon Sep 17 00:00:00 2001
 From: Martin Kopec <mkopec@redhat.com>
-Date: Fri, 9 Oct 2020 08:16:52 +0000
-Subject: [PATCH 3/4] Revert __future__ removal
+Date: Wed, 25 Aug 2021 11:50:12 +0000
+Subject: [PATCH 13/15] Revert __future__ removal
 
 It requires revert of a part of the following review:
 https://review.opendev.org/#/c/732960/
@@ -12,7 +12,7 @@ Change-Id: Ia035f4ed2ec61bb2b232afccf64408eca0dcabbc
  1 file changed, 1 insertion(+)
 
 diff --git a/tempest/lib/common/thread.py b/tempest/lib/common/thread.py
-index b47d40d..daf6a8f 100644
+index b47d40dcf..daf6a8f6e 100644
 --- a/tempest/lib/common/thread.py
 +++ b/tempest/lib/common/thread.py
 @@ -13,6 +13,7 @@
@@ -24,5 +24,5 @@ index b47d40d..daf6a8f 100644
  
  if six.PY2:
 -- 
-1.8.3.1
+2.27.0
 

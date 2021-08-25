@@ -1,7 +1,7 @@
-From f9bac9781f885098e79f4e4fc607981f33efa299 Mon Sep 17 00:00:00 2001
-From: Martin Kopec <xkopec42@gmail.com>
-Date: Thu, 22 Apr 2021 10:08:30 +0000
-Subject: [PATCH 3/5] Revert "Remove usage of six"
+From c185953796cc0ad74d95e1936c886dbaa19c1851 Mon Sep 17 00:00:00 2001
+From: Martin Kopec <mkopec@redhat.com>
+Date: Wed, 25 Aug 2021 10:40:43 +0000
+Subject: [PATCH 07/15] Revert "Remove usage of six"
 
 This reverts commit 8c3dac1abcdb7be83a94071c06316230a7ec66be.
 ---
@@ -109,7 +109,7 @@ index 15b8a0002..7930c6791 100644
                  cls.glance_client.update_image(image_id, data=image_file)
              else:
 diff --git a/tempest/api/image/base.py b/tempest/api/image/base.py
-index d0d64a5b7..d3dc19a86 100644
+index 23e7fd8ed..96de4d42d 100644
 --- a/tempest/api/image/base.py
 +++ b/tempest/api/image/base.py
 @@ -12,7 +12,7 @@
@@ -193,7 +193,7 @@ index 733c7784f..ad68d8241 100644
  
          body = self.client.show_image(image['id'])
 diff --git a/tempest/api/image/v2/test_images.py b/tempest/api/image/v2/test_images.py
-index 59067d12a..ca72388b7 100644
+index d283ab3c1..01c023856 100644
 --- a/tempest/api/image/v2/test_images.py
 +++ b/tempest/api/image/v2/test_images.py
 @@ -14,9 +14,10 @@
@@ -208,7 +208,7 @@ index 59067d12a..ca72388b7 100644
  from oslo_log import log as logging
  from tempest.api.image import base
  from tempest.common import waiters
-@@ -81,7 +82,7 @@ class ImportImagesTest(base.BaseV2ImageTest):
+@@ -77,7 +78,7 @@ class ImportImagesTest(base.BaseV2ImageTest):
          image = self._create_image()
          # Stage image data
          file_content = data_utils.random_bytes()
@@ -217,7 +217,7 @@ index 59067d12a..ca72388b7 100644
          self.client.stage_image_file(image['id'], image_file)
          # Check image status is 'uploading'
          body = self.client.show_image(image['id'])
-@@ -157,7 +158,7 @@ class MultiStoresImportImagesTest(base.BaseV2ImageTest):
+@@ -220,7 +221,7 @@ class MultiStoresImportImagesTest(base.BaseV2ImageTest):
  
          self.client.stage_image_file(
              image['id'],
@@ -226,7 +226,7 @@ index 59067d12a..ca72388b7 100644
          # Check image status is 'uploading'
          body = self.client.show_image(image['id'])
          self.assertEqual(image['id'], body['id'])
-@@ -239,7 +240,7 @@ class BasicOperationsImagesTest(base.BaseV2ImageTest):
+@@ -302,7 +303,7 @@ class BasicOperationsImagesTest(base.BaseV2ImageTest):
  
          # Now try uploading an image file
          file_content = data_utils.random_bytes()
@@ -235,7 +235,7 @@ index 59067d12a..ca72388b7 100644
          self.client.store_image_file(image['id'], image_file)
  
          # Now try to get image details
-@@ -316,7 +317,7 @@ class BasicOperationsImagesTest(base.BaseV2ImageTest):
+@@ -379,7 +380,7 @@ class BasicOperationsImagesTest(base.BaseV2ImageTest):
  
          # Upload an image file
          content = data_utils.random_bytes()
@@ -244,7 +244,7 @@ index 59067d12a..ca72388b7 100644
          self.client.store_image_file(image['id'], image_file)
  
          # Deactivate image
-@@ -366,7 +367,7 @@ class ListUserImagesTest(base.BaseV2ImageTest):
+@@ -429,7 +430,7 @@ class ListUserImagesTest(base.BaseV2ImageTest):
          1024 and 4096
          """
          size = random.randint(1024, 4096)
@@ -253,7 +253,7 @@ index 59067d12a..ca72388b7 100644
          tags = [data_utils.rand_name('tag'), data_utils.rand_name('tag')]
          image = cls.create_image(container_format=container_format,
                                   disk_format=disk_format,
-@@ -549,7 +550,7 @@ class ListSharedImagesTest(base.BaseV2ImageTest):
+@@ -612,7 +613,7 @@ class ListSharedImagesTest(base.BaseV2ImageTest):
      def test_list_images_param_member_status(self):
          """Test listing images by member_status and visibility"""
          # Create an image to be shared using default visibility
@@ -263,7 +263,7 @@ index 59067d12a..ca72388b7 100644
          disk_format = CONF.image.disk_formats[0]
          image = self.create_image(container_format=container_format,
 diff --git a/tempest/api/volume/test_volumes_negative.py b/tempest/api/volume/test_volumes_negative.py
-index 35dd0caf9..389d3bec6 100644
+index 554fc6a84..486af7280 100644
 --- a/tempest/api/volume/test_volumes_negative.py
 +++ b/tempest/api/volume/test_volumes_negative.py
 @@ -13,7 +13,7 @@
@@ -285,7 +285,7 @@ index 35dd0caf9..389d3bec6 100644
          waiters.wait_for_image_status(self.images_client,
                                        image['id'], 'active')
 diff --git a/tempest/tests/lib/services/image/v2/test_images_client.py b/tempest/tests/lib/services/image/v2/test_images_client.py
-index 7ee61d257..fe671bdfa 100644
+index 5b162f83c..bc7057089 100644
 --- a/tempest/tests/lib/services/image/v2/test_images_client.py
 +++ b/tempest/tests/lib/services/image/v2/test_images_client.py
 @@ -12,7 +12,7 @@
@@ -297,7 +297,7 @@ index 7ee61d257..fe671bdfa 100644
  
  from tempest.lib.common.utils import data_utils
  from tempest.lib.services.image.v2 import images_client
-@@ -178,7 +178,7 @@ class TestImagesClient(base.BaseServiceTest):
+@@ -216,7 +216,7 @@ class TestImagesClient(base.BaseServiceTest):
              {}, image_id="e485aab9-0907-4973-921c-bb6da8a8fcf8", status=204)
  
      def test_store_image_file(self):

@@ -1,7 +1,7 @@
-From 7792b4e5835dbdf1d01a9e701386c393dd352a2d Mon Sep 17 00:00:00 2001
-From: Martin Kopec <xkopec42@gmail.com>
-Date: Thu, 22 Apr 2021 10:46:31 +0000
-Subject: [PATCH] Reorder arguments and use parse from six
+From 368f093ce0f1bf238c3ba15109fba94b26f4fb51 Mon Sep 17 00:00:00 2001
+From: Martin Kopec <mkopec@redhat.com>
+Date: Wed, 25 Aug 2021 11:56:03 +0000
+Subject: [PATCH 15/15] Reorder arguments and use parse from six
 
 python3 doesn't care about the order of the args, however,
 py2 does so set **params as the last argument in run_command

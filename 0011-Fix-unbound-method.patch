@@ -1,7 +1,7 @@
-From 7b43da6bc765f0298b6f1190b11094bfb71dcaf0 Mon Sep 17 00:00:00 2001
+From 6a1fff38d54bc944d01cbeb3c40b8eb40527dbb4 Mon Sep 17 00:00:00 2001
 From: Martin Kopec <mkopec@redhat.com>
-Date: Fri, 9 Oct 2020 07:54:40 +0000
-Subject: [PATCH 1/4] Fix unbound method
+Date: Wed, 25 Aug 2021 11:47:36 +0000
+Subject: [PATCH 11/15] Fix unbound method
 
 Fix unbound method in order to keep python2 compatibility.
 
@@ -11,26 +11,26 @@ Change-Id: Ic4aca35f2bca6c5070c8860804fdf5346e9cb5c3
  1 file changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/tempest/scenario/manager.py b/tempest/scenario/manager.py
-index ff860d5..5ffeead 100644
+index 39021d5a3..cf9df3ebc 100644
 --- a/tempest/scenario/manager.py
 +++ b/tempest/scenario/manager.py
-@@ -91,6 +91,7 @@ class ScenarioTest(tempest.test.BaseTestCase):
+@@ -92,6 +92,7 @@ class ScenarioTest(tempest.test.BaseTestCase):
              volume_microversion=self.volume_request_microversion,
              placement_microversion=self.placement_request_microversion))
  
 +    @classmethod
      def setup_compute_client(cls):
-         """Compute and Compute security groups client"""
+         """Compute client"""
          cls.compute_images_client = cls.os_primary.compute_images_client
-@@ -102,6 +103,7 @@ class ScenarioTest(tempest.test.BaseTestCase):
-         cls.servers_client = cls.os_primary.servers_client
+@@ -100,6 +101,7 @@ class ScenarioTest(tempest.test.BaseTestCase):
          cls.interface_client = cls.os_primary.interfaces_client
+         cls.flavors_client = cls.os_primary.flavors_client
  
 +    @classmethod
      def setup_network_client(cls):
          """Neutron network client"""
          cls.networks_client = cls.os_primary.networks_client
-@@ -131,8 +133,8 @@ class ScenarioTest(tempest.test.BaseTestCase):
+@@ -126,8 +128,8 @@ class ScenarioTest(tempest.test.BaseTestCase):
                      'Either api_v1 or api_v2 must be True in '
                      '[image-feature-enabled].')
  
@@ -42,5 +42,5 @@ index ff860d5..5ffeead 100644
              cls.volumes_client = cls.os_primary.volumes_client_latest
              cls.snapshots_client = cls.os_primary.snapshots_client_latest
 -- 
-1.8.3.1
+2.27.0
 

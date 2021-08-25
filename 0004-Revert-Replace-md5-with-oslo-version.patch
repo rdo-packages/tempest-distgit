@@ -1,0 +1,180 @@
+From d6cdab4d61542c89f444c933999b5d91c45980b3 Mon Sep 17 00:00:00 2001
+From: Martin Kopec <mkopec@redhat.com>
+Date: Wed, 25 Aug 2021 10:38:09 +0000
+Subject: [PATCH 04/15] Revert "Replace md5 with oslo version"
+
+This reverts commit 56860ccae71114bfb32138c823ea04a50b916aa2.
+---
+ .../object_storage/test_object_services.py    | 20 +++++++++----------
+ tempest/api/object_storage/test_object_slo.py |  9 ++++-----
+ tempest/lib/common/preprov_creds.py           |  4 ++--
+ .../tests/lib/common/test_preprov_creds.py    |  4 ++--
+ 4 files changed, 18 insertions(+), 19 deletions(-)
+
+diff --git a/tempest/api/object_storage/test_object_services.py b/tempest/api/object_storage/test_object_services.py
+index 93f6fdbaa..fc9b1a2b7 100644
+--- a/tempest/api/object_storage/test_object_services.py
++++ b/tempest/api/object_storage/test_object_services.py
+@@ -13,12 +13,12 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
++import hashlib
+ import random
+ import re
+ import time
+ import zlib
+ 
+-from oslo_utils.secretutils import md5
+ from tempest.api.object_storage import base
+ from tempest.common import custom_matchers
+ from tempest import config
+@@ -151,8 +151,8 @@ class ObjectTest(base.BaseObjectTest):
+         """Test creating object with Etag"""
+         object_name = data_utils.rand_name(name='TestObject')
+         data = data_utils.random_bytes()
+-        create_md5 = md5(data, usedforsecurity=False).hexdigest()
+-        metadata = {'Etag': create_md5}
++        md5 = hashlib.md5(data).hexdigest()
++        metadata = {'Etag': md5}
+         resp, _ = self.object_client.create_object(
+             self.container_name,
+             object_name,
+@@ -641,7 +641,7 @@ class ObjectTest(base.BaseObjectTest):
+         """Test getting object with if_match"""
+         object_name = data_utils.rand_name(name='TestObject')
+         data = data_utils.random_bytes(10)
+-        create_md5 = md5(data, usedforsecurity=False).hexdigest()
++        create_md5 = hashlib.md5(data).hexdigest()
+         create_metadata = {'Etag': create_md5}
+         self.object_client.create_object(self.container_name,
+                                          object_name,
+@@ -681,7 +681,7 @@ class ObjectTest(base.BaseObjectTest):
+         """Test getting object with if_none_match"""
+         object_name = data_utils.rand_name(name='TestObject')
+         data = data_utils.random_bytes()
+-        create_md5 = md5(data, usedforsecurity=False).hexdigest()
++        create_md5 = hashlib.md5(data).hexdigest()
+         create_metadata = {'Etag': create_md5}
+         self.object_client.create_object(self.container_name,
+                                          object_name,
+@@ -689,7 +689,7 @@ class ObjectTest(base.BaseObjectTest):
+                                          metadata=create_metadata)
+ 
+         list_data = data_utils.random_bytes()
+-        list_md5 = md5(list_data, usedforsecurity=False).hexdigest()
++        list_md5 = hashlib.md5(list_data).hexdigest()
+         list_metadata = {'If-None-Match': list_md5}
+         resp, body = self.object_client.get_object(
+             self.container_name,
+@@ -978,8 +978,8 @@ class ObjectTest(base.BaseObjectTest):
+         """
+         object_name, data = self.create_object(self.container_name)
+         # local copy is identical, no download
+-        object_md5 = md5(data, usedforsecurity=False).hexdigest()
+-        headers = {'If-None-Match': object_md5}
++        md5 = hashlib.md5(data).hexdigest()
++        headers = {'If-None-Match': md5}
+         url = "%s/%s" % (self.container_name, object_name)
+         resp, _ = self.object_client.get(url, headers=headers)
+         self.assertEqual(resp['status'], '304')
+@@ -993,8 +993,8 @@ class ObjectTest(base.BaseObjectTest):
+ 
+         # local copy is different, download
+         local_data = "something different"
+-        other_md5 = md5(local_data.encode(), usedforsecurity=False).hexdigest()
+-        headers = {'If-None-Match': other_md5}
++        md5 = hashlib.md5(local_data.encode()).hexdigest()
++        headers = {'If-None-Match': md5}
+         resp, _ = self.object_client.get(url, headers=headers)
+         self.assertHeaders(resp, 'Object', 'GET')
+ 
+diff --git a/tempest/api/object_storage/test_object_slo.py b/tempest/api/object_storage/test_object_slo.py
+index 0c8435724..664bbc8e2 100644
+--- a/tempest/api/object_storage/test_object_slo.py
++++ b/tempest/api/object_storage/test_object_slo.py
+@@ -12,9 +12,10 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
++import hashlib
++
+ from oslo_serialization import jsonutils as json
+ 
+-from oslo_utils.secretutils import md5
+ from tempest.api.object_storage import base
+ from tempest.common import utils
+ from tempest.lib.common.utils import data_utils
+@@ -69,12 +70,10 @@ class ObjectSloTest(base.BaseObjectTest):
+         path_object_2 = '/%s/%s' % (self.container_name,
+                                     object_name_base_2)
+         data_manifest = [{'path': path_object_1,
+-                          'etag': md5(self.content,
+-                                      usedforsecurity=False).hexdigest(),
++                          'etag': hashlib.md5(self.content).hexdigest(),
+                           'size_bytes': data_size},
+                          {'path': path_object_2,
+-                          'etag': md5(self.content,
+-                                      usedforsecurity=False).hexdigest(),
++                          'etag': hashlib.md5(self.content).hexdigest(),
+                           'size_bytes': data_size}]
+ 
+         return json.dumps(data_manifest)
+diff --git a/tempest/lib/common/preprov_creds.py b/tempest/lib/common/preprov_creds.py
+index 6d948cfc8..df0f4d6dd 100644
+--- a/tempest/lib/common/preprov_creds.py
++++ b/tempest/lib/common/preprov_creds.py
+@@ -12,11 +12,11 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
++import hashlib
+ import os
+ 
+ from oslo_concurrency import lockutils
+ from oslo_log import log as logging
+-from oslo_utils.secretutils import md5
+ import yaml
+ 
+ from tempest.lib import auth
+@@ -134,7 +134,7 @@ class PreProvisionedCredentialProvider(cred_provider.CredentialProvider):
+                 scope = 'domain'
+             elif 'system' in account:
+                 scope = 'system'
+-            temp_hash = md5(usedforsecurity=False)
++            temp_hash = hashlib.md5()
+             account_for_hash = dict((k, v) for (k, v) in account.items()
+                                     if k in cls.HASH_CRED_FIELDS)
+             temp_hash.update(str(account_for_hash).encode('utf-8'))
+diff --git a/tempest/tests/lib/common/test_preprov_creds.py b/tempest/tests/lib/common/test_preprov_creds.py
+index f2131dcb9..e51beb365 100644
+--- a/tempest/tests/lib/common/test_preprov_creds.py
++++ b/tempest/tests/lib/common/test_preprov_creds.py
+@@ -12,6 +12,7 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
+ 
++import hashlib
+ import os
+ import shutil
+ from unittest import mock
+@@ -21,7 +22,6 @@ import testtools
+ import fixtures
+ from oslo_concurrency.fixture import lockutils as lockutils_fixtures
+ from oslo_config import cfg
+-from oslo_utils.secretutils import md5
+ 
+ from tempest import config
+ from tempest.lib import auth
+@@ -105,7 +105,7 @@ class TestPreProvisionedCredentials(base.TestCase):
+         hash_fields = (
+             preprov_creds.PreProvisionedCredentialProvider.HASH_CRED_FIELDS)
+         for account in accounts_list:
+-            hash = md5(usedforsecurity=False)
++            hash = hashlib.md5()
+             account_for_hash = dict((k, v) for (k, v) in account.items()
+                                     if k in hash_fields)
+             hash.update(str(account_for_hash).encode('utf-8'))
+-- 
+2.27.0
+
