@@ -1,0 +1,114 @@
+From b37b189b823a5f6895fc13eddc74e07370112bd2 Mon Sep 17 00:00:00 2001
+From: Pavan Kesava Rao <pkesavar@redhat.com>
+Date: Wed, 9 Jun 2021 15:21:37 -0500
+Subject: [PATCH 02/15] Add test to verify FQDN hostname sanitization
+
+This scenario has impacted field engineers trying to spin up
+instances with names containing freeform characters alongside
+openstack-designate service for neutron.
+
+Also, adding a config feature flag to enable/disable the test.
+
+The get_class_validation_resources wrapper can only manage
+one instance of class level validation resources that is used
+by all tests defined in the parent class. However, this testcase
+requires a custom server name of FQDN type be defined and managed
+for the test to be verified successfully. Hence, placing it in a
+separate class to prevent base class tests from failing.
+
+Relates to https://bugs.launchpad.net/nova/+bug/1581977 and
+gerrit https://review.opendev.org/c/openstack/nova/+/764482/
+
+Devstack gate test:
+[Master] https://review.opendev.org/c/openstack/devstack/+/801366
+
+Change-Id: I6a89824e9b2d1b2387e35e55056ad251df3e8633
+---
+ .../api/compute/servers/test_create_server.py | 53 +++++++++++++++++++
+ tempest/config.py                             |  9 ++++
+ 2 files changed, 62 insertions(+)
+
+diff --git a/tempest/api/compute/servers/test_create_server.py b/tempest/api/compute/servers/test_create_server.py
+index 48f32a813..c9aec62a7 100644
+--- a/tempest/api/compute/servers/test_create_server.py
++++ b/tempest/api/compute/servers/test_create_server.py
+@@ -180,3 +180,56 @@ class ServersTestBootFromVolume(ServersTestJSON):
+         if not utils.get_service_list()['volume']:
+             msg = "Volume service not enabled."
+             raise cls.skipException(msg)
++
++
++class ServersTestFqdnHostnames(base.BaseV2ComputeTest):
++    """Test creating server with FQDN hostname and verifying atrributes
++
++    Starting Wallaby release, Nova sanitizes freeform characters in
++    server hostname with dashes. This test verifies the same.
++    """
++
++    @classmethod
++    def setup_credentials(cls):
++        cls.prepare_instance_network()
++        super(ServersTestFqdnHostnames, cls).setup_credentials()
++
++    @classmethod
++    def setup_clients(cls):
++        super(ServersTestFqdnHostnames, cls).setup_clients()
++        cls.client = cls.servers_client
++
++    @decorators.idempotent_id('622066d2-39fc-4c09-9eeb-35903c114a0a')
++    @testtools.skipUnless(
++        CONF.compute_feature_enabled.hostname_fqdn_sanitization,
++        'FQDN hostname sanitization is not supported.')
++    @testtools.skipUnless(CONF.validation.run_validation,
++                          'Instance validation tests are disabled.')
++    def test_create_server_with_fqdn_name(self):
++        """Test to create an instance with FQDN type name scheme"""
++        validation_resources = self.get_class_validation_resources(
++            self.os_primary)
++        self.server_name = 'guest-instance-1.domain.com'
++        self.password = data_utils.rand_password()
++        self.accessIPv4 = '2.2.2.2'
++        test_server = self.create_test_server(
++            validatable=True,
++            validation_resources=validation_resources,
++            wait_until='ACTIVE',
++            adminPass=self.password,
++            name=self.server_name,
++            accessIPv4=self.accessIPv4)
++
++        """Verify the hostname within the instance is sanitized
++
++        Freeform characters in the hostname are replaced with dashes
++        """
++        linux_client = remote_client.RemoteClient(
++            self.get_server_ip(test_server, validation_resources),
++            self.ssh_user,
++            self.password,
++            validation_resources['keypair']['private_key'],
++            server=test_server,
++            servers_client=self.client)
++        hostname = linux_client.exec_command("hostname").rstrip()
++        self.assertEqual('guest-instance-1-domain-com', hostname)
+diff --git a/tempest/config.py b/tempest/config.py
+index 6715a00d4..3a497cb3c 100644
+--- a/tempest/config.py
++++ b/tempest/config.py
+@@ -437,6 +437,15 @@ ComputeFeaturesGroup = [
+     cfg.BoolOpt('disk_config',
+                 default=True,
+                 help="If false, skip disk config tests"),
++    # TODO(pkesav): Make it True by default once wallaby
++    # is oldest supported stable for Tempest.
++    cfg.BoolOpt('hostname_fqdn_sanitization',
++                default=False,
++                help="If false, skip fqdn instance sanitization tests. "
++                     "Nova started sanitizing the instance name by replacing "
++                     "the '.' with '-' to comply with fqdn hostname. Nova "
++                     "changed that in Wallaby cycle, if your cloud is older "
++                     "than wallaby then you can keep/make it False."),
+     cfg.ListOpt('api_extensions',
+                 default=['all'],
+                 help='A list of enabled compute extensions with a special '
+-- 
+2.27.0
+

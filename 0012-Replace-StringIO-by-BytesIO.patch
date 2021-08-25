@@ -1,7 +1,7 @@
-From c0ee4cd0c8cf5e1279ddb7d28e5b60099e2ec1b3 Mon Sep 17 00:00:00 2001
+From 316a99b26e559e3b80b870bd453e6cca3f50c78e Mon Sep 17 00:00:00 2001
 From: Martin Kopec <mkopec@redhat.com>
-Date: Fri, 9 Oct 2020 07:57:13 +0000
-Subject: [PATCH 2/4] Replace StringIO by BytesIO
+Date: Wed, 25 Aug 2021 11:48:57 +0000
+Subject: [PATCH 12/15] Replace StringIO by BytesIO
 
 Make str() and StringIO usage introduced by
 https://review.opendev.org/#/c/741810/ compatible with py2.
@@ -12,7 +12,7 @@ Change-Id: Ic806d0779bd874b0f4105a2cf59d5c6568b2fa4e
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/tempest/tests/cmd/test_subunit_describe_calls.py b/tempest/tests/cmd/test_subunit_describe_calls.py
-index 4fed84a..b72d4ea 100644
+index 4fed84a79..b72d4ead0 100644
 --- a/tempest/tests/cmd/test_subunit_describe_calls.py
 +++ b/tempest/tests/cmd/test_subunit_describe_calls.py
 @@ -15,7 +15,7 @@
@@ -34,5 +34,5 @@ index 4fed84a..b72d4ea 100644
  
      def _assert_cli_message(self, data):
 -- 
-1.8.3.1
+2.27.0
 

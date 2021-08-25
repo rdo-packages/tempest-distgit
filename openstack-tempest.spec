@@ -33,21 +33,30 @@ Source0:        http://tarballs.openstack.org/tempest/tempest-%{upstream_version
 # a tag nor a release. We revert the removal in tempest so that we can package
 # tempest 26.1.0 and ship it in Victoria. Tempest 26.1.0 contains apart from
 # the fixes also a significant argument deprecation.
-Patch0000: 0001-Revert-Remove-tempest-manager.py-after-4-year-deprec.patch
+Patch0001: 0001-Revert-Remove-tempest-manager.py-after-4-year-deprec.patch
+# Backport the following patch to follow downstream backport to Train.
+Patch0002: 0002-Add-test-to-verify-FQDN-hostname-sanitization.patch
+# The following backport fixes a bug mistakenly introduced in one of the latest
+# commits in 28.0.0 tag
+Patch0003: 0003-Fix-cleanup-of-default-security-group-when-preprov-c.patch
+# This reverts https://review.opendev.org/c/openstack/tempest/+/777684
+# as it requires python-oslo-utils package version 4.7.0 and above, current
+# version for Victoria release is lower.
+Patch0004: 0004-Revert-Replace-md5-with-oslo-version.patch
 
 # workaround for handling py2 and py3 mock issue
 %if %{pyver} == 2
-Patch0001: 0001-Revert-part1-Remove-six.patch
-Patch0002: 0002-Revert-Remove-usage-of-six.patch
-Patch0003: 0003-Revert-Remove-usage-of-six.patch
-Patch0004: 0004-Revert-Remove-usage-of-six.patch
-Patch0005: 0005-Revert-Remove-usage-of-six.patch
-Patch0006: 0006-Revert-Remove-six.PY3-six.PY2.patch
-Patch0007: 0007-Fix-unbound-method.patch
-Patch0008: 0008-Replace-StringIO-by-BytesIO.patch
-Patch0009: 0009-Revert-__future__-removal.patch
-Patch0010: 0010-Use-mock-not-from-unittest.patch
-Patch0011: 0011-Reorder-arguments-and-use-parse-from-six.patch
+Patch0005: 0005-Revert-part1-Remove-six.patch
+Patch0006: 0006-Revert-Remove-usage-of-six.patch
+Patch0007: 0007-Revert-Remove-usage-of-six.patch
+Patch0008: 0008-Revert-Remove-usage-of-six.patch
+Patch0009: 0009-Revert-Remove-usage-of-six.patch
+Patch0010: 0010-Revert-Remove-six.PY3-six.PY2.patch
+Patch0011: 0011-Fix-unbound-method.patch
+Patch0012: 0012-Replace-StringIO-by-BytesIO.patch
+Patch0013: 0013-Revert-__future__-removal.patch
+Patch0014: 0014-Use-mock-not-from-unittest.patch
+Patch0015: 0015-Reorder-arguments-and-use-parse-from-six.patch
 %endif
 BuildArch:      noarch
 
