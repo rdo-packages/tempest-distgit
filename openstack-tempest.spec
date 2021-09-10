@@ -74,7 +74,6 @@ Requires:      python3-os-testr >= 0.8.0
 Requires:      python3-paramiko >= 2.7.0
 Requires:      python3-pbr >= 2.0.0
 Requires:      python3-prettytable >= 0.7.1
-Requires:      python3-six >= 1.10.0
 Requires:      python3-stevedore >= 1.20.0
 Requires:      python3-stestr >= 1.0.0
 Requires:      python3-testtools >= 2.2.0
