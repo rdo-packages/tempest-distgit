@@ -140,7 +140,7 @@ Requires:       python3-patrole-tests-tempest
 Requires:       python3-novajoin-tests-tempest
 Requires:       python3-kuryr-tests-tempest
 Requires:       python3-barbican-tests-tempest
-%if 0%{rhel} == 8
+%if 0%{?rhel} == 8
 Requires:       python3-octavia-tests-tempest
 %endif
 
