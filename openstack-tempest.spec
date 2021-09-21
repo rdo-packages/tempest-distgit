@@ -2,7 +2,7 @@
 %global sources_gpg_sign 0x2426b928085a020d8a90d0d879ab7008d0896c8a
 %global project tempest
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
-%global with_doc 1
+%global with_doc 0
 # guard for Red Hat OpenStack Platform supported tempest
 %global rhosp 0
 %global common_desc \
