@@ -1,0 +1,10 @@
+Code-Review+2: Alex Schultz <aschultz@next-development.com>
+Code-Review+1: Kevin Carter <kevin@cloudnull.com>
+Code-Review+2: Luigi Toscano <ltoscano@redhat.com>
+Workflow+1: Luigi Toscano <ltoscano@redhat.com>
+Verified+2: Zuul CI <zuul@review.rdoproject.org>
+Submitted-by: Zuul CI <zuul@review.rdoproject.org>
+Submitted-at: Thu, 02 Dec 2021 21:00:25 +0000
+Reviewed-on: https://review.rdoproject.org/r/c/openstack/tempest-distgit/+/37006
+Project: openstack/tempest-distgit
+Branch: refs/heads/rpm-master
