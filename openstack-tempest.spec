@@ -125,9 +125,7 @@ Requires:       python3-designate-tests-tempest
 Requires:       python3-heat-tests-tempest
 Requires:       python3-ironic-tests-tempest
 Requires:       python3-keystone-tests-tempest
-Requires:       python3-mistral-tests-tempest
 Requires:       python3-neutron-tests-tempest
-Requires:       python3-zaqar-tests-tempest
 Requires:       python3-manila-tests-tempest
 Requires:       python3-telemetry-tests-tempest
 Requires:       python3-networking-l2gw-tests-tempest
@@ -139,11 +137,13 @@ Requires:       python3-barbican-tests-tempest
 
 %if 0%{?rhosp} == 0
 Requires:       python3-magnum-tests-tempest
+Requires:       python3-mistral-tests-tempest
 Requires:       python3-murano-tests-tempest
 Requires:       python3-sahara-tests-tempest
 Requires:       python3-trove-tests-tempest
 Requires:       python3-vitrage-tests-tempest
 Requires:       python3-watcher-tests-tempest
+Requires:       python3-zaqar-tests-tempest
 %endif
 
 %description -n %{name}-all
