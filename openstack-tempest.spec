@@ -137,10 +137,10 @@ Requires:       python3-octavia-tests-tempest
 Requires:       python3-networking-l2gw-tests-tempest
 Requires:       python3-patrole-tests-tempest
 Requires:       python3-novajoin-tests-tempest
-Requires:       python3-kuryr-tests-tempest
 Requires:       python3-barbican-tests-tempest
 
 %if 0%{?rhosp} == 0
+Requires:       python3-kuryr-tests-tempest
 Requires:       python3-magnum-tests-tempest
 Requires:       python3-mistral-tests-tempest
 Requires:       python3-murano-tests-tempest
