@@ -110,6 +110,7 @@ Summary:       All OpenStack Tempest Plugins
 
 Requires:      %{name} = %{epoch}:%{version}-%{release}
 
+<<<<<<< HEAD   (3c53ce Fix config_tempest failing due to v3)
 Requires:       python-aodh-tests
 Requires:       python-ceilometer-tests
 Requires:       python-cinder-tests
@@ -135,6 +136,33 @@ Requires:       python-magnum-tests
 Requires:       python-murano-tests
 Requires:       python-manila-tests
 Requires:       python-ironic-inspector-tests
+=======
+Requires:       python3-cinder-tests-tempest
+Requires:       python3-designate-tests-tempest
+Requires:       python3-heat-tests-tempest
+Requires:       python3-ironic-tests-tempest
+Requires:       python3-keystone-tests-tempest
+Requires:       python3-neutron-tests-tempest
+Requires:       python3-manila-tests-tempest
+Requires:       python3-telemetry-tests-tempest
+Requires:       python3-octavia-tests-tempest
+Requires:       python3-networking-l2gw-tests-tempest
+Requires:       python3-patrole-tests-tempest
+Requires:       python3-novajoin-tests-tempest
+Requires:       python3-barbican-tests-tempest
+
+%if 0%{?rhosp} == 0
+Requires:       python3-kuryr-tests-tempest
+Requires:       python3-magnum-tests-tempest
+Requires:       python3-mistral-tests-tempest
+Requires:       python3-murano-tests-tempest
+Requires:       python3-sahara-tests-tempest
+Requires:       python3-trove-tests-tempest
+Requires:       python3-vitrage-tests-tempest
+Requires:       python3-watcher-tests-tempest
+Requires:       python3-zaqar-tests-tempest
+%endif
+>>>>>>> CHANGE (d73655 move kuryr-tests-tempest to not rhosp block)
 
 %description -n %{name}-all
 This is a set of integration tests to be run against a live OpenStack cluster.
