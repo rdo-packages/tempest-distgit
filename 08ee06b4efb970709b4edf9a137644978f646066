@@ -1,0 +1,10 @@
+Code-Review+2: Luigi Toscano <ltoscano@redhat.com>
+Code-Review+2: Chandan Kumar <chkumar@redhat.com>
+Code-Review+1: Lon Hohberger <lon@metamorphism.com>
+Workflow+1: Chandan Kumar <chkumar@redhat.com>
+Verified+2: Zuul CI <zuul@review.rdoproject.org>
+Submitted-by: Zuul CI <zuul@review.rdoproject.org>
+Submitted-at: Fri, 10 Dec 2021 10:09:23 +0000
+Reviewed-on: https://review.rdoproject.org/r/c/openstack/tempest-distgit/+/37030
+Project: openstack/tempest-distgit
+Branch: refs/heads/rpm-master
