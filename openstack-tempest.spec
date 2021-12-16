@@ -221,7 +221,7 @@ export OS_TEST_PATH='./tempest/tests'
 export PATH=$PATH:$RPM_BUILD_ROOT/usr/bin
 export PYTHONPATH=$PWD
 rm -f $OS_TEST_PATH/test_hacking.py
-PYTHON=%{__python3} stestr --test-path $OS_TEST_PATH run
+PYTHON=%{__python3} stestr --test-path $OS_TEST_PATH run --exclude-regex 'test_check_uuid.TestCLInterface.test_fix_argument_yes'
 
 %files
 %license LICENSE
