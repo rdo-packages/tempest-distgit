@@ -4,6 +4,7 @@
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 %global with_doc 1
 # guard for Red Hat OpenStack Platform supported tempest
+%global repo_bootstrap 0
 %global rhosp 0
 %global common_desc \
 This is a set of integration tests to be run against a live OpenStack cluster.\
