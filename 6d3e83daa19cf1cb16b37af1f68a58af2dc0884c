@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f07cfcc_00ca4cab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2022-01-27T08:41:15Z",
+      "side": 1,
+      "message": "I will manually merge this as it\u0027s chicken-and-egg issue with https://review.rdoproject.org/r/c/rdoinfo/+/33101",
+      "revId": "6d3e83daa19cf1cb16b37af1f68a58af2dc0884c",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    }
+  ]
+}
