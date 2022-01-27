@@ -284,3 +284,4 @@ PYTHON=%{__python3} stestr --test-path $OS_TEST_PATH run --concurrency 1
 * Thu Sep 24 2020 RDO <dev@lists.rdoproject.org> 1:25.0.0-1
 - Update to 25.0.0
 
+# REMOVEME: error caused by commit https://opendev.org/openstack/tempest/commit/271f8201d4d927830d289c34744ca20a92bee33c
