@@ -256,3 +256,4 @@ PYTHON=%{__python3} stestr --test-path $OS_TEST_PATH run
 %endif
 
 %changelog
+# REMOVEME: error caused by commit https://opendev.org/openstack/tempest/commit/cae966812a4a5070c3e7f82d16ebe697da57e5c5
