@@ -18,10 +18,6 @@ Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://launchpad.net/tempest
 Source0:        http://tarballs.openstack.org/tempest/tempest-%{upstream_version}.tar.gz
-# Remove unittest2 usage in CS9 until fixed upstream
-%if 0%{?rhel} > 8
-Patch01:        0001-Remove-usage-of-unittest2.patch
-%endif
 # Required for tarball sources verification
 %if 0%{?sources_gpg} == 1
 Source101:        http://tarballs.openstack.org/tempest/tempest-%{upstream_version}.tar.gz.asc
@@ -81,9 +77,7 @@ Requires:      python3-testtools >= 2.2.0
 Requires:      python3-urllib3 >= 1.21.1
 Requires:      python3-subunit >= 1.0.0
 
-%if 0%{?rhel} == 8
 Requires:      python3-unittest2 >= 1.1.0
-%endif
 Requires:      python3-yaml >= 3.12
 
 %description -n python3-%{project}
