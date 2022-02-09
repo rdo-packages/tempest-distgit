@@ -18,8 +18,6 @@ Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://launchpad.net/tempest
 Source0:        http://tarballs.openstack.org/tempest/tempest-%{upstream_version}.tar.gz
-# Remove unittest2 usage in CS8 and CS9 until fixed upstream
-Patch01:        0001-Remove-usage-of-unittest2.patch
 
 # Required for tarball sources verification
 %if 0%{?sources_gpg} == 1
@@ -255,3 +253,4 @@ PYTHON=%{__python3} stestr --test-path $OS_TEST_PATH run
 %endif
 
 %changelog
+# REMOVEME: error caused by commit https://opendev.org/openstack/tempest/commit/140d693f8589a15636ddadb68941c7a580eeff75
