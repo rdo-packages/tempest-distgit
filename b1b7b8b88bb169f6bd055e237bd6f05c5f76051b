@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8445f19_1c16389d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2022-02-09T21:32:16Z",
+      "side": 1,
+      "message": "Hopefully https://review.rdoproject.org/r/c/openstack/tempest-distgit/+/39258 should fix it",
+      "revId": "b1b7b8b88bb169f6bd055e237bd6f05c5f76051b",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    }
+  ]
+}
