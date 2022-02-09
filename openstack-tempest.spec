@@ -59,6 +59,11 @@ Summary:       Tempest Python library
 # release
 Obsoletes:     python-tempest-lib
 
+# horizon-tempest-plugin was merged to based horizon in 26.1.0
+# https://github.com/openstack/tempest/commit/eb3c7e37bcf6acae63e15e7ae57f8daf0a261c73
+Obsoletes: python-horizon-tests-tempest
+Obsoletes: python3-horizon-tests-tempest
+
 Requires:      python3-cliff >= 2.8.0
 Requires:      python3-debtcollector >= 1.2.0
 Requires:      python3-fixtures >= 3.0.0
