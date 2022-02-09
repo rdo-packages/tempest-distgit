@@ -71,6 +71,29 @@
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a00cb26_78af0e89",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 682
+      },
+      "writtenOn": "2022-02-09T12:02:57Z",
+      "side": 1,
+      "message": "base tempest",
+      "range": {
+        "startLine": 62,
+        "startChar": 39,
+        "endLine": 62,
+        "endChar": 52
+      },
+      "revId": "d5029cc3d34d01075347443c9e1baa60d203c28e",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00e5835a_3f01650d",
