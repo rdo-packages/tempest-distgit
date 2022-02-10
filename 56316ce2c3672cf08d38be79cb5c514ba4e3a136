@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fee38e8f_d337288e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2022-02-10T13:57:52Z",
+      "side": 1,
+      "message": "It\u0027s a good point, users upgrading from victoria or previous to wallaby or later may hit issues. The reality is that tempest plugins are mainly (or only) installed in CI environments on ephemeral machines so it\u0027s weird that anyone have problems with it. Anyway, probably adding the obsoletes in wallaby-rdo branch would be fine.",
+      "parentUuid": "02e1420c_328aaf07",
+      "revId": "56316ce2c3672cf08d38be79cb5c514ba4e3a136",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9fa2ab33_b9dd7f75",
         "filename": "openstack-tempest.spec",
         "patchSetId": 7
