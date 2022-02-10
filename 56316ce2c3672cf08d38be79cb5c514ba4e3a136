@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69cf9377_20357036",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2022-02-10T09:37:09Z",
+      "side": 1,
+      "message": "simple rebase, gerrit reported a merge conflict",
+      "revId": "56316ce2c3672cf08d38be79cb5c514ba4e3a136",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    }
+  ]
+}
