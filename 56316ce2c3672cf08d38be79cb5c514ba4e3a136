@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "02e1420c_328aaf07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 682
+      },
+      "writtenOn": "2022-02-10T12:04:36Z",
+      "side": 1,
+      "message": "Thanks for checking that.\n\nA question here would be whether we expect any user would try FFU skipping Wallaby release. If not I\u0027ll make this patch stable only and then submit this to wallaby and older, but may I ask your feedback before making these patches ?",
+      "parentUuid": "8362f93c_0fb2f78f",
+      "revId": "56316ce2c3672cf08d38be79cb5c514ba4e3a136",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9fa2ab33_b9dd7f75",
         "filename": "openstack-tempest.spec",
         "patchSetId": 7
