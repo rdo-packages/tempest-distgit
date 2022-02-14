@@ -71,6 +71,23 @@
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44e48ea1_ac61e191",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 682
+      },
+      "writtenOn": "2022-02-14T11:40:02Z",
+      "side": 1,
+      "message": "Based on the discussion with Alfredo, I\u0027ll abandon this and start another patch set submitted for stable branches only.\n https://review.rdoproject.org/r/c/openstack/tempest-distgit/+/39431",
+      "revId": "56316ce2c3672cf08d38be79cb5c514ba4e3a136",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9fa2ab33_b9dd7f75",
@@ -84,6 +101,30 @@
       "writtenOn": "2022-02-10T10:11:32Z",
       "side": 1,
       "message": "mmm i\u0027m not sure if we need a Provides here for upgrades path, lemme check",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 1
+      },
+      "revId": "56316ce2c3672cf08d38be79cb5c514ba4e3a136",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c055b98_2478e61c",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 7
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 682
+      },
+      "writtenOn": "2022-02-14T11:40:02Z",
+      "side": 1,
+      "message": "I think we don\u0027t need this seeing that we don\u0027t have provides for python-tempest-lib ?",
+      "parentUuid": "9fa2ab33_b9dd7f75",
       "range": {
         "startLine": 63,
         "startChar": 0,
