@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb403834_77ccfb20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 759
+      },
+      "writtenOn": "2022-02-15T00:58:34Z",
+      "side": 1,
+      "message": "LGTM.\nOnly Wallaby and older stable branches makes sense to me.",
+      "revId": "e9eecb0236af92bcc8f8f0e7800efa7542514909",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    }
+  ]
+}
