@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01385482_c2c5a38a",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 635
+      },
+      "writtenOn": "2022-02-28T10:49:00Z",
+      "side": 1,
+      "message": "Needs to be removed to resolve conflict.",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 144,
+        "endChar": 1
+      },
+      "revId": "091cd839bd395c6f0d188f554cff12d04ff04237",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    }
+  ]
+}
