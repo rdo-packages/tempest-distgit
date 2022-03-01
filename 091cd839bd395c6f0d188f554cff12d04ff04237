@@ -22,6 +22,30 @@
       },
       "revId": "091cd839bd395c6f0d188f554cff12d04ff04237",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd66fffa_1228e9c3",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 682
+      },
+      "writtenOn": "2022-03-01T09:16:56Z",
+      "side": 1,
+      "message": "Done. I\u0027ve submitted a separate backport to remove the package from requirements and now this change is dependent on that removal.",
+      "parentUuid": "01385482_c2c5a38a",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 144,
+        "endChar": 1
+      },
+      "revId": "091cd839bd395c6f0d188f554cff12d04ff04237",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
     }
   ]
 }
