@@ -72,7 +72,8 @@ Obsoletes:     python-tempest-lib
 # horizon-tempest-plugin was merged to base tempest in 26.1.0
 # https://docs.openstack.org/releasenotes/tempest/v26.1.0.html#release-notes-26-1-0
 # https://opendev.org/openstack/tempest/commit/eb3c7e37bcf6acae63e15e7ae57f8daf0a261c73
-Obsoletes: python3-horizon-tests-tempest
+Obsoletes:     python3-horizon-tests-tempest < 1.1.0-3
+Provides:      python3-horizon-tests-tempest
 
 Requires:      python3-cliff
 Requires:      python3-debtcollector
