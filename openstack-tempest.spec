@@ -1,5 +1,5 @@
 %{!?sources_gpg: %{!?dlrn:%global sources_gpg 1} }
-%global sources_gpg_sign 0x2426b928085a020d8a90d0d879ab7008d0896c8a
+%global sources_gpg_sign 0x01527a34f0d0080f8a5db8d6eb6c5df21b4b6363
 %global project tempest
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 %global with_doc 0
@@ -10,10 +10,13 @@ This is a set of integration tests to be run against a live OpenStack cluster.\
 Tempest has batteries of tests for OpenStack API validation, Scenarios, and \
 other specific tests useful in validating an OpenStack deployment.
 
+# Enable bootstrap mode to break cyclic dep
+%global repo_bootstrap 1
+
 Name:           openstack-%{project}
 Epoch:          1
-Version:        XXX
-Release:        XXX
+Version:        30.0.0
+Release:        1%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://launchpad.net/tempest
@@ -254,3 +257,6 @@ PYTHON=%{__python3} stestr --test-path $OS_TEST_PATH run
 %endif
 
 %changelog
+* Tue Mar 29 2022 RDO <dev@lists.rdoproject.org> 1:30.0.0-1
+- Update to 30.0.0
+
