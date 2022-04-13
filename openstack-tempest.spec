@@ -1,5 +1,5 @@
 %{!?sources_gpg: %{!?dlrn:%global sources_gpg 1} }
-%global sources_gpg_sign 0x01527a34f0d0080f8a5db8d6eb6c5df21b4b6363
+%global sources_gpg_sign 0xa63ea142678138d1bb15f2e303bdfd64dd164087
 %global project tempest
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 %global with_doc 1
@@ -13,7 +13,7 @@ other specific tests useful in validating an OpenStack deployment.
 
 Name:           openstack-%{project}
 Epoch:          1
-Version:        29.1.0
+Version:        30.1.0
 Release:        1%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
@@ -260,6 +260,9 @@ PYTHON=%{__python3} stestr --test-path $OS_TEST_PATH run
 %endif
 
 %changelog
+* Wed Apr 13 2022 RDO <dev@lists.rdoproject.org> 1:30.1.0-1
+- Update to 30.1.0
+
 * Mon Nov 29 2021 RDO <dev@lists.rdoproject.org> 1:29.1.0-1
 - Update to 29.1.0
 
