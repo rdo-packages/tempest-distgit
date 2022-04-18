@@ -78,9 +78,6 @@ Requires:      python3-urllib3 >= 1.21.1
 Requires:      python3-subunit >= 1.0.0
 Requires:      python3-cryptography >= 2.1
 
-%if 0%{?rhel} == 8
-Requires:      python3-unittest2 >= 1.1.0
-%endif
 Requires:      python3-yaml >= 3.12
 
 %description -n python3-%{project}
