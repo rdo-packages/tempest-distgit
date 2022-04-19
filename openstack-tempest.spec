@@ -11,7 +11,7 @@ Tempest has batteries of tests for OpenStack API validation, Scenarios, and \
 other specific tests useful in validating an OpenStack deployment.
 
 # Enable bootstrap mode to break cyclic dep
-%global repo_bootstrap 1
+%global repo_bootstrap 0
 
 Name:           openstack-%{project}
 Epoch:          1
@@ -257,6 +257,9 @@ PYTHON=%{__python3} stestr --test-path $OS_TEST_PATH run
 %endif
 
 %changelog
+* Tue Apr 12 2022 RDO <dev@lists.rdoproject.org> 1:30.1.0-2
+- Disable bootstrap mode
+
 * Tue Apr 12 2022 RDO <dev@lists.rdoproject.org> 1:30.1.0-1
 - Update to 30.1.0
 
