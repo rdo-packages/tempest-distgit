@@ -16,6 +16,23 @@
       "message": "Uhm,\n\n-------------------------------\nCaptured traceback:\n~~~~~~~~~~~~~~~~~~~\n    Traceback (most recent call last):\n      File \"/builddir/build/BUILD/tempest-26.1.0/tempest/tests/cmd/test_verify_tempest_config.py\", line 530, in test_get_extension_client_sysexit\n        os \u003d clients.Manager(creds)\n      File \"/builddir/build/BUILD/tempest-26.1.0/tempest/clients.py\", line 41, in __init__\n        self._set_compute_clients()\n      File \"/builddir/build/BUILD/tempest-26.1.0/tempest/clients.py\", line 93, in _set_compute_clients\n        self.agents_client \u003d self.compute.AgentsClient()\n    AttributeError: \u0027Manager\u0027 object has no attribute \u0027compute\u0027",
       "revId": "34b0bb1373634332207d921f87b55919713d195a",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c99d173_14b47c2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 682
+      },
+      "writtenOn": "2022-06-02T12:25:38Z",
+      "side": 1,
+      "message": "recheck",
+      "revId": "34b0bb1373634332207d921f87b55919713d195a",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
     }
   ]
 }
