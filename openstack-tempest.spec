@@ -14,7 +14,7 @@ other specific tests useful in validating an OpenStack deployment.
 Name:           openstack-%{project}
 Epoch:          1
 Version:        31.0.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://launchpad.net/tempest
@@ -25,6 +25,16 @@ Source0:        http://tarballs.openstack.org/tempest/tempest-%{upstream_version
 Source101:        http://tarballs.openstack.org/tempest/tempest-%{upstream_version}.tar.gz.asc
 Source102:        https://releases.openstack.org/_static/%{sources_gpg_sign}.txt
 %endif
+# patches from https://review.opendev.org/q/topic:wait_until_sshable_pingable
+# Patch Series
+# https://review.opendev.org/c/openstack/tempest/+/843155
+# https://review.opendev.org/c/openstack/tempest/+/842240
+# https://review.opendev.org/c/openstack/tempest/+/817771
+# https://review.opendev.org/c/openstack/tempest/+/817772
+Patch0000: 0001-Make-test_server_actions.resource_setup-wait-for-SSH.patch
+Patch0001: 0001-Add-wait-for-server-SSH-able-in-base-attach_volume-m.patch
+Patch0002: 0001-Create-router-and-dhcp-when-create_default_network-s.patch
+Patch0003: 0001-compute-Move-volume-attached-live-migration-tests-to.patch
 BuildArch:      noarch
 
 # Required for tarball sources verification
@@ -261,6 +271,10 @@ PYTHON=%{__python3} stestr --test-path $OS_TEST_PATH run
 %endif
 
 %changelog
+* Wed Jun 03 2022 Chandan Kumar <chkumar@redhat.com> 1:30.1.0-2
+- Backport https://review.opendev.org/q/topic:wait_until_sshable_pingable patches
+  for wallaby.
+
 * Wed Jun 08 2022 RDO <dev@lists.rdoproject.org> 1:31.0.0-1
 - Update to 31.0.0
 
