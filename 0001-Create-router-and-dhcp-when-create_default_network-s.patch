@@ -1,0 +1,36 @@
+From db2f561cdf8fb51053373a4d3b0edc0ce8a6578d Mon Sep 17 00:00:00 2001
+From: Lee Yarwood <lyarwood@redhat.com>
+Date: Fri, 12 Nov 2021 13:03:57 +0000
+Subject: [PATCH 1/1] Create router and dhcp when create_default_network set
+
+We are trying to make server SSH-able before detach volume
+is performed (details in bug mentioned below). Creating
+router and dhcp is needed to setup the proper network path
+for server otherwise it fail
+- https://zuul.opendev.org/t/openstack/build/04e11a0eac12447f8a3c47fb385b0753
+
+Related-Bug: #1960346
+
+Change-Id: I18eff5a4216d5683a5d49ad0e400ac663650e7a9
+---
+ tempest/api/compute/base.py | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/tempest/api/compute/base.py b/tempest/api/compute/base.py
+index 74601dcee..75df5ae7c 100644
+--- a/tempest/api/compute/base.py
++++ b/tempest/api/compute/base.py
+@@ -66,7 +66,9 @@ class BaseV2ComputeTest(api_version_utils.BaseMicroversionTest,
+         # Setting network=True, subnet=True creates a default network
+         cls.set_network_resources(
+             network=cls.create_default_network,
+-            subnet=cls.create_default_network)
++            subnet=cls.create_default_network,
++            router=cls.create_default_network,
++            dhcp=cls.create_default_network)
+         super(BaseV2ComputeTest, cls).setup_credentials()
+ 
+     @classmethod
+-- 
+2.36.1
+
