@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5315ca7b_c6f8ed9d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2022-06-06T08:34:24Z",
+      "side": 1,
+      "message": "Is this just for testing purposes? I\u0027m not sure we can backport patches which are not even merged in master (ok, if they merged in master we could have just bumped the tempest hash used).",
+      "revId": "0e3a8d3b8b8445c5d869e58c44594604c40508a6",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    }
+  ]
+}
