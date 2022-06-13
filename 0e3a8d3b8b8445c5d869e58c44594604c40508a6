@@ -34,6 +34,24 @@
       "parentUuid": "5315ca7b_c6f8ed9d",
       "revId": "0e3a8d3b8b8445c5d869e58c44594604c40508a6",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c6c4e7a_f96cc152",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 85
+      },
+      "writtenOn": "2022-06-13T13:02:38Z",
+      "side": 1,
+      "message": "it is blocking, full tempest is not passing w/o these patches and they should be merged in Tempest upstream soon (hint: please help reviewing there, Tempest team is low on resources!)",
+      "parentUuid": "97e78d87_f6dc981d",
+      "revId": "0e3a8d3b8b8445c5d869e58c44594604c40508a6",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
     }
   ]
 }
