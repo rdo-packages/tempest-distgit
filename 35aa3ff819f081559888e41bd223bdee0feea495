@@ -16,6 +16,24 @@
       "message": "Can be re reverted after clearing known issues",
       "revId": "35aa3ff819f081559888e41bd223bdee0feea495",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8a0bba8_9b45bb2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2022-06-14T14:25:57Z",
+      "side": 1,
+      "message": "Let\u0027s get them merged upstream instead of revert this, please! 😊",
+      "parentUuid": "314823d6_706bc999",
+      "revId": "35aa3ff819f081559888e41bd223bdee0feea495",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
     }
   ]
 }
