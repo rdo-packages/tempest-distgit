@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb8bc8f5_db5c5be1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 403
+      },
+      "writtenOn": "2022-06-14T10:59:50Z",
+      "side": 1,
+      "message": "Was this tested before merging? seems to be causing issues in wallaby:- https://bugs.launchpad.net/tripleo/+bug/1978553 and https://bugs.launchpad.net/tripleo/+bug/1978556. Specifically https://review.opendev.org/c/openstack/tempest/+/842240 patch seems to be the culprit.\n",
+      "revId": "e0ccef48ce47e18b6d3e38c68714c1d7a051df39",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    }
+  ]
+}
