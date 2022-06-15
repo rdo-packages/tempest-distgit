@@ -1,0 +1,60 @@
+From 00bdb22cc31db962986ca910a909c0a25b3f590f Mon Sep 17 00:00:00 2001
+From: Lee Yarwood <lyarwood@redhat.com>
+Date: Wed, 2 Mar 2022 13:06:11 -0600
+Subject: [PATCH 1/1] compute: Move volume attached live migration tests to use
+ SSHABLE
+
+Live migration tests the volume attachment and checking the
+server ssh-able will help to avoid any race during attachment
+operation.
+
+Change-Id: Icdb3398061d0274fec8b4e10d955a4b00edf4524
+---
+ .../api/compute/admin/test_live_migration.py    | 17 +++++++++++------
+ 1 file changed, 11 insertions(+), 6 deletions(-)
+
+diff --git a/tempest/api/compute/admin/test_live_migration.py b/tempest/api/compute/admin/test_live_migration.py
+index c91b55778..09757024f 100644
+--- a/tempest/api/compute/admin/test_live_migration.py
++++ b/tempest/api/compute/admin/test_live_migration.py
+@@ -34,11 +34,6 @@ LOG = logging.getLogger(__name__)
+ class LiveMigrationTestBase(base.BaseV2ComputeAdminTest):
+     """Test live migration operations supported by admin user"""
+ 
+-    # These tests don't attempt any SSH validation nor do they use
+-    # floating IPs on the instance, so all we need is a network and
+-    # a subnet so the instance being migrated has a single port, but
+-    # we need that to make sure we are properly updating the port
+-    # host bindings during the live migration.
+     create_default_network = True
+ 
+     @classmethod
+@@ -104,6 +99,11 @@ class LiveMigrationTest(LiveMigrationTestBase):
+     max_microversion = '2.24'
+     block_migration = None
+ 
++    @classmethod
++    def setup_credentials(cls):
++        cls.prepare_instance_network()
++        super(LiveMigrationTest, cls).setup_credentials()
++
+     def _test_live_migration(self, state='ACTIVE', volume_backed=False):
+         """Tests live migration between two hosts.
+ 
+@@ -182,7 +182,12 @@ class LiveMigrationTest(LiveMigrationTestBase):
+         attach volume. This differs from test_volume_backed_live_migration
+         above that tests live-migration with only an attached volume.
+         """
+-        server = self.create_test_server(wait_until="ACTIVE")
++        validation_resources = self.get_test_validation_resources(
++            self.os_primary)
++        server = self.create_test_server(
++            validatable=True,
++            validation_resources=validation_resources,
++            wait_until="SSHABLE")
+         server_id = server['id']
+         if not CONF.compute_feature_enabled.can_migrate_between_any_hosts:
+             # not to specify a host so that the scheduler will pick one
+-- 
+2.36.1
+
