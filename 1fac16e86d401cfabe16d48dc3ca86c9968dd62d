@@ -50,6 +50,23 @@
       "message": "recheck\n\ngrrr timeout",
       "revId": "1fac16e86d401cfabe16d48dc3ca86c9968dd62d",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd77fb18_da3ca72a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2022-07-05T12:40:18Z",
+      "side": 1,
+      "message": "recheck\n\nargh! \nDEBUG:   - Curl error (28): Timeout was reached for http://mirror.centos.org/centos/8-stream/AppStream/x86_64/os/repodata/repomd.xml [Connection timed out after 30001 milliseconds]",
+      "revId": "1fac16e86d401cfabe16d48dc3ca86c9968dd62d",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
     }
   ]
 }
