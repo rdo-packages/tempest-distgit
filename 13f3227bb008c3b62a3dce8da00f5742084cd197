@@ -16,6 +16,23 @@
       "message": "recheck\n\n Timeout was reached for http://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/Packages/ModemManager-glib-1.18.2-3.el9.x86_64.rpm [Connection timed out after 30000 milliseconds]",
       "revId": "13f3227bb008c3b62a3dce8da00f5742084cd197",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e745d9fa_ddf3d93f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2022-07-05T11:06:53Z",
+      "side": 1,
+      "message": "recheck",
+      "revId": "13f3227bb008c3b62a3dce8da00f5742084cd197",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
     }
   ]
 }
