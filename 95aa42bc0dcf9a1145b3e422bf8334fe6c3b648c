@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0347fd3_66d54cce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2022-09-21T15:28:34Z",
+      "side": 1,
+      "message": "Failure in CBS install is irrelevant at this point of the bootstrap",
+      "revId": "95aa42bc0dcf9a1145b3e422bf8334fe6c3b648c",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    }
+  ]
+}
