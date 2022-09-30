@@ -11,12 +11,12 @@ Tempest has batteries of tests for OpenStack API validation, Scenarios, and \
 other specific tests useful in validating an OpenStack deployment.
 
 # Enable bootstrap mode to break cyclic dep
-%global repo_bootstrap 1
+%global repo_bootstrap 0
 
 Name:           openstack-%{project}
 Epoch:          1
 Version:        32.0.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://launchpad.net/tempest
@@ -254,6 +254,9 @@ PYTHON=%{__python3} stestr --test-path $OS_TEST_PATH run
 %endif
 
 %changelog
+* Fri Sep 30 2022 Joel Capitao <jcapitao@redhat.com> 1:32.0.0-2
+- Disable bootstrap mode
+
 * Fri Sep 16 2022 RDO <dev@lists.rdoproject.org> 1:32.0.0-1
 - Update to 32.0.0
 
