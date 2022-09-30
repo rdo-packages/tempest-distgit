@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b9c3150_e9a2b600",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 635
+      },
+      "writtenOn": "2022-09-30T14:14:52Z",
+      "side": 1,
+      "message": "needs https://review.rdoproject.org/r/c/openstack/octavia-tempest-plugin-distgit/+/45329 to be merged",
+      "revId": "a1f43b1641198106682bd861a8f3f0ed7690722b",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    }
+  ]
+}
