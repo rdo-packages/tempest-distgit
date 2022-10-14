@@ -36,6 +36,7 @@ BuildRequires:  python3-oslo-config
 BuildRequires:  python3-pbr
 BuildRequires:  python3-setuptools
 BuildRequires:  python3-devel
+BuildRequires:  python3-defusedxml
 BuildRequires:  openstack-macros
 
 Requires:       python3-tempest = %{epoch}:%{version}-%{release}
@@ -77,6 +78,7 @@ Requires:      python3-testtools >= 2.2.0
 Requires:      python3-urllib3 >= 1.21.1
 Requires:      python3-subunit >= 1.0.0
 Requires:      python3-cryptography >= 2.1
+Requires:      python3-defusedxml >= 0.7.1
 
 Requires:      python3-yaml >= 3.12
 
