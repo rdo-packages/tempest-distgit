@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1755bc87_dea119b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 635
+      },
+      "writtenOn": "2023-02-28T07:59:37Z",
+      "side": 1,
+      "message": "The patch upstream consumes a jsonschema feature which appears since v4.16.0 with this patch [1], in order to get rid of the deprecated warning message.\nThe CS Appstream repo provides currently python3-jsonschema-3.2.0-13 in RDO.\n\nWe may need to build new version of jsconschema and add it in our deps repo\n\n[1] https://github.com/python-jsonschema/jsonschema/commit/ee024ffc61bee56b25e816f489d7365fe1445c6d",
+      "revId": "ad0ee8e5fee3374a447513e1a9b2b5eb613c38f6",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    }
+  ]
+}
