@@ -33,6 +33,24 @@
       "message": "recheck",
       "revId": "ad0ee8e5fee3374a447513e1a9b2b5eb613c38f6",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cc10bde_2ff122ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 635
+      },
+      "writtenOn": "2023-03-02T10:50:16Z",
+      "side": 1,
+      "message": "it needs promotion of new the python-jsonschema NVR https://review.rdoproject.org/r/c/rdoinfo/+/47330",
+      "parentUuid": "4d8169f1_a83cfbff",
+      "revId": "ad0ee8e5fee3374a447513e1a9b2b5eb613c38f6",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
     }
   ]
 }
