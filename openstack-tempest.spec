@@ -79,6 +79,7 @@ Requires:      python3-urllib3 >= 1.21.1
 Requires:      python3-subunit >= 1.0.0
 Requires:      python3-cryptography >= 2.1
 Requires:      python3-defusedxml >= 0.7.1
+Requires:      python3-fasteners >= 0.16.0
 
 Requires:      python3-yaml >= 3.12
 
