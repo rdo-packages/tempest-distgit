@@ -11,7 +11,7 @@ Tempest has batteries of tests for OpenStack API validation, Scenarios, and \
 other specific tests useful in validating an OpenStack deployment.
 
 # Enable bootstrap mode to break cyclic dep
-%global repo_bootstrap 1
+%global repo_bootstrap 0
 
 Name:           openstack-%{project}
 Epoch:          1
