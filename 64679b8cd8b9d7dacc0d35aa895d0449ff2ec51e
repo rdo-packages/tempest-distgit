@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1f7c4ec_c17d6389",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 635
+      },
+      "writtenOn": "2023-04-13T10:16:06Z",
+      "side": 1,
+      "message": "linked to https://review.rdoproject.org/r/c/openstack/patrole-distgit/+/48293 issue",
+      "revId": "64679b8cd8b9d7dacc0d35aa895d0449ff2ec51e",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    }
+  ]
+}
