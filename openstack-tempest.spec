@@ -133,7 +133,6 @@ Requires:       python3-manila-tests-tempest
 Requires:       python3-telemetry-tests-tempest
 Requires:       python3-octavia-tests-tempest
 Requires:       python3-networking-l2gw-tests-tempest
-Requires:       python3-patrole-tests-tempest
 Requires:       python3-novajoin-tests-tempest
 Requires:       python3-barbican-tests-tempest
 
