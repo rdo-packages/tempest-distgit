@@ -2,6 +2,12 @@
 %global sources_gpg_sign 0x2426b928085a020d8a90d0d879ab7008d0896c8a
 %global project tempest
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
+# we are excluding some BRs from automatic generator
+%global excluded_brs doc8 bandit pre-commit hacking flake8-import-order bashate pycodestyle
+# Exclude sphinx from BRs if docs are disabled
+%if ! 0%{?with_doc}
+%global excluded_brs %{excluded_brs} sphinx openstackdocstheme
+%endif
 %global with_doc 0
 # guard for Red Hat OpenStack Platform supported tempest
 %global rhosp 0
@@ -15,7 +21,7 @@ Epoch:          1
 Version:        XXX
 Release:        XXX
 Summary:        OpenStack Integration Test Suite (Tempest)
-License:        ASL 2.0
+License:        Apache-2.0
 Url:            https://launchpad.net/tempest
 Source0:        http://tarballs.openstack.org/tempest/tempest-%{upstream_version}.tar.gz
 
@@ -32,11 +38,8 @@ BuildRequires:  /usr/bin/gpgv2
 %endif
 
 BuildRequires:  git-core
-BuildRequires:  python3-oslo-config
-BuildRequires:  python3-pbr
-BuildRequires:  python3-setuptools
 BuildRequires:  python3-devel
-BuildRequires:  python3-defusedxml
+BuildRequires:  pyproject-rpm-macros
 BuildRequires:  openstack-macros
 
 Requires:       python3-tempest = %{epoch}:%{version}-%{release}
@@ -51,37 +54,11 @@ Requires:       python3-tempestconf
 %package -n    python3-%{project}
 Summary:       Tempest Python library
 
-%{?python_provide:%python_provide python2-%{project}}
 
 # Obsoletes python-tempest-lib to avoid breakage
 # during upgrade from Newton onwards to till this
 # release
 Obsoletes:     python-tempest-lib
-
-Requires:      python3-cliff >= 2.8.0
-Requires:      python3-debtcollector >= 1.2.0
-Requires:      python3-fixtures >= 3.0.0
-Requires:      python3-jsonschema >= 3.2.0
-Requires:      python3-netaddr >= 0.7.18
-Requires:      python3-oslo-concurrency >= 3.26.0
-Requires:      python3-oslo-config >= 2:5.2.0
-Requires:      python3-oslo-log >= 3.36.0
-Requires:      python3-oslo-serialization >= 2.18.0
-Requires:      python3-oslo-utils >= 4.7.0
-Requires:      python3-os-testr >= 0.8.0
-Requires:      python3-paramiko >= 2.7.0
-Requires:      python3-pbr >= 2.0.0
-Requires:      python3-prettytable >= 0.7.1
-Requires:      python3-stevedore >= 1.20.0
-Requires:      python3-stestr >= 1.0.0
-Requires:      python3-testtools >= 2.2.0
-Requires:      python3-urllib3 >= 1.21.1
-Requires:      python3-subunit >= 1.0.0
-Requires:      python3-cryptography >= 2.1
-Requires:      python3-defusedxml >= 0.7.1
-Requires:      python3-fasteners >= 0.16.0
-
-Requires:      python3-yaml >= 3.12
 
 %description -n python3-%{project}
 %{common_desc}
@@ -91,25 +68,7 @@ This package contains the tempest python library.
 %package -n     python3-%{project}-tests
 Summary:        Python Tempest tests
 Requires:       python3-tempest = %{epoch}:%{version}-%{release}
-%{?python_provide:%python_provide python2-%{project}-tests}
 
-BuildRequires:  python3-mock
-BuildRequires:  python3-oslotest
-BuildRequires:  python3-subunit
-BuildRequires:  python3-oslo-log
-BuildRequires:  python3-jsonschema
-BuildRequires:  python3-urllib3
-BuildRequires:  python3-oslo-concurrency
-BuildRequires:  python3-paramiko
-BuildRequires:  python3-cliff
-BuildRequires:  python3-pycodestyle
-BuildRequires:  python3-os-testr
-BuildRequires:  python3-stestr
-
-BuildRequires:  python3-PyYAML
-
-
-Requires:       python3-mock
 Requires:       python3-oslotest
 
 %description -n python3-%{project}-tests
@@ -158,8 +117,6 @@ This package contains all the tempest plugins.
 %package -n %{name}-doc
 Summary:        %{name} documentation
 
-BuildRequires:  python3-sphinx
-BuildRequires:  python3-openstackdocstheme
 BuildRequires:  python3-sphinxcontrib-rsvgconverter
 
 %description -n %{name}-doc
@@ -174,8 +131,6 @@ It contains the documentation for Tempest.
 %{gpgverify}  --keyring=%{SOURCE102} --signature=%{SOURCE101} --data=%{SOURCE0}
 %endif
 %autosetup -n tempest-%{upstream_version} -S git
-# have dependencies being handled by rpms, rather than requirement files
-%py_req_cleanup
 
 # remove shebangs and fix permissions
 RPMLINT_OFFENDERS="tempest/cmd/list_plugins.py \
@@ -188,22 +143,43 @@ tempest/lib/cmd/check_uuid.py"
 sed -i '1{/^#!/d}' $RPMLINT_OFFENDERS
 chmod u=rw,go=r $RPMLINT_OFFENDERS
 
+sed -i /^[[:space:]]*-c{env:.*_CONSTRAINTS_FILE.*/d tox.ini
+sed -i "s/^deps = -c{env:.*_CONSTRAINTS_FILE.*/deps =/" tox.ini
+sed -i /^minversion.*/d tox.ini
+sed -i /^requires.*virtualenv.*/d tox.ini
+
+# Exclude some bad-known BRs
+for pkg in %{excluded_brs}; do
+  for reqfile in doc/requirements.txt test-requirements.txt; do
+    if [ -f $reqfile ]; then
+      sed -i /^${pkg}.*/d $reqfile
+    fi
+  done
+done
+
+# Automatic BR generation
+%generate_buildrequires
+%if 0%{?with_doc}
+  %pyproject_buildrequires -t -e %{default_toxenv},docs
+%else
+  %pyproject_buildrequires -t -e %{default_toxenv}
+%endif
+
 %build
-%{py3_build}
+%pyproject_wheel
 
 %if 0%{?with_doc}
 # Disable Build the plugin registry step as it uses git to clone
 # projects and then generate tempest plugin projects list.
 # It is also time taking.
-export PYTHONPATH=.
 export GENERATE_TEMPEST_PLUGIN_LIST='False'
-sphinx-build -b html doc/source doc/build/html
+%tox -e docs
 # remove the sphinx-build leftovers
 rm -rf doc/build/html/.{doctrees,buildinfo}
 %endif
 
 %install
-%{py3_install}
+%pyproject_install
 
 # Generate tempest config
 mkdir -p %{buildroot}%{_sysconfdir}/%{project}/
@@ -215,10 +191,8 @@ mv %{buildroot}/usr/etc/tempest/* %{buildroot}/etc/tempest
 
 %check
 export OS_TEST_PATH='./tempest/tests'
-export PATH=$PATH:$RPM_BUILD_ROOT/usr/bin
-export PYTHONPATH=$PWD
 rm -f $OS_TEST_PATH/test_hacking.py
-PYTHON=%{__python3} stestr --test-path $OS_TEST_PATH run
+%tox -e %{default_toxenv}
 
 %files
 %license LICENSE
@@ -234,7 +208,7 @@ PYTHON=%{__python3} stestr --test-path $OS_TEST_PATH run
 %files -n python3-%{project}
 %license LICENSE
 %{python3_sitelib}/%{project}
-%{python3_sitelib}/%{project}*.egg-info
+%{python3_sitelib}/%{project}*.dist-info
 %exclude %{python3_sitelib}/tempest/tests
 
 %files -n python3-%{project}-tests
