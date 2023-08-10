@@ -54,6 +54,9 @@ Requires:       python3-tempestconf
 %package -n    python3-%{project}
 Summary:       Tempest Python library
 
+# os-testr is required to provide subunit2html
+Requires:      python3-os-testr >= 0.8.0
+
 %description -n python3-%{project}
 %{common_desc}
 
