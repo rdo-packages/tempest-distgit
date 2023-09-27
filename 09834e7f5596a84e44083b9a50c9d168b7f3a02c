@@ -1,0 +1,8 @@
+Workflow+1: Luigi Toscano <ltoscano@redhat.com>
+Verified+2: Zuul CI <zuul@review.rdoproject.org>
+Code-Review+2: Luigi Toscano <ltoscano@redhat.com>
+Submitted-by: Zuul CI <zuul@review.rdoproject.org>
+Submitted-at: Wed, 27 Sep 2023 14:37:09 +0000
+Reviewed-on: https://review.rdoproject.org/r/c/openstack/tempest-distgit/+/50202
+Project: openstack/tempest-distgit
+Branch: refs/heads/bobcat-rdo
