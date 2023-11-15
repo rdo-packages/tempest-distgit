@@ -1,5 +1,5 @@
 %{!?sources_gpg: %{!?dlrn:%global sources_gpg 1} }
-%global sources_gpg_sign 0x815AFEC729392386480E076DCC0DFE2D21C023C9
+%global sources_gpg_sign 0x2ef3fe0ec2b075ab7458b5f8b702b20b13df2318
 %global project tempest
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 # we are excluding some BRs from automatic generator
@@ -79,18 +79,20 @@ Summary:       All OpenStack Tempest Plugins
 
 Requires:      %{name} = %{epoch}:%{version}-%{release}
 
+Requires:       python3-barbican-tests-tempest
 Requires:       python3-cinder-tests-tempest
 Requires:       python3-designate-tests-tempest
+Requires:       python3-glance-tests-tempest
 Requires:       python3-heat-tests-tempest
 Requires:       python3-ironic-tests-tempest
 Requires:       python3-keystone-tests-tempest
-Requires:       python3-neutron-tests-tempest
 Requires:       python3-manila-tests-tempest
-Requires:       python3-telemetry-tests-tempest
+Requires:       python3-neutron-tests-tempest
 Requires:       python3-octavia-tests-tempest
+Requires:       python3-telemetry-tests-tempest
 Requires:       python3-networking-l2gw-tests-tempest
 Requires:       python3-novajoin-tests-tempest
-Requires:       python3-barbican-tests-tempest
+Requires:       python3-whitebox-neutron-tests-tempest
 
 %if 0%{?rhosp} == 0
 Requires:       python3-kuryr-tests-tempest
