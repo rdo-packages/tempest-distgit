@@ -126,19 +126,22 @@ Summary:       All OpenStack Tempest Plugins
 
 Requires:      %{name} = %{epoch}:%{version}-%{release}
 
+Requires:       python3-barbican-tests-tempest
 Requires:       python3-cinder-tests-tempest
 Requires:       python3-designate-tests-tempest
+Requires:       python3-glance-tests-tempest
 Requires:       python3-heat-tests-tempest
 Requires:       python3-ironic-tests-tempest
 Requires:       python3-keystone-tests-tempest
-Requires:       python3-neutron-tests-tempest
 Requires:       python3-manila-tests-tempest
-Requires:       python3-telemetry-tests-tempest
+Requires:       python3-neutron-tests-tempest
 Requires:       python3-octavia-tests-tempest
+Requires:       python3-telemetry-tests-tempest
 Requires:       python3-networking-l2gw-tests-tempest
 Requires:       python3-patrole-tests-tempest
 Requires:       python3-novajoin-tests-tempest
-Requires:       python3-barbican-tests-tempest
+Requires:       python3-whitebox-tests-tempest
+Requires:       python3-whitebox-neutron-tests-tempest
 
 %if 0%{?rhosp} == 0
 Requires:       python3-kuryr-tests-tempest
