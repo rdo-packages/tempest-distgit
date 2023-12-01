@@ -1,5 +1,5 @@
 %{!?sources_gpg: %{!?dlrn:%global sources_gpg 1} }
-%global sources_gpg_sign 0x815AFEC729392386480E076DCC0DFE2D21C023C9
+%global sources_gpg_sign 0x815afec729392386480e076dcc0dfe2d21c023c9
 %global project tempest
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 # we are excluding some BRs from automatic generator
@@ -92,7 +92,6 @@ Requires:       python3-octavia-tests-tempest
 Requires:       python3-telemetry-tests-tempest
 Requires:       python3-networking-l2gw-tests-tempest
 Requires:       python3-novajoin-tests-tempest
-Requires:       python3-whitebox-neutron-tests-tempest
 
 %if 0%{?rhosp} == 0
 Requires:       python3-kuryr-tests-tempest
@@ -103,6 +102,7 @@ Requires:       python3-sahara-tests-tempest
 Requires:       python3-trove-tests-tempest
 Requires:       python3-vitrage-tests-tempest
 Requires:       python3-watcher-tests-tempest
+Requires:       python3-whitebox-neutron-tests-tempest
 Requires:       python3-zaqar-tests-tempest
 %endif
 
