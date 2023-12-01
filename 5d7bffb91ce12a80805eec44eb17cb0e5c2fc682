@@ -16,6 +16,24 @@
       "message": "AFAIK downstream tests are being moved in this upstream package, so ultimately it will be used in downstream too, likely in OSP18.0+, @slawek may be you can confirm it and if it\u0027s ready to be used already downstream now and this patch and it\u0027s revert can be avoided?",
       "revId": "5d7bffb91ce12a80805eec44eb17cb0e5c2fc682",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d6b18ea_b37074f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 534
+      },
+      "writtenOn": "2023-12-01T12:08:15Z",
+      "side": 1,
+      "message": "not all tests are moved already but we are making some progress there 😊",
+      "parentUuid": "d023d930_cb682928",
+      "revId": "5d7bffb91ce12a80805eec44eb17cb0e5c2fc682",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
     }
   ]
 }
