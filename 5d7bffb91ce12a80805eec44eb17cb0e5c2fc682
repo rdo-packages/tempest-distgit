@@ -1,0 +1,9 @@
+Verified+2: Zuul CI <zuul@review.rdoproject.org>
+Code-Review+1: Sławek Kapłoński <skaplons@redhat.com>
+Workflow+1: Karolina Kula <kkula@redhat.com>
+Code-Review+2: Yatin Karel <ykarel@redhat.com>
+Submitted-by: Zuul CI <zuul@review.rdoproject.org>
+Submitted-at: Mon, 04 Dec 2023 11:32:24 +0000
+Reviewed-on: https://review.rdoproject.org/r/c/openstack/tempest-distgit/+/50951
+Project: openstack/tempest-distgit
+Branch: refs/heads/rpm-master
