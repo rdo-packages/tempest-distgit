@@ -1,4 +1,22 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "765d902e_897f15b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 403
+      },
+      "writtenOn": "2023-12-04T17:36:52Z",
+      "side": 1,
+      "message": "it was missed for bobcat, sent now https://review.rdoproject.org/r/q/Ief4496318975ba29aa32b09f350ff899e82cbf4b",
+      "revId": "dc3c6e2cef13b0ef2d5d9893aaf77cff5bb5fac7",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    }
+  ],
   "submitRequirementResults": []
 }
