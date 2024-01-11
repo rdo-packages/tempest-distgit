@@ -139,7 +139,6 @@ Requires:       python3-octavia-tests-tempest
 Requires:       python3-telemetry-tests-tempest
 Requires:       python3-networking-l2gw-tests-tempest
 Requires:       python3-patrole-tests-tempest
-Requires:       python3-novajoin-tests-tempest
 
 %if 0%{?rhosp} == 0
 Requires:       python3-kuryr-tests-tempest
