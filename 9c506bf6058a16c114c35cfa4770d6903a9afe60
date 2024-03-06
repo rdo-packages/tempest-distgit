@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7091e41e_eccdb01e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2024-03-06T16:58:00Z",
+      "side": 1,
+      "message": "Goodbye sahara, it was time :/",
+      "revId": "9c506bf6058a16c114c35cfa4770d6903a9afe60",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    }
+  ]
+}
