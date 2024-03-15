@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb0483f6_bef15fd3",
+        "filename": "openstack-tempest.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2024-03-15T10:28:42Z",
+      "side": 1,
+      "message": "changelog comment is missleading as the version was updated in prevoius build. This should be something like Rebuild in bobcat release, or something like that.",
+      "range": {
+        "startLine": 229,
+        "startChar": 2,
+        "endLine": 229,
+        "endChar": 18
+      },
+      "revId": "7b32bf68292565a9fbb709809f1aecd046275078",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    }
+  ]
+}
