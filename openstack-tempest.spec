@@ -19,7 +19,7 @@ other specific tests useful in validating an OpenStack deployment.
 Name:           openstack-%{project}
 Epoch:          1
 Version:        37.0.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        Apache-2.0
 Url:            https://launchpad.net/tempest
@@ -223,6 +223,9 @@ rm -f $OS_TEST_PATH/test_hacking.py
 %endif
 
 %changelog
+* Fri Mar 29 2024 RDO <dev@lists.rdoproject.org> 1:37.0.0-3
+- Rebuild in Caracal release
+
 * Wed Mar 13 2024 RDO <dev@lists.rdoproject.org> 1:37.0.0-2
 - Rebuild in bobcat release
 
