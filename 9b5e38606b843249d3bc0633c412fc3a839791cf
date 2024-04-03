@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9aedb8a7_e4d8cbc2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2024-04-03T08:22:55Z",
+      "side": 1,
+      "message": "see my comment in https://review.rdoproject.org/r/c/openstack/tempest-distgit/+/52574",
+      "revId": "9b5e38606b843249d3bc0633c412fc3a839791cf",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    }
+  ]
+}
