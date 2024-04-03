@@ -52,6 +52,24 @@
       "parentUuid": "00a96e51_db2d3d50",
       "revId": "26d2ee27b41c98515e58bc36e047eab8c21a0fa6",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7050342c_20dad970",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2024-04-03T10:28:31Z",
+      "side": 1,
+      "message": "Then we need to bump to -3 and rebuild in caracal. Actually, given the difference between antelope and bobcat, we will also different builds for antelope, -2 (no pyproject), bobcat, -3 (pyproject) and caracal -4 (pyproject + murano and sahara removal)",
+      "parentUuid": "4c88ff12_06a669be",
+      "revId": "26d2ee27b41c98515e58bc36e047eab8c21a0fa6",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
     }
   ]
 }
