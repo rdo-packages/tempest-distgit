@@ -34,6 +34,24 @@
       "parentUuid": "71d65acd_80ed3886",
       "revId": "26d2ee27b41c98515e58bc36e047eab8c21a0fa6",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c88ff12_06a669be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 635
+      },
+      "writtenOn": "2024-04-03T08:27:07Z",
+      "side": 1,
+      "message": "it\u0027s because of [1] murano and sahara tests were removed. So we\u0027d end up w/o those in Bobcat and Antelope if we use -1\n\n[1] https://review.rdoproject.org/r/c/openstack/tempest-distgit/+/52000",
+      "parentUuid": "00a96e51_db2d3d50",
+      "revId": "26d2ee27b41c98515e58bc36e047eab8c21a0fa6",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
     }
   ]
 }
