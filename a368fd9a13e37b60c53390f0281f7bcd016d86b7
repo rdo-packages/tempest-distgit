@@ -16,6 +16,24 @@
       "message": "Alfredo, was your previous comment addressed?",
       "revId": "a368fd9a13e37b60c53390f0281f7bcd016d86b7",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9dc95fd_ceef9434",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2024-04-04T12:00:49Z",
+      "side": 1,
+      "message": "yes",
+      "parentUuid": "bf93d9d9_30b51843",
+      "revId": "a368fd9a13e37b60c53390f0281f7bcd016d86b7",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
     }
   ]
 }
