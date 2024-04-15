@@ -16,6 +16,23 @@
       "message": "lgtm if downstream rpm build will work (there were some issues couple of months ago)",
       "revId": "49cb4120aaa43360ba60b74dba6ef569f2ddbecd",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b847df02_5129a0c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 790
+      },
+      "writtenOn": "2024-04-15T09:12:10Z",
+      "side": 1,
+      "message": "Looks good to me!",
+      "revId": "49cb4120aaa43360ba60b74dba6ef569f2ddbecd",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
     }
   ]
 }
