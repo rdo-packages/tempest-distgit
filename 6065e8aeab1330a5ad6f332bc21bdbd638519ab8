@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d02d677e_84e60af1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 266
+      },
+      "writtenOn": "2024-04-15T06:05:19Z",
+      "side": 1,
+      "message": "yup, patrole repo has been archived for a year - https://github.com/openstack-archive/patrole - and none used that even before that (we waited in upstream for couple of cycles whether someone picks that up, starts maintaining etc before we retired it)",
+      "revId": "6065e8aeab1330a5ad6f332bc21bdbd638519ab8",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    }
+  ]
+}
