@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91c4ccd6_72c1460f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 266
+      },
+      "writtenOn": "2024-04-15T06:02:51Z",
+      "side": 1,
+      "message": "lgtm if there will no be no issue with building the rpm downstream",
+      "revId": "c7ec475a54ba291d2abef4d9798c9971e30bd197",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    }
+  ]
+}
