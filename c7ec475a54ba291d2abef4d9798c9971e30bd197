@@ -67,6 +67,23 @@
       "message": "whitebox-tests being included in 18.0",
       "revId": "c7ec475a54ba291d2abef4d9798c9971e30bd197",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "027210d6_e0163b2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2024-05-03T10:38:07Z",
+      "side": 1,
+      "message": "hold on until all builders have the requirements ready",
+      "revId": "c7ec475a54ba291d2abef4d9798c9971e30bd197",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
     }
   ]
 }
