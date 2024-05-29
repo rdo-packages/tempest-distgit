@@ -1,5 +1,5 @@
 %{!?sources_gpg: %{!?dlrn:%global sources_gpg 1} }
-%global sources_gpg_sign 0x2ef3fe0ec2b075ab7458b5f8b702b20b13df2318
+%global sources_gpg_sign 0xf8675126e2411e7748dd46662fc2093e4682645f
 %global project tempest
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 %global with_doc 0
@@ -15,8 +15,8 @@ other specific tests useful in validating an OpenStack deployment.
 
 Name:           openstack-%{project}
 Epoch:          1
-Version:        38.0.0
-Release:        2%{?dist}
+Version:        39.0.0
+Release:        1%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://launchpad.net/tempest
@@ -258,6 +258,9 @@ PYTHON=%{__python3} stestr --test-path $OS_TEST_PATH run
 %endif
 
 %changelog
+* Wed May 29 2024 RDO <dev@lists.rdoproject.org> 1:39.0.0-1
+- Update to 39.0.0
+
 * Wed Apr 03 2024 RDO <dev@lists.rdoproject.org> 1:38.0.0-2
 - Rebuild 38.0.0 in Antelope release
 
