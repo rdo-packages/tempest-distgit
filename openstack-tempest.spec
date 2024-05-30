@@ -150,6 +150,7 @@ Requires:       python3-trove-tests-tempest
 Requires:       python3-vitrage-tests-tempest
 Requires:       python3-watcher-tests-tempest
 Requires:       python3-whitebox-neutron-tests-tempest
+Requires:       python3-whitebox-tests-tempest
 Requires:       python3-zaqar-tests-tempest
 %endif
 
