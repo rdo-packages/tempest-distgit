@@ -33,6 +33,23 @@
       "message": "lgtm",
       "revId": "ec2451de898e99daf2519cb090276584245c54db",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "974b2301_58c36227",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2024-06-18T13:04:35Z",
+      "side": 1,
+      "message": "Thanks! Can you please vote also on the backports for caracal, bobcat and antelope?\n- https://review.rdoproject.org/r/c/openstack/tempest-distgit/+/53350\n- https://review.rdoproject.org/r/c/openstack/tempest-distgit/+/53351\n- https://review.rdoproject.org/r/c/openstack/tempest-distgit/+/53352",
+      "revId": "ec2451de898e99daf2519cb090276584245c54db",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
     }
   ],
   "submitRequirementResults": []
