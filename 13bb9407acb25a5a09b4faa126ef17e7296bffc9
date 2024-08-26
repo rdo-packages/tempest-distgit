@@ -16,6 +16,23 @@
       "message": "Unless I misunderand how it works, this will make some packages sneak in when they should not (by default in a downstream build).",
       "revId": "13bb9407acb25a5a09b4faa126ef17e7296bffc9",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d528351_e1f2e50a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2024-08-26T08:18:04Z",
+      "side": 1,
+      "message": "Limited to -1 while clarifying the process.",
+      "revId": "13bb9407acb25a5a09b4faa126ef17e7296bffc9",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
     }
   ]
 }
