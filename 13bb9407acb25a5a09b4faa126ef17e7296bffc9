@@ -51,6 +51,23 @@
       "parentUuid": "75bce755_5c861c05",
       "revId": "13bb9407acb25a5a09b4faa126ef17e7296bffc9",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "839e0ab4_3f93e37a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 403
+      },
+      "writtenOn": "2024-08-26T15:16:10Z",
+      "side": 1,
+      "message": "Reconsidering alternatives, as this require additional changes in tcib to enable weak deps and that would pull some unnecessary weak deps as well",
+      "revId": "13bb9407acb25a5a09b4faa126ef17e7296bffc9",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
     }
   ]
 }
