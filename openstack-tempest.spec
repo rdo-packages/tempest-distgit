@@ -102,6 +102,9 @@ Requires:       python3-watcher-tests-tempest
 Requires:       python3-whitebox-neutron-tests-tempest
 Requires:       python3-whitebox-tests-tempest
 Requires:       python3-zaqar-tests-tempest
+%else
+Recommends:     python3-whitebox-neutron-tests-tempest
+Recommends:     python3-whitebox-tests-tempest
 %endif
 
 %description -n %{name}-all
