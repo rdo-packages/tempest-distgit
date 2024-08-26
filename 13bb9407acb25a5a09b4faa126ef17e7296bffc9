@@ -33,6 +33,24 @@
       "message": "Limited to -1 while clarifying the process.",
       "revId": "13bb9407acb25a5a09b4faa126ef17e7296bffc9",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20c0a660_f47aefdf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 403
+      },
+      "writtenOn": "2024-08-26T08:35:33Z",
+      "side": 1,
+      "message": "@Luigi which packages you concerned about?\n\nwith this change if the packages are available/enabled downstream those will get pulled else not. Trunk repos have those rpms so will be included in trunk container images, non-trunk don\u0027t have those so will not be pulled for those container images.",
+      "parentUuid": "75bce755_5c861c05",
+      "revId": "13bb9407acb25a5a09b4faa126ef17e7296bffc9",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
     }
   ]
 }
