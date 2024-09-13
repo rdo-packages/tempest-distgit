@@ -41,6 +41,7 @@ BuildRequires:  python3-setuptools
 BuildRequires:  python3-devel
 BuildRequires:  python3-defusedxml
 BuildRequires:  openstack-macros
+BuildRequires:  python3-testscenarios
 
 Requires:       python3-tempest = %{epoch}:%{version}-%{release}
 
