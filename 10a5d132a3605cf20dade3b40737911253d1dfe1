@@ -33,6 +33,24 @@
       "message": "Oh, I see, bobcat and newer branches have https://review.rdoproject.org/r/c/openstack/tempest-distgit/+/49483",
       "revId": "10a5d132a3605cf20dade3b40737911253d1dfe1",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c0115b2_12c245be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 635
+      },
+      "writtenOn": "2024-09-16T09:08:46Z",
+      "side": 1,
+      "message": "Yep, those releases are using a RPM macro mechanism which adds the build-time and run-time requirements automatically",
+      "parentUuid": "73cd5e0e_fb986d74",
+      "revId": "10a5d132a3605cf20dade3b40737911253d1dfe1",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
     }
   ]
 }
