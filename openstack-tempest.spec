@@ -16,7 +16,7 @@ other specific tests useful in validating an OpenStack deployment.
 Name:           openstack-%{project}
 Epoch:          1
 Version:        40.0.0
-Release:        1%{?dist}
+Release:        4%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        ASL 2.0
 Url:            https://launchpad.net/tempest
@@ -84,6 +84,7 @@ Requires:      python3-subunit >= 1.0.0
 Requires:      python3-cryptography >= 2.1
 Requires:      python3-defusedxml >= 0.7.1
 Requires:      python3-fasteners >= 0.16.0
+Requires:      python3-testscenarios >= 0.5.0
 
 Requires:      python3-yaml >= 3.12
 
@@ -259,6 +260,9 @@ PYTHON=%{__python3} stestr --test-path $OS_TEST_PATH run
 %endif
 
 %changelog
+* Mon Sep 16 2024 Joel Capitao <jcapitao@redhat.com> 1:40.0.0-4
+- Add testscenarios as run-time dep
+
 * Fri Sep 13 2024 RDO <dev@lists.rdoproject.org> 1:40.0.0-1
 - Update to 40.0.0
 
