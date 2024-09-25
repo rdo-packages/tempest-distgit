@@ -1,5 +1,5 @@
 %{!?sources_gpg: %{!?dlrn:%global sources_gpg 1} }
-%global sources_gpg_sign 0x2426b928085a020d8a90d0d879ab7008d0896c8a
+%global sources_gpg_sign 0xf8675126e2411e7748dd46662fc2093e4682645f
 %global project tempest
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 # we are excluding some BRs from automatic generator
@@ -18,8 +18,8 @@ other specific tests useful in validating an OpenStack deployment.
 
 Name:           openstack-%{project}
 Epoch:          1
-Version:        XXX
-Release:        XXX
+Version:        41.0.0
+Release:        4%{?dist}
 Summary:        OpenStack Integration Test Suite (Tempest)
 License:        Apache-2.0
 Url:            https://launchpad.net/tempest
@@ -224,4 +224,14 @@ rm -f $OS_TEST_PATH/test_hacking.py
 %endif
 
 %changelog
+* Wed Sep 25 2024 RDO <dev@lists.rdoproject.org> 1:41.0.0-4
+- Rebuild in Dalmatian
 
+* Wed Sep 25 2024 RDO <dev@lists.rdoproject.org> 1:41.0.0-3
+- Rebuild in Caracal
+
+* Wed Sep 25 2024 RDO <dev@lists.rdoproject.org> 1:41.0.0-2
+- Rebuild in Bobcat
+
+* Wed Sep 25 2024 RDO <dev@lists.rdoproject.org> 1:41.0.0-1
+- Update to 41.0.0
