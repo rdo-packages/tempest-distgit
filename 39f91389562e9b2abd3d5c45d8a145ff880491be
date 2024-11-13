@@ -34,6 +34,41 @@
       "parentUuid": "25b5d664_558def0e",
       "revId": "39f91389562e9b2abd3d5c45d8a145ff880491be",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f87c3d8a_706ee34d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2024-11-13T13:06:25Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we also wait until the package is available downstream? Or everything would break. -1 for that until it\u0027s done (which I believe it is now yet).",
+      "parentUuid": "5f82e3df_f5a473a3",
+      "revId": "39f91389562e9b2abd3d5c45d8a145ff880491be",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71ec585a_4cb129e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2024-11-13T13:06:25Z",
+      "side": 1,
+      "message": "Is the package",
+      "revId": "39f91389562e9b2abd3d5c45d8a145ff880491be",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
     }
   ]
 }
