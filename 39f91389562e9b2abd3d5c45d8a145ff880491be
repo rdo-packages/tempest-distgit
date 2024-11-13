@@ -16,6 +16,24 @@
       "message": "could you then backport it down to Antelope branch please ?",
       "revId": "39f91389562e9b2abd3d5c45d8a145ff880491be",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f82e3df_f5a473a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 266
+      },
+      "writtenOn": "2024-11-13T12:52:08Z",
+      "side": 1,
+      "message": "absolutely, that\u0027s the plan .. we\u0027ll need some other action in order to get this available downstream, right? we have this - https://issues.redhat.com/browse/OSPRH-10710 is it enough?",
+      "parentUuid": "25b5d664_558def0e",
+      "revId": "39f91389562e9b2abd3d5c45d8a145ff880491be",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
     }
   ]
 }
