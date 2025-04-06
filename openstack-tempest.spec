@@ -129,10 +129,7 @@ It contains the documentation for Tempest.
 %autosetup -n tempest-%{upstream_version} -S git
 
 # remove shebangs and fix permissions
-RPMLINT_OFFENDERS="tempest/cmd/list_plugins.py \
-tempest/cmd/cleanup.py \
-tempest/cmd/cleanup_service.py \
-tempest/cmd/verify_tempest_config.py \
+RPMLINT_OFFENDERS="tempest/cmd/verify_tempest_config.py \
 tempest/cmd/account_generator.py \
 tempest/lib/cmd/skip_tracker.py \
 tempest/lib/cmd/check_uuid.py"
