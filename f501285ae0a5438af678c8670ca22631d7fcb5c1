@@ -16,6 +16,24 @@
       "message": "So is this going to be part of the product?",
       "revId": "f501285ae0a5438af678c8670ca22631d7fcb5c1",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3e597a9_b6af3fde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 403
+      },
+      "writtenOn": "2025-06-04T05:41:38Z",
+      "side": 1,
+      "message": "yes that was the idea as Jira ticket was created for that only,\nbut with latest discussion",
+      "parentUuid": "fd838f98_b41111ff",
+      "revId": "f501285ae0a5438af678c8670ca22631d7fcb5c1",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
     }
   ]
 }
