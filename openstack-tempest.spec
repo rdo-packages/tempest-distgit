@@ -130,6 +130,7 @@ Requires:      %{name} = %{epoch}:%{version}-%{release}
 
 Requires:       python3-barbican-tests-tempest
 Requires:       python3-cinder-tests-tempest
+Requires:       python3-cloudkitty-tests-tempest
 Requires:       python3-designate-tests-tempest
 Requires:       python3-glance-tests-tempest
 Requires:       python3-heat-tests-tempest
