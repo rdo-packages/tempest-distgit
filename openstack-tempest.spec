@@ -224,3 +224,4 @@ rm -f $OS_TEST_PATH/test_hacking.py
 
 %changelog
 
+# REMOVEME: error caused by commit https://opendev.org/openstack/tempest/commit/290069b157d948b76ab04993d8b6b5ae9e74e212
