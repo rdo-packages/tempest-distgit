@@ -67,6 +67,23 @@
       "message": "recheck",
       "revId": "7baf87d9f80585db94482315e52f843fa976c7ec",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a68aa84_828b0507",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 168
+      },
+      "writtenOn": "2025-10-08T21:03:53Z",
+      "side": 1,
+      "message": "Since this is rpm-master this should be ok to merge.",
+      "revId": "7baf87d9f80585db94482315e52f843fa976c7ec",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7"
     }
   ]
 }
